@@ -1,0 +1,66 @@
+# Environment
+.env
+*.env
+
+# Credentials
+config/gdrive_credentials.json
+config/gdrive_token.json
+config/*.json
+!config/config.yaml
+!config/prompts.yaml
+!config/logging.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Output (keep structure, not data)
+output/raw/*
+output/extracted/*
+output/processed/*
+output/embeddings/*
+output/knowledge_graph/*
+output/faq/*
+output/questions/*
+!output/raw/.gitkeep
+!output/extracted/.gitkeep
+!output/processed/.gitkeep
+!output/embeddings/.gitkeep
+!output/knowledge_graph/.gitkeep
+!output/faq/.gitkeep
+!output/questions/.gitkeep
+
+# Test artifacts
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# FAISS index
+*.index
+*.faiss
+
+# Model cache
+models/
+.cache/
+
+# Logs
+logs/
+*.log

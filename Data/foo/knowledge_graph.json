@@ -1,0 +1,257 @@
+{
+  "entities": {
+    "patient_ashok_dalal": {
+      "id": "patient_ashok_dalal",
+      "type": "Patient",
+      "name": "Mr ASHOK ANUBHAI DALAL",
+      "attributes": {
+        "age": "76 years 10 months",
+        "sex": "Male",
+        "mrn": "10002018149398",
+        "visit_type": "Inpatient",
+        "sample_no": "LB2411040175"
+      }
+    },
+    "test_cbc_20241104": {
+      "id": "test_cbc_20241104",
+      "type": "Test",
+      "name": "Complete Blood Count (CBC)",
+      "attributes": {
+        "sample_collected_on": "04/11/2024 03:15",
+        "sample_received_on": "04/11/2024 06:09",
+        "reported_on": "04/11/2024 06:28",
+        "ordered_location": "ICU7A - 7F",
+        "haemoglobin": {
+          "value": 9.7,
+          "unit": "g/dL",
+          "reference_range": "13.0-17.0",
+          "flag": "Low"
+        },
+        "rbc_count": {
+          "value": 3.06,
+          "unit": "x10^6/cumm",
+          "reference_range": "4.5-5.5",
+          "flag": "Low"
+        },
+        "hematocrit": {
+          "value": 29.3,
+          "unit": "%",
+          "reference_range": "40.0-50.0",
+          "flag": "Low"
+        },
+        "mcv": {
+          "value": 96.0,
+          "unit": "fl",
+          "reference_range": "83.0-101.0"
+        },
+        "mch": {
+          "value": 31.6,
+          "unit": "pg",
+          "reference_range": "27.0-32.0"
+        },
+        "mchc": {
+          "value": 32.9,
+          "unit": "g/dL",
+          "reference_range": "31.5-34.5"
+        },
+        "rdw_cv": {
+          "value": 13.8,
+          "unit": "%",
+          "reference_range": "12.0-16.0"
+        },
+        "wbc_count": {
+          "value": 14430,
+          "unit": "cells/cumm",
+          "reference_range": "4000.0-10000.0",
+          "flag": "High"
+        },
+        "platelet_count": {
+          "value": 296000,
+          "unit": "cells/cumm",
+          "reference_range": "150000.0-450000.0"
+        },
+        "mpv": {
+          "value": 8.5,
+          "unit": "fl",
+          "reference_range": "4.0-10.0"
+        },
+        "platelet_clumps_count": {
+          "value": 57,
+          "unit": "",
+          "reference_range": "0.0-300.0"
+        },
+        "neutrophils_percent": {
+          "value": 91,
+          "unit": "%",
+          "reference_range": "40.0-80.0",
+          "flag": "High"
+        },
+        "lymphocytes_percent": {
+          "value": 6,
+          "unit": "%",
+          "reference_range": "20.0-40.0",
+          "flag": "Low"
+        },
+        "eosinophils_percent": {
+          "value": 0,
+          "unit": "%",
+          "reference_range": "1.0-6.0",
+          "flag": "Low"
+        },
+        "monocytes_percent": {
+          "value": 3,
+          "unit": "%",
+          "reference_range": "2.0-10.0"
+        },
+        "basophils_percent": {
+          "value": 0,
+          "unit": "%",
+          "reference_range": "0.0-2.0"
+        },
+        "absolute_neutrophil_count": {
+          "value": 13070,
+          "unit": "/cmm",
+          "reference_range": "2000.0-7000.0",
+          "flag": "High"
+        },
+        "absolute_lymphocyte_count": {
+          "value": 790,
+          "unit": "/cmm",
+          "reference_range": "1000.0-3000.0",
+          "flag": "Low"
+        },
+        "absolute_eosinophil_count": {
+          "value": 80,
+          "unit": "/cmm",
+          "reference_range": "20.0-500.0"
+        },
+        "parasite": "Malarial parasites not detected",
+        "rbc_morphology": "Normocytic Normochromic",
+        "wbc_morphology": "Neutrophilic leucocytosis",
+        "platelet_morphology": "Adequate on smear & Normal Morphologically",
+        "left_shift": "Present",
+        "percent_hypochromasia": {
+          "value": 6,
+          "unit": "%",
+          "reference_range": "0.0-4.0",
+          "flag": "High"
+        },
+        "percent_microcytosis": {
+          "value": 1,
+          "unit": "%",
+          "reference_range": "0.0-4.0"
+        },
+        "percent_macrocytosis": {
+          "value": 2,
+          "unit": "%",
+          "reference_range": "2.5-6.4"
+        },
+        "percent_nrbcs": {
+          "value": 0,
+          "unit": "%",
+          "reference_range": "0.0-2.0"
+        }
+      }
+    },
+    "condition_anemia": {
+      "id": "condition_anemia",
+      "type": "Condition",
+      "name": "Anemia",
+      "attributes": {
+        "evidence": "Low hemoglobin (9.7 g/dL), low RBC count, low hematocrit, increased hypochromasia"
+      }
+    },
+    "condition_neutrophilic_leucocytosis": {
+      "id": "condition_neutrophilic_leucocytosis",
+      "type": "Condition",
+      "name": "Neutrophilic Leucocytosis",
+      "attributes": {
+        "evidence": "High WBC count (14430 cells/cumm), high neutrophil percentage (91%), high absolute neutrophil count (13070 /cmm), left shift"
+      }
+    },
+    "condition_lymphopenia": {
+      "id": "condition_lymphopenia",
+      "type": "Condition",
+      "name": "Lymphopenia",
+      "attributes": {
+        "evidence": "Low lymphocyte percentage (6%), low absolute lymphocyte count (790 /cmm)"
+      }
+    },
+    "doctor_amit_patel": {
+      "id": "doctor_amit_patel",
+      "type": "Healthcare Provider",
+      "name": "Dr. AMIT PATEL",
+      "attributes": {
+        "role": "Consulting and Referring Doctor"
+      }
+    }
+  },
+  "relationships": [
+    {
+      "source": "patient_ashok_dalal",
+      "target": "test_cbc_20241104",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient had a CBC test performed on 04/11/2024."
+    },
+    {
+      "source": "test_cbc_20241104",
+      "target": "condition_anemia",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "CBC results show evidence of anemia."
+    },
+    {
+      "source": "test_cbc_20241104",
+      "target": "condition_neutrophilic_leucocytosis",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "CBC results show evidence of neutrophilic leucocytosis."
+    },
+    {
+      "source": "test_cbc_20241104",
+      "target": "condition_lymphopenia",
+      "type": "INDICATES",
+      "strength": "medium",
+      "description": "CBC results show evidence of lymphopenia."
+    },
+    {
+      "source": "doctor_amit_patel",
+      "target": "patient_ashok_dalal",
+      "type": "CARES_FOR",
+      "strength": "high",
+      "description": "Dr. Amit Patel is the consulting and referring doctor for the patient."
+    }
+  ],
+  "summary": {
+    "totalEntities": 5,
+    "totalRelationships": 5,
+    "entityTypes": [
+      "Patient",
+      "Test",
+      "Condition",
+      "Healthcare Provider"
+    ],
+    "keyInsights": [
+      "Patient is a 76-year-old male admitted as an inpatient.",
+      "CBC reveals anemia with low hemoglobin, RBC count, and hematocrit.",
+      "Neutrophilic leucocytosis is present, suggesting possible infection or inflammation.",
+      "Lymphopenia is noted, indicating low lymphocyte counts.",
+      "Platelet count and morphology are within normal limits.",
+      "No malarial parasites detected.",
+      "Left shift in WBCs observed, supporting acute infection or stress response.",
+      "Consulting and referring doctor is Dr. Amit Patel."
+    ]
+  },
+  "metadata": {
+    "generated_at": "2025-10-12T18:37:30.639055",
+    "document_name": "ASHOK ANUBHAI DALAL -1.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 3413,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 55,
+    "document_uuid": "ASHOK ANUB_44c4e465",
+    "storage_type": "uuid_based"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Document Summary: ASHOK ANUBHAI DALAL -1.pdf",
+  "keyFindings": [
+    "Document processed successfully",
+    "Text length: 2101 characters",
+    "Summary generated using fallback method"
+  ],
+  "summary": "This document contains 2101 characters of text. The content was extracted from ASHOK ANUBHAI DALAL -1.pdf and is available for further analysis.",
+  "recommendations": [
+    "Review the original document for detailed information",
+    "Consider re-processing if text extraction was incomplete"
+  ],
+  "metadata": {
+    "model": "fallback",
+    "generated_at": "2025-10-12T18:36:43.556344",
+    "document_name": "ASHOK ANUBHAI DALAL -1.pdf",
+    "original_text_length": 2101,
+    "tokens_used": 0,
+    "schema_version": "1.0",
+    "validation_passed": true,
+    "fallback_used": true,
+    "document_id": 55,
+    "document_uuid": "ASHOK ANUB_44c4e465",
+    "storage_type": "uuid_based"
+  }
+}

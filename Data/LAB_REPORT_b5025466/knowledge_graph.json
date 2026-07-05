@@ -1,0 +1,317 @@
+{
+  "entities": {
+    "patient_rajesh_kulkarni": {
+      "id": "patient_rajesh_kulkarni",
+      "type": "Patient",
+      "name": "Rajesh Kulkarni",
+      "attributes": {
+        "gender": "Male",
+        "age": 26,
+        "booking_id": "5316220876",
+        "sample_collected_on": "18/Sept/2025 07:00AM",
+        "sample_received_on": "18/Sept/2025 11:22AM",
+        "report_generated_on": "18/Sept/2025 02:22PM",
+        "report_status": "Final Report"
+      }
+    },
+    "condition_diabetes": {
+      "id": "condition_diabetes",
+      "type": "Condition",
+      "name": "Diabetes Mellitus",
+      "attributes": {
+        "status": "Diagnosed",
+        "basis": "HbA1c >= 6.5%",
+        "severity": "Poorly controlled"
+      }
+    },
+    "test_hba1c": {
+      "id": "test_hba1c",
+      "type": "Test",
+      "name": "HbA1c - Glycated Hemoglobin",
+      "attributes": {
+        "value": 11.9,
+        "unit": "%",
+        "reference_range": "4.2-5.7",
+        "date": "18/Sept/2025",
+        "interpretation": "High",
+        "concern": true
+      }
+    },
+    "test_avg_est_glucose": {
+      "id": "test_avg_est_glucose",
+      "type": "Test",
+      "name": "Average Estimated Glucose (plasma)",
+      "attributes": {
+        "value": 243.43,
+        "unit": "mg/dl",
+        "method": "Calculated",
+        "date": "18/Sept/2025"
+      }
+    },
+    "test_serum_chloride": {
+      "id": "test_serum_chloride",
+      "type": "Test",
+      "name": "Serum Chloride",
+      "attributes": {
+        "value": 110,
+        "unit": "mmol/L",
+        "reference_range": "99-109",
+        "interpretation": "High",
+        "concern": true
+      }
+    },
+    "test_vitamin_d": {
+      "id": "test_vitamin_d",
+      "type": "Test",
+      "name": "Vitamin D Total-25 Hydroxy",
+      "attributes": {
+        "value": 11.37,
+        "unit": "ng/ml",
+        "interpretation": "Low",
+        "concern": true
+      }
+    },
+    "test_serum_iron": {
+      "id": "test_serum_iron",
+      "type": "Test",
+      "name": "Serum Iron",
+      "attributes": {
+        "value": 16.4,
+        "unit": "ug/dl",
+        "interpretation": "Low",
+        "concern": true
+      }
+    },
+    "test_hemoglobin": {
+      "id": "test_hemoglobin",
+      "type": "Test",
+      "name": "Hemoglobin (Hb)",
+      "attributes": {
+        "value": 11.2,
+        "unit": "g/dl",
+        "interpretation": "Low",
+        "concern": true
+      }
+    },
+    "test_tsh": {
+      "id": "test_tsh",
+      "type": "Test",
+      "name": "Thyroid Stimulating Hormone (TSH) - Ultrasensitive",
+      "attributes": {
+        "value": 3.206,
+        "unit": "µIU/ml",
+        "interpretation": "Normal"
+      }
+    },
+    "test_vitamin_b12": {
+      "id": "test_vitamin_b12",
+      "type": "Test",
+      "name": "Vitamin B12 (Cyanocobalamin)",
+      "attributes": {
+        "value": 503,
+        "unit": "pg/ml",
+        "interpretation": "Normal"
+      }
+    },
+    "test_cholesterol_total": {
+      "id": "test_cholesterol_total",
+      "type": "Test",
+      "name": "Cholesterol Total",
+      "attributes": {
+        "value": 157,
+        "unit": "mg/dl",
+        "interpretation": "Normal"
+      }
+    },
+    "test_alt_sgpt": {
+      "id": "test_alt_sgpt",
+      "type": "Test",
+      "name": "Alanine Aminotransferase (ALT/SGPT)",
+      "attributes": {
+        "value": 11.0,
+        "unit": "U/l",
+        "interpretation": "Normal"
+      }
+    },
+    "test_serum_creatinine": {
+      "id": "test_serum_creatinine",
+      "type": "Test",
+      "name": "Serum Creatinine",
+      "attributes": {
+        "value": 0.73,
+        "unit": "mg/dl",
+        "interpretation": "Normal"
+      }
+    },
+    "test_calcium_total": {
+      "id": "test_calcium_total",
+      "type": "Test",
+      "name": "Calcium Total, Serum",
+      "attributes": {
+        "value": 9.8,
+        "unit": "mg/dl",
+        "interpretation": "Normal"
+      }
+    },
+    "recommendation_electrolyte_balance": {
+      "id": "recommendation_electrolyte_balance",
+      "type": "Lifestyle Recommendation",
+      "name": "Maintain Electrolyte Balance",
+      "attributes": {
+        "advice": "Healthy balanced diet with plenty of water, fresh fruits and vegetables. Oral rehydration for low chloride."
+      }
+    },
+    "recommendation_diabetes_management": {
+      "id": "recommendation_diabetes_management",
+      "type": "Lifestyle Recommendation",
+      "name": "Diabetes Management",
+      "attributes": {
+        "advice": "HbA1c target <7.0%. Consult physician for glycemic control. Monitor trends in HbA1c."
+      }
+    }
+  },
+  "relationships": [
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "condition_diabetes",
+      "type": "HAS_CONDITION",
+      "strength": "high",
+      "description": "Patient diagnosed with diabetes based on elevated HbA1c."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_hba1c",
+      "type": "HAS_TEST_RESULT",
+      "strength": "high",
+      "description": "HbA1c test result is significantly elevated."
+    },
+    {
+      "source": "test_hba1c",
+      "target": "condition_diabetes",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "HbA1c value confirms diagnosis of diabetes."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_avg_est_glucose",
+      "type": "HAS_TEST_RESULT",
+      "strength": "high",
+      "description": "Average estimated glucose is high, consistent with diabetes."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_serum_chloride",
+      "type": "HAS_TEST_RESULT",
+      "strength": "medium",
+      "description": "Serum chloride is slightly elevated, indicating possible electrolyte imbalance."
+    },
+    {
+      "source": "test_serum_chloride",
+      "target": "recommendation_electrolyte_balance",
+      "type": "RECOMMENDED",
+      "strength": "medium",
+      "description": "Lifestyle advice to maintain electrolyte balance due to abnormal chloride."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_vitamin_d",
+      "type": "HAS_TEST_RESULT",
+      "strength": "medium",
+      "description": "Vitamin D is low, indicating deficiency."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_serum_iron",
+      "type": "HAS_TEST_RESULT",
+      "strength": "medium",
+      "description": "Serum iron is low, indicating possible iron deficiency."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_hemoglobin",
+      "type": "HAS_TEST_RESULT",
+      "strength": "medium",
+      "description": "Hemoglobin is low, suggesting anemia or related condition."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_tsh",
+      "type": "HAS_TEST_RESULT",
+      "strength": "low",
+      "description": "TSH is within normal range."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_vitamin_b12",
+      "type": "HAS_TEST_RESULT",
+      "strength": "low",
+      "description": "Vitamin B12 is within normal range."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_cholesterol_total",
+      "type": "HAS_TEST_RESULT",
+      "strength": "low",
+      "description": "Cholesterol total is within normal range."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_alt_sgpt",
+      "type": "HAS_TEST_RESULT",
+      "strength": "low",
+      "description": "ALT/SGPT is within normal range."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_serum_creatinine",
+      "type": "HAS_TEST_RESULT",
+      "strength": "low",
+      "description": "Serum creatinine is within normal range."
+    },
+    {
+      "source": "patient_rajesh_kulkarni",
+      "target": "test_calcium_total",
+      "type": "HAS_TEST_RESULT",
+      "strength": "low",
+      "description": "Serum calcium is within normal range."
+    },
+    {
+      "source": "test_hba1c",
+      "target": "recommendation_diabetes_management",
+      "type": "RECOMMENDED",
+      "strength": "high",
+      "description": "Lifestyle and monitoring recommendations for diabetes management."
+    }
+  ],
+  "summary": {
+    "totalEntities": 15,
+    "totalRelationships": 16,
+    "entityTypes": [
+      "Patient",
+      "Condition",
+      "Test",
+      "Lifestyle Recommendation"
+    ],
+    "keyInsights": [
+      "Patient Rajesh Kulkarni (26M) is diagnosed with poorly controlled diabetes (HbA1c 11.9%).",
+      "Average estimated plasma glucose is high (243.43 mg/dl), confirming hyperglycemia.",
+      "Serum chloride is slightly elevated (110 mmol/L), suggesting mild electrolyte imbalance.",
+      "Vitamin D (11.37 ng/ml), serum iron (16.4 ug/dl), and hemoglobin (11.2 g/dl) are low, indicating deficiencies and possible anemia.",
+      "Thyroid function (TSH), vitamin B12, cholesterol, liver, kidney, and calcium tests are within normal limits.",
+      "Recommendations include strict diabetes management, monitoring HbA1c trends, and maintaining electrolyte balance through diet and hydration.",
+      "Patient should consult a physician for glycemic control, anemia, and vitamin D/iron supplementation."
+    ]
+  },
+  "metadata": {
+    "generated_at": "2025-10-12T11:46:05.048965",
+    "document_name": "LAB_REPORT_SEPT_2025.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 5329,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 95,
+    "document_uuid": "LAB_REPORT_b5025466",
+    "storage_type": "uuid_based"
+  }
+}

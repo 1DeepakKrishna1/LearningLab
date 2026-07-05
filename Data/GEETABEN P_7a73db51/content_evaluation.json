@@ -1,0 +1,45 @@
+{
+  "title": "Comprehensive Laboratory Analysis: Hematology, Electrolytes, and Respiratory Panel",
+  "keyFindings": [
+    "Mild hyponatremia (Serum Sodium: 136 mmol/L; reference 137–145)",
+    "Neutrophilic leukocytosis (WBC: 17,510 cells/cumm; Neutrophils: 85%, Absolute Neutrophil Count: 14,880/cmm)",
+    "Mild anemia (Hemoglobin: 11.6 g/dL; reference 12.0–15.0)",
+    "Negative respiratory viral panel (SARS-CoV-2, Influenza A/B, RSV not detected)"
+  ],
+  "summary": "The laboratory evaluation of Mrs. Geetaben Prahladbhai Patel, a 61-year-old female, reveals several notable findings. There is mild hyponatremia with a serum sodium just below the lower reference limit, which may be clinically insignificant in isolation but warrants monitoring, especially in elderly or comorbid patients. The complete blood count demonstrates significant neutrophilic leukocytosis, with a markedly elevated white blood cell count and neutrophil predominance, suggestive of an acute bacterial infection or inflammatory process. Mild normocytic, normochromic anemia is present, as indicated by slightly reduced hemoglobin and hematocrit values, which may be chronic or related to underlying disease. Platelet count and red cell indices are within normal limits. The respiratory viral PCR panel is negative for SARS-CoV-2, influenza A/B, and RSV, effectively ruling out common viral respiratory pathogens at the time of testing. Liver function (SGPT/ALT) is within normal range. Overall, the findings point toward an acute bacterial infection in the absence of viral etiology, with mild anemia and electrolyte disturbance. Clinical correlation and further evaluation for the source of infection are recommended.",
+  "recommendations": [
+    "Initiate or continue evaluation for bacterial infection source (e.g., chest X-ray, urinalysis, cultures).",
+    "Monitor serum sodium and consider assessment for causes of mild hyponatremia.",
+    "Assess for underlying causes of anemia and monitor hemoglobin trends.",
+    "Repeat CBC and electrolytes as clinically indicated to track progression or resolution.",
+    "Ensure close clinical follow-up for evolving symptoms or complications."
+  ],
+  "patientConditions": [
+    {
+      "condition": "Neutrophilic leukocytosis",
+      "severity": 7,
+      "description": "Marked elevation in WBC and neutrophils, highly suggestive of acute bacterial infection or significant inflammation."
+    },
+    {
+      "condition": "Mild anemia",
+      "severity": 4,
+      "description": "Hemoglobin and hematocrit are mildly reduced, consistent with normocytic, normochromic anemia."
+    },
+    {
+      "condition": "Mild hyponatremia",
+      "severity": 3,
+      "description": "Serum sodium is slightly below normal, requiring monitoring but not immediately critical."
+    }
+  ],
+  "metadata": {
+    "generated_at": "2025-10-14T18:22:57.138842",
+    "document_name": "GEETABEN PRAHLADBHAI PATEL.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 3104,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 0,
+    "document_uuid": "GEETABEN P_7a73db51",
+    "storage_type": "uuid_based"
+  }
+}

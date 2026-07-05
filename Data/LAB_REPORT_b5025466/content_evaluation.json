@@ -1,0 +1,39 @@
+{
+  "title": "Comprehensive Health Analysis Report Summary for Rajesh Kulkarni (26M)",
+  "keyFindings": [
+    "Very poor glycemic control: HbA1c 11.9% (reference: 4.2-5.7%), diagnostic of uncontrolled diabetes mellitus.",
+    "Fasting blood glucose normal at 98 mg/dL (reference: 70-100 mg/dL), but not reflective of long-term control.",
+    "Severe iron deficiency: Serum iron 16.4 ug/dL (reference: 50-170), transferrin saturation 4.2% (reference: 15-50%), low hemoglobin 11.2 g/dL (reference: 12-15), low MCV 77.8 fL (reference: 83-101), suggestive of microcytic anemia.",
+    "Vitamin D deficiency: 11.37 ng/mL (reference: 20-100 ng/mL).",
+    "Low HDL cholesterol: 29.6 mg/dL (reference: 40-60), high VLDL: 83.4 mg/dL (reference: 6-30), LDL/HDL ratio high at 9.68 (reference: <3.0), indicating increased cardiovascular risk.",
+    "Serum chloride slightly elevated: 110 mmol/L (reference: 99-109).",
+    "Urine analysis: Pyuria (15-20 pus cells/HPF), positive leukocyte esterase, slightly hazy appearance, suggestive of urinary tract infection (UTI).",
+    "Mildly elevated serum uric acid: 6.5 mg/dL (reference: 2.6-6.0).",
+    "Liver and kidney function otherwise within normal limits.",
+    "Vitamin B12, calcium, and thyroid function within normal limits."
+  ],
+  "summary": "Rajesh Kulkarni, a 26-year-old male, presents with evidence of uncontrolled diabetes mellitus (markedly elevated HbA1c), severe iron deficiency anemia, vitamin D deficiency, and dyslipidemia characterized by low HDL and high VLDL cholesterol. Urine analysis is suggestive of a urinary tract infection. Liver and kidney function tests are largely within normal limits, except for a mild elevation in serum uric acid and chloride. There is no evidence of acute kidney or liver injury. The patient is at increased risk for cardiovascular disease and complications related to poorly controlled diabetes and anemia.",
+  "recommendations": [
+    "Immediate referral to an endocrinologist or diabetologist for urgent optimization of diabetes management. Consider initiation or adjustment of anti-diabetic therapy.",
+    "Start oral iron supplementation and investigate for sources of chronic blood loss (e.g., gastrointestinal tract) or malabsorption.",
+    "Begin vitamin D supplementation as per standard guidelines.",
+    "Address dyslipidemia: lifestyle modification (diet, exercise), and consider pharmacotherapy if indicated after repeat fasting lipid profile.",
+    "Urine findings suggest a urinary tract infection; recommend urine culture and sensitivity, and start empirical antibiotics as per local guidelines.",
+    "Monitor blood pressure and renal function regularly due to increased cardiovascular and renal risk.",
+    "Repeat hemogram and iron studies after 4-6 weeks of therapy.",
+    "Dietary counseling for diabetes, anemia, and dyslipidemia.",
+    "Encourage regular physical activity as tolerated.",
+    "Follow up with primary care physician for ongoing monitoring and coordination of care."
+  ],
+  "metadata": {
+    "generated_at": "2025-10-12T11:45:46.757583",
+    "document_name": "LAB_REPORT_SEPT_2025.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 8721,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 95,
+    "document_uuid": "LAB_REPORT_b5025466",
+    "storage_type": "uuid_based"
+  }
+}

@@ -1,0 +1,102 @@
+knowledge_graph:
+  system: |
+    You are an expert knowledge graph engineer. Extract structured knowledge from text.
+    Always respond with valid JSON matching the exact schema provided.
+    Focus on factual, verifiable information. Avoid hallucination.
+  user: |
+    Extract a knowledge graph from the following text chunk.
+
+    Document: {doc_title}
+    Chunk ID: {chunk_id}
+    Topics: {topics}
+
+    TEXT:
+    {text}
+
+    Return ONLY valid JSON with this exact structure:
+    {{
+      "entities": [
+        {{"id": "e1", "name": "EntityName", "type": "PERSON|ORG|CONCEPT|LOCATION|EVENT|PRODUCT", "description": "brief description"}}
+      ],
+      "relationships": [
+        {{"source": "e1", "target": "e2", "relation": "relation_type", "confidence": 0.9}}
+      ],
+      "attributes": [
+        {{"entity_id": "e1", "key": "attribute_name", "value": "attribute_value"}}
+      ]
+    }}
+
+    Rules:
+    - Extract only entities clearly mentioned in the text
+    - Use normalized entity names (title case)
+    - Deduplicate entities
+    - Confidence scores between 0.0 and 1.0
+    - Return empty arrays if nothing found
+
+faq:
+  system: |
+    You are an expert content analyst and instructional designer.
+    Generate high-quality FAQ pairs that comprehensively cover the content.
+    Answers must be grounded strictly in the provided text.
+  user: |
+    Generate {num_pairs} FAQ pairs from the following document chunk.
+
+    Document: {doc_title}
+    Topics: {topics}
+    Keywords: {keywords}
+
+    TEXT:
+    {text}
+
+    Return ONLY valid JSON array:
+    [
+      {{
+        "question": "Clear, specific question",
+        "answer": "Comprehensive answer grounded in the text",
+        "category": "definition|process|comparison|fact|application",
+        "confidence": 0.95
+      }}
+    ]
+
+    Rules:
+    - Questions must be answerable from the text
+    - Avoid yes/no questions
+    - Cover key concepts, processes, and facts
+    - Answers should be 1-3 sentences
+
+dok_questions:
+  system: |
+    You are an expert educator using Webb's Depth of Knowledge (DOK) framework.
+    Generate questions at each cognitive level based on the provided content.
+    All questions must be answerable from the text.
+  user: |
+    Generate DOK-leveled questions from the following document chunk.
+
+    Document: {doc_title}
+    Topics: {topics}
+    Questions per level: {questions_per_level}
+
+    TEXT:
+    {text}
+
+    Return ONLY valid JSON with this exact structure:
+    {{
+      "level_1": [
+        {{"question": "Recall/fact question", "answer": "Direct answer from text", "bloom": "Remember"}}
+      ],
+      "level_2": [
+        {{"question": "Concept/explain question", "answer": "Explanatory answer", "bloom": "Understand/Apply"}}
+      ],
+      "level_3": [
+        {{"question": "Analysis/justification question", "answer": "Analytical answer", "bloom": "Analyze/Evaluate"}}
+      ],
+      "level_4": [
+        {{"question": "Complex multi-step or real-world application question", "answer": "Extended reasoning answer", "bloom": "Create/Synthesize"}}
+      ]
+    }}
+
+    DOK Level Guidelines:
+    - Level 1: Facts, definitions, recall (Who, What, When, Where)
+    - Level 2: Concepts, procedures, comparing (How, Why, Explain, Describe)
+    - Level 3: Strategic thinking, analysis, justification (Analyze, Evaluate, Justify)
+    - Level 4: Extended reasoning, design, real-world application (Design, Create, Predict)

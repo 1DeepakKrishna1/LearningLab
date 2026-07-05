@@ -1,0 +1,245 @@
+{
+  "entities": {
+    "patient_geetaben_patel": {
+      "id": "patient_geetaben_patel",
+      "type": "Patient",
+      "name": "Mrs GEETABEN PRAHLADBHAI PATEL",
+      "attributes": {
+        "age": "61 years 6 months",
+        "sex": "Female",
+        "mrn": "10002024482606",
+        "visit_type": "OP / OP-002"
+      }
+    },
+    "doctor_vn_shah": {
+      "id": "doctor_vn_shah",
+      "type": "Healthcare Provider",
+      "name": "Dr. V. N. SHAH",
+      "attributes": {
+        "role": "Consulting and Referring Doctor"
+      }
+    },
+    "test_electrolytes_serum": {
+      "id": "test_electrolytes_serum",
+      "type": "Test",
+      "name": "Electrolytes-Serum",
+      "attributes": {
+        "sample_no": "LB2412070405",
+        "collected_on": "07/12/2024 11:39",
+        "reported_on": "07/12/2024 12:29",
+        "sodium": "136",
+        "sodium_unit": "mmol/L",
+        "sodium_reference": "137.0-145.0",
+        "sodium_flag": "Low",
+        "potassium": "4.0",
+        "potassium_unit": "mmol/L",
+        "potassium_reference": "3.5-5.2",
+        "potassium_flag": "Normal",
+        "chloride": "103",
+        "chloride_unit": "mmol/L",
+        "chloride_reference": "98.0-107.0",
+        "chloride_flag": "Normal"
+      }
+    },
+    "test_cbc": {
+      "id": "test_cbc",
+      "type": "Test",
+      "name": "Complete Blood Count (CBC)",
+      "attributes": {
+        "sample_no": "HE2412070272",
+        "collected_on": "07/12/2024 14:03",
+        "reported_on": "07/12/2024 14:23",
+        "haemoglobin": "11.6",
+        "haemoglobin_unit": "g/dL",
+        "haemoglobin_reference": "12.0-15.0",
+        "haemoglobin_flag": "Low",
+        "rbc_count": "3.91",
+        "rbc_count_unit": "x10^6/cumm",
+        "rbc_count_reference": "3.8-4.8",
+        "rbc_count_flag": "Normal",
+        "hematocrit": "35.9",
+        "hematocrit_unit": "%",
+        "hematocrit_reference": "36.0-46.0",
+        "hematocrit_flag": "Low",
+        "mcv": "91.7",
+        "mcv_unit": "fl",
+        "mcv_reference": "83.0-101.0",
+        "mcv_flag": "Normal",
+        "mch": "29.8",
+        "mch_unit": "pg",
+        "mch_reference": "27.0-32.0",
+        "mch_flag": "Normal",
+        "mchc": "32.3",
+        "mchc_unit": "g/dL",
+        "mchc_reference": "31.5-34.5",
+        "mchc_flag": "Normal",
+        "rdw_cv": "13.6",
+        "rdw_cv_unit": "%",
+        "rdw_cv_reference": "12.0-16.0",
+        "rdw_cv_flag": "Normal",
+        "wbc_count": "17510",
+        "wbc_count_unit": "cells/cumm",
+        "wbc_count_reference": "4000.0-10000.0",
+        "wbc_count_flag": "High",
+        "platelet_count": "260000",
+        "platelet_count_unit": "cells/cumm",
+        "platelet_count_reference": "150000.0-450000.0",
+        "platelet_count_flag": "Normal",
+        "mpv": "8",
+        "mpv_unit": "fl",
+        "mpv_reference": "4.0-10.0",
+        "mpv_flag": "Normal",
+        "neutrophils_percent": "85",
+        "neutrophils_percent_reference": "40.0-80.0",
+        "neutrophils_percent_flag": "High",
+        "lymphocytes_percent": "10",
+        "lymphocytes_percent_reference": "20.0-40.0",
+        "lymphocytes_percent_flag": "Low",
+        "eosinophils_percent": "0",
+        "eosinophils_percent_reference": "1.0-6.0",
+        "eosinophils_percent_flag": "Low",
+        "monocytes_percent": "5",
+        "monocytes_percent_reference": "2.0-10.0",
+        "monocytes_percent_flag": "Normal",
+        "basophils_percent": "0",
+        "basophils_percent_reference": "0.0-2.0",
+        "basophils_percent_flag": "Normal",
+        "absolute_neutrophil_count": "14880",
+        "absolute_neutrophil_count_unit": "/cmm",
+        "absolute_neutrophil_count_reference": "2000.0-7000.0",
+        "absolute_neutrophil_count_flag": "High",
+        "absolute_lymphocyte_count": "1700",
+        "absolute_lymphocyte_count_unit": "/cmm",
+        "absolute_lymphocyte_count_reference": "1000.0-3000.0",
+        "absolute_lymphocyte_count_flag": "Normal",
+        "absolute_eosinophil_count": "0",
+        "absolute_eosinophil_count_unit": "/cmm",
+        "absolute_eosinophil_count_reference": "20.0-500.0",
+        "absolute_eosinophil_count_flag": "Low",
+        "peripheral_smear_comment": "Normocytic - Normochromic, Neutrophilic Leucocytosis, Platelets are adequate, No Malarial parasites seen"
+      }
+    },
+    "condition_neutrophilic_leucocytosis": {
+      "id": "condition_neutrophilic_leucocytosis",
+      "type": "Condition",
+      "name": "Neutrophilic Leucocytosis",
+      "attributes": {
+        "description": "Elevated neutrophil count and overall high WBC count"
+      }
+    },
+    "test_respiratory_panel": {
+      "id": "test_respiratory_panel",
+      "type": "Test",
+      "name": "Respiratory Panel-1 (Flu/ RSV/ Covid Panel)",
+      "attributes": {
+        "sample_no": "LB2412070573",
+        "collected_on": "07/12/2024 14:03",
+        "reported_on": "07/12/2024 20:05",
+        "sample_type": "Nasopharyngeal and Throat Swab with VTM",
+        "methodology": "Realtime Polymerase chain reaction",
+        "sars_cov_19": "Target not detected",
+        "influenza_a": "Target not detected",
+        "influenza_a_h1n1": "Target not detected",
+        "influenza_a_h3n2": "Target not detected",
+        "influenza_b": "Target not detected",
+        "respiratory_synctial_virus_a": "Target not detected",
+        "respiratory_synctial_virus_b": "Target not detected"
+      }
+    },
+    "test_sgpt": {
+      "id": "test_sgpt",
+      "type": "Test",
+      "name": "SGPT (ALT)",
+      "attributes": {
+        "sample_no": "LB2412070572",
+        "collected_on": "07/12/2024 14:03",
+        "reported_on": "07/12/2024 14:42",
+        "sgpt": "19",
+        "sgpt_unit": "u/L",
+        "sgpt_reference": "0.0-35.0",
+        "sgpt_flag": "Normal"
+      }
+    }
+  },
+  "relationships": [
+    {
+      "source": "patient_geetaben_patel",
+      "target": "doctor_vn_shah",
+      "type": "CONSULTED_BY",
+      "strength": "high",
+      "description": "Patient was seen and referred by Dr. V. N. SHAH"
+    },
+    {
+      "source": "patient_geetaben_patel",
+      "target": "test_electrolytes_serum",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient had serum electrolytes tested"
+    },
+    {
+      "source": "patient_geetaben_patel",
+      "target": "test_cbc",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient had a complete blood count (CBC) performed"
+    },
+    {
+      "source": "patient_geetaben_patel",
+      "target": "test_respiratory_panel",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient had a respiratory viral panel performed"
+    },
+    {
+      "source": "patient_geetaben_patel",
+      "target": "test_sgpt",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient had liver enzyme (SGPT/ALT) tested"
+    },
+    {
+      "source": "test_cbc",
+      "target": "condition_neutrophilic_leucocytosis",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "CBC findings show neutrophilic leucocytosis"
+    },
+    {
+      "source": "patient_geetaben_patel",
+      "target": "condition_neutrophilic_leucocytosis",
+      "type": "HAS_CONDITION",
+      "strength": "high",
+      "description": "Patient has neutrophilic leucocytosis as per CBC and smear findings"
+    }
+  ],
+  "summary": {
+    "totalEntities": 6,
+    "totalRelationships": 7,
+    "entityTypes": [
+      "Patient",
+      "Healthcare Provider",
+      "Test",
+      "Condition"
+    ],
+    "keyInsights": [
+      "Patient is a 61-year-old female with abnormal CBC findings.",
+      "CBC shows neutrophilic leucocytosis (high neutrophils and WBC), low haemoglobin, low hematocrit, low lymphocytes and eosinophils.",
+      "Serum sodium is mildly low; potassium and chloride are within normal limits.",
+      "SGPT (ALT) is within normal range, indicating no acute liver injury.",
+      "Respiratory viral panel is negative for SARS-CoV-2, Influenza A/B, and RSV.",
+      "Peripheral smear is normocytic, normochromic, with adequate platelets and no malarial parasites.",
+      "Clinical correlation is recommended for the abnormal CBC findings."
+    ]
+  },
+  "metadata": {
+    "generated_at": "2025-10-14T18:23:20.902543",
+    "document_name": "GEETABEN PRAHLADBHAI PATEL.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 4975,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 0,
+    "document_uuid": "GEETABEN P_7a73db51",
+    "storage_type": "uuid_based"
+  }
+}

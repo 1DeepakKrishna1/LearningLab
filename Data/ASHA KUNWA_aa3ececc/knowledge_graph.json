@@ -1,0 +1,181 @@
+{
+  "entities": {
+    "patient_asha_kunwar_rathod": {
+      "id": "patient_asha_kunwar_rathod",
+      "type": "Patient",
+      "name": "Mrs ASHA KUNWAR RATHOD",
+      "attributes": {
+        "age": "36",
+        "sex": "Female",
+        "mrn": "10002023421090"
+      }
+    },
+    "provider_dr_vn_shah": {
+      "id": "provider_dr_vn_shah",
+      "type": "Healthcare Provider",
+      "name": "Dr. V. N. SHAH",
+      "attributes": {
+        "role": "Consulting and Referring Doctor"
+      }
+    },
+    "test_hba1c_2024_03_19": {
+      "id": "test_hba1c_2024_03_19",
+      "type": "Test",
+      "name": "HbA1c (Glycosylated Hemoglobin)",
+      "attributes": {
+        "sample_no": "LB2403190810",
+        "collected_on": "2024-03-19 12:17",
+        "reported_on": "2024-03-19 13:16",
+        "result_hba1c": "7.17",
+        "result_hba1c_flag": "High",
+        "unit_hba1c": "%",
+        "reference_hba1c": "Normal ≤ 5.7%; Prediabetes 5.7-6.5%; Diabetes > 6.5%",
+        "ada_goal_good": "6.01 - 7.00%",
+        "ada_goal_fair": "7.01 - 8.00%",
+        "ada_goal_poor": "> 8.01%",
+        "result_eag": "159.1",
+        "result_eag_flag": "High",
+        "unit_eag": "mg/dL",
+        "reference_eag": "70.0-126.0"
+      }
+    },
+    "test_hba1c_2024_05_24": {
+      "id": "test_hba1c_2024_05_24",
+      "type": "Test",
+      "name": "HbA1c (Glycosylated Hemoglobin)",
+      "attributes": {
+        "sample_no": "LB2405241020",
+        "collected_on": "2024-05-24 17:45",
+        "reported_on": "2024-05-24 19:08",
+        "result_hba1c": "7.37",
+        "result_hba1c_flag": "High",
+        "unit_hba1c": "%",
+        "reference_hba1c": "Normal ≤ 5.7%; Prediabetes 5.7-6.5%; Diabetes > 6.5%",
+        "ada_goal_good": "6.01 - 7.00%",
+        "ada_goal_fair": "7.01 - 8.00%",
+        "ada_goal_poor": "> 8.01%",
+        "result_eag": "164.8",
+        "result_eag_flag": "High",
+        "unit_eag": "mg/dL",
+        "reference_eag": "70.0-126.0"
+      }
+    },
+    "test_hba1c_2025_01_06": {
+      "id": "test_hba1c_2025_01_06",
+      "type": "Test",
+      "name": "HbA1c (Glycosylated Hemoglobin)",
+      "attributes": {
+        "sample_no": "HE2501060184",
+        "collected_on": "2025-01-06 11:39",
+        "reported_on": "2025-01-06 12:30",
+        "result_hba1c": "7.9",
+        "result_hba1c_flag": "High",
+        "unit_hba1c": "%",
+        "reference_hba1c": "Normal ≤ 5.7%; Prediabetes 5.7-6.5%; Diabetes > 6.5%",
+        "ada_goal_good": "6.01 - 7.00%",
+        "ada_goal_fair": "7.01 - 8.00%",
+        "ada_goal_poor": "> 8.01%",
+        "result_eag": "180.0",
+        "result_eag_flag": "High",
+        "unit_eag": "mg/dL",
+        "reference_eag": "70.0-126.0"
+      }
+    },
+    "condition_diabetes_mellitus": {
+      "id": "condition_diabetes_mellitus",
+      "type": "Condition",
+      "name": "Diabetes Mellitus",
+      "attributes": {
+        "diagnosis_basis": "HbA1c > 6.5%",
+        "status": "Uncontrolled"
+      }
+    }
+  },
+  "relationships": [
+    {
+      "source": "patient_asha_kunwar_rathod",
+      "target": "test_hba1c_2024_03_19",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient underwent HbA1c and eAG testing on 2024-03-19"
+    },
+    {
+      "source": "patient_asha_kunwar_rathod",
+      "target": "test_hba1c_2024_05_24",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient underwent HbA1c and eAG testing on 2024-05-24"
+    },
+    {
+      "source": "patient_asha_kunwar_rathod",
+      "target": "test_hba1c_2025_01_06",
+      "type": "UNDERWENT",
+      "strength": "high",
+      "description": "Patient underwent HbA1c and eAG testing on 2025-01-06"
+    },
+    {
+      "source": "test_hba1c_2024_03_19",
+      "target": "condition_diabetes_mellitus",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "HbA1c result of 7.17% indicates diabetes"
+    },
+    {
+      "source": "test_hba1c_2024_05_24",
+      "target": "condition_diabetes_mellitus",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "HbA1c result of 7.37% indicates diabetes"
+    },
+    {
+      "source": "test_hba1c_2025_01_06",
+      "target": "condition_diabetes_mellitus",
+      "type": "INDICATES",
+      "strength": "high",
+      "description": "HbA1c result of 7.9% indicates diabetes"
+    },
+    {
+      "source": "patient_asha_kunwar_rathod",
+      "target": "condition_diabetes_mellitus",
+      "type": "HAS_CONDITION",
+      "strength": "high",
+      "description": "Patient has diabetes mellitus based on repeated high HbA1c"
+    },
+    {
+      "source": "provider_dr_vn_shah",
+      "target": "patient_asha_kunwar_rathod",
+      "type": "CARES_FOR",
+      "strength": "high",
+      "description": "Dr. V. N. SHAH is the consulting and referring doctor for the patient"
+    }
+  ],
+  "summary": {
+    "totalEntities": 6,
+    "totalRelationships": 8,
+    "entityTypes": [
+      "Patient",
+      "Healthcare Provider",
+      "Test",
+      "Condition"
+    ],
+    "keyInsights": [
+      "Patient Mrs ASHA KUNWAR RATHOD (female, age 36) has persistently elevated HbA1c levels (7.17%, 7.37%, 7.9%) over three tests spanning March 2024 to January 2025.",
+      "All eAG (estimated average glucose) values are above the normal reference range, indicating poor glycemic control.",
+      "HbA1c values consistently exceed the ADA goal for good control, with the latest value (7.9%) approaching the threshold for poor control.",
+      "Diagnosis of diabetes mellitus is confirmed and remains uncontrolled.",
+      "Ongoing monitoring is evident, but results suggest a need for improved diabetes management and possible adjustment of therapy.",
+      "Patient is under the care of Dr. V. N. SHAH."
+    ]
+  },
+  "metadata": {
+    "generated_at": "2025-10-12T11:44:14.559685",
+    "document_name": "ASHA KUNWAR RATHOD.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 3562,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 94,
+    "document_uuid": "ASHA KUNWA_aa3ececc",
+    "storage_type": "uuid_based"
+  }
+}

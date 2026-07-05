@@ -1,0 +1,104 @@
+pipeline:
+  batch_size: 10
+  max_workers: 4
+  retry_attempts: 3
+  retry_delay: 2.0
+  idempotent: true
+
+paths:
+  input_dir: ./input
+  output_dir: ./output
+  raw_dir: ./output/raw
+  extracted_dir: ./output/extracted
+  processed_dir: ./output/processed
+  embeddings_dir: ./output/embeddings
+  knowledge_graph_dir: ./output/knowledge_graph
+  faq_dir: ./output/faq
+  questions_dir: ./output/questions
+  state_db: ./output/.pipeline_state.json
+
+ingestion:
+  supported_extensions: [".pdf"]
+  hash_algorithm: sha256
+  dedup_enabled: true
+  incremental: true
+  sources:
+    local:
+      enabled: true
+    gdrive:
+      enabled: false
+      scopes:
+        - https://www.googleapis.com/auth/drive.readonly
+    sharepoint:
+      enabled: false
+      api_version: v1.0
+
+extraction:
+  text:
+    backend: pymupdf          # pymupdf | pdfplumber
+    preserve_layout: true
+  tables:
+    backend: pdfplumber       # pdfplumber | camelot | tabula
+    extract_as_markdown: true
+  images:
+    extract: true
+    min_size: 100             # minimum pixel dimension
+    ocr:
+      enabled: true
+      backend: easyocr        # easyocr | tesseract
+      languages: ["en"]
+    captioning:
+      enabled: false          # requires vision model
+
+processing:
+  cleaning:
+    remove_headers_footers: true
+    normalize_whitespace: true
+    fix_hyphenation: true
+  chunking:
+    strategy: semantic        # semantic | fixed | sentence
+    chunk_size: 512
+    chunk_overlap: 64
+    min_chunk_size: 50
+  metadata:
+    extract_ner: true
+    extract_keywords: true
+    max_keywords: 15
+    ner_model: en_core_web_sm
+
+embedding:
+  model: all-MiniLM-L6-v2
+  device: cpu
+  batch_size: 64
+  normalize: true
+  vector_store:
+    backend: faiss
+    index_type: IndexFlatL2
+    save_path: ./output/embeddings
+
+enrichment:
+  groq:
+    model: llama3-70b-8192
+    temperature: 0.1
+    max_tokens: 4096
+    timeout: 60
+    max_retries: 3
+  knowledge_graph:
+    enabled: true
+    max_entities_per_chunk: 20
+  faq:
+    enabled: true
+    pairs_per_chunk: 5
+  questions:
+    enabled: true
+    levels: [1, 2, 3, 4]
+    questions_per_level: 3
+
+observability:
+  log_level: INFO
+  log_format: json
+  metrics:
+    enabled: true
+    port: 8000
+  tracing:
+    enabled: false

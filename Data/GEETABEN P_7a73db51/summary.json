@@ -1,0 +1,16 @@
+{
+  "title": "Comprehensive Laboratory Assessment and Hematological Interpretation",
+  "summary": "The laboratory evaluation for Mrs. Geetaben Prahladbhai Patel, a 61-year-old female, reveals several key findings. Serum electrolyte analysis demonstrates a mildly decreased sodium level (136 mmol/L; reference: 137–145 mmol/L), while potassium (4.0 mmol/L) and chloride (103 mmol/L) are within normal limits. The slight hyponatremia may be clinically insignificant but warrants correlation with hydration status, renal function, and possible medication effects, especially in the context of diabetes care.\n\nComplete blood count (CBC) shows mild anemia with hemoglobin at 11.6 g/dL (reference: 12.0–15.0 g/dL) and hematocrit at 35.9% (reference: 36.0–46.0%), with a red blood cell count at the lower end of normal. Red cell indices (MCV, MCH, MCHC, RDW) indicate a normocytic, normochromic anemia, which is commonly associated with chronic disease, early iron deficiency, or renal insufficiency. Notably, there is marked leukocytosis (WBC 17,510 cells/cumm; reference: 4,000–10,000), with a pronounced neutrophilia (neutrophils 85%, absolute neutrophil count 14,880/cmm) and relative lymphopenia (lymphocytes 10%). Eosinophils are absent. The peripheral smear confirms neutrophilic leukocytosis with adequate platelets and no malarial parasites. These findings are suggestive of an acute bacterial infection or significant inflammatory response.\n\nLiver function, as assessed by SGPT (ALT), is within normal range (19 u/L; reference: 0–35 u/L), indicating no evidence of hepatocellular injury. Respiratory viral PCR panel is negative for SARS-CoV-2, Influenza A/B, and RSV, ruling out these common viral etiologies for respiratory symptoms.\n\nOverall, the laboratory profile is abnormal, characterized by mild normocytic anemia and significant neutrophilic leukocytosis, likely reflecting an acute bacterial infection or inflammatory process. Electrolyte and liver function are largely preserved. Further clinical correlation and investigation for the source of infection are recommended.",
+  "metadata": {
+    "model": "gpt-4.1",
+    "generated_at": "2025-10-14T18:22:28.947896",
+    "document_name": "GEETABEN PRAHLADBHAI PATEL.pdf",
+    "original_text_length": 5701,
+    "tokens_used": 2942,
+    "schema_version": "1.0",
+    "validation_passed": true,
+    "document_id": 0,
+    "document_uuid": "GEETABEN P_7a73db51",
+    "storage_type": "uuid_based"
+  }
+}

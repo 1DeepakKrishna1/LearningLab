@@ -1,0 +1,34 @@
+{
+  "title": "CBC Interpretation for Mr. Ashok Anubhai Dalal (76 years, Male)",
+  "keyFindings": [
+    "Anemia: Hemoglobin 9.7 g/dL (Low), RBC count 3.06 x10^6/cumm (Low), Hematocrit 29.3% (Low)",
+    "Normocytic, normochromic RBCs with mild hypochromasia (6%)",
+    "Marked neutrophilic leukocytosis: WBC 14,430/cumm (High), Neutrophils 91% (High), Absolute neutrophil count 13,070/cumm (High)",
+    "Lymphopenia: Lymphocytes 6% (Low), Absolute lymphocyte count 790/cumm (Low)",
+    "Eosinopenia: Eosinophils 0% (Low)",
+    "Platelet count within normal limits: 296,000/cumm",
+    "No malarial parasites detected",
+    "Left shift present in WBC differential"
+  ],
+  "summary": "The complete blood count (CBC) for Mr. Ashok Anubhai Dalal reveals normocytic, normochromic anemia with mild hypochromasia, marked neutrophilic leukocytosis with a left shift, and significant lymphopenia and eosinopenia. Platelet count is within normal limits and no malarial parasites are detected. The findings are suggestive of an acute or ongoing bacterial infection or inflammatory process, possibly severe, given the degree of neutrophilia and left shift. The anemia appears to be of chronic disease or acute illness type, given the normocytic, normochromic picture.",
+  "recommendations": [
+    "Correlate clinically for signs of infection, sepsis, or acute inflammatory process.",
+    "Monitor for potential sources of infection; consider blood cultures and other relevant microbiological investigations.",
+    "Assess for underlying causes of anemia (chronic disease, acute blood loss, nutritional deficiencies) and manage accordingly.",
+    "Monitor CBC trends to assess response to therapy and progression.",
+    "Evaluate immune status given lymphopenia, especially if immunosuppression or recent infection is suspected.",
+    "Consider consultation with hematology if anemia worsens or if there are additional unexplained cytopenias.",
+    "Continue supportive care as indicated in the ICU setting."
+  ],
+  "metadata": {
+    "generated_at": "2025-10-12T18:37:02.079966",
+    "document_name": "ASHOK ANUBHAI DALAL -1.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 1543,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 55,
+    "document_uuid": "ASHOK ANUB_44c4e465",
+    "storage_type": "uuid_based"
+  }
+}

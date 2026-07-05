@@ -1,0 +1,177 @@
+You are a senior data engineer and AI systems architect.
+
+Design and implement a **production-grade, scalable, and modular data pipeline in Python** that processes PDF documents from multiple sources and generates structured AI-ready outputs.
+
+---
+
+# 🎯 Objective
+Build an end-to-end pipeline that:
+1. Extracts PDF documents from multiple input sources
+2. Processes and enriches content using AI
+3. Stores intermediate and final outputs phase-wise
+4. Produces structured outputs for downstream AI/SLM applications
+
+---
+
+# 📥 Input Sources
+Support the following input locations:
+- Local file system
+- Google Drive (via API)
+- SharePoint (via Microsoft Graph API)
+
+The system must:
+- Handle authentication securely (OAuth2 / service accounts)
+- Support batch and incremental ingestion
+- Detect new/updated files
+
+---
+
+# 📤 Output Requirements
+- Store outputs phase-wise in a structured directory on local drive:
+  /output/
+    /raw/
+    /extracted/
+    /processed/
+    /embeddings/
+    /knowledge_graph/
+    /faq/
+    /questions/
+
+- Use JSON format for all structured outputs
+- Ensure traceability (each output linked to source document ID)
+
+---
+
+# ⚙️ Pipeline Architecture
+Design the pipeline with the following components:
+
+## 1. Ingestion Layer
+- File discovery and metadata capture
+- Deduplication using hashing
+- Logging and retry mechanisms
+
+## 2. Extraction Layer
+Extract ALL content types from PDFs:
+- Text (use PyMuPDF / pdfplumber)
+- Tables (use camelot / tabula)
+- Images (extract images)
+- OCR on images (use Tesseract / EasyOCR)
+- Image description (use vision-capable model or captioning model)
+
+## 3. Processing Layer
+- Clean and normalize text
+- Chunk content intelligently (semantic chunking preferred)
+- Extract metadata:
+  - Title
+  - Author (if available)
+  - Keywords
+  - Topics
+  - Entities (NER)
+
+## 4. Embedding Layer
+- Generate embeddings using a configurable model (e.g., sentence-transformers or API)
+- Store embeddings with references to chunk IDs
+- Support vector DB compatibility (FAISS / Pinecone-ready format)
+
+## 5. AI Enrichment Layer (Use GroQ LLM)
+Use :contentReference[oaicite:1]{index=1} LLM APIs with optimized prompts:
+
+### a. Knowledge Graph Generation
+- Output JSON format:
+  {
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+  }
+- Ensure deduplication and normalization
+
+### b. FAQ Generation
+- Generate high-quality Q&A pairs
+- Cover key concepts and edge cases
+- Output format:
+  [
+    {"question": "", "answer": ""}
+  ]
+
+### c. DOK-Based Question Generation
+Generate questions based on Depth of Knowledge:
+
+- Level 1: Recall (facts, definitions)
+- Level 2: Concepts (explain, compare)
+- Level 3: Strategic thinking (analyze, justify)
+- Level 4: Extended reasoning (multi-step, real-world application)
+
+Output format:
+{
+  "level_1": [],
+  "level_2": [],
+  "level_3": [],
+  "level_4": []
+}
+
+---
+
+# 🧠 Prompt Engineering Requirements
+- Use structured prompts with:
+  - Role definition
+  - Context injection (chunk + metadata)
+  - Clear output schema
+- Implement prompt templates
+- Add guardrails for hallucination reduction
+
+---
+
+# 📊 Observability & Reliability
+- Structured logging
+- Error handling with retries
+- Metrics (processing time, failures)
+- Idempotent processing
+- Pipeline status tracking
+
+---
+
+# 🔐 Security
+- Secure API key management
+- Handle sensitive documents safely
+- Access control for external sources
+
+---
+
+# 📦 Deliverables
+Provide:
+
+1. Complete Python project structure
+2. Modular code for each pipeline stage
+3. Configuration files
+4. Sample prompts for GroQ LLM
+5. Sample input & output JSON
+6. Setup instructions (local + cloud-ready)
+7. Dockerfile + docker-compose
+8. README with architecture diagram
+9. Unit test examples
+
+---
+
+# 🚀 General
+- Add vector DB integration
+- Add incremental pipeline runs
+- Add LangGraph / agentic orchestration
+
+---
+
+# ⚠️ Constraints
+- Must handle large PDFs efficiently
+- Avoid memory bottlenecks
+- Ensure modular extensibility
+- Code should be production-ready, not prototype
+
+---
+
+# ✅ Output Expectation
+Return:
+- Full working code (not pseudo code)
+- Well-documented modules
+- Clear separation of concerns
+- Real-world best practices
+
+Act like you are delivering this for enterprise deployment.

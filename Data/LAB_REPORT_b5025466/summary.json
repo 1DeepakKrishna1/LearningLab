@@ -1,0 +1,32 @@
+{
+  "title": "Comprehensive Health Analysis Report",
+  "keyFindings": [
+    "Elevated HbA1c at 11.90%, indicating poorly controlled diabetes.",
+    "Low serum iron at 16.4 ug/dl, suggestive of possible iron deficiency.",
+    "Low hemoglobin at 11.2 g/dl, indicating anemia.",
+    "Low vitamin D level at 11.37 ng/ml, below the recommended range.",
+    "Serum chloride slightly elevated at 110 mmol/L (normal: 99-109 mmol/L).",
+    "Normal thyroid function, vitamin B12, cholesterol, liver, kidney, and calcium levels.",
+    "Fasting blood sugar within normal limits at 98 mg/dl."
+  ],
+  "summary": "This comprehensive health analysis for Rajesh Kulkarni, a 26-year-old male, reveals several areas of concern requiring attention. The most significant finding is a markedly elevated HbA1c of 11.90%, which is well above the diagnostic threshold for diabetes and indicates poor long-term glycemic control. Despite a normal fasting blood glucose level, the high HbA1c suggests chronic hyperglycemia. Additionally, the report highlights low serum iron and hemoglobin levels, pointing toward iron deficiency anemia. Vitamin D is also notably deficient, which may impact bone health and immune function. Serum chloride is marginally above the normal range, which may reflect an electrolyte imbalance but is not critically high. Other vital parameters, including thyroid function, vitamin B12, cholesterol, liver enzymes, kidney function, and calcium, are within normal limits. The report emphasizes the importance of routine monitoring and lifestyle modifications to address these findings. Overall, while some health parameters are stable, the presence of uncontrolled diabetes, anemia, and vitamin D deficiency necessitate prompt medical intervention and ongoing management.",
+  "recommendations": [
+    "Consult an endocrinologist or physician promptly to address uncontrolled diabetes and review current treatment.",
+    "Initiate or adjust diabetes management plan, including medication, diet, and physical activity.",
+    "Investigate and treat iron deficiency anemia with dietary changes and/or supplementation as advised by a healthcare provider.",
+    "Begin vitamin D supplementation and increase safe sun exposure as recommended.",
+    "Repeat relevant blood tests in 2-3 months to monitor progress and effectiveness of interventions."
+  ],
+  "metadata": {
+    "model": "gpt-4.1",
+    "generated_at": "2025-10-12T11:45:10.564445",
+    "document_name": "LAB_REPORT_SEPT_2025.pdf",
+    "original_text_length": 10003,
+    "tokens_used": 3648,
+    "schema_version": "1.0",
+    "validation_passed": true,
+    "document_id": 95,
+    "document_uuid": "LAB_REPORT_b5025466",
+    "storage_type": "uuid_based"
+  }
+}

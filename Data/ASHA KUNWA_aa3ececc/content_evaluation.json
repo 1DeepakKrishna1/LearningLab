@@ -1,0 +1,31 @@
+{
+  "title": "HbA1c Trend Analysis and Glycemic Control Assessment for Mrs. Asha Kunwar Rathod",
+  "keyFindings": [
+    "HbA1c levels consistently above the diagnostic threshold for diabetes (>6.5%) across all three reports.",
+    "Progressive increase in HbA1c: 7.17% (March 2024), 7.37% (May 2024), 7.9% (January 2025).",
+    "Estimated average glucose (eAg) values also elevated and rising: 159.1 mg/dL, 164.8 mg/dL, 180.0 mg/dL (reference: 70.0-126.0 mg/dL).",
+    "Glycemic control has shifted from 'fair' (HbA1c 7.01-8.00%) to approaching 'poor' control (>8.01%) per ADA guidelines.",
+    "No evidence of improvement in glycemic control over the monitoring period."
+  ],
+  "summary": "Mrs. Asha Kunwar Rathod, a 36-year-old female with a known diagnosis of diabetes, has demonstrated a progressive worsening of glycemic control over a 10-month period. Her HbA1c values have increased from 7.17% in March 2024 to 7.9% in January 2025, with corresponding rises in estimated average glucose. These results indicate suboptimal diabetes management, with current values nearing the threshold for poor glycemic control. There is no evidence of improvement, and the trend suggests an increased risk for diabetes-related complications if not addressed.",
+  "recommendations": [
+    "Review and intensify diabetes management plan, including possible adjustment of pharmacotherapy.",
+    "Reinforce dietary counseling and encourage adherence to a diabetes-appropriate meal plan.",
+    "Increase frequency of self-monitoring of blood glucose and maintain a log for review.",
+    "Assess for barriers to medication adherence and address any psychosocial or financial issues.",
+    "Screen for diabetes-related complications (retinopathy, nephropathy, neuropathy, cardiovascular risk).",
+    "Consider referral to a diabetes educator or endocrinologist for comprehensive management.",
+    "Schedule close follow-up to monitor response to interventions and repeat HbA1c in 3 months."
+  ],
+  "metadata": {
+    "generated_at": "2025-10-12T11:44:00.467798",
+    "document_name": "ASHA KUNWAR RATHOD.pdf",
+    "model": "gpt-4.1",
+    "tokens_used": 1875,
+    "schema_version": "1.0",
+    "extraction_type": "llm_generated",
+    "document_id": 94,
+    "document_uuid": "ASHA KUNWA_aa3ececc",
+    "storage_type": "uuid_based"
+  }
+}

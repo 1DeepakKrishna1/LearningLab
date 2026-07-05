@@ -1,0 +1,31 @@
+{
+  "title": "HbA1c Trend Analysis for Mrs. Asha Kunwar Rathod",
+  "keyFindings": [
+    "HbA1c levels consistently above the diabetic threshold (>6.5%) in all three reports.",
+    "Progressive increase in HbA1c: 7.17% (March 2024), 7.37% (May 2024), and 7.9% (January 2025).",
+    "Estimated average glucose (eAg) values are elevated and rising: 159.1 mg/dL, 164.8 mg/dL, and 180.0 mg/dL.",
+    "HbA1c control has shifted from fair to approaching poor as per ADA guidelines.",
+    "No evidence of improvement in glycemic control over the course of the year.",
+    "All results are flagged as abnormal, indicating suboptimal diabetes management."
+  ],
+  "summary": "This document summarizes three sequential HbA1c laboratory reports for Mrs. Asha Kunwar Rathod, a 36-year-old female patient under the care of Dr. V. N. Shah at Zydus Hospital. The reports, dated March 2024, May 2024, and January 2025, show a consistent and progressive elevation in HbA1c levels: 7.17%, 7.37%, and 7.9%, respectively. These values are well above the diagnostic threshold for diabetes (>6.5%) and indicate a transition from fair to nearly poor glycemic control according to ADA recommendations. Correspondingly, the estimated average glucose (eAg) values have also increased over time, from 159.1 mg/dL to 180.0 mg/dL, further confirming deteriorating blood sugar control. All results are highlighted as abnormal, and there is no evidence of improvement in diabetes management over the observed period. These findings suggest a need for urgent review and intensification of the patient's diabetes care plan to prevent potential complications.",
+  "recommendations": [
+    "Review and intensify the current diabetes management plan, including possible medication adjustments.",
+    "Consult with a diabetologist or endocrinologist for specialized guidance.",
+    "Implement or reinforce lifestyle modifications, such as dietary changes and increased physical activity.",
+    "Schedule more frequent monitoring of HbA1c and blood glucose levels to assess response to interventions.",
+    "Educate the patient on the importance of adherence to therapy and regular follow-up visits."
+  ],
+  "metadata": {
+    "model": "gpt-4.1",
+    "generated_at": "2025-10-12T11:43:50.197220",
+    "document_name": "ASHA KUNWAR RATHOD.pdf",
+    "original_text_length": 3430,
+    "tokens_used": 1939,
+    "schema_version": "1.0",
+    "validation_passed": true,
+    "document_id": 94,
+    "document_uuid": "ASHA KUNWA_aa3ececc",
+    "storage_type": "uuid_based"
+  }
+}
