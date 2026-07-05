@@ -1,0 +1,4 @@
+openpyxl
+sentence-transformers
+scikit-learn
+python-dotenv

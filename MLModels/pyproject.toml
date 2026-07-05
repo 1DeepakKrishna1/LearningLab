@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "app-detector"
+version = "1.0.0"
+description = "Naive Bayes CLI that detects an application_id from categorical features and emits a risk/action decision."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Deepak Krishna" }]
+license = { text = "MIT" }
+keywords = ["naive-bayes", "classification", "cli", "risk-scoring"]
+dependencies = []  # Pure standard library. No third-party runtime dependencies.
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "httpx>=0.27"]
+api = ["fastapi>=0.110", "uvicorn>=0.29"]
+
+[project.scripts]
+app-detector = "app_detector.cli:main"
+app-detector-api = "app_detector.api:serve"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

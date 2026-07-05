@@ -1,0 +1,119 @@
+Build a Production-Grade NLP AI Data Intelligence Platform
+#🎯 Objective
+Design and implement a scalable, production-quality NLP-powered Data Intelligence Application that allows users to:
+ - Upload and process large datasets (CSV/XLS/XLSX)
+ - Automatically generate metadata
+ - Query data using natural language
+ - Perform advanced analytics
+ - Build dynamic dashboards and reports via NLP or structured queries
+
+#🏗️ High-Level Architecture
+*Backend*
+ - Language: Python 3.11+
+ - Framework: FastAPI
+ - Database: SQLite (initial), designed for extensibility to PostgreSQL
+ - ORM: SQLAlchemy
+ - NLP Layer: Hybrid approach:
+ 	- Rule-based parsing
+ 	- Embedding-based retrieval (FAISS / Chroma)
+ 	- Optional LLM integration (OpenAI / local models)
+*Frontend*
+ - Framework: React
+ - UI Library: Material UI
+ - Charting
+
+#📦 Core Features & Functional Requirements
+1. 📂 Data Ingestion Engine
+ - Upload:
+ 	- CSV, XLS, XLSX
+ - Handle:
+ 	- Large files (streaming/chunking)
+ 	- Encoding issues
+ - Validation:
+ 	- Schema validation
+ 	- Data type inference
+ - Storage:
+ 	- Persist raw + processed data
+
+2. 🧠 Metadata Generation Engine
+ - Auto-generate:
+ 	- Column types (numeric, categorical, datetime)
+ 	- Null %, uniqueness, distributions
+ - Semantic tagging:
+ 	- Detect entities (e.g., "Revenue", "Customer ID")
+ - Store metadata in DB:
+ 	- datasets
+ 	- columns
+ 	- statistics
+
+3. 🔍 NLP Query Engine
+*Capabilities:*
+ - Convert natural language → SQL
+ - Examples:
+ 	- "Show top 10 customers by revenue"
+ 	- "Monthly sales trend"
+*Implementation:*
+ - Step 1: Intent detection
+ - Step 2: Entity extraction
+ - Step 3: SQL generation
+ - Step 4: Query execution
+
+*Techniques:*
+ - Prompt-based LLM SQL generation
+ - Fallback rule-based parser
+ - Query validation layer (prevent SQL injection)
+
+4. 📊 Data Analysis Engine
+ - Aggregations:
+ 	- Sum, Avg, Count, Group By
+ - Time-series analysis
+ - Correlation detection
+ - Outlier detection
+
+5. 📈 Dashboard Engine
+ - Prebuilt dashboards:
+ 	- Summary statistics
+ 	- Trends
+ 	- Top-N insights
+ - Features:
+ 	- Dynamic widgets
+ 	- Drag-and-drop layout
+ 	- Multi-dataset support
+
+6. 🧾 Reporting Engine
+ - Generate:
+ 	- Tabular reports
+ 	- Chart-based reports
+ - Drill-down:
+ 	- Click → deeper query
+ - Export:
+ 	- CSV, PDF
+
+7. 🤖 NLP-driven Dashboard & Report Generation
+ - User input:
+ 	- "Create a sales dashboard for last 6 months"
+ - System:
+ 	- Understand intent
+ 	- Auto-select dataset
+ 	- Generate widgets + queries
+
+#🔐 Security & Validation
+ - Input sanitization
+ - SQL injection prevention
+ - File size limits
+ - Authentication-ready (JWT-based optional)
+
+#⚡ Performance Considerations
+ - Chunked file processing
+ - Lazy loading datasets
+ - Query caching
+ - Async processing 
+
+#🧠 Expected Output Quality
+- Clean architecture (layered design)
+- Proper error handling
+- Logging (structured logs)
+- Production-grade, not prototype
+- Modular, extensible design
+- Well-documented code
+- Scalable architecture

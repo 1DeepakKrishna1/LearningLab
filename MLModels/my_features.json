@@ -1,0 +1,10 @@
+{
+  "employment_status": "employed", 
+  "income_bracket": "high", 
+  "credit_history": "good",
+  "loan_purpose": "home", 
+  "residence_type": "own", 
+  "region": "west",
+  "existing_customer": "yes", 
+  "device_type": "mobile"
+}

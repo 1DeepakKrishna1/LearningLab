@@ -1,0 +1,159 @@
+You are a senior Python architect and AI safety engineer.
+
+Design and implement a **production-grade, reusable Guardrails Framework in Python** that supports both **Input Guardrails (pre-LLM)** and **Output Guardrails (post-LLM)** for any LLM-based system.
+
+---
+
+# 🎯 Core Requirements
+
+## 1. Guardrail Execution Logic
+* Each guardrail is assigned a unique **sequenceId** (power of 2: 1, 2, 4, 8, 16, …).
+* A **mapped_number (bitmask)** determines which guardrails are active.
+* Execute a guardrail ONLY IF:
+  mapped_number & sequenceId != 0
+* This enables scalable, configurable, and dynamic guardrail execution.
+
+---
+
+## 2. Architecture Requirements
+
+Design a modular, extensible architecture with:
+### Core Components:
+* `BaseGuardrail` (abstract class)
+* `InputGuardrail` and `OutputGuardrail` (inherit from Base)
+* `GuardrailExecutor`
+* `GuardrailRegistry`
+* `GuardrailResult` (status, score, flags, message)
+* `PipelineContext` (input, intermediate, output, metadata)
+
+---
+
+## 3. Input Guardrails (Pre-LLM Layer)
+Implement the following guardrails:
+1. Anti-Prompt Injection Defense
+2. Sensitive Data Screening (PII Detection)
+3. Language Toxicity Detection
+4. Contextual Relevance Check
+5. SQL Injection Prevention
+6. Intent Alignment Verification
+
+Each guardrail should:
+* Return structured result (pass/fail, confidence score, reason)
+* Optionally modify input (sanitize/redact)
+
+---
+
+## 4. Output Guardrails (Post-LLM Layer)
+Implement:
+1. Structured Data / JSON Validator
+2. API Schema Compliance Checker
+3. Logical Consistency Checker
+4. Redundancy Removal
+5. Complexity & Readability Scoring
+6. Output Quality Assessment
+7. Inappropriate Content Filter
+8. Competitor Shield & Brand Safety
+
+Each should:
+* Validate and optionally transform output
+* Provide scoring and flags
+
+---
+
+## 5. LLM Integration
+* Use Groq API for any LLM-based validation tasks
+* Abstract LLM calls via:
+  `LLMClient(interface)` → `GroqLLMClient(implementation)`
+
+* Support:
+  * retry logic
+  * timeout handling
+  * structured prompting
+  * cost-aware execution
+
+---
+
+## 6. Execution Flow
+### Step-by-step pipeline:
+1. Receive input prompt
+2. Execute **Input Guardrails** (based on bitmask)
+3. If passed → invoke LLM
+4. Capture response
+5. Execute **Output Guardrails**
+6. Return final validated response
+
+---
+
+## 7. Non-Functional Requirements
+* Production-grade code quality
+* Type hints everywhere
+* Logging (structured logging with correlation IDs)
+* Exception handling with custom error classes
+* Config-driven guardrail activation
+* Async support (async/await)
+* Easily pluggable new guardrails
+* Unit-test friendly design
+
+---
+
+## 8. Deliverables
+
+Provide:
+
+### A. Full Code Implementation
+* Modular folder structure:
+  guardrails/
+  base/
+  input/
+  output/
+  executor/
+  registry/
+  llm/
+  models/
+  utils/
+
+### B. Example Usage
+* Show how to:
+  * Register guardrails
+  * Set mapped_number
+  * Run pipeline
+
+### C. Sample Config
+* YAML/JSON config for guardrails
+
+### D. Unit Tests
+* pytest-based tests for:
+  * bitmask execution
+  * guardrail validation
+  * pipeline flow
+
+### E. Documentation
+
+* Explain:
+
+  * how bitmask works
+  * how to add new guardrail
+  * how to extend LLM provider
+
+---
+
+# ⚠️ Important Constraints
+
+* Do NOT produce pseudo-code — provide working, executable Python code
+* Follow clean architecture and SOLID principles
+* Ensure extensibility for enterprise-scale systems
+* Avoid hardcoding — everything should be configurable
+
+---
+
+# 🧠 Output Expectation
+
+Return:
+
+1. Complete Python implementation
+2. Folder structure
+3. Example execution
+4. Tests
+5. Documentation
+
+Make the solution **enterprise-ready and scalable**.

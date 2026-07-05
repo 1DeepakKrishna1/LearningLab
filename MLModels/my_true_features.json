@@ -1,0 +1,10 @@
+ {
+    "employment_status": "employed", 
+    "income_bracket": "very_high", 
+    "credit_history": "poor", 
+    "loan_purpose": "debt_consolidation", 
+    "residence_type": "family", 
+    "region": "east", 
+    "existing_customer": "yes", 
+    "device_type": "mobile"
+}

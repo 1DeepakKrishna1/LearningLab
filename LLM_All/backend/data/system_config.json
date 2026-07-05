@@ -1,0 +1,11 @@
+{
+  "active_llm": "groq",
+  "models": {
+    "openai": "gpt-4o",
+    "anthropic": "claude-3-5-sonnet-20241022",
+    "google": "gemini-1.5-pro",
+    "groq": "llama-3.3-70b-versatile"
+  },
+  "system_prompt": "You are a helpful, accurate, and friendly AI assistant. Provide clear, concise, and well-structured responses. When appropriate, suggest related topics the user might find useful.",
+  "context_window": 5
+}

@@ -1,0 +1,32 @@
+{
+  "enabled": true,
+  "rules": [
+    {
+      "id": "no_harmful_content",
+      "name": "No Harmful Content",
+      "description": "Block requests for harmful, violent, or dangerous content",
+      "enabled": true,
+      "type": "keyword_block",
+      "keywords": ["how to make a bomb", "how to harm", "instructions for violence", "how to kill"],
+      "response": "I'm unable to assist with that request as it may involve harmful content."
+    },
+    {
+      "id": "no_personal_info_solicitation",
+      "name": "No Personal Information Solicitation",
+      "description": "Prevent the AI from soliciting sensitive personal information",
+      "enabled": true,
+      "type": "output_filter",
+      "keywords": ["share your credit card", "provide your ssn", "give me your password", "enter your pin"],
+      "response": "I cannot request personal or sensitive information from users."
+    },
+    {
+      "id": "professional_tone",
+      "name": "Professional Tone",
+      "description": "Maintain professional and respectful communication",
+      "enabled": false,
+      "type": "topic_restriction",
+      "keywords": [],
+      "response": "Please keep the conversation professional and respectful."
+    }
+  ]
+}

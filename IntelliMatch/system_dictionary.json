@@ -1,0 +1,37 @@
+{
+  "CB-44-3AL|AFL|EXTERNAL COIL BRACKET": {
+    "PLP Cross Part": "80061195",
+    "Confidence Score": "100",
+    "Reason of Match": "Direct Part Match (RFP_Historical Data (1).xlsx, Sheet1, rows 81-90)"
+  },
+  "3319|AFL|1272 KCMIL \"BITTERN\" CONDUCTOR SPACER": {
+    "PLP Cross Part": "MXCEC-R-42A-18-T100",
+    "Confidence Score": "65",
+    "Reason of Match": "Conductor spacer match; 1272 kcmil ACSR falls within 500–1351.5 ACSR range of PLP spacer. Source: Sales Part Details -all fields (5).xlsx, rows 1698"
+  },
+  "ODEC640/64909|AFL|BOLTED DEADEND FOR OPGW": {
+    "PLP Cross Part": "2900005PE",
+    "Confidence Score": "55",
+    "Reason of Match": "Both describe a bolted dead-end for OPGW (Fiberlign OPGW Dead-Ends family); type aligns though exact cable diameter in input is not specified. Source: Sales Part Details -all fields (5).xlsx, rows 5677"
+  },
+  "YCBS|AFL|Y-CLEVIS BALL, ANSI 52-5, 30K, 3/4\" PIN, 3-3/32\" LENGTH, 1-1/2\" OPENING DEPTH": {
+    "PLP Cross Part": "BYC-30CM",
+    "Confidence Score": "80",
+    "Reason of Match": "Ball Y‑Clevis 30K; hardware type and load rating align (ANSI 52-5 ball fitting). Source: Sales Part Details -all fields (5).xlsx, rows 17449"
+  },
+  "5050202|Performed Line Products|HIGH MASS SPIRAL VIBRATION DAMPER FOR OPGW, (0.646\" DIA)": {
+    "PLP Cross Part": "5050202",
+    "Confidence Score": "100",
+    "Reason of Match": "Exact PART NO match (5050202); desc: SPIRAL VIBRATION DAMPER .462-.563"
+  },
+  "8003041H3|Performed Line Products|CUSHIONED DOWN LEAD CLAMP FOR UG CABLE, STEEL POLE MOUNTING": {
+    "PLP Cross Part": "8003041H3",
+    "Confidence Score": "100",
+    "Reason of Match": "Exact PART NO match (8003041H3); desc: DOWNLEAD CUSH w/1.2\" HDWR .375-.468"
+  },
+  "8003270H3|Performed Line Products|ALUMINUM CUSHION DOWNLEAD CLAMP FOR OPGW, STEEL POLE MOUNTING": {
+    "PLP Cross Part": "8003270H3",
+    "Confidence Score": "100",
+    "Reason of Match": "Exact PART NO match (8003270H3); desc: AL DOWNLEAD CUSH 1/2 HDWR .657-.703"
+  }
+}

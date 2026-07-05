@@ -1,0 +1,9 @@
+Create a conversational AI bot using FAST API (Python) and React with below features:
+- Admins can manage API Keys for the LLMs:  GPT-4o · Claude · Gemini · Llama · GroQ and store it in .env file
+- Admins can manage the System prompt and select generic guardrails store the latest in json file. 
+- Users can give any input user query and the output from AI bot based on input query, applied and stored system prompt and guardrails.
+- Every user login is a new conversation.
+- After applying Guardrails, for a given conversation id, FAST API should consider last 5 queries and its responses as context in order to provide response for input user query with the provided system prompt. Summary can also be pass as context for older than 5 queries and responses.
+- All conversations and their full responses should be logged in file as well as sqllite db.
+- FAST API should return a JSON response containing input user query response, Follow ups in the form of links, tokens consumed, time taken to response. 
+- Admins can also view all conversation details and can view analytics, summary, and insights for chat history of a given conversation from the list.

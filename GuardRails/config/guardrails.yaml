@@ -1,0 +1,190 @@
+# Guardrails Framework — Reference Configuration
+# ------------------------------------------------
+# Bitmask logic: a guardrail runs when (mapped_number & sequence_id) != 0
+# Input sequence IDs:  1=injection 2=pii 4=toxicity 8=relevance 16=sql 32=intent
+# Output sequence IDs: 1=json 2=schema 4=consistency 8=redundancy 16=readability 32=quality 64=content 128=brand
+
+guardrails:
+  input:
+    mapped_number: 63           # 0b111111 — all 6 input guardrails active
+    guardrails:
+
+      - name: anti_prompt_injection
+        sequence_id: 1
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          max_suspicious_patterns: 1
+          redact: false
+
+      - name: pii_detection
+        sequence_id: 2
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          mode: redact            # "redact" sanitises in-place; "fail" blocks
+          enabled_types:
+            - EMAIL
+            - US_PHONE
+            - US_SSN
+            - CREDIT_CARD
+            - IP_ADDRESS
+            - DOB
+            - PASSPORT
+            - IBAN
+
+      - name: toxicity
+        sequence_id: 4
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 10.0
+        parameters:
+          use_llm: false          # set true to add LLM-based scoring
+
+      - name: contextual_relevance
+        sequence_id: 8
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 10.0
+        parameters:
+          allowed_topics: []      # empty = allow everything
+          use_llm: true
+
+      - name: sql_injection
+        sequence_id: 16
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          max_allowed_hits: 0
+
+      - name: intent_alignment
+        sequence_id: 32
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 10.0
+        parameters:
+          use_llm: true
+          allowed_intents:
+            - question_answering
+            - summarization
+            - code_generation
+            - analysis
+            - creative_writing
+            - data_extraction
+            - translation
+            - planning
+
+  output:
+    mapped_number: 255          # 0b11111111 — all 8 output guardrails active
+    guardrails:
+
+      - name: json_validator
+        sequence_id: 1
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          required: false         # false = only validate if output looks like JSON
+
+      - name: schema_compliance
+        sequence_id: 2
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          schema: null            # provide a JSON Schema dict to enable
+
+      - name: logical_consistency
+        sequence_id: 4
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 10.0
+        parameters:
+          use_llm: true
+
+      - name: redundancy_removal
+        sequence_id: 8
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          similarity_threshold: 0.85
+          min_sentence_length: 15
+
+      - name: readability
+        sequence_id: 16
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          min_score: 0.0
+          max_score: 100.0
+
+      - name: output_quality
+        sequence_id: 32
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 10.0
+        parameters:
+          use_llm: true
+          min_quality_score: 0.5
+
+      - name: content_filter
+        sequence_id: 64
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          categories:
+            - HATE_SPEECH
+            - GRAPHIC_VIOLENCE
+            - SELF_HARM_PROMOTION
+            - ILLEGAL_ACTIVITY
+
+      - name: brand_safety
+        sequence_id: 128
+        enabled: true
+        threshold: 0.5
+        fail_on_error: false
+        timeout_seconds: 5.0
+        parameters:
+          competitors: []         # e.g. ["CompetitorA", "CompetitorB"]
+          brand_name: ""
+          block_on_competitor_mention: false
+          require_brand_mention: false
+
+# LLM provider settings
+llm:
+  provider: groq
+  model: llama3-8b-8192
+  api_key_env: GROQ_API_KEY      # environment variable that holds the key
+  max_retries: 3
+  timeout_seconds: 10.0
+
+# Pipeline behaviour
+pipeline:
+  block_on_input_failure: true
+  block_on_output_failure: false
+  max_concurrent: 4
+
+# Logging
+logging:
+  level: INFO
+  structured: false
+  log_file: "app.log"                 # set to a path to also write to a file

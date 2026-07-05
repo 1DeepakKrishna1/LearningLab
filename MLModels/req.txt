@@ -1,0 +1,14 @@
+# Generate a python CLI application for following:
+- Generate a master set of records having ~1k application_ids (primarykey) along with around ~8 features (mostly strings) with each of applicationId.
+- Now generate ~100 training records for input as 8 features and output as detected application_id
+- Build a Naive Bayes ML model that can provide detected application_id in the below format
+{
+  "application_id": "APP-80637",
+  "ai_decision": "Low Risk", #  ["High Risk", "Medium Risk", "Low Risk"]
+  "recommended_action": "Escalate", # ["Decline", "Approve", "Escalate"]
+  "confidence": 0.76,
+  "signals": [
+    "edge_case_flag",
+    "manual_review_recommended"
+  ]
+}

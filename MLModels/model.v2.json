@@ -1,0 +1,935 @@
+{
+  "schema_version": "1.0.0",
+  "model": {
+    "type": "CategoricalNaiveBayes",
+    "alpha": 1.0,
+    "feature_names": [
+      "employment_status",
+      "income_bracket",
+      "credit_history",
+      "loan_purpose",
+      "residence_type",
+      "region",
+      "existing_customer",
+      "device_type"
+    ],
+    "vocab_sizes": {
+      "employment_status": 5,
+      "income_bracket": 4,
+      "credit_history": 5,
+      "loan_purpose": 6,
+      "residence_type": 4,
+      "region": 5,
+      "existing_customer": 2,
+      "device_type": 3
+    },
+    "classes": [
+      "APP-03278",
+      "APP-03478",
+      "APP-03905",
+      "APP-11395",
+      "APP-13434",
+      "APP-14592",
+      "APP-18289",
+      "APP-26062",
+      "APP-28657",
+      "APP-28893",
+      "APP-29256",
+      "APP-30495",
+      "APP-32098",
+      "APP-36048",
+      "APP-55302",
+      "APP-58878",
+      "APP-66237",
+      "APP-71426",
+      "APP-71482",
+      "APP-73563",
+      "APP-77397",
+      "APP-78907",
+      "APP-83810",
+      "APP-85181",
+      "APP-88696",
+      "APP-91924",
+      "APP-93850",
+      "APP-96530",
+      "APP-97080",
+      "APP-97196"
+    ],
+    "class_counts": {
+      "APP-03278": 5,
+      "APP-03478": 4,
+      "APP-29256": 2,
+      "APP-97080": 3,
+      "APP-97196": 2,
+      "APP-30495": 7,
+      "APP-28657": 7,
+      "APP-66237": 10,
+      "APP-32098": 4,
+      "APP-71482": 3,
+      "APP-58878": 6,
+      "APP-77397": 2,
+      "APP-13434": 3,
+      "APP-91924": 4,
+      "APP-36048": 1,
+      "APP-28893": 3,
+      "APP-73563": 4,
+      "APP-55302": 2,
+      "APP-11395": 6,
+      "APP-88696": 3,
+      "APP-26062": 2,
+      "APP-85181": 1,
+      "APP-96530": 4,
+      "APP-03905": 2,
+      "APP-78907": 2,
+      "APP-18289": 2,
+      "APP-71426": 7,
+      "APP-83810": 1,
+      "APP-93850": 2,
+      "APP-14592": 1
+    },
+    "value_counts": {
+      "employment_status": {
+        "APP-03278": {
+          "student": 5
+        },
+        "APP-03478": {
+          "self_employed": 4
+        },
+        "APP-29256": {
+          "unemployed": 2
+        },
+        "APP-97080": {
+          "retired": 3
+        },
+        "APP-97196": {
+          "student": 1,
+          "self_employed": 1
+        },
+        "APP-30495": {
+          "student": 1,
+          "self_employed": 6
+        },
+        "APP-28657": {
+          "student": 1,
+          "retired": 1,
+          "unemployed": 5
+        },
+        "APP-66237": {
+          "student": 1,
+          "self_employed": 1,
+          "unemployed": 3,
+          "employed": 5
+        },
+        "APP-32098": {
+          "employed": 4
+        },
+        "APP-71482": {
+          "unemployed": 1,
+          "student": 2
+        },
+        "APP-58878": {
+          "self_employed": 6
+        },
+        "APP-77397": {
+          "student": 1,
+          "unemployed": 1
+        },
+        "APP-13434": {
+          "student": 3
+        },
+        "APP-91924": {
+          "employed": 3,
+          "self_employed": 1
+        },
+        "APP-36048": {
+          "self_employed": 1
+        },
+        "APP-28893": {
+          "retired": 3
+        },
+        "APP-73563": {
+          "retired": 3,
+          "unemployed": 1
+        },
+        "APP-55302": {
+          "employed": 2
+        },
+        "APP-11395": {
+          "retired": 5,
+          "unemployed": 1
+        },
+        "APP-88696": {
+          "unemployed": 3
+        },
+        "APP-26062": {
+          "retired": 2
+        },
+        "APP-85181": {
+          "employed": 1
+        },
+        "APP-96530": {
+          "unemployed": 4
+        },
+        "APP-03905": {
+          "self_employed": 1,
+          "student": 1
+        },
+        "APP-78907": {
+          "retired": 2
+        },
+        "APP-18289": {
+          "employed": 2
+        },
+        "APP-71426": {
+          "employed": 6,
+          "student": 1
+        },
+        "APP-83810": {
+          "employed": 1
+        },
+        "APP-93850": {
+          "self_employed": 2
+        },
+        "APP-14592": {
+          "retired": 1
+        }
+      },
+      "income_bracket": {
+        "APP-03278": {
+          "medium": 5
+        },
+        "APP-03478": {
+          "very_high": 3,
+          "medium": 1
+        },
+        "APP-29256": {
+          "high": 2
+        },
+        "APP-97080": {
+          "very_high": 3
+        },
+        "APP-97196": {
+          "high": 2
+        },
+        "APP-30495": {
+          "medium": 7
+        },
+        "APP-28657": {
+          "very_high": 6,
+          "high": 1
+        },
+        "APP-66237": {
+          "high": 9,
+          "medium": 1
+        },
+        "APP-32098": {
+          "very_high": 4
+        },
+        "APP-71482": {
+          "very_high": 3
+        },
+        "APP-58878": {
+          "very_high": 6
+        },
+        "APP-77397": {
+          "high": 2
+        },
+        "APP-13434": {
+          "very_high": 2,
+          "high": 1
+        },
+        "APP-91924": {
+          "medium": 3,
+          "high": 1
+        },
+        "APP-36048": {
+          "high": 1
+        },
+        "APP-28893": {
+          "medium": 3
+        },
+        "APP-73563": {
+          "very_high": 4
+        },
+        "APP-55302": {
+          "medium": 1,
+          "high": 1
+        },
+        "APP-11395": {
+          "very_high": 1,
+          "high": 5
+        },
+        "APP-88696": {
+          "low": 3
+        },
+        "APP-26062": {
+          "low": 2
+        },
+        "APP-85181": {
+          "high": 1
+        },
+        "APP-96530": {
+          "high": 4
+        },
+        "APP-03905": {
+          "medium": 1,
+          "very_high": 1
+        },
+        "APP-78907": {
+          "high": 2
+        },
+        "APP-18289": {
+          "high": 1,
+          "medium": 1
+        },
+        "APP-71426": {
+          "low": 1,
+          "very_high": 6
+        },
+        "APP-83810": {
+          "low": 1
+        },
+        "APP-93850": {
+          "low": 2
+        },
+        "APP-14592": {
+          "high": 1
+        }
+      },
+      "credit_history": {
+        "APP-03278": {
+          "none": 5
+        },
+        "APP-03478": {
+          "good": 4
+        },
+        "APP-29256": {
+          "poor": 2
+        },
+        "APP-97080": {
+          "fair": 2,
+          "excellent": 1
+        },
+        "APP-97196": {
+          "none": 2
+        },
+        "APP-30495": {
+          "excellent": 7
+        },
+        "APP-28657": {
+          "poor": 7
+        },
+        "APP-66237": {
+          "none": 9,
+          "poor": 1
+        },
+        "APP-32098": {
+          "poor": 4
+        },
+        "APP-71482": {
+          "fair": 3
+        },
+        "APP-58878": {
+          "none": 4,
+          "good": 1,
+          "fair": 1
+        },
+        "APP-77397": {
+          "excellent": 2
+        },
+        "APP-13434": {
+          "fair": 1,
+          "poor": 2
+        },
+        "APP-91924": {
+          "fair": 4
+        },
+        "APP-36048": {
+          "excellent": 1
+        },
+        "APP-28893": {
+          "poor": 1,
+          "good": 2
+        },
+        "APP-73563": {
+          "good": 3,
+          "excellent": 1
+        },
+        "APP-55302": {
+          "none": 2
+        },
+        "APP-11395": {
+          "poor": 5,
+          "excellent": 1
+        },
+        "APP-88696": {
+          "excellent": 2,
+          "none": 1
+        },
+        "APP-26062": {
+          "fair": 1,
+          "none": 1
+        },
+        "APP-85181": {
+          "none": 1
+        },
+        "APP-96530": {
+          "poor": 4
+        },
+        "APP-03905": {
+          "good": 2
+        },
+        "APP-78907": {
+          "fair": 2
+        },
+        "APP-18289": {
+          "good": 1,
+          "fair": 1
+        },
+        "APP-71426": {
+          "good": 6,
+          "fair": 1
+        },
+        "APP-83810": {
+          "excellent": 1
+        },
+        "APP-93850": {
+          "none": 1,
+          "poor": 1
+        },
+        "APP-14592": {
+          "excellent": 1
+        }
+      },
+      "loan_purpose": {
+        "APP-03278": {
+          "business": 2,
+          "home": 1,
+          "debt_consolidation": 1,
+          "auto": 1
+        },
+        "APP-03478": {
+          "business": 3,
+          "auto": 1
+        },
+        "APP-29256": {
+          "home": 2
+        },
+        "APP-97080": {
+          "auto": 2,
+          "debt_consolidation": 1
+        },
+        "APP-97196": {
+          "personal": 1,
+          "home": 1
+        },
+        "APP-30495": {
+          "education": 7
+        },
+        "APP-28657": {
+          "home": 1,
+          "business": 5,
+          "education": 1
+        },
+        "APP-66237": {
+          "personal": 5,
+          "home": 5
+        },
+        "APP-32098": {
+          "debt_consolidation": 4
+        },
+        "APP-71482": {
+          "education": 3
+        },
+        "APP-58878": {
+          "education": 1,
+          "auto": 5
+        },
+        "APP-77397": {
+          "auto": 1,
+          "business": 1
+        },
+        "APP-13434": {
+          "home": 3
+        },
+        "APP-91924": {
+          "auto": 4
+        },
+        "APP-36048": {
+          "auto": 1
+        },
+        "APP-28893": {
+          "auto": 3
+        },
+        "APP-73563": {
+          "business": 3,
+          "personal": 1
+        },
+        "APP-55302": {
+          "education": 2
+        },
+        "APP-11395": {
+          "personal": 5,
+          "home": 1
+        },
+        "APP-88696": {
+          "auto": 3
+        },
+        "APP-26062": {
+          "business": 1,
+          "education": 1
+        },
+        "APP-85181": {
+          "business": 1
+        },
+        "APP-96530": {
+          "home": 4
+        },
+        "APP-03905": {
+          "education": 2
+        },
+        "APP-78907": {
+          "personal": 2
+        },
+        "APP-18289": {
+          "personal": 1,
+          "education": 1
+        },
+        "APP-71426": {
+          "debt_consolidation": 6,
+          "auto": 1
+        },
+        "APP-83810": {
+          "business": 1
+        },
+        "APP-93850": {
+          "education": 1,
+          "home": 1
+        },
+        "APP-14592": {
+          "auto": 1
+        }
+      },
+      "residence_type": {
+        "APP-03278": {
+          "family": 5
+        },
+        "APP-03478": {
+          "own": 3,
+          "family": 1
+        },
+        "APP-29256": {
+          "mortgage": 2
+        },
+        "APP-97080": {
+          "family": 3
+        },
+        "APP-97196": {
+          "own": 2
+        },
+        "APP-30495": {
+          "own": 1,
+          "family": 6
+        },
+        "APP-28657": {
+          "mortgage": 5,
+          "own": 1,
+          "rent": 1
+        },
+        "APP-66237": {
+          "family": 9,
+          "own": 1
+        },
+        "APP-32098": {
+          "family": 4
+        },
+        "APP-71482": {
+          "own": 2,
+          "mortgage": 1
+        },
+        "APP-58878": {
+          "mortgage": 6
+        },
+        "APP-77397": {
+          "own": 2
+        },
+        "APP-13434": {
+          "own": 3
+        },
+        "APP-91924": {
+          "own": 4
+        },
+        "APP-36048": {
+          "mortgage": 1
+        },
+        "APP-28893": {
+          "own": 2,
+          "rent": 1
+        },
+        "APP-73563": {
+          "own": 4
+        },
+        "APP-55302": {
+          "family": 2
+        },
+        "APP-11395": {
+          "own": 4,
+          "mortgage": 1,
+          "rent": 1
+        },
+        "APP-88696": {
+          "own": 2,
+          "mortgage": 1
+        },
+        "APP-26062": {
+          "own": 2
+        },
+        "APP-85181": {
+          "rent": 1
+        },
+        "APP-96530": {
+          "own": 1,
+          "family": 2,
+          "rent": 1
+        },
+        "APP-03905": {
+          "own": 2
+        },
+        "APP-78907": {
+          "family": 2
+        },
+        "APP-18289": {
+          "mortgage": 2
+        },
+        "APP-71426": {
+          "rent": 6,
+          "family": 1
+        },
+        "APP-83810": {
+          "mortgage": 1
+        },
+        "APP-93850": {
+          "rent": 2
+        },
+        "APP-14592": {
+          "mortgage": 1
+        }
+      },
+      "region": {
+        "APP-03278": {
+          "central": 1,
+          "west": 4
+        },
+        "APP-03478": {
+          "north": 1,
+          "east": 3
+        },
+        "APP-29256": {
+          "east": 2
+        },
+        "APP-97080": {
+          "central": 1,
+          "west": 2
+        },
+        "APP-97196": {
+          "central": 2
+        },
+        "APP-30495": {
+          "east": 4,
+          "south": 1,
+          "north": 2
+        },
+        "APP-28657": {
+          "west": 7
+        },
+        "APP-66237": {
+          "south": 4,
+          "west": 1,
+          "north": 5
+        },
+        "APP-32098": {
+          "east": 3,
+          "west": 1
+        },
+        "APP-71482": {
+          "north": 1,
+          "east": 1,
+          "south": 1
+        },
+        "APP-58878": {
+          "west": 5,
+          "east": 1
+        },
+        "APP-77397": {
+          "central": 2
+        },
+        "APP-13434": {
+          "west": 3
+        },
+        "APP-91924": {
+          "west": 4
+        },
+        "APP-36048": {
+          "north": 1
+        },
+        "APP-28893": {
+          "east": 1,
+          "central": 2
+        },
+        "APP-73563": {
+          "south": 3,
+          "west": 1
+        },
+        "APP-55302": {
+          "south": 1,
+          "west": 1
+        },
+        "APP-11395": {
+          "east": 1,
+          "west": 5
+        },
+        "APP-88696": {
+          "east": 3
+        },
+        "APP-26062": {
+          "central": 1,
+          "south": 1
+        },
+        "APP-85181": {
+          "west": 1
+        },
+        "APP-96530": {
+          "east": 4
+        },
+        "APP-03905": {
+          "central": 2
+        },
+        "APP-78907": {
+          "west": 2
+        },
+        "APP-18289": {
+          "north": 2
+        },
+        "APP-71426": {
+          "north": 5,
+          "east": 1,
+          "central": 1
+        },
+        "APP-83810": {
+          "central": 1
+        },
+        "APP-93850": {
+          "central": 1,
+          "south": 1
+        },
+        "APP-14592": {
+          "central": 1
+        }
+      },
+      "existing_customer": {
+        "APP-03278": {
+          "no": 5
+        },
+        "APP-03478": {
+          "no": 4
+        },
+        "APP-29256": {
+          "yes": 2
+        },
+        "APP-97080": {
+          "yes": 3
+        },
+        "APP-97196": {
+          "yes": 2
+        },
+        "APP-30495": {
+          "no": 7
+        },
+        "APP-28657": {
+          "yes": 6,
+          "no": 1
+        },
+        "APP-66237": {
+          "no": 9,
+          "yes": 1
+        },
+        "APP-32098": {
+          "yes": 4
+        },
+        "APP-71482": {
+          "no": 3
+        },
+        "APP-58878": {
+          "no": 5,
+          "yes": 1
+        },
+        "APP-77397": {
+          "no": 1,
+          "yes": 1
+        },
+        "APP-13434": {
+          "no": 2,
+          "yes": 1
+        },
+        "APP-91924": {
+          "yes": 4
+        },
+        "APP-36048": {
+          "yes": 1
+        },
+        "APP-28893": {
+          "no": 3
+        },
+        "APP-73563": {
+          "no": 4
+        },
+        "APP-55302": {
+          "yes": 2
+        },
+        "APP-11395": {
+          "yes": 5,
+          "no": 1
+        },
+        "APP-88696": {
+          "yes": 3
+        },
+        "APP-26062": {
+          "no": 1,
+          "yes": 1
+        },
+        "APP-85181": {
+          "yes": 1
+        },
+        "APP-96530": {
+          "no": 3,
+          "yes": 1
+        },
+        "APP-03905": {
+          "no": 2
+        },
+        "APP-78907": {
+          "no": 2
+        },
+        "APP-18289": {
+          "yes": 2
+        },
+        "APP-71426": {
+          "yes": 7
+        },
+        "APP-83810": {
+          "yes": 1
+        },
+        "APP-93850": {
+          "no": 2
+        },
+        "APP-14592": {
+          "no": 1
+        }
+      },
+      "device_type": {
+        "APP-03278": {
+          "desktop": 1,
+          "tablet": 3,
+          "mobile": 1
+        },
+        "APP-03478": {
+          "tablet": 4
+        },
+        "APP-29256": {
+          "mobile": 1,
+          "desktop": 1
+        },
+        "APP-97080": {
+          "desktop": 3
+        },
+        "APP-97196": {
+          "mobile": 2
+        },
+        "APP-30495": {
+          "mobile": 7
+        },
+        "APP-28657": {
+          "desktop": 6,
+          "mobile": 1
+        },
+        "APP-66237": {
+          "tablet": 5,
+          "desktop": 5
+        },
+        "APP-32098": {
+          "mobile": 4
+        },
+        "APP-71482": {
+          "desktop": 2,
+          "tablet": 1
+        },
+        "APP-58878": {
+          "tablet": 3,
+          "desktop": 3
+        },
+        "APP-77397": {
+          "tablet": 1,
+          "desktop": 1
+        },
+        "APP-13434": {
+          "tablet": 3
+        },
+        "APP-91924": {
+          "tablet": 4
+        },
+        "APP-36048": {
+          "mobile": 1
+        },
+        "APP-28893": {
+          "tablet": 3
+        },
+        "APP-73563": {
+          "mobile": 4
+        },
+        "APP-55302": {
+          "mobile": 2
+        },
+        "APP-11395": {
+          "tablet": 1,
+          "desktop": 5
+        },
+        "APP-88696": {
+          "mobile": 3
+        },
+        "APP-26062": {
+          "tablet": 1,
+          "desktop": 1
+        },
+        "APP-85181": {
+          "tablet": 1
+        },
+        "APP-96530": {
+          "desktop": 4
+        },
+        "APP-03905": {
+          "mobile": 2
+        },
+        "APP-78907": {
+          "tablet": 1,
+          "mobile": 1
+        },
+        "APP-18289": {
+          "mobile": 2
+        },
+        "APP-71426": {
+          "desktop": 7
+        },
+        "APP-83810": {
+          "mobile": 1
+        },
+        "APP-93850": {
+          "tablet": 2
+        },
+        "APP-14592": {
+          "tablet": 1
+        }
+      }
+    },
+    "n_samples": 105
+  }
+}
