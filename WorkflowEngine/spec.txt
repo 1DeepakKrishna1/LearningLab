@@ -1,0 +1,8 @@
+Using Python, from the available library dummy_data.json and the input myworkflow.json, create a workflow execution engine
+1. Provision to execute it as Langgraph / Topological sort based on .env config entries.
+2. Agent execution can be orchestrated with workflow graph. All Agent can be exposed as executable python class as core\base_agent.py. 
+3. All tools are exposed as executable python class as core\base_tool.py
+4. Create a all dummy implementations for all agents and tools mentioned in the library dummy_data.json.
+5. Use dynamic state for the input worflow name to track input and output for all agent and its respective tools execution. Create execution log for complete workflow execution.
+6. Input to the workflow is properties of Start Agent and output would be properties of End Agent.
+7. Invoke this workflow execution via FAST API with input as Workflow name and properties of Start Agent and output as properties of End Agent.

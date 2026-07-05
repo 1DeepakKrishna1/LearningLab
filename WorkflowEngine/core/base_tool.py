@@ -1,0 +1,17 @@
+from abc import ABC, abstractmethod
+from typing import Dict, Any
+
+
+class BaseTool(ABC):
+
+    @abstractmethod
+    def name(self) -> str:
+        pass
+
+    @abstractmethod
+    def description(self) -> str:
+        pass
+
+    @abstractmethod
+    def run(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
+        pass

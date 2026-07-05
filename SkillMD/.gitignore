@@ -1,0 +1,9 @@
+# Local secrets — never commit
+.env
+
+# Skill runtime data
+skills/todo-manager/scripts/tasks.json
+
+# Python
+__pycache__/
+*.pyc

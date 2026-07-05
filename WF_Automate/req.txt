@@ -1,0 +1,21 @@
+Using React as frontend and Python as backend, Build a workflow management system using reactflow with following:-
+    Workflow is a collection of Agents. Agents is a collection of tools. Tools can be executed on the workflow run.
+    Workflow run can be simulated and execution results can be displayed in the UI. 
+    Ability to orchestrate workflow with Agents i.e. worksteps(type like automatic, role based, HumanInTheLoop, etc.) and edges. 
+    UI should drag and drop agents to workflow canvas and configure its properties in the right flyout in the UI.
+    Workflows can be cloned from library and modified to generate a new workflow.
+    Available Workflow/Agents in the library can be dragged from left panel for orchestration in the workflow canvas.
+    An AI Assistant can be available for workflow management activities in the workflow canvas.
+    All data shown in the UI should come from FAST API (create Dummy data for it).
+
+
+Enhancement:
+    Agent/Tool configuration flyout – display properties in a right-hand panel. It should dynamically pick the selected node properties.
+    Workflow cloning – endpoints and UI to duplicate library workflows. After cloning save would create a new workflow.
+    Workflow persistence – save/load via backend.
+    Execution simulation UI – render run results on canvas nodes.
+    AI Assistant integration – chat/bot component tied to canvas data.
+
+    Plug in a real AI service to the assistant.
+    Improve execution simulation with step‑by‑step results.
+    use groq key for AI

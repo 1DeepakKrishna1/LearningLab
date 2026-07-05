@@ -1,0 +1,189 @@
+{
+  "examination": {
+    "name_suggestion": "National Entrance Examination",
+    "stages": [
+      {"type": "notification", "enabled": true, "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true, "ai_enabled": true, "ai_task": "assist_form_fill"},
+      {"type": "document", "enabled": true, "ai_enabled": true, "ai_task": "check_completeness"},
+      {"type": "eligibility", "enabled": true, "ai_enabled": true, "ai_task": "assess_eligibility"},
+      {"type": "scheduling", "enabled": true},
+      {"type": "assessment", "enabled": true},
+      {"type": "evaluation", "enabled": true, "ai_enabled": true, "ai_task": "score_response"},
+      {"type": "ranking", "enabled": true, "ai_enabled": true, "ai_task": "explain_ranking"},
+      {"type": "preference", "enabled": true, "ai_enabled": true, "ai_task": "recommend_preferences"},
+      {"type": "allocation", "enabled": true, "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "payment", "enabled": true},
+      {"type": "verification", "enabled": true, "ai_enabled": true, "ai_task": "cross_check_data"},
+      {"type": "enrollment", "enabled": true, "ai_enabled": true, "ai_task": "onboarding_checklist"},
+      {"type": "closure", "enabled": true, "ai_enabled": true, "ai_task": "analytics_summary"}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
+      {"key": "dob", "label": "Date of Birth", "type": "date", "required": true},
+      {"key": "category", "label": "Category", "type": "select", "options": ["GEN", "OBC", "SC", "ST", "EWS"], "required": true},
+      {"key": "qualifying_marks", "label": "Class 12 %", "type": "number", "required": true}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": ["dob_asc"]},
+    "allocation": {"strategy": "merit_preference", "rounds": 1},
+    "options": [
+      {"key": "iit_b_cse", "label": "IIT Bombay - CSE", "capacity": 2},
+      {"key": "iit_d_cse", "label": "IIT Delhi - CSE", "capacity": 2},
+      {"key": "nit_t_ece", "label": "NIT Trichy - ECE", "capacity": 3}
+    ]
+  },
+  "university_admission": {
+    "name_suggestion": "University Admission",
+    "stages": [
+      {"type": "notification", "enabled": true, "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true},
+      {"type": "document", "enabled": true, "ai_enabled": true, "ai_task": "check_completeness"},
+      {"type": "eligibility", "enabled": true, "ai_enabled": true, "ai_task": "assess_eligibility"},
+      {"type": "assessment", "enabled": true, "name_override": "Entrance Test / Interview"},
+      {"type": "evaluation", "enabled": true, "ai_enabled": true, "ai_task": "score_response"},
+      {"type": "ranking", "enabled": true, "name_override": "Merit List"},
+      {"type": "preference", "enabled": true, "ai_enabled": true, "ai_task": "recommend_preferences"},
+      {"type": "allocation", "enabled": true, "name_override": "Seat Allocation", "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "payment", "enabled": true, "name_override": "Fee Payment"},
+      {"type": "enrollment", "enabled": true, "ai_enabled": true, "ai_task": "onboarding_checklist"},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
+      {"key": "program", "label": "Program Applied", "type": "text", "required": true},
+      {"key": "ug_percentage", "label": "Qualifying %", "type": "number", "required": true}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": []},
+    "allocation": {"strategy": "merit_preference", "rounds": 2},
+    "options": [{"key": "ba_eco", "label": "BA Economics", "capacity": 5}, {"key": "bsc_cs", "label": "BSc Computer Science", "capacity": 5}]
+  },
+  "recruitment": {
+    "name_suggestion": "Campus / Lateral Recruitment",
+    "stages": [
+      {"type": "notification", "enabled": true, "name_override": "Job Notification", "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true, "name_override": "Application"},
+      {"type": "document", "enabled": true},
+      {"type": "eligibility", "enabled": true, "name_override": "Eligibility Screening", "ai_enabled": true, "ai_task": "assess_eligibility"},
+      {"type": "assessment", "enabled": true, "name_override": "Online Test"},
+      {"type": "evaluation", "enabled": true, "name_override": "Interview Rounds", "ai_enabled": true, "ai_task": "score_response"},
+      {"type": "ranking", "enabled": true, "name_override": "Merit Ranking"},
+      {"type": "allocation", "enabled": true, "name_override": "Offer Allocation", "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "verification", "enabled": true, "name_override": "Document Verification", "ai_enabled": true, "ai_task": "cross_check_data"},
+      {"type": "enrollment", "enabled": true, "name_override": "Joining"},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
+      {"key": "cgpa", "label": "CGPA", "type": "number", "required": true},
+      {"key": "skills", "label": "Key Skills", "type": "text", "required": false}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": []},
+    "allocation": {"strategy": "merit_preference", "rounds": 1},
+    "options": [{"key": "sde1", "label": "Software Engineer I", "capacity": 4}, {"key": "analyst", "label": "Business Analyst", "capacity": 3}]
+  },
+  "scholarship": {
+    "name_suggestion": "Scholarship / Fellowship",
+    "stages": [
+      {"type": "notification", "enabled": true, "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true, "name_override": "Application"},
+      {"type": "document", "enabled": true},
+      {"type": "verification", "enabled": true, "ai_enabled": true, "ai_task": "cross_check_data"},
+      {"type": "evaluation", "enabled": true, "ai_enabled": true, "ai_task": "score_response"},
+      {"type": "ranking", "enabled": true, "name_override": "Merit Ranking"},
+      {"type": "allocation", "enabled": true, "name_override": "Fund Allocation", "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "payment", "enabled": true, "name_override": "Disbursement"},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
+      {"key": "family_income", "label": "Annual Family Income", "type": "number", "required": true},
+      {"key": "merit_score", "label": "Academic Merit Score", "type": "number", "required": true}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": ["family_income_asc"]},
+    "allocation": {"strategy": "merit_priority", "rounds": 1},
+    "options": [{"key": "fellowship_a", "label": "Research Fellowship - Tier A", "capacity": 3}]
+  },
+  "housing": {
+    "name_suggestion": "Hostel / Housing Allocation",
+    "stages": [
+      {"type": "notification", "enabled": true, "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true, "name_override": "Application"},
+      {"type": "preference", "enabled": true, "name_override": "Preference Submission", "ai_enabled": true, "ai_task": "recommend_preferences"},
+      {"type": "eligibility", "enabled": true, "ai_enabled": true, "ai_task": "assess_eligibility"},
+      {"type": "ranking", "enabled": true, "name_override": "Priority List"},
+      {"type": "allocation", "enabled": true, "name_override": "Room Allocation", "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "payment", "enabled": true, "name_override": "Fee Payment"},
+      {"type": "enrollment", "enabled": true, "name_override": "Occupancy Confirmation"},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Full Name", "type": "text", "required": true},
+      {"key": "distance_km", "label": "Distance from Campus (km)", "type": "number", "required": true},
+      {"key": "year_of_study", "label": "Year of Study", "type": "number", "required": true}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": []},
+    "allocation": {"strategy": "merit_preference", "rounds": 1},
+    "options": [{"key": "blockA", "label": "Block A Room", "capacity": 10}, {"key": "blockB", "label": "Block B Room", "capacity": 10}]
+  },
+  "govt_benefit": {
+    "name_suggestion": "Government Benefit Distribution",
+    "stages": [
+      {"type": "notification", "enabled": true, "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true, "name_override": "Application"},
+      {"type": "eligibility", "enabled": true, "name_override": "Eligibility Check", "ai_enabled": true, "ai_task": "assess_eligibility"},
+      {"type": "verification", "enabled": true, "ai_enabled": true, "ai_task": "cross_check_data"},
+      {"type": "ranking", "enabled": true, "name_override": "Priority Ranking"},
+      {"type": "allocation", "enabled": true, "name_override": "Benefit Allocation", "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "payment", "enabled": true, "name_override": "Disbursement"},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Beneficiary Name", "type": "text", "required": true},
+      {"key": "aadhaar_last4", "label": "ID (last 4)", "type": "text", "required": true},
+      {"key": "annual_income", "label": "Annual Income", "type": "number", "required": true}
+    ],
+    "ranking": {"strategy": "score_asc", "tie_breakers": []},
+    "allocation": {"strategy": "merit_priority", "rounds": 1},
+    "options": [{"key": "subsidy", "label": "Crop Subsidy", "capacity": 50}]
+  },
+  "tender": {
+    "name_suggestion": "Tender & Procurement",
+    "stages": [
+      {"type": "notification", "enabled": true, "name_override": "Tender Publication", "ai_enabled": true, "ai_task": "draft_notification"},
+      {"type": "registration", "enabled": true, "name_override": "Bid Submission"},
+      {"type": "document", "enabled": true, "name_override": "Bid Opening"},
+      {"type": "evaluation", "enabled": true, "name_override": "Technical Evaluation", "ai_enabled": true, "ai_task": "score_response"},
+      {"type": "evaluation", "enabled": true, "name_override": "Financial Evaluation"},
+      {"type": "ranking", "enabled": true},
+      {"type": "allocation", "enabled": true, "name_override": "Award Allocation", "ai_enabled": true, "ai_task": "recommend_allocation"},
+      {"type": "enrollment", "enabled": true, "name_override": "Contract Execution"},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "vendor_name", "label": "Vendor Name", "type": "text", "required": true},
+      {"key": "technical_score", "label": "Self-rated Technical Score", "type": "number", "required": false},
+      {"key": "bid_amount", "label": "Bid Amount", "type": "number", "required": true}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": []},
+    "allocation": {"strategy": "merit_preference", "rounds": 1},
+    "options": [{"key": "contract_2026", "label": "Annual Maintenance Contract 2026", "capacity": 1}]
+  },
+  "generic": {
+    "name_suggestion": "New System",
+    "stages": [
+      {"type": "notification", "enabled": true},
+      {"type": "registration", "enabled": true},
+      {"type": "document", "enabled": true},
+      {"type": "eligibility", "enabled": true},
+      {"type": "evaluation", "enabled": true},
+      {"type": "ranking", "enabled": true},
+      {"type": "allocation", "enabled": true},
+      {"type": "closure", "enabled": true}
+    ],
+    "form_fields": [
+      {"key": "full_name", "label": "Full Name", "type": "text", "required": true}
+    ],
+    "ranking": {"strategy": "score_desc", "tie_breakers": []},
+    "allocation": {"strategy": "merit_preference", "rounds": 1},
+    "options": []
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "description": "Canonical 14-stage lifecycle catalog. Every System is built by selecting and configuring a subset of these stages. AI tasks listed per stage type are the assists a SystemAdmin may enable.",
+  "stage_catalog": [
+    {
+      "type": "notification",
+      "name": "Notification & Announcement",
+      "default_roles": ["system_admin"],
+      "ai_tasks": ["draft_notification", "summarize_announcement"]
+    },
+    {
+      "type": "registration",
+      "name": "Registration & Application",
+      "default_roles": ["applicant"],
+      "ai_tasks": ["assist_form_fill", "validate_application"]
+    },
+    {
+      "type": "document",
+      "name": "Document Management",
+      "default_roles": ["applicant", "verifier"],
+      "ai_tasks": ["classify_document", "summarize_document", "check_completeness"]
+    },
+    {
+      "type": "eligibility",
+      "name": "Eligibility Verification",
+      "default_roles": ["verifier"],
+      "ai_tasks": ["assess_eligibility", "explain_decision"]
+    },
+    {
+      "type": "scheduling",
+      "name": "Scheduling & Slotting",
+      "default_roles": ["system_admin"],
+      "ai_tasks": ["suggest_schedule"]
+    },
+    {
+      "type": "assessment",
+      "name": "Assessment / Examination",
+      "default_roles": ["applicant", "evaluator"],
+      "ai_tasks": ["generate_questions", "proctor_summary"]
+    },
+    {
+      "type": "evaluation",
+      "name": "Evaluation & Scoring",
+      "default_roles": ["evaluator"],
+      "ai_tasks": ["score_response", "rubric_feedback"]
+    },
+    {
+      "type": "ranking",
+      "name": "Ranking / Merit Generation",
+      "default_roles": ["allocation_authority", "reporting_authority"],
+      "ai_tasks": ["explain_ranking", "detect_anomaly"]
+    },
+    {
+      "type": "preference",
+      "name": "Preference Collection",
+      "default_roles": ["applicant"],
+      "ai_tasks": ["recommend_preferences"]
+    },
+    {
+      "type": "allocation",
+      "name": "Allocation Engine",
+      "default_roles": ["allocation_authority"],
+      "ai_tasks": ["recommend_allocation", "explain_allocation"]
+    },
+    {
+      "type": "payment",
+      "name": "Payment Processing",
+      "default_roles": ["applicant", "payment_agency"],
+      "ai_tasks": ["payment_reminder", "detect_payment_anomaly"]
+    },
+    {
+      "type": "verification",
+      "name": "Final Verification",
+      "default_roles": ["verifier"],
+      "ai_tasks": ["cross_check_data", "explain_decision"]
+    },
+    {
+      "type": "enrollment",
+      "name": "Enrollment / Onboarding",
+      "default_roles": ["institution", "applicant"],
+      "ai_tasks": ["onboarding_checklist", "welcome_message"]
+    },
+    {
+      "type": "closure",
+      "name": "Closure & Analytics",
+      "default_roles": ["reporting_authority", "auditor"],
+      "ai_tasks": ["analytics_summary", "lessons_learned"]
+    }
+  ],
+  "ai_task_prompts": {
+    "draft_notification": "You draft official public notifications/announcements. Be formal, concise, and complete (dates, eligibility, process).",
+    "summarize_announcement": "Summarize the announcement into key bullet points an applicant must know.",
+    "assist_form_fill": "Help the applicant complete their application form. Suggest values and flag missing/inconsistent fields. Never fabricate identity data.",
+    "validate_application": "Validate the application data for completeness and internal consistency. List issues as a checklist.",
+    "classify_document": "Classify the uploaded document into a type (id_proof, marksheet, certificate, photo, signature, other) and state confidence.",
+    "summarize_document": "Summarize the key facts in this document relevant to eligibility (name, dates, marks, authority).",
+    "check_completeness": "Given the required document list and submitted documents, list which mandatory documents are missing.",
+    "assess_eligibility": "Assess eligibility STRICTLY against the provided criteria. Return a recommendation (ELIGIBLE / INELIGIBLE / NEEDS_REVIEW) with reasons. You only advise; a human verifier decides.",
+    "explain_decision": "Explain the given decision in plain, defensible language suitable for an audit trail.",
+    "suggest_schedule": "Suggest an exam/interview schedule given candidate counts, capacity and constraints.",
+    "generate_questions": "Generate fair, unbiased assessment questions for the given subject and difficulty.",
+    "proctor_summary": "Summarize proctoring flags into a concise integrity report.",
+    "score_response": "Score the candidate response against the rubric. Return a numeric score, justification, and per-criterion breakdown. Be consistent and unbiased.",
+    "rubric_feedback": "Give constructive rubric-based feedback on the response.",
+    "explain_ranking": "Explain how the merit rank was derived from scores and tie-breakers.",
+    "detect_anomaly": "Inspect the ranking/score data for anomalies (duplicates, outliers, suspicious clustering).",
+    "recommend_preferences": "Given the candidate's rank/score and the available options, recommend a sensible ordered preference list and explain why.",
+    "recommend_allocation": "Given merit ranks, preferences, capacities and reservation rules, recommend an allocation. Respect capacity and category rules strictly.",
+    "explain_allocation": "Explain to the applicant why they were allotted (or not allotted) a particular option.",
+    "payment_reminder": "Draft a polite payment reminder with the amount, purpose and deadline.",
+    "detect_payment_anomaly": "Flag suspicious or inconsistent payments.",
+    "cross_check_data": "Cross-check application data against verified documents and list mismatches.",
+    "onboarding_checklist": "Produce a step-by-step onboarding checklist for the enrolled candidate.",
+    "welcome_message": "Write a warm, professional welcome/onboarding message.",
+    "analytics_summary": "Summarize the cycle outcomes (counts, fill rate, category-wise stats) into an executive summary.",
+    "lessons_learned": "List lessons learned and process improvement suggestions for the next cycle."
+  }
+}
