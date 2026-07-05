@@ -1,0 +1,6 @@
+[
+  {"value": "one_time", "label": "One-Time Campaign", "description": "Single send to an audience."},
+  {"value": "recurring", "label": "Recurring Campaign", "description": "Repeats on a schedule (daily/weekly/monthly)."},
+  {"value": "drip", "label": "Basic Drip Campaign", "description": "Multi-step sequence with delays between steps."},
+  {"value": "multi_channel", "label": "Multi-Channel Campaign", "description": "Coordinated steps across email/SMS/push."}
+]

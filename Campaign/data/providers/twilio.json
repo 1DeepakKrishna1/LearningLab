@@ -1,0 +1,6 @@
+{
+  "account_sid": "",
+  "auth_token": "",
+  "from_number": "",
+  "_comment": "Provide Twilio credentials and set provider mode to 'live' to send real SMS."
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "VIP Contacts",
+    "description": "Contacts tagged as VIP",
+    "is_dynamic": true,
+    "definition": {"op": "AND", "rules": [{"field": "tags", "operator": "contains", "value": "vip"}]}
+  },
+  {
+    "name": "US Pro Users",
+    "description": "Pro-plan contacts in the United States",
+    "is_dynamic": true,
+    "definition": {"op": "AND", "rules": [
+      {"field": "country", "operator": "eq", "value": "US"},
+      {"field": "attributes.plan", "operator": "eq", "value": "pro"}
+    ]}
+  },
+  {
+    "name": "High Value or Enterprise",
+    "description": "Enterprise plan OR lifetime value over 5000",
+    "is_dynamic": true,
+    "definition": {"op": "OR", "rules": [
+      {"field": "attributes.plan", "operator": "eq", "value": "enterprise"},
+      {"field": "attributes.ltv", "operator": "gt", "value": 5000}
+    ]}
+  }
+]

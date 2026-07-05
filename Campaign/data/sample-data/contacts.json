@@ -1,0 +1,12 @@
+[
+  {"email": "alice@example.com", "phone": "+15551230001", "first_name": "Alice", "last_name": "Nguyen", "country": "US", "timezone": "America/New_York", "tags": ["vip", "newsletter"], "attributes": {"plan": "pro", "ltv": 1200}},
+  {"email": "bob@example.com", "phone": "+15551230002", "first_name": "Bob", "last_name": "Smith", "country": "US", "timezone": "America/Chicago", "tags": ["newsletter"], "attributes": {"plan": "free", "ltv": 0}},
+  {"email": "carol@example.co.uk", "phone": "+447700900003", "first_name": "Carol", "last_name": "Jones", "country": "GB", "timezone": "Europe/London", "tags": ["vip"], "attributes": {"plan": "enterprise", "ltv": 9800}},
+  {"email": "deepak@example.in", "phone": "+919812300004", "first_name": "Deepak", "last_name": "Kumar", "country": "IN", "timezone": "Asia/Kolkata", "tags": ["trial"], "attributes": {"plan": "pro", "ltv": 540}},
+  {"email": "emma@example.de", "phone": "+4915123400005", "first_name": "Emma", "last_name": "Müller", "country": "DE", "timezone": "Europe/Berlin", "tags": ["newsletter", "beta"], "attributes": {"plan": "free", "ltv": 30}},
+  {"email": "frank@example.com", "phone": "+15551230006", "first_name": "Frank", "last_name": "Lopez", "country": "US", "timezone": "America/Los_Angeles", "tags": [], "attributes": {"plan": "pro", "ltv": 760}},
+  {"email": "grace@example.ca", "phone": "+14165550007", "first_name": "Grace", "last_name": "Tremblay", "country": "CA", "timezone": "America/New_York", "tags": ["vip", "beta"], "attributes": {"plan": "enterprise", "ltv": 15400}},
+  {"email": "hiro@example.jp", "phone": "+81901230008", "first_name": "Hiro", "last_name": "Tanaka", "country": "JP", "timezone": "Asia/Tokyo", "tags": ["trial"], "attributes": {"plan": "free", "ltv": 0}},
+  {"email": "ines@example.fr", "phone": "+33612300009", "first_name": "Inès", "last_name": "Dubois", "country": "FR", "timezone": "Europe/Paris", "tags": ["newsletter"], "attributes": {"plan": "pro", "ltv": 320}},
+  {"email": "john@example.au", "phone": "+61412300010", "first_name": "John", "last_name": "Walker", "country": "AU", "timezone": "Australia/Sydney", "tags": ["vip"], "attributes": {"plan": "enterprise", "ltv": 7200}}
+]

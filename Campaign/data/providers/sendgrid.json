@@ -1,0 +1,5 @@
+{
+  "api_key": "",
+  "from_email": "no-reply@acme.local",
+  "_comment": "Provide a SendGrid API key and set provider mode to 'live' to send for real."
+}

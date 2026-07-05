@@ -1,0 +1,5 @@
+{
+  "project_id": "",
+  "service_account_json_path": "",
+  "_comment": "Provide a Firebase project id + service account for live FCM (not implemented for live; sandbox by default)."
+}

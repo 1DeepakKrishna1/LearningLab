@@ -1,0 +1,17 @@
+{
+  "app_name": "Campaign Management Platform",
+  "company": "Acme Corp",
+  "default_timezone": "UTC",
+  "default_from_email": "no-reply@acme.local",
+  "default_from_name": "Acme Marketing",
+  "ui": {
+    "theme": "light",
+    "primary_color": "#1976d2",
+    "page_size_default": 20
+  },
+  "features": {
+    "approval_required": true,
+    "drip_campaigns": true,
+    "multi_channel": true
+  }
+}

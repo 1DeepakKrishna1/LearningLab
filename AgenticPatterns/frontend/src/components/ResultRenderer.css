@@ -1,0 +1,290 @@
+.result-renderer {
+  padding: 0.75rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ── Section ──────────────────────────────────────────────────── */
+.rr-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rr-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.rr-section-body { }
+
+/* ── Row (horizontal flex) ────────────────────────────────────── */
+.rr-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ── Prose text ───────────────────────────────────────────────── */
+.rr-prose {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-1);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.rr-secondary { color: var(--text-2); }
+.rr-small { font-size: 12px; }
+
+/* ── Headline ─────────────────────────────────────────────────── */
+.rr-headline {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.4;
+}
+
+/* ── Code block ───────────────────────────────────────────────── */
+.rr-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--text-1);
+}
+
+/* ── Log ──────────────────────────────────────────────────────── */
+.rr-log {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--text-3);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* ── Badge ────────────────────────────────────────────────────── */
+.rr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.rr-badge-label {
+  background: var(--bg-3);
+  color: var(--text-3);
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.rr-badge-value {
+  background: var(--bg);
+  color: var(--text-1);
+  padding: 2px 8px;
+}
+
+/* ── Tool calls ───────────────────────────────────────────────── */
+.rr-tool-call {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 12.5px;
+  padding: 0.2rem 0;
+}
+
+.rr-tool-name {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.rr-tool-result {
+  color: var(--text-2);
+}
+
+/* ── List ─────────────────────────────────────────────────────── */
+.rr-list {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* ── Key-value ────────────────────────────────────────────────── */
+.rr-kv {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 12.5px;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid var(--bg-3);
+}
+
+.rr-kv:last-child { border-bottom: none; }
+
+.rr-kv-key {
+  color: var(--text-3);
+  font-weight: 600;
+  min-width: 120px;
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+
+.rr-kv-val {
+  color: var(--text-1);
+  word-break: break-word;
+}
+
+.rr-alert .rr-kv-key { color: var(--yellow); }
+
+/* ── Turn (Memory Management) ─────────────────────────────────── */
+.rr-turn {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.rr-turn-user {
+  background: var(--bg-3);
+  padding: 0.4rem 0.75rem;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.rr-turn-assistant {
+  padding: 0.5rem 0.75rem;
+  font-size: 13px;
+  color: var(--text-1);
+  white-space: pre-wrap;
+}
+
+/* ── Milestone ────────────────────────────────────────────────── */
+.rr-milestone {
+  margin-bottom: 0.6rem;
+}
+
+.rr-milestone-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 13px;
+}
+
+.rr-milestone-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  min-width: 18px;
+}
+
+.rr-milestone-desc {
+  flex: 1;
+  color: var(--text-1);
+}
+
+.rr-milestone-status {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.rr-milestone-status--complete  { color: var(--green);  background: color-mix(in srgb, var(--green)  12%, transparent); }
+.rr-milestone-status--blocked   { color: var(--red);    background: color-mix(in srgb, var(--red)    12%, transparent); }
+.rr-milestone-status--in_progress { color: var(--yellow); background: color-mix(in srgb, var(--yellow) 12%, transparent); }
+.rr-milestone-status--pending   { color: var(--text-3); background: var(--bg-3); }
+
+/* ── Progress bar ─────────────────────────────────────────────── */
+.rr-progress-bar {
+  height: 4px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rr-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ── Score bar ────────────────────────────────────────────────── */
+.rr-score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 12.5px;
+  margin-bottom: 0.35rem;
+}
+
+.rr-score-label {
+  width: 90px;
+  flex-shrink: 0;
+  text-transform: capitalize;
+  color: var(--text-2);
+}
+
+.rr-score-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.rr-score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  border-radius: 3px;
+}
+
+.rr-score-val {
+  width: 30px;
+  text-align: right;
+  color: var(--text-1);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* ── Tags ─────────────────────────────────────────────────────── */
+.rr-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.rr-tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+}

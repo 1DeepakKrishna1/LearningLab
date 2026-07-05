@@ -1,0 +1,5 @@
+{
+  "app_id": "",
+  "rest_api_key": "",
+  "_comment": "Provide a OneSignal app id + REST API key for live push (sandbox by default)."
+}

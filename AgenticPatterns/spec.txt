@@ -1,0 +1,27 @@
+Provide python code to demonstrate below Agentic AI design patterns with unified interfaces and GroQ Key:
+
+1: Prompt Chaining 
+2: Routing 
+3: Parallelization
+4: Reflection 
+5: Tool Use
+6: Planning
+7: Multi-Agent
+
+Extend it to below patterns as well:
+8: Memory Management 
+9: Learning and Adaptation 
+10: Model Context Protocol 
+11: Goal Setting and Monitoring 
+12: Exception Handling and Recovery 
+13: Human-in-the-Loop 
+14: Knowledge Retrieval (RAG) 
+
+Finally extend it for below patterns as well:
+15: Inter-Agent Communication (A2A) 
+16: Resource-Aware Optimization 
+17: Reasoning Techniques (code)
+18: Guardrails/Safety Patterns 
+19: Evaluation and Monitoring 
+20: Prioritization 
+21: Exploration and Discovery 

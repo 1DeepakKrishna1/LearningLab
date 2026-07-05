@@ -1,0 +1,15 @@
+{
+  "execution": {
+    "batch_size": 500,
+    "max_retries": 3,
+    "rate_limit_per_second": 50,
+    "scheduler_poll_seconds": 15
+  },
+  "lifecycle": {
+    "require_approval": true,
+    "auto_archive_after_days": 90
+  },
+  "recurrence": {
+    "supported_frequencies": ["HOURLY", "DAILY", "WEEKLY", "MONTHLY"]
+  }
+}

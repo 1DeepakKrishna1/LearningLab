@@ -1,0 +1,21 @@
+{
+  "password_policy": {
+    "min_length": 8,
+    "require_uppercase": true,
+    "require_number": true,
+    "require_symbol": false
+  },
+  "jwt": {
+    "access_token_minutes": 30,
+    "refresh_token_days": 7,
+    "algorithm": "HS256"
+  },
+  "rate_limits": {
+    "global_per_minute": 300,
+    "login_per_minute": 10
+  },
+  "secure_headers": {
+    "hsts": false,
+    "content_security_policy": "default-src 'self'"
+  }
+}

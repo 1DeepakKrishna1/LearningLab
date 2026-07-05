@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Welcome Email",
+    "channel": "email",
+    "category": "onboarding",
+    "status": "active",
+    "subject": "Welcome to Acme, {{first_name}}!",
+    "preheader": "We're glad you're here.",
+    "html_content": "<h1>Hi {{first_name}},</h1><p>Welcome to Acme! Your plan is <b>{{plan}}</b>.</p><p><a href=\"https://acme.local/start\">Get started</a></p>",
+    "variables": ["first_name", "plan"]
+  },
+  {
+    "name": "Monthly Newsletter",
+    "channel": "email",
+    "category": "newsletter",
+    "status": "active",
+    "subject": "Your {{country}} monthly update",
+    "preheader": "What's new this month",
+    "html_content": "<h2>Hello {{first_name}}</h2><p>Here are this month's highlights for {{country}}.</p>",
+    "variables": ["first_name", "country"]
+  },
+  {
+    "name": "Promo SMS",
+    "channel": "sms",
+    "category": "promotion",
+    "status": "active",
+    "text_content": "Hi {{first_name}}, get 20% off today only! Reply STOP to opt out.",
+    "variables": ["first_name"]
+  },
+  {
+    "name": "Cart Reminder Push",
+    "channel": "push",
+    "category": "retention",
+    "status": "active",
+    "title": "Still thinking it over?",
+    "body": "Hi {{first_name}}, your cart is waiting.",
+    "image_url": "https://acme.local/img/cart.png",
+    "deep_link": "acme://cart",
+    "buttons": [{"label": "View Cart", "action": "acme://cart"}, {"label": "Dismiss", "action": "dismiss"}],
+    "variables": ["first_name"]
+  }
+]

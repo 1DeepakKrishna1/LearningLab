@@ -1,0 +1,9 @@
+{
+  "host": "",
+  "port": 587,
+  "use_tls": true,
+  "username": "",
+  "password": "",
+  "from_email": "no-reply@acme.local",
+  "_comment": "Leave host empty to run in sandbox (logged, not sent). Fill these for live SMTP and set provider mode to 'live'."
+}

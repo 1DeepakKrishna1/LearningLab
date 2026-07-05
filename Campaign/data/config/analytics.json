@@ -1,0 +1,15 @@
+{
+  "snapshot_interval": "daily",
+  "retention_days": 365,
+  "metrics": {
+    "email": ["sent", "delivered", "opened", "clicked", "bounced", "complained", "unsubscribed"],
+    "sms": ["sent", "delivered", "failed", "replied"],
+    "push": ["sent", "delivered", "opened", "action_clicked"]
+  },
+  "rates": {
+    "open_rate": "opened / delivered",
+    "click_rate": "clicked / opened",
+    "bounce_rate": "bounced / sent",
+    "delivery_rate": "delivered / sent"
+  }
+}
