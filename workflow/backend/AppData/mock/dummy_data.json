@@ -1,0 +1,1463 @@
+{
+  "tools": [
+    {
+      "id": "tool-001",
+      "name": "HTTP Request",
+      "description": "Make HTTP GET/POST/PUT/DELETE requests to external APIs",
+      "type": "api_call",
+      "properties": {
+        "method": "GET",
+        "url": "",
+        "headers": {},
+        "timeout": 30
+      },
+      "icon": "globe",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-002",
+      "name": "Data Transformer",
+      "description": "Transform and map data between JSON, CSV, and XML formats",
+      "type": "data_transform",
+      "properties": {
+        "input_format": "json",
+        "output_format": "json",
+        "mapping_rules": {}
+      },
+      "icon": "arrow-right-left",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-003",
+      "name": "Email Notifier",
+      "description": "Send email notifications to specified recipients",
+      "type": "notification",
+      "properties": {
+        "smtp_server": "smtp.gmail.com",
+        "from_address": "",
+        "subject_template": "[{{workflow_name}}] {{status}} \u2014 {{timestamp}}"
+      },
+      "icon": "mail",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-004",
+      "name": "Database Query",
+      "description": "Execute SQL queries against connected databases",
+      "type": "database",
+      "properties": {
+        "connection_string": "",
+        "query_template": "SELECT {{columns}}\nFROM {{table_name}}\nWHERE {{filter_field}} = '{{filter_value}}'\nORDER BY created_at DESC\nLIMIT {{max_rows}}",
+        "timeout": 60
+      },
+      "icon": "database",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-005",
+      "name": "File Reader",
+      "description": "Read files from local storage or cloud (S3, GCS, Azure Blob)",
+      "type": "file_operation",
+      "properties": {
+        "storage_type": "local",
+        "path": "",
+        "encoding": "utf-8"
+      },
+      "icon": "file-text",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-006",
+      "name": "AI Inference",
+      "description": "Run AI/ML model inference on input data using configured models",
+      "type": "ai_model",
+      "properties": {
+        "model": "llama-3.3-70b-versatile",
+        "temperature": 0.7,
+        "max_tokens": 1000
+      },
+      "icon": "brain",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-007",
+      "name": "Approval Gate",
+      "description": "Pause workflow and wait for human approval before proceeding",
+      "type": "notification",
+      "properties": {
+        "approvers": [],
+        "timeout_hours": 24,
+        "auto_approve_on_timeout": false
+      },
+      "icon": "shield-check",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-008",
+      "name": "Slack Notifier",
+      "description": "Send messages to Slack channels or direct messages",
+      "type": "notification",
+      "properties": {
+        "channel": "#general",
+        "message_template": "*[{{workflow_name}}]* Execution {{status}} \u2705\n>Records processed: {{records}}\n>Duration: {{duration_ms}}ms\n>Timestamp: {{timestamp}}"
+      },
+      "icon": "message-square",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-009",
+      "name": "CSV Exporter",
+      "description": "Export processed data to CSV format for downstream use",
+      "type": "file_operation",
+      "properties": {
+        "delimiter": ",",
+        "include_headers": true,
+        "output_path": ""
+      },
+      "icon": "table",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-010",
+      "name": "Webhook Trigger",
+      "description": "Trigger outbound webhooks or listen for inbound webhook events",
+      "type": "api_call",
+      "properties": {
+        "url": "",
+        "secret": "",
+        "retry_count": 3
+      },
+      "icon": "zap",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-011",
+      "name": "REST API Caller",
+      "description": "Authenticated REST API calls with OAuth2, API keys, retries and response parsing",
+      "type": "api_call",
+      "properties": {
+        "base_url": "",
+        "auth_type": "bearer",
+        "auth_token": "",
+        "retry_count": 3,
+        "timeout": 30,
+        "parse_response": "json"
+      },
+      "icon": "plug",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-012",
+      "name": "NL-to-SQL",
+      "description": "Convert natural language questions into SQL queries and execute against a database",
+      "type": "database",
+      "properties": {
+        "connection_string": "",
+        "schema_description": "Tables and columns:\n{{db_schema}}\n\nRelationships:\n{{db_relationships}}\n\nRules:\n- Always add LIMIT {{max_rows}} unless user specifies\n- Use parameterized queries for user-supplied values\n- Prefer explicit column names over SELECT *",
+        "model": "llama-3.3-70b-versatile",
+        "max_rows": 500
+      },
+      "icon": "search-code",
+      "review_status": "approved"
+    },
+    {
+      "id": "tool-013",
+      "name": "Web Search",
+      "description": "Real-time web search to retrieve up-to-date information from the internet",
+      "type": "web_search",
+      "properties": {
+        "engine": "tavily",
+        "api_key": "",
+        "max_results": 5,
+        "search_depth": "advanced"
+      },
+      "icon": "search",
+      "review_status": "approved"
+    }
+  ],
+  "agents": [
+    {
+      "id": "agent-start",
+      "name": "Workflow Start",
+      "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+      "type": "start",
+      "tools": [],
+      "tool_configs": {},
+      "properties": {
+        "environment": "production",
+        "version": "1.0.0",
+        "timeout_seconds": 3600,
+        "max_retries": 3,
+        "run_label": "",
+        "triggers": []
+      },
+      "icon": "play",
+      "color": "#22c55e",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-end",
+      "name": "Workflow End",
+      "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+      "type": "end",
+      "tools": [],
+      "tool_configs": {},
+      "properties": {
+        "output_destination": "",
+        "notify_on_complete": true,
+        "archive_results": false,
+        "summary": ""
+      },
+      "icon": "flag",
+      "color": "#f43f5e",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-001",
+      "name": "Data Ingestion Agent",
+      "description": "Fetches data from external sources via APIs or file systems",
+      "type": "automatic",
+      "tools": [
+        "tool-001",
+        "tool-005"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "retry_on_failure": true,
+        "max_retries": 3,
+        "batch_size": 500
+      },
+      "icon": "download",
+      "color": "#6366f1",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-002",
+      "name": "Data Processor",
+      "description": "Transforms, validates, and structures raw data for downstream use",
+      "type": "automatic",
+      "tools": [
+        "tool-002",
+        "tool-009"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "validation_schema": {},
+        "error_threshold": 0.05
+      },
+      "icon": "cpu",
+      "color": "#6366f1",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-003",
+      "name": "AI Analyst",
+      "description": "Applies AI/ML models to derive insights and classify data",
+      "type": "automatic",
+      "tools": [
+        "tool-006",
+        "tool-002"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "LLM": "GroQ",
+        "model": "llama-3.3-70b-versatile",
+        "confidence_threshold": 0.85,
+        "Embeddings-Source": "default"
+      },
+      "icon": "brain",
+      "color": "#6366f1",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-004",
+      "name": "Human Reviewer - Old",
+      "description": "Routes items to human reviewers and waits for approval decisions",
+      "type": "human_in_the_loop",
+      "tools": [
+        "tool-007"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "reviewers": [
+          "team@company.com"
+        ],
+        "timeout_hours": 24,
+        "escalation_email": "manager@company.com"
+      },
+      "icon": "user-check",
+      "color": "#f59e0b",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-005",
+      "name": "Notification Agent",
+      "description": "Sends status updates and alerts via email and Slack",
+      "type": "automatic",
+      "tools": [
+        "tool-003",
+        "tool-008"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "email_template": "default",
+        "slack_channel": "#alerts"
+      },
+      "icon": "bell",
+      "color": "#6366f1",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-006",
+      "name": "Database Manager",
+      "description": "Persists processed records to the configured database",
+      "type": "automatic",
+      "tools": [
+        "tool-004"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "operation": "upsert",
+        "conflict_strategy": "update",
+        "batch_size": 100
+      },
+      "icon": "database",
+      "color": "#6366f1",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-007",
+      "name": "Workflow Orchestrator",
+      "description": "Routes execution based on conditions and triggers downstream webhooks",
+      "type": "conditional",
+      "tools": [
+        "tool-010",
+        "tool-001"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "condition_field": "",
+        "condition_operator": "equals",
+        "condition_value": ""
+      },
+      "icon": "git-branch",
+      "color": "#f97316",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-008",
+      "name": "Parallel Executor",
+      "description": "Runs multiple sub-tasks concurrently to reduce total execution time",
+      "type": "parallel",
+      "tools": [
+        "tool-001",
+        "tool-002"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "max_concurrency": 4,
+        "merge_strategy": "combine"
+      },
+      "icon": "layers",
+      "color": "#a855f7",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-009",
+      "name": "Role-Based Approver",
+      "description": "Routes tasks to role-specific approvers based on business rules",
+      "type": "role_based",
+      "tools": [
+        "tool-007",
+        "tool-003"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "roles": [
+          "manager",
+          "compliance"
+        ],
+        "require_all": false
+      },
+      "icon": "users",
+      "color": "#10b981",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-010",
+      "name": "Prompt Agent",
+      "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+      "type": "prompt_agent",
+      "tools": [
+        "tool-006",
+        "tool-011"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "system_prompt": "You are an expert {{domain}} analyst with deep knowledge of {{context}}.\n\nRespond in {{output_format}} format.\nBe concise, accurate, and data-driven.\nIf data is missing, clearly state assumptions.\nCurrent date: {{timestamp}}.",
+        "user_prompt": "Input data:\n{{input_data}}\n\nTask: {{task}}\n\nProvide:\n1. A concise summary\n2. Key insights from the data\n3. Anomalies or risks detected\n4. Recommended next steps",
+        "model": "llama-3.3-70b-versatile",
+        "temperature": 0.7,
+        "max_tokens": 2000,
+        "output_format": "markdown"
+      },
+      "icon": "message-circle",
+      "color": "#ec4899",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-011",
+      "name": "ReAct Agent",
+      "description": "Iteratively Reasons and Acts using tools until a final answer is reached (ReAct pattern)",
+      "type": "react_agent",
+      "tools": [
+        "tool-006",
+        "tool-013",
+        "tool-011"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "goal_prompt": "Goal: {{user_query}}\n\nAvailable context:\n{{context}}\n\nInstructions:\n- Think step-by-step before each action\n- Use Web Search to find recent information\n- Use REST API Caller for structured data retrieval\n- Cite your sources in the final answer\n- Stop reasoning when you reach a confident answer\n- Format final answer as: {{output_format}}",
+        "max_iterations": 6,
+        "model": "llama-3.3-70b-versatile",
+        "stop_on_answer": true,
+        "trace_thoughts": true
+      },
+      "icon": "repeat",
+      "color": "#06b6d4",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-012",
+      "name": "Reflection Agent",
+      "description": "Generates an initial output, self-critiques it and iteratively improves until quality threshold is met",
+      "type": "reflection_agent",
+      "tools": [
+        "tool-006"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "critique_prompt": "Review the following response:\n---\n{{previous_output}}\n---\n\nEvaluate on three dimensions:\n1. Accuracy \u2014 Is every factual claim correct? (1\u201310)\n2. Completeness \u2014 Does it fully address the original task? (1\u201310)\n3. Clarity \u2014 Is it well-structured and easy to understand? (1\u201310)\n\nProvide:\n- An overall score (average of the three)\n- Specific weaknesses found\n- Concrete, actionable improvements\n- A revised version if score < {{quality_threshold}}",
+        "quality_threshold": 8.0,
+        "max_iterations": 3,
+        "model": "llama-3.3-70b-versatile",
+        "temperature": 0.4
+      },
+      "icon": "refresh-cw",
+      "color": "#14b8a6",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-013",
+      "name": "Guardrails Agent",
+      "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+      "type": "guardrails",
+      "tools": [
+        "tool-002"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "check_pii": true,
+        "check_toxicity": true,
+        "max_content_length": 4096,
+        "block_on_violation": true,
+        "redact_pii": true
+      },
+      "icon": "shield",
+      "color": "#ef4444",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-014",
+      "name": "Orchestrator",
+      "description": "Decomposes complex tasks, dispatches sub-tasks to specialist agents and merges results",
+      "type": "orchestrator",
+      "tools": [
+        "tool-010",
+        "tool-001"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "decomposition_strategy": "llm",
+        "merge_strategy": "reduce",
+        "max_sub_agents": 5,
+        "timeout_seconds": 120,
+        "model": "llama-3.3-70b-versatile"
+      },
+      "icon": "network",
+      "color": "#7c3aed",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-015",
+      "name": "Supervisor",
+      "description": "Monitors agent health, routes tasks by policy, catches failures and triggers retries or escalations",
+      "type": "supervisor",
+      "tools": [
+        "tool-008",
+        "tool-003"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "routing_policy": "round_robin",
+        "max_retries": 3,
+        "failure_threshold": 2,
+        "escalation_channel": "#ops-alerts",
+        "heartbeat_interval_s": 10
+      },
+      "icon": "monitor",
+      "color": "#84cc16",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-016",
+      "name": "Human-in-the-Loop Agent",
+      "description": "Pauses the running loop so a human can approve, correct, override the AI decision, or give feedback the model learns from. Active collaboration during execution.",
+      "type": "human_in_the_loop",
+      "tools": [
+        "tool-007"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "assigned_to": "analyst@company.com",
+        "intervention_stage": "during",
+        "allow_override": true,
+        "train_model": "yes",
+        "timeout_hours": 24
+      },
+      "icon": "user-cog",
+      "color": "#f59e0b",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    },
+    {
+      "id": "agent-017",
+      "name": "Human Review Agent",
+      "description": "Validation checkpoint after automation. A reviewer verifies the AI-generated artifact and approves or rejects it. Verification only, no model learning.",
+      "type": "human_review",
+      "tools": [
+        "tool-007"
+      ],
+      "tool_configs": {},
+      "properties": {
+        "assigned_to": "legal-team@company.com",
+        "review_stage": "after",
+        "decision_mode": "approve_reject",
+        "model_learning": false,
+        "timeout_hours": 48
+      },
+      "icon": "clipboard-check",
+      "color": "#0ea5e9",
+      "review_status": "approved",
+      "invoke": {
+        "input_parameters": [],
+        "output_parameters": []
+      }
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl-001",
+      "name": "Data Pipeline",
+      "description": "End-to-end ETL pipeline: ingest raw data, transform it, run AI analysis, persist to DB, and notify stakeholders.",
+      "status": "active",
+      "nodes": [
+        {
+          "id": "dp-n1",
+          "node_kind": "agent",
+          "agent_id": "agent-001",
+          "tool_id": null,
+          "position": {
+            "x": 80.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Ingest Sales Data",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "dp-n2",
+          "node_kind": "agent",
+          "agent_id": "agent-002",
+          "tool_id": null,
+          "position": {
+            "x": 320.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Transform Records",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "dp-n3",
+          "node_kind": "agent",
+          "agent_id": "agent-003",
+          "tool_id": null,
+          "position": {
+            "x": 560.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "AI Trend Analysis",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "dp-n4",
+          "node_kind": "agent",
+          "agent_id": "agent-006",
+          "tool_id": null,
+          "position": {
+            "x": 800.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Save to DB",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "dp-n5",
+          "node_kind": "agent",
+          "agent_id": "agent-005",
+          "tool_id": null,
+          "position": {
+            "x": 1040.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Send Report",
+            "type": "automatic"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "dp-e1",
+          "source": "dp-n1",
+          "target": "dp-n2",
+          "label": "raw data",
+          "type": "smoothstep"
+        },
+        {
+          "id": "dp-e2",
+          "source": "dp-n2",
+          "target": "dp-n3",
+          "label": "clean data",
+          "type": "smoothstep"
+        },
+        {
+          "id": "dp-e3",
+          "source": "dp-n3",
+          "target": "dp-n4",
+          "label": "insights",
+          "type": "smoothstep"
+        },
+        {
+          "id": "dp-e4",
+          "source": "dp-n4",
+          "target": "dp-n5",
+          "label": "persisted",
+          "type": "smoothstep"
+        }
+      ],
+      "created_at": "2026-06-03T18:10:08.673888",
+      "updated_at": "2026-06-03T18:10:08.673888",
+      "is_template": true,
+      "tags": [
+        "etl",
+        "data",
+        "analytics"
+      ]
+    },
+    {
+      "id": "tpl-002",
+      "name": "Customer Onboarding",
+      "description": "Automated customer onboarding: verify identity with AI, route to human review, then save and notify.",
+      "status": "active",
+      "nodes": [
+        {
+          "id": "co-n1",
+          "node_kind": "agent",
+          "agent_id": "agent-001",
+          "tool_id": null,
+          "position": {
+            "x": 80.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Collect Customer Data",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "co-n2",
+          "node_kind": "agent",
+          "agent_id": "agent-003",
+          "tool_id": null,
+          "position": {
+            "x": 320.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "AI Verification",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "co-n3",
+          "node_kind": "agent",
+          "agent_id": "agent-004",
+          "tool_id": null,
+          "position": {
+            "x": 560.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Compliance Review",
+            "type": "human_in_the_loop"
+          }
+        },
+        {
+          "id": "co-n4",
+          "node_kind": "agent",
+          "agent_id": "agent-006",
+          "tool_id": null,
+          "position": {
+            "x": 800.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Create Account",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "co-n5",
+          "node_kind": "agent",
+          "agent_id": "agent-005",
+          "tool_id": null,
+          "position": {
+            "x": 1040.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Send Welcome Email",
+            "type": "automatic"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "co-e1",
+          "source": "co-n1",
+          "target": "co-n2",
+          "label": "profile",
+          "type": "smoothstep"
+        },
+        {
+          "id": "co-e2",
+          "source": "co-n2",
+          "target": "co-n3",
+          "label": "verified",
+          "type": "smoothstep"
+        },
+        {
+          "id": "co-e3",
+          "source": "co-n3",
+          "target": "co-n4",
+          "label": "approved",
+          "type": "smoothstep"
+        },
+        {
+          "id": "co-e4",
+          "source": "co-n4",
+          "target": "co-n5",
+          "label": "created",
+          "type": "smoothstep"
+        }
+      ],
+      "created_at": "2026-06-03T18:10:08.673888",
+      "updated_at": "2026-06-03T18:10:08.673888",
+      "is_template": true,
+      "tags": [
+        "onboarding",
+        "compliance",
+        "human-review"
+      ]
+    },
+    {
+      "id": "tpl-003",
+      "name": "Report Generation",
+      "description": "Automated weekly report: fetch latest data, apply AI analysis, and distribute to stakeholders.",
+      "status": "active",
+      "nodes": [
+        {
+          "id": "rg-n1",
+          "node_kind": "agent",
+          "agent_id": "agent-001",
+          "tool_id": null,
+          "position": {
+            "x": 150.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Fetch Weekly Data",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "rg-n2",
+          "node_kind": "agent",
+          "agent_id": "agent-002",
+          "tool_id": null,
+          "position": {
+            "x": 400.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Aggregate Metrics",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "rg-n3",
+          "node_kind": "agent",
+          "agent_id": "agent-003",
+          "tool_id": null,
+          "position": {
+            "x": 650.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "AI Commentary",
+            "type": "automatic"
+          }
+        },
+        {
+          "id": "rg-n4",
+          "node_kind": "agent",
+          "agent_id": "agent-005",
+          "tool_id": null,
+          "position": {
+            "x": 900.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Distribute Report",
+            "type": "automatic"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "rg-e1",
+          "source": "rg-n1",
+          "target": "rg-n2",
+          "label": "raw",
+          "type": "smoothstep"
+        },
+        {
+          "id": "rg-e2",
+          "source": "rg-n2",
+          "target": "rg-n3",
+          "label": "aggregated",
+          "type": "smoothstep"
+        },
+        {
+          "id": "rg-e3",
+          "source": "rg-n3",
+          "target": "rg-n4",
+          "label": "report ready",
+          "type": "smoothstep"
+        }
+      ],
+      "created_at": "2026-06-03T18:10:08.673888",
+      "updated_at": "2026-06-03T18:10:08.673888",
+      "is_template": true,
+      "tags": [
+        "reporting",
+        "analytics",
+        "scheduled"
+      ]
+    },
+    {
+      "id": "tpl-004",
+      "name": "ReAct Research Agent",
+      "description": "A ReAct loop agent reasons and acts using Web Search and REST API tools, with guardrails on input/output and reflection-based improvement of the final answer.",
+      "status": "active",
+      "nodes": [
+        {
+          "id": "ra-n1",
+          "node_kind": "agent",
+          "agent_id": "agent-013",
+          "tool_id": null,
+          "position": {
+            "x": 80.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Input Guardrails",
+            "type": "guardrails",
+            "properties": {
+              "check_pii": true,
+              "check_toxicity": true,
+              "max_content_length": 4096,
+              "block_on_violation": true,
+              "redact_pii": false
+            }
+          }
+        },
+        {
+          "id": "ra-n2",
+          "node_kind": "agent",
+          "agent_id": "agent-011",
+          "tool_id": null,
+          "position": {
+            "x": 320.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "ReAct Research",
+            "type": "react_agent",
+            "properties": {
+              "goal_prompt": "Goal: {{user_query}}\n\nContext: {{context}}\n\nInstructions:\n- Think step-by-step before each action\n- Use Web Search for recent facts and current events\n- Use REST API Caller for structured data retrieval\n- Cite all sources\n- Output format: {{output_format}}",
+              "max_iterations": 6,
+              "model": "llama-3.3-70b-versatile",
+              "stop_on_answer": true,
+              "trace_thoughts": true
+            }
+          }
+        },
+        {
+          "id": "ra-n3",
+          "node_kind": "agent",
+          "agent_id": "agent-012",
+          "tool_id": null,
+          "position": {
+            "x": 560.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Reflect & Improve",
+            "type": "reflection_agent",
+            "properties": {
+              "critique_prompt": "Review this research answer:\n---\n{{previous_output}}\n---\n\nScore on:\n1. Factual accuracy (1\u201310)\n2. Source coverage (1\u201310)\n3. Answer completeness (1\u201310)\n\nIf overall < {{quality_threshold}}, provide an improved version.",
+              "quality_threshold": 8.0,
+              "max_iterations": 2,
+              "model": "llama-3.3-70b-versatile",
+              "temperature": 0.3
+            }
+          }
+        },
+        {
+          "id": "ra-n4",
+          "node_kind": "agent",
+          "agent_id": "agent-013",
+          "tool_id": null,
+          "position": {
+            "x": 800.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Output Guardrails",
+            "type": "guardrails",
+            "properties": {
+              "check_pii": true,
+              "check_toxicity": true,
+              "max_content_length": 8192,
+              "block_on_violation": true,
+              "redact_pii": true
+            }
+          }
+        },
+        {
+          "id": "ra-n5",
+          "node_kind": "agent",
+          "agent_id": "agent-005",
+          "tool_id": null,
+          "position": {
+            "x": 1040.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Deliver Results",
+            "type": "automatic"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "ra-e1",
+          "source": "ra-n1",
+          "target": "ra-n2",
+          "label": "validated input",
+          "type": "smoothstep"
+        },
+        {
+          "id": "ra-e2",
+          "source": "ra-n2",
+          "target": "ra-n3",
+          "label": "raw answer",
+          "type": "smoothstep"
+        },
+        {
+          "id": "ra-e3",
+          "source": "ra-n3",
+          "target": "ra-n4",
+          "label": "improved answer",
+          "type": "smoothstep"
+        },
+        {
+          "id": "ra-e4",
+          "source": "ra-n4",
+          "target": "ra-n5",
+          "label": "safe output",
+          "type": "smoothstep"
+        }
+      ],
+      "created_at": "2026-06-03T18:10:08.673888",
+      "updated_at": "2026-06-03T18:10:08.673888",
+      "is_template": true,
+      "tags": [
+        "ai",
+        "research",
+        "react",
+        "reflection"
+      ]
+    },
+    {
+      "id": "tpl-005",
+      "name": "Prompt-Driven NL-SQL Query",
+      "description": "User asks a natural-language question; a Prompt Agent reformulates it, the DB agent runs NL-to-SQL, Reflection validates quality, a Human Reviewer approves, then results are sent.",
+      "status": "active",
+      "nodes": [
+        {
+          "id": "nq-n1",
+          "node_kind": "agent",
+          "agent_id": "agent-013",
+          "tool_id": null,
+          "position": {
+            "x": 80.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Validate Question",
+            "type": "guardrails"
+          }
+        },
+        {
+          "id": "nq-n2",
+          "node_kind": "agent",
+          "agent_id": "agent-010",
+          "tool_id": null,
+          "position": {
+            "x": 320.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Reformulate Prompt",
+            "type": "prompt_agent",
+            "properties": {
+              "system_prompt": "You are a data query specialist. Convert user questions into precise, unambiguous database query specifications.\n\nDatabase context:\n{{db_schema}}\n\nAlways output a structured JSON with keys: intent, entities, filters, sort_by, limit.",
+              "user_prompt": "User question: {{user_query}}\n\nExtract the query intent and convert to a structured specification that NL-to-SQL can process. Include any implicit filters based on context: {{context}}",
+              "model": "llama-3.3-70b-versatile",
+              "temperature": 0.2,
+              "max_tokens": 800,
+              "output_format": "json"
+            }
+          }
+        },
+        {
+          "id": "nq-n3",
+          "node_kind": "agent",
+          "agent_id": "agent-006",
+          "tool_id": null,
+          "position": {
+            "x": 560.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "NL-to-SQL Query",
+            "type": "automatic",
+            "toolConfigs": {
+              "tool-012": {
+                "schema_description": "Tables:\n- orders(id, customer_id, amount, status, created_at)\n- customers(id, name, email, region, tier)\n- products(id, name, category, price, stock)\n\nRelationships:\n- orders.customer_id \u2192 customers.id\n\nRules:\n- Always add LIMIT {{max_rows}} unless user specifies\n- Use parameterized queries for safety"
+              }
+            }
+          }
+        },
+        {
+          "id": "nq-n4",
+          "node_kind": "agent",
+          "agent_id": "agent-012",
+          "tool_id": null,
+          "position": {
+            "x": 800.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Reflect on Results",
+            "type": "reflection_agent",
+            "properties": {
+              "critique_prompt": "Review this query result:\n---\n{{previous_output}}\n---\n\nOriginal question: {{user_query}}\n\nDoes the result fully answer the question? Check for:\n- Missing data (score 1\u201310)\n- Correctness of values (score 1\u201310)\n- Result completeness (score 1\u201310)\n\nIf score < {{quality_threshold}}, suggest an improved query.",
+              "quality_threshold": 7.5,
+              "max_iterations": 2,
+              "model": "llama-3.3-70b-versatile",
+              "temperature": 0.2
+            }
+          }
+        },
+        {
+          "id": "nq-n5",
+          "node_kind": "agent",
+          "agent_id": "agent-004",
+          "tool_id": null,
+          "position": {
+            "x": 1040.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Human Review",
+            "type": "human_in_the_loop"
+          }
+        },
+        {
+          "id": "nq-n6",
+          "node_kind": "agent",
+          "agent_id": "agent-005",
+          "tool_id": null,
+          "position": {
+            "x": 1280.0,
+            "y": 200.0
+          },
+          "data": {
+            "name": "Send Answer",
+            "type": "automatic"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "nq-e1",
+          "source": "nq-n1",
+          "target": "nq-n2",
+          "label": "clean query",
+          "type": "smoothstep"
+        },
+        {
+          "id": "nq-e2",
+          "source": "nq-n2",
+          "target": "nq-n3",
+          "label": "structured prompt",
+          "type": "smoothstep"
+        },
+        {
+          "id": "nq-e3",
+          "source": "nq-n3",
+          "target": "nq-n4",
+          "label": "query results",
+          "type": "smoothstep"
+        },
+        {
+          "id": "nq-e4",
+          "source": "nq-n4",
+          "target": "nq-n5",
+          "label": "quality answer",
+          "type": "smoothstep"
+        },
+        {
+          "id": "nq-e5",
+          "source": "nq-n5",
+          "target": "nq-n6",
+          "label": "approved",
+          "type": "smoothstep"
+        }
+      ],
+      "created_at": "2026-06-03T18:10:08.673888",
+      "updated_at": "2026-06-03T18:10:08.673888",
+      "is_template": true,
+      "tags": [
+        "nlp",
+        "database",
+        "prompt",
+        "nl-sql"
+      ]
+    },
+    {
+      "id": "tpl-006",
+      "name": "Supervised Multi-Agent Workflow",
+      "description": "A Supervisor monitors the pipeline; an Orchestrator decomposes the task; parallel Prompt and ReAct sub-agents handle sub-tasks; Reflection merges results; Guardrails validates before delivery.",
+      "status": "active",
+      "nodes": [
+        {
+          "id": "sm-n1",
+          "node_kind": "agent",
+          "agent_id": "agent-015",
+          "tool_id": null,
+          "position": {
+            "x": 80.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Supervisor",
+            "type": "supervisor",
+            "properties": {
+              "routing_policy": "priority",
+              "max_retries": 3,
+              "failure_threshold": 2,
+              "escalation_channel": "#ops-alerts",
+              "heartbeat_interval_s": 10
+            }
+          }
+        },
+        {
+          "id": "sm-n2",
+          "node_kind": "agent",
+          "agent_id": "agent-014",
+          "tool_id": null,
+          "position": {
+            "x": 320.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Orchestrator",
+            "type": "orchestrator",
+            "properties": {
+              "decomposition_strategy": "llm",
+              "merge_strategy": "reduce",
+              "max_sub_agents": 2,
+              "timeout_seconds": 90,
+              "model": "llama-3.3-70b-versatile"
+            }
+          }
+        },
+        {
+          "id": "sm-n3",
+          "node_kind": "agent",
+          "agent_id": "agent-010",
+          "tool_id": null,
+          "position": {
+            "x": 560.0,
+            "y": 100.0
+          },
+          "data": {
+            "name": "Prompt Sub-Agent",
+            "type": "prompt_agent",
+            "properties": {
+              "system_prompt": "You are an expert at {{domain}}. Your sub-task: {{task}}\n\nContext from orchestrator:\n{{context}}\n\nRespond in {{output_format}} format. Be thorough but concise.",
+              "user_prompt": "Process this input:\n{{input_data}}\n\nFocus on: structured analysis, key findings, data integrity issues.",
+              "model": "llama-3.3-70b-versatile",
+              "temperature": 0.5,
+              "max_tokens": 1500,
+              "output_format": "json"
+            }
+          }
+        },
+        {
+          "id": "sm-n4",
+          "node_kind": "agent",
+          "agent_id": "agent-011",
+          "tool_id": null,
+          "position": {
+            "x": 560.0,
+            "y": 400.0
+          },
+          "data": {
+            "name": "ReAct Sub-Agent",
+            "type": "react_agent",
+            "properties": {
+              "goal_prompt": "Sub-task: {{task}}\n\nInput data: {{input_data}}\n\nUse Web Search and REST API to enrich the data with current information. Reason step-by-step. Output: {{output_format}}",
+              "max_iterations": 4,
+              "model": "llama-3.3-70b-versatile",
+              "stop_on_answer": true,
+              "trace_thoughts": true
+            }
+          }
+        },
+        {
+          "id": "sm-n5",
+          "node_kind": "agent",
+          "agent_id": "agent-012",
+          "tool_id": null,
+          "position": {
+            "x": 800.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Reflect & Merge",
+            "type": "reflection_agent",
+            "properties": {
+              "critique_prompt": "Merge and review these sub-agent outputs:\n\nSub-Agent A result:\n{{previous_output}}\n\nEvaluate the merged result for:\n1. Consistency \u2014 Do the results agree? (1\u201310)\n2. Coverage \u2014 Is {{task}} fully addressed? (1\u201310)\n3. Quality \u2014 Is the output actionable? (1\u201310)\n\nProvide a unified, coherent final output. If score < {{quality_threshold}}, revise.",
+              "quality_threshold": 7.5,
+              "max_iterations": 2,
+              "model": "llama-3.3-70b-versatile",
+              "temperature": 0.35
+            }
+          }
+        },
+        {
+          "id": "sm-n6",
+          "node_kind": "agent",
+          "agent_id": "agent-013",
+          "tool_id": null,
+          "position": {
+            "x": 1040.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Output Guardrails",
+            "type": "guardrails"
+          }
+        },
+        {
+          "id": "sm-n7",
+          "node_kind": "agent",
+          "agent_id": "agent-005",
+          "tool_id": null,
+          "position": {
+            "x": 1280.0,
+            "y": 250.0
+          },
+          "data": {
+            "name": "Notify Stakeholders",
+            "type": "automatic"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "sm-e1",
+          "source": "sm-n1",
+          "target": "sm-n2",
+          "label": "task",
+          "type": "smoothstep"
+        },
+        {
+          "id": "sm-e2",
+          "source": "sm-n2",
+          "target": "sm-n3",
+          "label": "sub-task A",
+          "type": "smoothstep"
+        },
+        {
+          "id": "sm-e3",
+          "source": "sm-n2",
+          "target": "sm-n4",
+          "label": "sub-task B",
+          "type": "smoothstep"
+        },
+        {
+          "id": "sm-e4",
+          "source": "sm-n3",
+          "target": "sm-n5",
+          "label": "result A",
+          "type": "smoothstep"
+        },
+        {
+          "id": "sm-e5",
+          "source": "sm-n4",
+          "target": "sm-n5",
+          "label": "result B",
+          "type": "smoothstep"
+        },
+        {
+          "id": "sm-e6",
+          "source": "sm-n5",
+          "target": "sm-n6",
+          "label": "merged",
+          "type": "smoothstep"
+        },
+        {
+          "id": "sm-e7",
+          "source": "sm-n6",
+          "target": "sm-n7",
+          "label": "validated",
+          "type": "smoothstep"
+        }
+      ],
+      "created_at": "2026-06-03T18:10:08.673888",
+      "updated_at": "2026-06-03T18:10:08.673888",
+      "is_template": true,
+      "tags": [
+        "multi-agent",
+        "supervisor",
+        "orchestration",
+        "parallel"
+      ]
+    }
+  ]
+}

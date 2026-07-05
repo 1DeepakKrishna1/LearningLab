@@ -1,0 +1,540 @@
+{
+  "tools": [
+    {
+      "id": "tool-L01",
+      "name": "Legal Database Search",
+      "description": "Search Indian and international legal databases such as SCC, Manupatra, Westlaw, and LexisNexis",
+      "type": "legal_search",
+      "properties": {
+        "sources": ["SCC", "Manupatra", "Westlaw", "LexisNexis"],
+        "max_results": 20
+      },
+      "icon": "search"
+    },
+    {
+      "id": "tool-L02",
+      "name": "Judgment Analyzer",
+      "description": "Analyze court judgments and extract legal principles, ratio decidendi and precedents",
+      "type": "ai_model",
+      "properties": {
+        "model": "legal-llm",
+        "max_tokens": 2000
+      },
+      "icon": "scale"
+    },
+    {
+      "id": "tool-L03",
+      "name": "Legal Document Generator",
+      "description": "Generate legal drafts such as contracts, agreements, legal notices",
+      "type": "ai_model",
+      "properties": {
+        "document_types": [
+          "Contract",
+          "Agreement",
+          "Legal Notice",
+          "Policy Draft"
+        ]
+      },
+      "icon": "file-text"
+    },
+    {
+      "id": "tool-L04",
+      "name": "Citation Formatter",
+      "description": "Format legal citations using Bluebook, OSCOLA or Indian citation formats",
+      "type": "data_transform",
+      "properties": {
+        "citation_style": "Bluebook"
+      },
+      "icon": "book"
+    },
+    {
+      "id": "tool-L05",
+      "name": "Plagiarism Checker",
+      "description": "Detect plagiarism in legal research papers or student assignments",
+      "type": "analysis",
+      "properties": {
+        "threshold": 0.15
+      },
+      "icon": "shield"
+    },
+    {
+      "id": "tool-L06",
+      "name": "Case Law Summarizer",
+      "description": "Summarize complex judgments into concise legal briefs",
+      "type": "ai_model",
+      "properties": {
+        "summary_length": "short"
+      },
+      "icon": "clipboard"
+    },
+    {
+      "id": "tool-L07",
+      "name": "Email Notification",
+      "description": "Send notifications to students, faculty, and administrators",
+      "type": "notification",
+      "properties": {
+        "smtp_server": "smtp.jgls.edu"
+      },
+      "icon": "mail"
+    },
+    {
+      "id": "tool-L08",
+      "name": "Academic Database",
+      "description": "Store course materials, case studies, and research papers",
+      "type": "database",
+      "properties": {
+        "operation": "upsert"
+      },
+      "icon": "database"
+    },
+    {
+      "id": "tool-L09",
+      "name": "Legal Compliance Checker",
+      "description": "Validate documents against regulatory frameworks",
+      "type": "ai_model",
+      "properties": {
+        "frameworks": [
+          "Companies Act",
+          "Data Protection Act",
+          "Corporate Governance"
+        ]
+      },
+      "icon": "check"
+    },
+    {
+      "id": "tool-L10",
+      "name": "Web Legal Research",
+      "description": "Search legal news, government circulars and regulatory updates",
+      "type": "web_search",
+      "properties": {
+        "max_results": 10
+      },
+      "icon": "globe"
+    }
+  ],
+
+  "agents": [
+        {
+      "id": "agent-start",
+      "name": "Workflow Start",
+      "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+      "type": "start",
+      "tools": [],
+      "properties": {
+        "environment": "production",
+        "version": "1.0.0",
+        "timeout_seconds": 3600,
+        "max_retries": 3,
+        "run_label": ""
+      },
+      "icon": "play",
+      "color": "#22c55e"
+    },
+    {
+      "id": "agent-end",
+      "name": "Workflow End",
+      "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+      "type": "end",
+      "tools": [],
+      "properties": {
+        "output_destination": "",
+        "notify_on_complete": true,
+        "archive_results": false,
+        "summary": ""
+      },
+      "icon": "flag",
+      "color": "#f43f5e"
+    },
+    {
+      "id": "agent-L01",
+      "name": "Legal Research Agent",
+      "description": "Performs case law research and gathers legal references",
+      "tools": ["tool-L01", "tool-L10"],
+      "type": "automatic"
+    },
+    {
+      "id": "agent-L02",
+      "name": "Judgment Analysis Agent",
+      "description": "Extracts key insights and legal principles from judgments",
+      "tools": ["tool-L02", "tool-L06"],
+      "type": "ai_agent"
+    },
+    {
+      "id": "agent-L03",
+      "name": "Legal Drafting Agent",
+      "description": "Creates legal documents, contracts, and academic case briefs",
+      "tools": ["tool-L03"],
+      "type": "ai_agent"
+    },
+    {
+      "id": "agent-L04",
+      "name": "Citation Validation Agent",
+      "description": "Ensures citations follow academic legal standards",
+      "tools": ["tool-L04"],
+      "type": "automatic"
+    },
+    {
+      "id": "agent-L05",
+      "name": "Plagiarism Detection Agent",
+      "description": "Checks student submissions for originality",
+      "tools": ["tool-L05"],
+      "type": "automatic"
+    },
+    {
+      "id": "agent-L06",
+      "name": "Compliance Review Agent",
+      "description": "Validates documents against regulatory frameworks",
+      "tools": ["tool-L09"],
+      "type": "ai_agent"
+    },
+    {
+      "id": "agent-L07",
+      "name": "Faculty Approval Agent",
+      "description": "Routes research or legal drafts for faculty approval",
+      "tools": ["tool-L07"],
+      "type": "human_in_the_loop"
+    },
+    {
+      "id": "agent-L08",
+      "name": "Academic Repository Agent",
+      "description": "Stores approved documents and research outputs",
+      "tools": ["tool-L08"],
+      "type": "automatic"
+    },
+    {
+      "id": "agent-L09",
+      "name": "Student Notification Agent",
+      "description": "Notifies students about results, feedback or updates",
+      "tools": ["tool-L07"],
+      "type": "automatic"
+    },
+    {
+      "id": "agent-L10",
+      "name": "Workflow Coordinator",
+      "description": "Coordinates multiple legal education processes",
+      "tools": ["tool-L07"],
+      "type": "orchestrator"
+    },
+    {
+      "id": "agent-007",
+      "name": "Workflow Orchestrator",
+      "description": "Routes execution based on conditions and triggers downstream webhooks",
+      "type": "conditional",
+      "tools": ["tool-010", "tool-001"],
+      "properties": {"condition_field": "", "condition_operator": "equals", "condition_value": ""},
+      "icon": "git-branch",
+      "color": "#f97316"
+    },
+    {
+      "id": "agent-008",
+      "name": "Parallel Executor",
+      "description": "Runs multiple sub-tasks concurrently to reduce total execution time",
+      "type": "parallel",
+      "tools": ["tool-001", "tool-002"],
+      "properties": {"max_concurrency": 4, "merge_strategy": "combine"},
+      "icon": "layers",
+      "color": "#a855f7"
+    },
+    {
+      "id": "agent-009",
+      "name": "Role-Based Approver",
+      "description": "Routes tasks to role-specific approvers based on business rules",
+      "type": "role_based",
+      "tools": ["tool-007", "tool-003"],
+      "properties": {"roles": ["manager", "compliance"], "require_all": false},
+      "icon": "users",
+      "color": "#10b981"
+    },
+    {
+      "id": "agent-010",
+      "name": "Prompt Agent",
+      "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+      "type": "prompt_agent",
+      "tools": ["tool-006", "tool-011"],
+      "properties": {
+        "system_prompt": "You are an expert {{domain}} analyst with deep knowledge of {{context}}.\n\nRespond in {{output_format}} format.\nBe concise, accurate, and data-driven.\nIf data is missing, clearly state assumptions.\nCurrent date: {{timestamp}}.",
+        "user_prompt": "Input data:\n{{input_data}}\n\nTask: {{task}}\n\nProvide:\n1. A concise summary\n2. Key insights from the data\n3. Anomalies or risks detected\n4. Recommended next steps",
+        "model": "llama-3.3-70b-versatile",
+        "temperature": 0.7,
+        "max_tokens": 2000,
+        "output_format": "markdown"
+      },
+      "icon": "message-circle",
+      "color": "#ec4899"
+    },
+    {
+      "id": "agent-011",
+      "name": "ReAct Agent",
+      "description": "Iteratively Reasons and Acts using tools until a final answer is reached (ReAct pattern)",
+      "type": "react_agent",
+      "tools": ["tool-006", "tool-013", "tool-011"],
+      "properties": {
+        "goal_prompt": "Goal: {{user_query}}\n\nAvailable context:\n{{context}}\n\nInstructions:\n- Think step-by-step before each action\n- Use Web Search to find recent information\n- Use REST API Caller for structured data retrieval\n- Cite your sources in the final answer\n- Stop reasoning when you reach a confident answer\n- Format final answer as: {{output_format}}",
+        "max_iterations": 6,
+        "model": "llama-3.3-70b-versatile",
+        "stop_on_answer": true,
+        "trace_thoughts": true
+      },
+      "icon": "repeat",
+      "color": "#06b6d4"
+    },
+    {
+      "id": "agent-012",
+      "name": "Reflection Agent",
+      "description": "Generates an initial output, self-critiques it and iteratively improves until quality threshold is met",
+      "type": "reflection_agent",
+      "tools": ["tool-006"],
+      "properties": {
+        "critique_prompt": "Review the following response:\n---\n{{previous_output}}\n---\n\nEvaluate on three dimensions:\n1. Accuracy — Is every factual claim correct? (1–10)\n2. Completeness — Does it fully address the original task? (1–10)\n3. Clarity — Is it well-structured and easy to understand? (1–10)\n\nProvide:\n- An overall score (average of the three)\n- Specific weaknesses found\n- Concrete, actionable improvements\n- A revised version if score < {{quality_threshold}}",
+        "quality_threshold": 8.0,
+        "max_iterations": 3,
+        "model": "llama-3.3-70b-versatile",
+        "temperature": 0.4
+      },
+      "icon": "refresh-cw",
+      "color": "#14b8a6"
+    },
+    {
+      "id": "agent-013",
+      "name": "Guardrails Agent",
+      "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+      "type": "guardrails",
+      "tools": ["tool-002"],
+      "properties": {
+        "check_pii": true,
+        "check_toxicity": true,
+        "max_content_length": 4096,
+        "block_on_violation": true,
+        "redact_pii": true
+      },
+      "icon": "shield",
+      "color": "#ef4444"
+    },
+    {
+      "id": "agent-014",
+      "name": "Orchestrator",
+      "description": "Decomposes complex tasks, dispatches sub-tasks to specialist agents and merges results",
+      "type": "orchestrator",
+      "tools": ["tool-010", "tool-001"],
+      "properties": {
+        "decomposition_strategy": "llm",
+        "merge_strategy": "reduce",
+        "max_sub_agents": 5,
+        "timeout_seconds": 120,
+        "model": "llama-3.3-70b-versatile"
+      },
+      "icon": "network",
+      "color": "#7c3aed"
+    },
+    {
+      "id": "agent-015",
+      "name": "Supervisor",
+      "description": "Monitors agent health, routes tasks by policy, catches failures and triggers retries or escalations",
+      "type": "supervisor",
+      "tools": ["tool-008", "tool-003"],
+      "properties": {
+        "routing_policy": "round_robin",
+        "max_retries": 3,
+        "failure_threshold": 2,
+        "escalation_channel": "#ops-alerts",
+        "heartbeat_interval_s": 10
+      },
+      "icon": "monitor",
+      "color": "#84cc16"
+    }
+  ],
+
+"templates": [
+
+{
+"id": "tpl-L01",
+"name": "Legal Research Workflow",
+"description": "Research legal precedents and store results in the academic repository",
+"status": "active",
+"is_template": true,
+"tags": ["legal","research","case-law"],
+"nodes": [
+{"id": "lr-n1","agent_id":"agent-L01","position":{"x":80,"y":200},"data":{"name":"Search Legal Databases","type":"automatic"}},
+{"id": "lr-n2","agent_id":"agent-L02","position":{"x":320,"y":200},"data":{"name":"Analyze Judgments","type":"automatic"}},
+{"id": "lr-n3","agent_id":"agent-L08","position":{"x":560,"y":200},"data":{"name":"Store Research Output","type":"automatic"}}
+],
+"edges":[
+{"id":"lr-e1","source":"lr-n1","target":"lr-n2","label":"cases"},
+{"id":"lr-e2","source":"lr-n2","target":"lr-n3","label":"analysis"}
+]
+},
+
+{
+"id": "tpl-L02",
+"name": "Case Study Preparation Workflow",
+"description": "Prepare academic case studies from legal judgments",
+"status": "active",
+"is_template": true,
+"tags": ["education","case-study"],
+"nodes":[
+{"id":"cs-n1","agent_id":"agent-L01","position":{"x":80,"y":200},"data":{"name":"Collect Case Laws","type":"automatic"}},
+{"id":"cs-n2","agent_id":"agent-L02","position":{"x":320,"y":200},"data":{"name":"Analyze Judgment","type":"automatic"}},
+{"id":"cs-n3","agent_id":"agent-L04","position":{"x":560,"y":200},"data":{"name":"Format Citations","type":"automatic"}},
+{"id":"cs-n4","agent_id":"agent-L08","position":{"x":800,"y":200},"data":{"name":"Publish Case Study","type":"automatic"}}
+],
+"edges":[
+{"id":"cs-e1","source":"cs-n1","target":"cs-n2","label":"cases"},
+{"id":"cs-e2","source":"cs-n2","target":"cs-n3","label":"analysis"},
+{"id":"cs-e3","source":"cs-n3","target":"cs-n4","label":"formatted"}
+]
+},
+
+{
+"id": "tpl-L03",
+"name": "Moot Court Preparation",
+"description": "Prepare moot court submissions and briefs",
+"status":"active",
+"is_template":true,
+"tags":["moot-court","legal-education"],
+"nodes":[
+{"id":"mc-n1","agent_id":"agent-L01","position":{"x":80,"y":200},"data":{"name":"Research Precedents","type":"automatic"}},
+{"id":"mc-n2","agent_id":"agent-L03","position":{"x":320,"y":200},"data":{"name":"Draft Moot Arguments","type":"automatic"}},
+{"id":"mc-n3","agent_id":"agent-L07","position":{"x":560,"y":200},"data":{"name":"Faculty Review","type":"human_in_the_loop"}}
+],
+"edges":[
+{"id":"mc-e1","source":"mc-n1","target":"mc-n2","label":"research"},
+{"id":"mc-e2","source":"mc-n2","target":"mc-n3","label":"draft"}
+]
+},
+
+{
+"id":"tpl-L04",
+"name":"Legal Draft Approval Workflow",
+"description":"Create and approve legal documents",
+"status":"active",
+"is_template":true,
+"tags":["legal","drafting"],
+"nodes":[
+{"id":"ld-n1","agent_id":"agent-L03","position":{"x":80,"y":200},"data":{"name":"Generate Legal Draft","type":"automatic"}},
+{"id":"ld-n2","agent_id":"agent-L06","position":{"x":320,"y":200},"data":{"name":"Compliance Validation","type":"automatic"}},
+{"id":"ld-n3","agent_id":"agent-L07","position":{"x":560,"y":200},"data":{"name":"Faculty Approval","type":"human_in_the_loop"}},
+{"id":"ld-n4","agent_id":"agent-L08","position":{"x":800,"y":200},"data":{"name":"Store Approved Draft","type":"automatic"}}
+],
+"edges":[
+{"id":"ld-e1","source":"ld-n1","target":"ld-n2","label":"draft"},
+{"id":"ld-e2","source":"ld-n2","target":"ld-n3","label":"validated"},
+{"id":"ld-e3","source":"ld-n3","target":"ld-n4","label":"approved"}
+]
+},
+
+{
+"id":"tpl-L05",
+"name":"Student Assignment Evaluation",
+"description":"Evaluate legal assignments submitted by students",
+"status":"active",
+"is_template":true,
+"tags":["education","evaluation"],
+"nodes":[
+{"id":"sa-n1","agent_id":"agent-L05","position":{"x":80,"y":200},"data":{"name":"Plagiarism Check","type":"automatic"}},
+{"id":"sa-n2","agent_id":"agent-L04","position":{"x":320,"y":200},"data":{"name":"Validate Citations","type":"automatic"}},
+{"id":"sa-n3","agent_id":"agent-L07","position":{"x":560,"y":200},"data":{"name":"Faculty Review","type":"human_in_the_loop"}}
+],
+"edges":[
+{"id":"sa-e1","source":"sa-n1","target":"sa-n2","label":"checked"},
+{"id":"sa-e2","source":"sa-n2","target":"sa-n3","label":"validated"}
+]
+},
+
+{
+"id":"tpl-L06",
+"name":"Legal Clinic Case Intake",
+"description":"Process legal clinic case submissions",
+"status":"active",
+"is_template":true,
+"tags":["legal-clinic"],
+"nodes":[
+{"id":"lc-n1","agent_id":"agent-L01","position":{"x":80,"y":200},"data":{"name":"Collect Case Info","type":"automatic"}},
+{"id":"lc-n2","agent_id":"agent-L02","position":{"x":320,"y":200},"data":{"name":"Analyze Case","type":"automatic"}},
+{"id":"lc-n3","agent_id":"agent-L06","position":{"x":560,"y":200},"data":{"name":"Compliance Screening","type":"automatic"}}
+],
+"edges":[
+{"id":"lc-e1","source":"lc-n1","target":"lc-n2","label":"case"},
+{"id":"lc-e2","source":"lc-n2","target":"lc-n3","label":"analysis"}
+]
+},
+
+{
+"id":"tpl-L07",
+"name":"Legal Research Publication",
+"description":"Prepare and publish academic legal research",
+"status":"active",
+"is_template":true,
+"tags":["research","publication"],
+"nodes":[
+{"id":"rp-n1","agent_id":"agent-L05","position":{"x":80,"y":200},"data":{"name":"Plagiarism Scan","type":"automatic"}},
+{"id":"rp-n2","agent_id":"agent-L04","position":{"x":320,"y":200},"data":{"name":"Citation Formatting","type":"automatic"}},
+{"id":"rp-n3","agent_id":"agent-L07","position":{"x":560,"y":200},"data":{"name":"Faculty Approval","type":"human_in_the_loop"}},
+{"id":"rp-n4","agent_id":"agent-L08","position":{"x":800,"y":200},"data":{"name":"Publish Research","type":"automatic"}}
+],
+"edges":[
+{"id":"rp-e1","source":"rp-n1","target":"rp-n2","label":"checked"},
+{"id":"rp-e2","source":"rp-n2","target":"rp-n3","label":"formatted"},
+{"id":"rp-e3","source":"rp-n3","target":"rp-n4","label":"approved"}
+]
+},
+
+{
+"id":"tpl-L08",
+"name":"Legal Knowledge Base Creation",
+"description":"Build a legal knowledge repository",
+"status":"active",
+"is_template":true,
+"tags":["knowledge-base"],
+"nodes":[
+{"id":"kb-n1","agent_id":"agent-L01","position":{"x":80,"y":200},"data":{"name":"Collect Legal Sources","type":"automatic"}},
+{"id":"kb-n2","agent_id":"agent-L06","position":{"x":320,"y":200},"data":{"name":"Validate Regulations","type":"automatic"}},
+{"id":"kb-n3","agent_id":"agent-L08","position":{"x":560,"y":200},"data":{"name":"Store Knowledge","type":"automatic"}}
+],
+"edges":[
+{"id":"kb-e1","source":"kb-n1","target":"kb-n2","label":"sources"},
+{"id":"kb-e2","source":"kb-n2","target":"kb-n3","label":"validated"}
+]
+},
+
+{
+"id":"tpl-L09",
+"name":"Regulatory Monitoring",
+"description":"Track regulatory changes and notify stakeholders",
+"status":"active",
+"is_template":true,
+"tags":["regulatory","monitoring"],
+"nodes":[
+{"id":"rm-n1","agent_id":"agent-L01","position":{"x":80,"y":200},"data":{"name":"Monitor Legal Updates","type":"automatic"}},
+{"id":"rm-n2","agent_id":"agent-L06","position":{"x":320,"y":200},"data":{"name":"Analyze Compliance Impact","type":"automatic"}},
+{"id":"rm-n3","agent_id":"agent-L09","position":{"x":560,"y":200},"data":{"name":"Notify Stakeholders","type":"automatic"}}
+],
+"edges":[
+{"id":"rm-e1","source":"rm-n1","target":"rm-n2","label":"updates"},
+{"id":"rm-e2","source":"rm-n2","target":"rm-n3","label":"impact"}
+]
+},
+
+{
+"id":"tpl-L10",
+"name":"Course Material Creation",
+"description":"Create course materials for law programs",
+"status":"active",
+"is_template":true,
+"tags":["education","course-material"],
+"nodes":[
+{"id":"cm-n1","agent_id":"agent-L03","position":{"x":80,"y":200},"data":{"name":"Generate Study Material","type":"automatic"}},
+{"id":"cm-n2","agent_id":"agent-L04","position":{"x":320,"y":200},"data":{"name":"Validate Citations","type":"automatic"}},
+{"id":"cm-n3","agent_id":"agent-L07","position":{"x":560,"y":200},"data":{"name":"Faculty Review","type":"human_in_the_loop"}},
+{"id":"cm-n4","agent_id":"agent-L08","position":{"x":800,"y":200},"data":{"name":"Publish Course Material","type":"automatic"}}
+],
+"edges":[
+{"id":"cm-e1","source":"cm-n1","target":"cm-n2","label":"draft"},
+{"id":"cm-e2","source":"cm-n2","target":"cm-n3","label":"validated"},
+{"id":"cm-e3","source":"cm-n3","target":"cm-n4","label":"approved"}
+]
+}
+
+]
+
+
+}

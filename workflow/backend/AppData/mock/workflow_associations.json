@@ -1,0 +1,871 @@
+[
+  {
+    "id": "517944cb-7429-47e3-8628-a91bda1d497a",
+    "workflow_id": "29195194-4197-45cf-bfa5-92c9e2651db3",
+    "data_model_id": "2725e764-1506-4f68-ae2e-bddc9c5e1fd8",
+    "project": "HR",
+    "environment": "dev",
+    "global_context": {},
+    "input_mappings": [
+      {
+        "source": "name",
+        "target": "this.name",
+        "description": ""
+      }
+    ],
+    "default_values": {},
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-05-05T11:36:32.900607",
+    "updated_at": "2026-05-05T11:37:43.887525"
+  },
+  {
+    "id": "assoc-loan-2026",
+    "workflow_id": "wf-loan-sanction-2026",
+    "data_model_id": "dm-loan-sanction-2026",
+    "project": "RetailLending",
+    "environment": "uat",
+    "global_context": {
+      "bank_code": "HDFC",
+      "currency": "INR",
+      "max_loan_amount": 5000000,
+      "min_credit_score": 650,
+      "bureau_provider": "CIBIL",
+      "processing_branch": "MAIN",
+      "sla_hours": 48
+    },
+    "input_mappings": [
+      {
+        "source": "applicant.pan_number",
+        "target": "LoanApplication.applicant_id",
+        "description": "PAN used as applicant reference"
+      },
+      {
+        "source": "application.requested_amount",
+        "target": "CreditAssessment.recommended_amount",
+        "description": "Initial amount fed to assessment"
+      },
+      {
+        "source": "applicant.credit_score",
+        "target": "CreditAssessment.bureau_report_ref",
+        "description": "Live bureau score reference"
+      },
+      {
+        "source": "assessment.recommended_amount",
+        "target": "SanctionLetter.sanctioned_amount",
+        "description": "Assessment drives sanction amount"
+      },
+      {
+        "source": "assessment.recommended_rate",
+        "target": "SanctionLetter.interest_rate",
+        "description": "Assessment drives interest rate"
+      },
+      {
+        "source": "sanction.sanctioned_amount",
+        "target": "Disbursement.disbursed_amount",
+        "description": "Sanction amount flows to disbursement"
+      }
+    ],
+    "default_values": {
+      "LoanApplication.status": "Submitted",
+      "CreditAssessment.risk_category": "Medium",
+      "SanctionLetter.accepted_by_applicant": "false",
+      "Disbursement.mode": "NEFT"
+    },
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-05-05T12:00:00",
+    "updated_at": "2026-05-20T11:06:14.080787"
+  },
+  {
+    "id": "assoc-kyc-2026",
+    "workflow_id": "wf-kyc-onboarding-2026",
+    "data_model_id": "dm-kyc-onboarding-2026",
+    "project": "CustomerOnboarding",
+    "environment": "uat",
+    "global_context": {
+      "org_code": "BANK_IN",
+      "kyc_standard": "PMLA_2002",
+      "face_match_threshold": 0.92,
+      "aml_provider": "Dow Jones",
+      "sla_hours": 4,
+      "auto_approve_low_risk": true
+    },
+    "input_mappings": [
+      {
+        "source": "registration.full_name",
+        "target": "Customer.full_name",
+        "description": "Registration name to customer entity"
+      },
+      {
+        "source": "registration.dob",
+        "target": "Customer.dob",
+        "description": "DOB from registration form"
+      },
+      {
+        "source": "registration.email",
+        "target": "Customer.email",
+        "description": "Email from registration"
+      },
+      {
+        "source": "upload.doc_type",
+        "target": "IdentityDocument.doc_type",
+        "description": "Uploaded document type"
+      },
+      {
+        "source": "upload.doc_number",
+        "target": "IdentityDocument.doc_number",
+        "description": "Document number extracted via OCR"
+      },
+      {
+        "source": "aml_result.resolution",
+        "target": "AMLScreening.resolution",
+        "description": "AML system resolution"
+      }
+    ],
+    "default_values": {
+      "Customer.risk_level": "Low",
+      "Customer.is_pep": "false",
+      "OnboardingCase.status": "Initiated",
+      "VerificationRecord.status": "Pending",
+      "AMLScreening.watchlist_hit": "false"
+    },
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-05-05T12:10:00",
+    "updated_at": "2026-05-13T11:40:43.474143"
+  },
+  {
+    "id": "assoc-insurance-2026",
+    "workflow_id": "wf-insurance-claims-2026",
+    "data_model_id": "dm-insurance-claims-2026",
+    "project": "ClaimsManagement",
+    "environment": "prod",
+    "global_context": {
+      "insurer_code": "INSCO_IN",
+      "currency": "INR",
+      "fraud_flag_threshold": 0.75,
+      "high_value_threshold": 500000,
+      "fast_track_threshold": 50000,
+      "irdai_compliance": true,
+      "sla_days": 30
+    },
+    "input_mappings": [
+      {
+        "source": "claim_form.policy_number",
+        "target": "PolicyHolder.policy_number",
+        "description": "Policy number from claim form"
+      },
+      {
+        "source": "claim_form.incident_date",
+        "target": "ClaimRequest.incident_date",
+        "description": "Date of loss from form"
+      },
+      {
+        "source": "claim_form.claimed_amount",
+        "target": "ClaimRequest.claimed_amount",
+        "description": "Amount requested by claimant"
+      },
+      {
+        "source": "ai_result.fraud_score",
+        "target": "ClaimAssessment.is_fraud_suspect",
+        "description": "AI fraud flag"
+      },
+      {
+        "source": "adjuster.eligible_amount",
+        "target": "ClaimAssessment.eligible_amount",
+        "description": "Adjuster assessed amount"
+      },
+      {
+        "source": "assessment.net_payable",
+        "target": "Settlement.settlement_amount",
+        "description": "Net payable becomes settlement amount"
+      }
+    ],
+    "default_values": {
+      "ClaimRequest.status": "Filed",
+      "ClaimRequest.priority": "Normal",
+      "ClaimAssessment.deductible": 0,
+      "ClaimAssessment.is_fraud_suspect": false,
+      "Settlement.claimant_accepted": false
+    },
+    "validation_rules": [
+      {
+        "field": "PolicyHolder.is_active",
+        "rule": "eq",
+        "value": true,
+        "message": "Policy must be active to file a claim"
+      },
+      {
+        "field": "ClaimRequest.claimed_amount",
+        "rule": "lte",
+        "value": "PolicyHolder.sum_insured",
+        "message": "Claim cannot exceed sum insured"
+      },
+      {
+        "field": "ClaimRequest.incident_date",
+        "rule": "between",
+        "value": [
+          "PolicyHolder.policy_start",
+          "PolicyHolder.policy_end"
+        ],
+        "message": "Incident must fall within policy period"
+      }
+    ],
+    "activity_bindings": [
+      {
+        "node_id": "node-ins-01",
+        "agent_name": "Receive Claim & Documents",
+        "input_mappings": [
+          {
+            "source": "trigger.claim_payload",
+            "target": "ClaimRequest"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "uploaded_files",
+            "target": "SupportingDocument"
+          }
+        ]
+      },
+      {
+        "node_id": "node-ins-02",
+        "agent_name": "AI Fraud Detection",
+        "input_mappings": [
+          {
+            "source": "ClaimRequest",
+            "target": "fraud_model.claim"
+          },
+          {
+            "source": "SupportingDocument",
+            "target": "fraud_model.docs"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "fraud_score",
+            "target": "ClaimAssessment.is_fraud_suspect"
+          }
+        ]
+      },
+      {
+        "node_id": "node-ins-04",
+        "agent_name": "Claims Adjuster Review",
+        "input_mappings": [
+          {
+            "source": "ClaimRequest",
+            "target": "adjuster_view"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "adjuster_decision",
+            "target": "ClaimAssessment"
+          }
+        ]
+      },
+      {
+        "node_id": "node-ins-07",
+        "agent_name": "Record Settlement & Initiate Payout",
+        "input_mappings": [
+          {
+            "source": "ClaimAssessment",
+            "target": "db.claim_assessments"
+          },
+          {
+            "source": "Settlement",
+            "target": "db.settlements"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "payment_ref",
+            "target": "Settlement.transaction_ref"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-05-05T12:20:00",
+    "updated_at": "2026-05-05T12:20:00"
+  },
+  {
+    "id": "assoc-po-2026",
+    "workflow_id": "wf-po-approval-2026",
+    "data_model_id": "dm-po-approval-2026",
+    "project": "Procurement",
+    "environment": "uat",
+    "global_context": {
+      "org_code": "CORP_IN",
+      "erp_system": "SAP",
+      "currency": "INR",
+      "gst_enabled": true,
+      "three_way_match": true,
+      "auto_approve_below": 50000,
+      "tolerance_percent": 2,
+      "sla_hours": 48
+    },
+    "input_mappings": [
+      {
+        "source": "pr.requested_by",
+        "target": "PurchaseRequest.requested_by",
+        "description": "Employee who raised PR"
+      },
+      {
+        "source": "pr.department",
+        "target": "PurchaseRequest.department",
+        "description": "Requesting department"
+      },
+      {
+        "source": "pr.estimated_cost",
+        "target": "PurchaseRequest.estimated_cost",
+        "description": "Estimated total cost"
+      },
+      {
+        "source": "vendor.vendor_id",
+        "target": "PurchaseOrder.vendor_id",
+        "description": "Selected vendor ID"
+      },
+      {
+        "source": "approval.decision",
+        "target": "ApprovalRecord.decision",
+        "description": "Approver decision"
+      },
+      {
+        "source": "grn.quantity_received",
+        "target": "GoodsReceipt.quantity_received",
+        "description": "Actual received quantity"
+      }
+    ],
+    "default_values": {
+      "PurchaseRequest.status": "Submitted",
+      "PurchaseOrder.currency": "INR",
+      "PurchaseOrder.status": "Pending Approval",
+      "ApprovalRecord.level": 1,
+      "GoodsReceipt.quality_status": "Accepted",
+      "GoodsReceipt.three_way_match": false
+    },
+    "validation_rules": [
+      {
+        "field": "Vendor.is_approved",
+        "rule": "eq",
+        "value": true,
+        "message": "Vendor must be in approved vendor master"
+      },
+      {
+        "field": "PurchaseRequest.quantity",
+        "rule": "gt",
+        "value": 0,
+        "message": "Quantity must be greater than zero"
+      },
+      {
+        "field": "PurchaseRequest.estimated_cost",
+        "rule": "gt",
+        "value": 0,
+        "message": "Estimated cost must be positive"
+      },
+      {
+        "field": "PurchaseRequest.justification",
+        "rule": "not_empty",
+        "value": null,
+        "message": "Business justification is required"
+      }
+    ],
+    "activity_bindings": [
+      {
+        "node_id": "node-po-01",
+        "agent_name": "Receive Purchase Request",
+        "input_mappings": [
+          {
+            "source": "trigger.erp_payload",
+            "target": "PurchaseRequest"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "pr_record",
+            "target": "PurchaseRequest"
+          }
+        ]
+      },
+      {
+        "node_id": "node-po-03",
+        "agent_name": "Vendor Due Diligence",
+        "input_mappings": [
+          {
+            "source": "Vendor",
+            "target": "diligence_input"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "risk_level",
+            "target": "Vendor.rating"
+          }
+        ]
+      },
+      {
+        "node_id": "node-po-05",
+        "agent_name": "Multi-Level PO Approval",
+        "input_mappings": [
+          {
+            "source": "PurchaseOrder",
+            "target": "approval_request"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "approval_result",
+            "target": "ApprovalRecord"
+          }
+        ]
+      },
+      {
+        "node_id": "node-po-07",
+        "agent_name": "Record GRN & 3-Way Match",
+        "input_mappings": [
+          {
+            "source": "PurchaseOrder",
+            "target": "db.purchase_orders"
+          },
+          {
+            "source": "GoodsReceipt",
+            "target": "db.goods_receipts"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "match_result",
+            "target": "GoodsReceipt.three_way_match"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-05-05T12:30:00",
+    "updated_at": "2026-05-05T12:30:00"
+  },
+  {
+    "id": "09efcb2b-bceb-461f-8cd0-1628082bed14",
+    "workflow_id": "797f2506-08e6-4687-821d-8426502ede88",
+    "data_model_id": "dm-kyc-onboarding-2026",
+    "project": "HRDummy",
+    "environment": "dev",
+    "global_context": {},
+    "input_mappings": [],
+    "default_values": {},
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-05-05T13:18:27.012787",
+    "updated_at": "2026-05-05T13:18:27.012787"
+  },
+  {
+    "id": "31c7b7fb-1dbf-4b52-b558-2f8a93edc779",
+    "workflow_id": "bee5012d-2871-4769-ab5b-9c552cd1ffe7",
+    "data_model_id": "e34aa15e-34d8-4264-95b1-c161d79f435c",
+    "project": "PLPCrossMatching",
+    "environment": "dev",
+    "global_context": {
+      "organization_code": "PLP_GLOBAL",
+      "matching_threshold": 90,
+      "historical_match_threshold": 95,
+      "embedding_provider": "OpenAI",
+      "embedding_model": "text-embedding-3-large",
+      "vector_database": "pgvector",
+      "default_currency": "USD",
+      "auto_approve_threshold": 97,
+      "human_review_threshold": 90,
+      "catalog_sources": [
+        "PLP",
+        "VendorCatalog"
+      ],
+      "semantic_search_enabled": true,
+      "historical_learning_enabled": true,
+      "max_candidate_matches": 10,
+      "rfq_supported_formats": [
+        "xls",
+        "xlsx",
+        "csv"
+      ],
+      "uom_normalization_enabled": true,
+      "vendor_normalization_enabled": true,
+      "part_number_cleanup_enabled": true,
+      "response_generation_format": "xlsx",
+      "sla_minutes": 30
+    },
+    "input_mappings": [
+      {
+        "source": "upload.file_name",
+        "target": "RFQRequest.source_file_name",
+        "description": "Uploaded RFQ source file"
+      },
+      {
+        "source": "upload.customer_id",
+        "target": "RFQRequest.customer_id",
+        "description": "Customer identifier from upload request"
+      },
+      {
+        "source": "sheet.row.ref_number",
+        "target": "RFQLineItem.raw_ref_number",
+        "description": "RFQ reference number from Excel row"
+      },
+      {
+        "source": "sheet.row.part_number",
+        "target": "RFQLineItem.raw_part_number",
+        "description": "Raw manufacturer part number"
+      },
+      {
+        "source": "sheet.row.description",
+        "target": "RFQLineItem.raw_description",
+        "description": "RFQ item description"
+      },
+      {
+        "source": "sheet.row.quantity",
+        "target": "RFQLineItem.raw_quantity",
+        "description": "Requested quantity"
+      },
+      {
+        "source": "sheet.row.uom",
+        "target": "RFQLineItem.raw_uom",
+        "description": "Requested unit of measure"
+      },
+      {
+        "source": "sheet.row.manufacturer",
+        "target": "RFQLineItem.raw_manufacturer",
+        "description": "Raw manufacturer/vendor from RFQ"
+      },
+      {
+        "source": "normalized.part_number",
+        "target": "RFQLineNormalization.normalized_part_number",
+        "description": "Cleaned and normalized part number"
+      },
+      {
+        "source": "normalized.vendor_id",
+        "target": "RFQLineNormalization.normalized_vendor_id",
+        "description": "Mapped normalized vendor"
+      },
+      {
+        "source": "historical.match.product_id",
+        "target": "HistoricalMatch.matched_plp_part_id",
+        "description": "Historical PLP match"
+      },
+      {
+        "source": "semantic.match.product_id",
+        "target": "RFQLineMatch.matched_product_id",
+        "description": "Semantic search candidate match"
+      },
+      {
+        "source": "semantic.match.confidence",
+        "target": "RFQLineMatch.confidence_level",
+        "description": "Semantic match confidence"
+      },
+      {
+        "source": "review.selected_product_id",
+        "target": "HumanReviewAction.selected_product_id",
+        "description": "Human reviewer selected product"
+      },
+      {
+        "source": "review.confidence",
+        "target": "HumanReviewAction.reviewer_confidence",
+        "description": "Human reviewer confidence"
+      },
+      {
+        "source": "final.product_id",
+        "target": "FinalMatch.final_product_id",
+        "description": "Final approved PLP product"
+      },
+      {
+        "source": "final.confidence",
+        "target": "FinalMatch.final_confidence_level",
+        "description": "Final confidence level"
+      },
+      {
+        "source": "response.product_id",
+        "target": "RFQResponseLine.matched_product_id",
+        "description": "RFQ response matched product"
+      }
+    ],
+    "default_values": {
+      "RFQRequest.status": "Uploaded",
+      "RFQLineNormalization.normalization_status": "Pending",
+      "RFQLineMatch.match_source": "HISTORICAL",
+      "RFQLineMatch.match_rank": 1,
+      "HumanReviewQueue.review_status": "Pending",
+      "FinalMatch.approval_status": "Pending",
+      "RFQResponse.response_status": "Draft",
+      "RFQResponseLine.confidence_level": 0,
+      "HistoricalMatch.usage_count": 0,
+      "VendorMaster.vendor_type": "OEM"
+    },
+    "validation_rules": [
+      {
+        "field": "RFQRequest.source_file_name",
+        "rule": "required",
+        "value": true,
+        "message": "RFQ source file is mandatory"
+      },
+      {
+        "field": "RFQLineItem.raw_part_number",
+        "rule": "required",
+        "value": true,
+        "message": "Part number is mandatory"
+      },
+      {
+        "field": "RFQLineItem.raw_quantity",
+        "rule": "gt",
+        "value": 0,
+        "message": "Quantity should be greater than zero"
+      },
+      {
+        "field": "RFQLineMatch.confidence_level",
+        "rule": "between",
+        "value": [
+          0,
+          100
+        ],
+        "message": "Confidence should be between 0 and 100"
+      },
+      {
+        "field": "FinalMatch.final_confidence_level",
+        "rule": "gte",
+        "value": 90,
+        "message": "Final confidence should meet approval threshold"
+      },
+      {
+        "field": "RFQLineNormalization.normalized_vendor_id",
+        "rule": "required",
+        "value": true,
+        "message": "Vendor normalization is required"
+      }
+    ],
+    "activity_bindings": [
+      {
+        "node_id": "node-1778222831750",
+        "agent_name": "Extract RFQ",
+        "input_mappings": [
+          {
+            "source": "upload.file",
+            "target": "RFQRequest"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "parsed_rows",
+            "target": "RFQLineItem"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778222906396",
+        "agent_name": "Nomalize",
+        "input_mappings": [
+          {
+            "source": "RFQLineItem",
+            "target": "normalization_engine.input"
+          },
+          {
+            "source": "VendorAlias",
+            "target": "normalization_engine.vendor_alias"
+          },
+          {
+            "source": "ColumnAlias",
+            "target": "normalization_engine.column_alias"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "normalized_output",
+            "target": "RFQLineNormalization"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778223520158",
+        "agent_name": "Master + History Match",
+        "input_mappings": [
+          {
+            "source": "RFQLineNormalization",
+            "target": "historical_match_engine.input"
+          },
+          {
+            "source": "HistoricalMatch",
+            "target": "historical_match_engine.history"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "historical_match_result",
+            "target": "RFQLineMatch"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778222927099",
+        "agent_name": "Match PLP Processor",
+        "input_mappings": [
+          {
+            "source": "RFQLineNormalization",
+            "target": "plp_embedding_engine.input"
+          },
+          {
+            "source": "ProductEmbedding",
+            "target": "plp_embedding_engine.embeddings"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "plp_match_candidates",
+            "target": "RFQLineMatch"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778223057574",
+        "agent_name": "Match Processor Vendor",
+        "input_mappings": [
+          {
+            "source": "RFQLineNormalization",
+            "target": "vendor_embedding_engine.input"
+          },
+          {
+            "source": "ProductCatalog",
+            "target": "vendor_embedding_engine.catalog"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "vendor_match_candidates",
+            "target": "RFQLineMatch"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778231407066",
+        "agent_name": "Match Review",
+        "input_mappings": [
+          {
+            "source": "RFQLineMatch",
+            "target": "review_queue"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "review_decision",
+            "target": "HumanReviewAction"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778231475414",
+        "agent_name": "Match Model Update",
+        "input_mappings": [
+          {
+            "source": "HumanReviewAction",
+            "target": "learning_engine.feedback"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "updated_historical_match",
+            "target": "HistoricalMatch"
+          },
+          {
+            "source": "updated_embeddings",
+            "target": "HistoricalMatchEmbedding"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778224053832",
+        "agent_name": "RFQ Response generate",
+        "input_mappings": [
+          {
+            "source": "FinalMatch",
+            "target": "response_generator.input"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "generated_response",
+            "target": "RFQResponse"
+          },
+          {
+            "source": "generated_response_lines",
+            "target": "RFQResponseLine"
+          }
+        ]
+      },
+      {
+        "node_id": "node-1778224185524",
+        "agent_name": "Send RFQ Response",
+        "input_mappings": [
+          {
+            "source": "RFQResponse",
+            "target": "notification_engine.response"
+          }
+        ],
+        "output_mappings": [
+          {
+            "source": "delivery_status",
+            "target": "RFQResponse.response_status"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-05-12T12:58:55.387647",
+    "updated_at": "2026-05-12T13:02:51.186954"
+  },
+  {
+    "id": "a8cc042b-c83f-47c0-bae5-ed701b28c240",
+    "workflow_id": "372133e0-38e4-4895-8c9b-4679af18eabf",
+    "data_model_id": "3eedc52a-ce56-4dc8-8d5a-36e40a524004",
+    "project": "RetailBanking",
+    "environment": "uat",
+    "global_context": {
+      "bank_code": "BANK_IN",
+      "currency": "INR",
+      "min_fd_amount": 10000,
+      "max_tenor_months": 120,
+      "default_tenor": 12
+    },
+    "input_mappings": [],
+    "default_values": {},
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-05-20T12:09:43.007092",
+    "updated_at": "2026-06-09T07:13:50.650534"
+  },
+  {
+    "id": "e87835f2-393d-4b93-b449-6a29e1b81ba4",
+    "workflow_id": "fb23c64b-1527-45bc-b9a3-dad8b5900bf7",
+    "data_model_id": "10e7d9f6-2050-4942-a528-6fe41427d58c",
+    "project": "RetailBanking",
+    "environment": "uat",
+    "global_context": {
+      "bank_code": "BANK_IN",
+      "currency": "INR",
+      "min_fd_amount": 10000,
+      "max_tenor_months": 120,
+      "default_tenor": 12
+    },
+    "input_mappings": [],
+    "default_values": {},
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-05-20T12:10:47.341346",
+    "updated_at": "2026-05-20T12:10:47.341346"
+  },
+  {
+    "id": "7554d8ac-7715-4a8d-8840-9c60a2e74c48",
+    "workflow_id": "da1e9769-5e08-4851-8a0e-8523dcb1f57a",
+    "data_model_id": "08ee0c4b-8651-4964-af1f-b57bc88bda83",
+    "project": "",
+    "environment": "dev",
+    "global_context": {},
+    "input_mappings": [],
+    "default_values": {},
+    "validation_rules": [],
+    "activity_bindings": [],
+    "created_at": "2026-06-12T10:11:53.308938",
+    "updated_at": "2026-06-12T10:11:53.308938"
+  }
+]

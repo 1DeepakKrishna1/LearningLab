@@ -1,0 +1,2034 @@
+[
+  {
+    "id": "run-loan-001",
+    "workflow_id": "wf-loan-sanction-2026",
+    "status": "completed",
+    "started_at": "2026-05-07T08:30:00",
+    "completed_at": "2026-05-07T08:30:14",
+    "total_duration_ms": 14290,
+    "steps": [
+      {
+        "node_id": "ls-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:00",
+        "completed_at": "2026-05-07T08:30:00.82",
+        "duration_ms": 820,
+        "input": {},
+        "output": {
+          "config": { "environment": "production", "version": "2.1.0", "run_label": "Loan-Batch-2026-0507" },
+          "environment": "production",
+          "version": "2.1.0",
+          "run_label": "Loan-Batch-2026-0507"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Loading workflow configuration…",
+          "Environment: production | Version: 2.1.0",
+          "Run label: Loan-Batch-2026-0507",
+          "Configuration broadcast to all agents in workflow context.",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-app-intake",
+        "agent_name": "Application Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:00.82",
+        "completed_at": "2026-05-07T08:30:02.97",
+        "duration_ms": 2150,
+        "input": { "records": 3420, "source": "api" },
+        "output": { "processed": 3418, "errors": 2, "batches_created": 12 },
+        "logs": [
+          "Initialising agent…",
+          "Connecting to loan application API endpoint…",
+          "Fetched 3420 pending loan applications.",
+          "Validation checks passed for 3418 records.",
+          "2 records rejected: missing mandatory fields (applicant_dob, income_proof).",
+          "Created 12 processing batches of ~285 records each.",
+          "Completed in 2150 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-kyc-tool",
+        "agent_name": "KYC Verification",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:02.97",
+        "completed_at": "2026-05-07T08:30:04.42",
+        "duration_ms": 1450,
+        "input": {
+          "method": "POST",
+          "url": "https://kyc-api.fincheck.io/v2/verify-batch",
+          "headers": { "Authorization": "Bearer ***", "Content-Type": "application/json" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1450,
+          "body": {
+            "verified": 3310,
+            "failed": 108,
+            "pending_manual": 0,
+            "batch_ref": "KYC-20260507-001"
+          }
+        },
+        "logs": [
+          "Sending POST request to https://kyc-api.fincheck.io/v2/verify-batch…",
+          "Connection established (TLS 1.3).",
+          "Submitting 3418 applicant records for KYC verification.",
+          "Response received: 200 OK in 1450ms.",
+          "KYC Results: 3310 verified, 108 failed identity checks.",
+          "Batch reference KYC-20260507-001 stored for audit."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-credit-tool",
+        "agent_name": "Credit Score Inference",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:04.42",
+        "completed_at": "2026-05-07T08:30:06.22",
+        "duration_ms": 1800,
+        "input": {
+          "model": "credit-score-v3",
+          "prompt_tokens": 312
+        },
+        "output": {
+          "completion_tokens": 480,
+          "total_tokens": 792,
+          "confidence": 0.941,
+          "score_distribution": {
+            "excellent_750_plus": 1102,
+            "good_700_749": 987,
+            "fair_650_699": 765,
+            "poor_below_650": 456
+          }
+        },
+        "logs": [
+          "Loading model: credit-score-v3",
+          "Tokenising applicant financial profiles…",
+          "Running inference on 3310 KYC-verified applicants…",
+          "Inference complete — 792 tokens used (avg per record: 0.24).",
+          "Score distribution computed: 1102 Excellent, 987 Good, 765 Fair, 456 Poor."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-risk-agent",
+        "agent_name": "Risk Assessment Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:06.22",
+        "completed_at": "2026-05-07T08:30:08.82",
+        "duration_ms": 2600,
+        "input": { "records": 3310, "source": "credit_score_output" },
+        "output": {
+          "approved_for_processing": 2089,
+          "high_risk_flagged": 365,
+          "rejected_automatically": 856,
+          "risk_model_version": "RM-4.2"
+        },
+        "logs": [
+          "Initialising risk assessment engine (RM-4.2)…",
+          "Applying debt-to-income ratio rules…",
+          "Applying collateral valuation checks…",
+          "Applying historical default pattern analysis…",
+          "2089 applications cleared for processing.",
+          "365 flagged as high-risk — routing to compliance review.",
+          "856 auto-rejected: credit score < 550 or debt ratio > 80%.",
+          "Completed in 2600 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-compliance-tool",
+        "agent_name": "Compliance DB Check",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:08.82",
+        "completed_at": "2026-05-07T08:30:09.77",
+        "duration_ms": 950,
+        "input": {
+          "query": "SELECT applicant_id, sanction_flag, pep_flag FROM compliance_registry WHERE applicant_id IN (?)",
+          "timeout": 30
+        },
+        "output": {
+          "rows_returned": 2454,
+          "execution_time_ms": 950,
+          "affected_rows": 0,
+          "sanction_hits": 12,
+          "pep_hits": 7
+        },
+        "logs": [
+          "Connecting to compliance database (replica-east)…",
+          "Connection pool acquired.",
+          "Executing batch compliance lookup for 2454 applicants…",
+          "Query returned 2454 rows in 950ms.",
+          "Sanction list hits: 12 applicants flagged.",
+          "PEP (Politically Exposed Persons) hits: 7 applicants flagged.",
+          "19 records routed to manual compliance review queue."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-approval-tool",
+        "agent_name": "Loan Approval Gate",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:09.77",
+        "completed_at": "2026-05-07T08:30:10.45",
+        "duration_ms": 680,
+        "input": {
+          "policy": "standard_loan_policy_v3",
+          "threshold": 0.75
+        },
+        "output": {
+          "decision": "approved",
+          "confidence": 0.921,
+          "policy_applied": "standard_loan_policy_v3",
+          "approved_count": 2070,
+          "conditional_count": 365,
+          "rejected_count": 19
+        },
+        "logs": [
+          "Evaluating approval policy: standard_loan_policy_v3…",
+          "Policy thresholds loaded: confidence ≥ 0.75 for auto-approval.",
+          "Applying final approval matrix…",
+          "2070 loans approved automatically.",
+          "365 high-risk loans conditionally approved (require additional collateral).",
+          "19 compliance-flagged loans rejected.",
+          "Decision: Approved (batch)."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-notify-tool",
+        "agent_name": "Applicant Notification",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:10.45",
+        "completed_at": "2026-05-07T08:30:11.65",
+        "duration_ms": 1200,
+        "input": {
+          "recipients": ["applicants@batch-KYC-20260507-001"],
+          "subject": "Your Loan Application Decision"
+        },
+        "output": {
+          "sent": true,
+          "message_id": "msg-8821",
+          "delivery_ms": 1200,
+          "emails_sent": 2454,
+          "sms_sent": 2454
+        },
+        "logs": [
+          "Connecting to smtp.finmail.io…",
+          "SMTP handshake complete.",
+          "Composing personalised decision emails for 2454 applicants…",
+          "Email batch queued (2454 messages).",
+          "Email delivered in 1200ms.",
+          "SMS notifications dispatched via Twilio gateway.",
+          "All applicant notifications sent successfully."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T08:30:11.65",
+        "completed_at": "2026-05-07T08:30:12.29",
+        "duration_ms": 640,
+        "input": { "collected_sources": 7, "upstream_agents": 7 },
+        "output": {
+          "status": "success",
+          "total_agents_completed": 7,
+          "summary": "Loan sanction batch processed: 2070 approved, 365 conditional, 856 auto-rejected, 19 compliance-rejected.",
+          "output_destination": "loan-results-bucket/2026-05-07",
+          "notify_on_complete": true
+        },
+        "logs": [
+          "Workflow End reached.",
+          "Collecting outputs from 7 upstream nodes…",
+          "Aggregating final result set…",
+          "Results written to loan-results-bucket/2026-05-07.",
+          "Execution complete. Total: 14290ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-loan-002",
+    "workflow_id": "wf-loan-sanction-2026",
+    "status": "failed",
+    "started_at": "2026-05-06T14:15:00",
+    "completed_at": "2026-05-06T14:15:07",
+    "total_duration_ms": 6980,
+    "steps": [
+      {
+        "node_id": "ls-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T14:15:00",
+        "completed_at": "2026-05-06T14:15:00.79",
+        "duration_ms": 790,
+        "input": {},
+        "output": {
+          "config": { "environment": "production", "version": "2.1.0" },
+          "environment": "production",
+          "version": "2.1.0",
+          "run_label": "Loan-Batch-2026-0506"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Loading workflow configuration…",
+          "Environment: production | Version: 2.1.0",
+          "Configuration broadcast to all agents in workflow context.",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-app-intake",
+        "agent_name": "Application Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T14:15:00.79",
+        "completed_at": "2026-05-06T14:15:02.85",
+        "duration_ms": 2060,
+        "input": { "records": 2890, "source": "api" },
+        "output": { "processed": 2887, "errors": 3, "batches_created": 10 },
+        "logs": [
+          "Initialising agent…",
+          "Connecting to loan application API endpoint…",
+          "Fetched 2890 pending loan applications.",
+          "Validation checks passed for 2887 records.",
+          "3 records rejected: invalid PAN numbers.",
+          "Created 10 processing batches.",
+          "Completed in 2060 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-kyc-tool",
+        "agent_name": "KYC Verification",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-06T14:15:02.85",
+        "completed_at": "2026-05-06T14:15:04.2",
+        "duration_ms": 1350,
+        "input": {
+          "method": "POST",
+          "url": "https://kyc-api.fincheck.io/v2/verify-batch",
+          "headers": { "Authorization": "Bearer ***", "Content-Type": "application/json" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1350,
+          "body": { "verified": 2741, "failed": 146, "batch_ref": "KYC-20260506-001" }
+        },
+        "logs": [
+          "Sending POST request to https://kyc-api.fincheck.io/v2/verify-batch…",
+          "Connection established.",
+          "Submitting 2887 applicant records…",
+          "Response received: 200 OK in 1350ms.",
+          "KYC Results: 2741 verified, 146 failed."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-credit-tool",
+        "agent_name": "Credit Score Inference",
+        "node_kind": "tool",
+        "status": "failed",
+        "started_at": "2026-05-06T14:15:04.2",
+        "completed_at": "2026-05-06T14:15:06.18",
+        "duration_ms": 1980,
+        "input": {
+          "model": "credit-score-v3",
+          "prompt_tokens": 298
+        },
+        "output": {},
+        "logs": [
+          "Loading model: credit-score-v3",
+          "Tokenising applicant financial profiles…",
+          "Running inference on 2741 KYC-verified applicants…",
+          "ERROR: Inference service returned HTTP 503 — Service Unavailable.",
+          "Retry attempt 1/3… failed.",
+          "Retry attempt 2/3… failed.",
+          "Retry attempt 3/3… failed.",
+          "ERROR: tool execution failed."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-risk-agent",
+        "agent_name": "Risk Assessment Agent",
+        "node_kind": "agent",
+        "status": "skipped",
+        "started_at": "2026-05-06T14:15:06.18",
+        "completed_at": "2026-05-06T14:15:06.18",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-compliance-tool",
+        "agent_name": "Compliance DB Check",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-06T14:15:06.18",
+        "completed_at": "2026-05-06T14:15:06.18",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-approval-tool",
+        "agent_name": "Loan Approval Gate",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-06T14:15:06.18",
+        "completed_at": "2026-05-06T14:15:06.18",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-notify-tool",
+        "agent_name": "Applicant Notification",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-06T14:15:06.18",
+        "completed_at": "2026-05-06T14:15:06.18",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "skipped",
+        "started_at": "2026-05-06T14:15:06.18",
+        "completed_at": "2026-05-06T14:15:06.18",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-loan-003",
+    "workflow_id": "wf-loan-sanction-2026",
+    "status": "completed",
+    "started_at": "2026-05-04T10:00:00",
+    "completed_at": "2026-05-04T10:00:16",
+    "total_duration_ms": 16050,
+    "steps": [
+      {
+        "node_id": "ls-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:00",
+        "completed_at": "2026-05-04T10:00:00.86",
+        "duration_ms": 860,
+        "input": {},
+        "output": {
+          "config": { "environment": "production", "version": "2.1.0" },
+          "environment": "production",
+          "version": "2.1.0",
+          "run_label": "Loan-Batch-2026-0504"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Loading workflow configuration…",
+          "Environment: production | Version: 2.1.0",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-app-intake",
+        "agent_name": "Application Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:00.86",
+        "completed_at": "2026-05-04T10:00:03.06",
+        "duration_ms": 2200,
+        "input": { "records": 4150, "source": "api" },
+        "output": { "processed": 4148, "errors": 2, "batches_created": 14 },
+        "logs": [
+          "Initialising agent…",
+          "Fetched 4150 pending loan applications.",
+          "4148 records validated, 2 rejected.",
+          "Created 14 processing batches.",
+          "Completed in 2200 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-kyc-tool",
+        "agent_name": "KYC Verification",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:03.06",
+        "completed_at": "2026-05-04T10:00:04.62",
+        "duration_ms": 1560,
+        "input": {
+          "method": "POST",
+          "url": "https://kyc-api.fincheck.io/v2/verify-batch",
+          "headers": { "Authorization": "Bearer ***" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1560,
+          "body": { "verified": 3980, "failed": 168, "batch_ref": "KYC-20260504-001" }
+        },
+        "logs": [
+          "Sending POST request to KYC API…",
+          "Response received: 200 OK in 1560ms.",
+          "KYC Results: 3980 verified, 168 failed."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-credit-tool",
+        "agent_name": "Credit Score Inference",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:04.62",
+        "completed_at": "2026-05-04T10:00:06.62",
+        "duration_ms": 2000,
+        "input": { "model": "credit-score-v3", "prompt_tokens": 345 },
+        "output": {
+          "completion_tokens": 512,
+          "total_tokens": 857,
+          "confidence": 0.938,
+          "score_distribution": {
+            "excellent_750_plus": 1340,
+            "good_700_749": 1102,
+            "fair_650_699": 890,
+            "poor_below_650": 648
+          }
+        },
+        "logs": [
+          "Loading model: credit-score-v3",
+          "Running inference on 3980 KYC-verified applicants…",
+          "Inference complete — 857 tokens used.",
+          "Score distribution computed successfully."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-risk-agent",
+        "agent_name": "Risk Assessment Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:06.62",
+        "completed_at": "2026-05-04T10:00:09.42",
+        "duration_ms": 2800,
+        "input": { "records": 3980, "source": "credit_score_output" },
+        "output": {
+          "approved_for_processing": 2510,
+          "high_risk_flagged": 412,
+          "rejected_automatically": 1058,
+          "risk_model_version": "RM-4.2"
+        },
+        "logs": [
+          "Initialising risk assessment engine (RM-4.2)…",
+          "Applying debt-to-income ratio rules…",
+          "Applying historical default pattern analysis…",
+          "2510 applications cleared for processing.",
+          "412 flagged as high-risk.",
+          "1058 auto-rejected.",
+          "Completed in 2800 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-compliance-tool",
+        "agent_name": "Compliance DB Check",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:09.42",
+        "completed_at": "2026-05-04T10:00:10.49",
+        "duration_ms": 1070,
+        "input": {
+          "query": "SELECT applicant_id, sanction_flag, pep_flag FROM compliance_registry WHERE applicant_id IN (?)",
+          "timeout": 30
+        },
+        "output": {
+          "rows_returned": 2922,
+          "execution_time_ms": 1070,
+          "sanction_hits": 18,
+          "pep_hits": 9
+        },
+        "logs": [
+          "Connecting to compliance database…",
+          "Executing batch compliance lookup for 2922 applicants…",
+          "Query returned 2922 rows in 1070ms.",
+          "27 applicants flagged (sanction/PEP)."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-approval-tool",
+        "agent_name": "Loan Approval Gate",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:10.49",
+        "completed_at": "2026-05-04T10:00:11.27",
+        "duration_ms": 780,
+        "input": { "policy": "standard_loan_policy_v3", "threshold": 0.75 },
+        "output": {
+          "decision": "approved",
+          "confidence": 0.934,
+          "approved_count": 2483,
+          "conditional_count": 412,
+          "rejected_count": 27
+        },
+        "logs": [
+          "Evaluating approval policy: standard_loan_policy_v3…",
+          "2483 loans approved automatically.",
+          "412 conditional approvals.",
+          "27 rejected.",
+          "Decision: Approved (batch)."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-notify-tool",
+        "agent_name": "Applicant Notification",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:11.27",
+        "completed_at": "2026-05-04T10:00:12.84",
+        "duration_ms": 1570,
+        "input": {
+          "recipients": ["applicants@batch-KYC-20260504-001"],
+          "subject": "Your Loan Application Decision"
+        },
+        "output": {
+          "sent": true,
+          "message_id": "msg-7741",
+          "delivery_ms": 1570,
+          "emails_sent": 2922
+        },
+        "logs": [
+          "Connecting to smtp.finmail.io…",
+          "Composing personalised decision emails for 2922 applicants…",
+          "Email delivered in 1570ms.",
+          "All notifications sent successfully."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ls-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-04T10:00:12.84",
+        "completed_at": "2026-05-04T10:00:13.05",
+        "duration_ms": 210,
+        "input": { "collected_sources": 7, "upstream_agents": 7 },
+        "output": {
+          "status": "success",
+          "summary": "Loan sanction batch processed: 2483 approved, 412 conditional, 1058 auto-rejected, 27 compliance-rejected.",
+          "output_destination": "loan-results-bucket/2026-05-04"
+        },
+        "logs": [
+          "Workflow End reached.",
+          "Collecting outputs from 7 upstream nodes…",
+          "Results written to loan-results-bucket/2026-05-04.",
+          "Execution complete. Total: 16050ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-kyc-001",
+    "workflow_id": "wf-kyc-onboarding-2026",
+    "status": "completed",
+    "started_at": "2026-05-06T11:00:00",
+    "completed_at": "2026-05-06T11:00:12",
+    "total_duration_ms": 12480,
+    "steps": [
+      {
+        "node_id": "kyc-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:00",
+        "completed_at": "2026-05-06T11:00:00.74",
+        "duration_ms": 740,
+        "input": {},
+        "output": {
+          "environment": "production",
+          "version": "1.8.0",
+          "run_label": "KYC-Batch-2026-0506"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Environment: production | Version: 1.8.0",
+          "Run label: KYC-Batch-2026-0506",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-doc-intake",
+        "agent_name": "Document Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:00.74",
+        "completed_at": "2026-05-06T11:00:02.34",
+        "duration_ms": 1600,
+        "input": { "records": 1820, "source": "document_portal" },
+        "output": {
+          "processed": 1818,
+          "errors": 2,
+          "doc_types_found": { "passport": 720, "national_id": 880, "driving_license": 218 }
+        },
+        "logs": [
+          "Initialising document intake agent…",
+          "Fetching documents from portal queue…",
+          "1820 documents retrieved.",
+          "Document type classification: Passport 720, National ID 880, Driving License 218.",
+          "2 documents rejected: corrupted file format.",
+          "Completed in 1600 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-ocr-tool",
+        "agent_name": "OCR Data Extraction",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:02.34",
+        "completed_at": "2026-05-06T11:00:04.14",
+        "duration_ms": 1800,
+        "input": { "model": "ocr-v2-multilingual", "prompt_tokens": 218 },
+        "output": {
+          "completion_tokens": 380,
+          "total_tokens": 598,
+          "confidence": 0.972,
+          "fields_extracted": {
+            "full_name": 1817,
+            "dob": 1815,
+            "id_number": 1818,
+            "address": 1802,
+            "expiry_date": 1810
+          }
+        },
+        "logs": [
+          "Loading OCR model: ocr-v2-multilingual",
+          "Processing 1818 document images…",
+          "Field extraction complete.",
+          "Confidence score: 0.972 — within acceptable threshold.",
+          "Flagging 16 low-confidence extractions for manual review."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-id-verify",
+        "agent_name": "Identity Verification API",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:04.14",
+        "completed_at": "2026-05-06T11:00:05.69",
+        "duration_ms": 1550,
+        "input": {
+          "method": "POST",
+          "url": "https://idverify.globalcheck.io/v3/match",
+          "headers": { "Authorization": "Bearer ***" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1550,
+          "body": {
+            "matched": 1780,
+            "mismatch": 38,
+            "inconclusive": 0,
+            "verification_batch_id": "IDV-20260506-1100"
+          }
+        },
+        "logs": [
+          "Sending POST request to https://idverify.globalcheck.io/v3/match…",
+          "Connection established.",
+          "Submitting 1818 identity records for biometric matching…",
+          "Response received: 200 OK in 1550ms.",
+          "Identity matches: 1780 confirmed, 38 mismatches flagged for review."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-sanction-agent",
+        "agent_name": "Sanction Screening Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:05.69",
+        "completed_at": "2026-05-06T11:00:07.49",
+        "duration_ms": 1800,
+        "input": { "records": 1780, "source": "api" },
+        "output": {
+          "processed": 1780,
+          "errors": 0,
+          "sanctions_hits": 4,
+          "pep_hits": 2,
+          "adverse_media_hits": 11,
+          "cleared": 1763
+        },
+        "logs": [
+          "Initialising sanction screening engine…",
+          "Checking against OFAC, EU, UN consolidated sanction lists…",
+          "Cross-referencing PEP registry (140k+ records)…",
+          "Adverse media screening via NLP pipeline…",
+          "Sanction hits: 4 | PEP hits: 2 | Adverse media hits: 11.",
+          "1763 customers cleared for onboarding.",
+          "Completed in 1800 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-human-review",
+        "agent_name": "KYC Human Review",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:07.49",
+        "completed_at": "2026-05-06T11:00:09.29",
+        "duration_ms": 1800,
+        "input": { "items_pending": 17, "assigned_to": "kyc-team@incepta.com" },
+        "output": { "approved": 14, "rejected": 2, "escalated": 1 },
+        "logs": [
+          "Routing 17 flagged items to assigned KYC reviewers…",
+          "Awaiting human decision…",
+          "14 items approved by reviewer.",
+          "2 items rejected: identity mismatch confirmed.",
+          "1 item escalated to compliance officer."
+        ],
+        "requires_human_input": false,
+        "judgment_options": ["Approve", "Reject", "Escalate", "Request More Info"],
+        "input_fields": { "reviewer_notes": "", "priority": "high" },
+        "human_response": {
+          "decision": "Approve",
+          "reviewer_notes": "Reviewed 17 flagged cases. 14 approved, 2 rejected due to confirmed fraud, 1 escalated.",
+          "reviewed_by": "jane.smith@incepta.com",
+          "reviewed_at": "2026-05-06T11:00:09.10"
+        }
+      },
+      {
+        "node_id": "kyc-node-approval-tool",
+        "agent_name": "KYC Approval Gate",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:09.29",
+        "completed_at": "2026-05-06T11:00:09.97",
+        "duration_ms": 680,
+        "input": { "policy": "kyc_approval_policy_v2", "threshold": 0.8 },
+        "output": {
+          "decision": "approved",
+          "confidence": 0.961,
+          "policy_applied": "kyc_approval_policy_v2",
+          "onboarded": 1777,
+          "rejected": 3
+        },
+        "logs": [
+          "Evaluating KYC approval policy v2…",
+          "1777 customers approved for onboarding.",
+          "3 customers rejected (post-review).",
+          "Decision: Approved (batch)."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-06T11:00:09.97",
+        "completed_at": "2026-05-06T11:00:10.48",
+        "duration_ms": 510,
+        "input": { "collected_sources": 6, "upstream_agents": 6 },
+        "output": {
+          "status": "success",
+          "total_agents_completed": 6,
+          "summary": "KYC batch completed: 1777 customers onboarded, 3 rejected, 1 escalated.",
+          "output_destination": "kyc-results/2026-05-06"
+        },
+        "logs": [
+          "Workflow End reached.",
+          "Aggregating results from 6 upstream nodes…",
+          "KYC results written to kyc-results/2026-05-06.",
+          "Execution complete. Total: 12480ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-kyc-002",
+    "workflow_id": "wf-kyc-onboarding-2026",
+    "status": "pending",
+    "started_at": "2026-05-07T09:45:00",
+    "completed_at": null,
+    "total_duration_ms": 5320,
+    "steps": [
+      {
+        "node_id": "kyc-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T09:45:00",
+        "completed_at": "2026-05-07T09:45:00.71",
+        "duration_ms": 710,
+        "input": {},
+        "output": {
+          "environment": "production",
+          "version": "1.8.0",
+          "run_label": "KYC-Batch-2026-0507-AM"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Environment: production | Version: 1.8.0",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-doc-intake",
+        "agent_name": "Document Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T09:45:00.71",
+        "completed_at": "2026-05-07T09:45:02.01",
+        "duration_ms": 1300,
+        "input": { "records": 920, "source": "document_portal" },
+        "output": {
+          "processed": 920,
+          "errors": 0,
+          "doc_types_found": { "passport": 380, "national_id": 440, "driving_license": 100 }
+        },
+        "logs": [
+          "Fetching documents from portal queue…",
+          "920 documents retrieved, all validated.",
+          "Completed in 1300 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-ocr-tool",
+        "agent_name": "OCR Data Extraction",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T09:45:02.01",
+        "completed_at": "2026-05-07T09:45:03.53",
+        "duration_ms": 1520,
+        "input": { "model": "ocr-v2-multilingual", "prompt_tokens": 185 },
+        "output": {
+          "completion_tokens": 290,
+          "total_tokens": 475,
+          "confidence": 0.968,
+          "fields_extracted": {
+            "full_name": 920,
+            "dob": 919,
+            "id_number": 920
+          }
+        },
+        "logs": [
+          "Processing 920 document images…",
+          "Field extraction complete — confidence 0.968.",
+          "8 low-confidence extractions flagged."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-id-verify",
+        "agent_name": "Identity Verification API",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-07T09:45:03.53",
+        "completed_at": "2026-05-07T09:45:04.82",
+        "duration_ms": 1290,
+        "input": {
+          "method": "POST",
+          "url": "https://idverify.globalcheck.io/v3/match",
+          "headers": { "Authorization": "Bearer ***" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1290,
+          "body": { "matched": 902, "mismatch": 18, "batch_id": "IDV-20260507-0945" }
+        },
+        "logs": [
+          "Sending POST request to identity verification API…",
+          "Response received: 200 OK in 1290ms.",
+          "902 matched, 18 mismatches flagged."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-sanction-agent",
+        "agent_name": "Sanction Screening Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-07T09:45:04.82",
+        "completed_at": "2026-05-07T09:45:05.32",
+        "duration_ms": 500,
+        "input": { "records": 902, "source": "api" },
+        "output": {
+          "processed": 902,
+          "sanctions_hits": 1,
+          "pep_hits": 0,
+          "adverse_media_hits": 3,
+          "cleared": 898
+        },
+        "logs": [
+          "Checking against OFAC, EU, UN sanction lists…",
+          "1 sanction hit, 3 adverse media hits.",
+          "898 customers cleared.",
+          "Completed in 500 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-human-review",
+        "agent_name": "KYC Human Review",
+        "node_kind": "agent",
+        "status": "pending",
+        "started_at": "2026-05-07T09:45:05.32",
+        "completed_at": null,
+        "duration_ms": 0,
+        "input": { "items_pending": 22, "assigned_to": "kyc-team@incepta.com" },
+        "output": {},
+        "logs": [
+          "Routing 22 flagged items to assigned KYC reviewers…",
+          "Awaiting human decision…"
+        ],
+        "requires_human_input": true,
+        "judgment_options": ["Approve", "Reject", "Escalate", "Request More Info"],
+        "input_fields": { "reviewer_notes": "", "priority": "high" },
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-approval-tool",
+        "agent_name": "KYC Approval Gate",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-07T09:45:05.32",
+        "completed_at": "2026-05-07T09:45:05.32",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Waiting for upstream human review to complete."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "kyc-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "skipped",
+        "started_at": "2026-05-07T09:45:05.32",
+        "completed_at": "2026-05-07T09:45:05.32",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Waiting for upstream steps to complete."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-ins-001",
+    "workflow_id": "wf-insurance-claims-2026",
+    "status": "completed",
+    "started_at": "2026-05-05T15:30:00",
+    "completed_at": "2026-05-05T15:30:19",
+    "total_duration_ms": 19350,
+    "steps": [
+      {
+        "node_id": "ins-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:00",
+        "completed_at": "2026-05-05T15:30:00.88",
+        "duration_ms": 880,
+        "input": {},
+        "output": {
+          "environment": "production",
+          "version": "3.0.1",
+          "run_label": "Claims-Run-2026-0505"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Environment: production | Version: 3.0.1",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-intake",
+        "agent_name": "Claims Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:00.88",
+        "completed_at": "2026-05-05T15:30:02.68",
+        "duration_ms": 1800,
+        "input": { "records": 540, "source": "claims_portal" },
+        "output": {
+          "processed": 538,
+          "errors": 2,
+          "claim_types": { "motor": 210, "health": 195, "property": 133 }
+        },
+        "logs": [
+          "Initialising claims intake agent…",
+          "Fetching 540 new claims from portal…",
+          "538 claims validated — 2 rejected (missing incident date).",
+          "Claims classified: Motor 210, Health 195, Property 133.",
+          "Completed in 1800 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-policy-tool",
+        "agent_name": "Policy Validation",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:02.68",
+        "completed_at": "2026-05-05T15:30:03.81",
+        "duration_ms": 1130,
+        "input": {
+          "query": "SELECT policy_id, coverage_type, sum_insured, expiry_date, active FROM policies WHERE policy_id IN (?)",
+          "timeout": 30
+        },
+        "output": {
+          "rows_returned": 538,
+          "execution_time_ms": 1130,
+          "active_policies": 522,
+          "expired_policies": 11,
+          "invalid_policies": 5
+        },
+        "logs": [
+          "Connecting to policy database…",
+          "Validating 538 policy IDs…",
+          "522 active, 11 expired, 5 invalid policy references.",
+          "Query returned in 1130ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-damage-agent",
+        "agent_name": "Damage Assessment Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:03.81",
+        "completed_at": "2026-05-05T15:30:07.41",
+        "duration_ms": 3600,
+        "input": {
+          "goal": "Assess damage severity from claim evidence and photos",
+          "available_tools": ["image_analysis", "repair_cost_db"]
+        },
+        "output": {
+          "reasoning_steps": 4,
+          "tools_invoked": 3,
+          "final_answer": "Damage severity classified for 522 claims; cost estimates generated."
+        },
+        "logs": [
+          "Thought: Reviewing claim descriptions and uploaded evidence…",
+          "Act: Calling image analysis tool on 348 photo attachments…",
+          "Observation: 312 images processed — severity scores assigned.",
+          "Thought: Cross-referencing repair cost database for motor claims…",
+          "Act: Querying repair cost DB for 210 motor claims…",
+          "Observation: Cost estimates retrieved for 204 claims.",
+          "Thought: Sufficient context for damage classification after 4 iterations.",
+          "Final damage severity report generated for 522 claims."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-fraud-tool",
+        "agent_name": "Fraud Detection",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:07.41",
+        "completed_at": "2026-05-05T15:30:09.21",
+        "duration_ms": 1800,
+        "input": {
+          "model": "fraud-detect-v4",
+          "prompt_tokens": 428
+        },
+        "output": {
+          "completion_tokens": 615,
+          "total_tokens": 1043,
+          "confidence": 0.887,
+          "fraud_risk": {
+            "high": 14,
+            "medium": 38,
+            "low": 470
+          }
+        },
+        "logs": [
+          "Loading fraud detection model: fraud-detect-v4",
+          "Analysing 522 claims for anomalous patterns…",
+          "Applying temporal pattern analysis…",
+          "Applying network graph analysis (claimant relationships)…",
+          "Fraud risk: 14 high, 38 medium, 470 low.",
+          "14 high-risk claims flagged for manual investigation."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-adjudicator",
+        "agent_name": "Claims Adjudicator",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:09.21",
+        "completed_at": "2026-05-05T15:30:11.51",
+        "duration_ms": 2300,
+        "input": { "role": "senior_adjudicator", "items": 14 },
+        "output": {
+          "decisions": 14,
+          "escalated": 2,
+          "settlement_approved": 480,
+          "settlement_denied": 42
+        },
+        "logs": [
+          "Checking role-based routing rules for adjudication…",
+          "Assigning 14 high-risk claims to senior adjudicators.",
+          "Role-based decision engine evaluating 522 standard claims…",
+          "480 claims approved for settlement.",
+          "42 claims denied (policy exclusions / fraud confirmed).",
+          "2 high-risk claims escalated to legal team."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-payment-tool",
+        "agent_name": "Payment Processing",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:11.51",
+        "completed_at": "2026-05-05T15:30:13.27",
+        "duration_ms": 1760,
+        "input": {
+          "method": "POST",
+          "url": "https://payments.insure-gateway.io/v2/settlements",
+          "headers": { "Authorization": "Bearer ***", "X-Batch-Id": "CLAIMS-20260505-001" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1760,
+          "body": {
+            "settlements_initiated": 480,
+            "total_amount_inr": 42750000,
+            "transaction_ref": "TXN-20260505-SETTLE-001"
+          }
+        },
+        "logs": [
+          "Sending POST request to payment gateway…",
+          "Connection established.",
+          "Submitting 480 settlement instructions (₹4.275 Cr total)…",
+          "Response received: 200 OK in 1760ms.",
+          "Transaction ref: TXN-20260505-SETTLE-001.",
+          "All 480 settlements initiated successfully."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-notify-tool",
+        "agent_name": "Claimant Notifications",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:13.27",
+        "completed_at": "2026-05-05T15:30:14.54",
+        "duration_ms": 1270,
+        "input": {
+          "recipients": ["claimants@batch-CLAIMS-20260505"],
+          "subject": "Insurance Claim Decision"
+        },
+        "output": {
+          "sent": true,
+          "message_id": "msg-4490",
+          "delivery_ms": 1270,
+          "emails_sent": 522
+        },
+        "logs": [
+          "Composing personalised claim decision emails for 522 claimants…",
+          "480 settlement approval emails queued.",
+          "42 denial emails with explanation queued.",
+          "Email batch delivered in 1270ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T15:30:14.54",
+        "completed_at": "2026-05-05T15:30:15.35",
+        "duration_ms": 810,
+        "input": { "collected_sources": 7, "upstream_agents": 7 },
+        "output": {
+          "status": "success",
+          "summary": "Insurance claims processed: 480 settled, 42 denied, 2 escalated to legal.",
+          "output_destination": "claims-results/2026-05-05"
+        },
+        "logs": [
+          "Workflow End reached.",
+          "Aggregating results from 7 upstream nodes…",
+          "Claims report written to claims-results/2026-05-05.",
+          "Execution complete. Total: 19350ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-po-001",
+    "workflow_id": "wf-po-approval-2026",
+    "status": "completed",
+    "started_at": "2026-05-05T09:00:00",
+    "completed_at": "2026-05-05T09:00:11",
+    "total_duration_ms": 11420,
+    "steps": [
+      {
+        "node_id": "po-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:00",
+        "completed_at": "2026-05-05T09:00:00.76",
+        "duration_ms": 760,
+        "input": {},
+        "output": {
+          "environment": "uat",
+          "version": "1.4.0",
+          "run_label": "PO-Run-2026-0505"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Environment: uat | Version: 1.4.0",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "po-node-intake",
+        "agent_name": "PO Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:00.76",
+        "completed_at": "2026-05-05T09:00:02.06",
+        "duration_ms": 1300,
+        "input": { "records": 128, "source": "erp_portal" },
+        "output": {
+          "processed": 127,
+          "errors": 1,
+          "po_categories": { "IT": 45, "Operations": 52, "Marketing": 30 }
+        },
+        "logs": [
+          "Initialising PO intake agent…",
+          "Fetching 128 purchase orders from ERP portal…",
+          "127 POs validated, 1 rejected (missing vendor code).",
+          "Categorised: IT 45, Operations 52, Marketing 30.",
+          "Completed in 1300 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "po-node-budget-tool",
+        "agent_name": "Budget Availability Check",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:02.06",
+        "completed_at": "2026-05-05T09:00:03.11",
+        "duration_ms": 1050,
+        "input": {
+          "query": "SELECT dept_code, budget_remaining, fy_period FROM budget_ledger WHERE dept_code IN (?) AND fy_period = '2026-Q2'",
+          "timeout": 30
+        },
+        "output": {
+          "rows_returned": 127,
+          "execution_time_ms": 1050,
+          "within_budget": 118,
+          "over_budget": 9
+        },
+        "logs": [
+          "Connecting to finance database…",
+          "Querying Q2 FY2026 budget ledger for 127 POs…",
+          "118 POs within budget.",
+          "9 POs exceed available budget — flagged for CFO review.",
+          "Query returned in 1050ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "po-node-routing-agent",
+        "agent_name": "Approval Routing Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:03.11",
+        "completed_at": "2026-05-05T09:00:04.91",
+        "duration_ms": 1800,
+        "input": { "role": "department_head", "items": 9 },
+        "output": {
+          "decisions": 9,
+          "escalated": 0,
+          "auto_approved_low_value": 85,
+          "routed_to_manager": 33,
+          "routed_to_director": 9
+        },
+        "logs": [
+          "Checking role-based routing rules…",
+          "POs ≤ ₹50,000: 85 auto-approved.",
+          "POs ₹50,001–₹500,000: 33 routed to department managers.",
+          "POs > ₹500,000 or over-budget: 9 routed to director/CFO.",
+          "Routing complete."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "po-node-human-approver",
+        "agent_name": "Human PO Approver",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:04.91",
+        "completed_at": "2026-05-05T09:00:07.11",
+        "duration_ms": 2200,
+        "input": { "items_pending": 42, "assigned_to": "finance-approvers@incepta.com" },
+        "output": { "approved": 38, "rejected": 3, "escalated": 1 },
+        "logs": [
+          "Routing 42 POs requiring human approval…",
+          "Awaiting human decision from managers and director…",
+          "38 POs approved.",
+          "3 POs rejected (duplicate orders / budget mismatch).",
+          "1 PO escalated to CFO for large capital expense."
+        ],
+        "requires_human_input": false,
+        "judgment_options": ["Approve", "Reject", "Escalate", "Request More Info"],
+        "input_fields": { "reviewer_notes": "", "priority": "normal" },
+        "human_response": {
+          "decision": "Approve",
+          "reviewer_notes": "38 approved, 3 rejected (duplicates), 1 escalated for CFO sign-off.",
+          "reviewed_by": "rahul.mehta@incepta.com",
+          "reviewed_at": "2026-05-05T09:00:06.90"
+        }
+      },
+      {
+        "node_id": "po-node-erp-tool",
+        "agent_name": "ERP Integration",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:07.11",
+        "completed_at": "2026-05-05T09:00:08.81",
+        "duration_ms": 1700,
+        "input": {
+          "method": "POST",
+          "url": "https://erp.incepta.io/api/v2/purchase-orders/batch-commit",
+          "headers": { "Authorization": "Bearer ***", "X-Org": "INCEPTA-PROD" }
+        },
+        "output": {
+          "status_code": 200,
+          "response_time_ms": 1700,
+          "body": {
+            "pos_committed": 123,
+            "total_value_inr": 8920000,
+            "batch_ref": "PO-COMMIT-20260505-001"
+          }
+        },
+        "logs": [
+          "Sending POST request to ERP commit endpoint…",
+          "Committing 123 approved POs (₹89.2 Lakh total)…",
+          "Response received: 200 OK in 1700ms.",
+          "Batch ref: PO-COMMIT-20260505-001.",
+          "PO records updated in ERP successfully."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "po-node-notify-tool",
+        "agent_name": "PO Status Notification",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:08.81",
+        "completed_at": "2026-05-05T09:00:09.82",
+        "duration_ms": 1010,
+        "input": {
+          "recipients": ["requestors@batch-PO-20260505"],
+          "subject": "Purchase Order Status Update"
+        },
+        "output": {
+          "sent": true,
+          "message_id": "msg-3318",
+          "delivery_ms": 1010,
+          "emails_sent": 127
+        },
+        "logs": [
+          "Composing PO decision emails for 127 requestors…",
+          "123 approval confirmation emails.",
+          "3 rejection emails with reasons.",
+          "1 escalation notification.",
+          "Email delivered in 1010ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "po-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-05T09:00:09.82",
+        "completed_at": "2026-05-05T09:00:10.42",
+        "duration_ms": 600,
+        "input": { "collected_sources": 6, "upstream_agents": 6 },
+        "output": {
+          "status": "success",
+          "summary": "PO approval run complete: 123 committed, 3 rejected, 1 escalated.",
+          "output_destination": "po-results/2026-05-05"
+        },
+        "logs": [
+          "Workflow End reached.",
+          "Aggregating results from 6 upstream nodes…",
+          "PO results written to po-results/2026-05-05.",
+          "Execution complete. Total: 11420ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-co-001",
+    "workflow_id": "a813709b-dbd1-429b-800c-43b29928ff5d",
+    "status": "completed",
+    "started_at": "2026-05-03T14:20:00",
+    "completed_at": "2026-05-03T14:20:09",
+    "total_duration_ms": 9140,
+    "steps": [
+      {
+        "node_id": "co-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-03T14:20:00",
+        "completed_at": "2026-05-03T14:20:00.77",
+        "duration_ms": 770,
+        "input": {},
+        "output": {
+          "environment": "production",
+          "version": "1.2.0",
+          "run_label": "CO-Run-2026-0503"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Environment: production | Version: 1.2.0",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "co-node-data-agent",
+        "agent_name": "Customer Data Ingestion",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-03T14:20:00.77",
+        "completed_at": "2026-05-03T14:20:03.07",
+        "duration_ms": 2300,
+        "input": { "records": 2150, "source": "crm_api" },
+        "output": {
+          "processed": 2148,
+          "errors": 2,
+          "segments": { "enterprise": 320, "sme": 780, "individual": 1048 }
+        },
+        "logs": [
+          "Initialising customer data ingestion…",
+          "Fetching 2150 new customer records from CRM API…",
+          "2148 records validated, 2 rejected (duplicate email).",
+          "Segmented: Enterprise 320, SME 780, Individual 1048.",
+          "Completed in 2300 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "co-node-transform-tool",
+        "agent_name": "Data Transformer",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-03T14:20:03.07",
+        "completed_at": "2026-05-03T14:20:05.27",
+        "duration_ms": 2200,
+        "input": {
+          "records": 2148,
+          "input_format": "json"
+        },
+        "output": {
+          "records_out": 2148,
+          "output_format": "parquet",
+          "fields_mapped": 24
+        },
+        "logs": [
+          "Reading JSON input (2148 records)…",
+          "Applying 24-field mapping rules to onboarding schema…",
+          "Normalising phone numbers to E.164 format…",
+          "Standardising country codes to ISO 3166-1 alpha-2…",
+          "Transformed 2148 records.",
+          "Output written as Parquet to staging area."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "co-node-email-tool",
+        "agent_name": "Welcome Email",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-03T14:20:05.27",
+        "completed_at": "2026-05-03T14:20:06.69",
+        "duration_ms": 1420,
+        "input": {
+          "recipients": ["new-customers@batch-CO-20260503"],
+          "subject": "Welcome to Incepta — Your Account is Ready"
+        },
+        "output": {
+          "sent": true,
+          "message_id": "msg-6672",
+          "delivery_ms": 1420,
+          "emails_sent": 2148
+        },
+        "logs": [
+          "Connecting to smtp.mailing.io…",
+          "Composing personalised welcome emails for 2148 new customers…",
+          "Personalisation: customer name, account tier, activation link.",
+          "Email batch delivered in 1420ms.",
+          "2148 welcome emails sent successfully."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "co-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-03T14:20:06.69",
+        "completed_at": "2026-05-03T14:20:07.14",
+        "duration_ms": 450,
+        "input": { "collected_sources": 3, "upstream_agents": 3 },
+        "output": {
+          "status": "success",
+          "summary": "Customer onboarding run complete: 2148 customers ingested, transformed, and welcomed.",
+          "output_destination": "onboarding-results/2026-05-03"
+        },
+        "logs": [
+          "Workflow End reached.",
+          "Aggregating results from 3 upstream nodes…",
+          "Onboarding results written to onboarding-results/2026-05-03.",
+          "Execution complete. Total: 9140ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  },
+
+  {
+    "id": "run-ins-002",
+    "workflow_id": "wf-insurance-claims-2026",
+    "status": "failed",
+    "started_at": "2026-05-03T10:15:00",
+    "completed_at": "2026-05-03T10:15:08",
+    "total_duration_ms": 8100,
+    "steps": [
+      {
+        "node_id": "ins-node-start",
+        "agent_name": "Workflow Start",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-03T10:15:00",
+        "completed_at": "2026-05-03T10:15:00.92",
+        "duration_ms": 920,
+        "input": {},
+        "output": {
+          "environment": "production",
+          "version": "3.0.1",
+          "run_label": "Claims-Run-2026-0503"
+        },
+        "logs": [
+          "Workflow Start reached.",
+          "Environment: production | Version: 3.0.1",
+          "Workflow execution is now running."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-intake",
+        "agent_name": "Claims Intake Agent",
+        "node_kind": "agent",
+        "status": "completed",
+        "started_at": "2026-05-03T10:15:00.92",
+        "completed_at": "2026-05-03T10:15:02.72",
+        "duration_ms": 1800,
+        "input": { "records": 318, "source": "claims_portal" },
+        "output": { "processed": 316, "errors": 2, "claim_types": { "motor": 120, "health": 110, "property": 86 } },
+        "logs": [
+          "Fetching 318 new claims from portal…",
+          "316 claims validated, 2 rejected.",
+          "Completed in 1800 ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-policy-tool",
+        "agent_name": "Policy Validation",
+        "node_kind": "tool",
+        "status": "completed",
+        "started_at": "2026-05-03T10:15:02.72",
+        "completed_at": "2026-05-03T10:15:03.95",
+        "duration_ms": 1230,
+        "input": {
+          "query": "SELECT policy_id, coverage_type, sum_insured FROM policies WHERE policy_id IN (?)",
+          "timeout": 30
+        },
+        "output": {
+          "rows_returned": 316,
+          "execution_time_ms": 1230,
+          "active_policies": 308,
+          "expired_policies": 8
+        },
+        "logs": [
+          "Validating 316 policy IDs against database…",
+          "308 active, 8 expired.",
+          "Query returned in 1230ms."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-damage-agent",
+        "agent_name": "Damage Assessment Agent",
+        "node_kind": "agent",
+        "status": "failed",
+        "started_at": "2026-05-03T10:15:03.95",
+        "completed_at": "2026-05-03T10:15:07.05",
+        "duration_ms": 3100,
+        "input": {
+          "goal": "Assess damage severity from claim evidence and photos",
+          "available_tools": ["image_analysis", "repair_cost_db"]
+        },
+        "output": {},
+        "logs": [
+          "Thought: Reviewing claim descriptions and uploaded evidence…",
+          "Act: Calling image analysis tool on 248 photo attachments…",
+          "Observation: Image analysis service returned 429 Too Many Requests.",
+          "Retry attempt 1/3… 429 Too Many Requests.",
+          "Retry attempt 2/3… 429 Too Many Requests.",
+          "Retry attempt 3/3… 429 Too Many Requests.",
+          "ERROR: Image analysis tool rate-limited — cannot complete damage assessment.",
+          "ERROR: step failed unexpectedly."
+        ],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-fraud-tool",
+        "agent_name": "Fraud Detection",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-03T10:15:07.05",
+        "completed_at": "2026-05-03T10:15:07.05",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-adjudicator",
+        "agent_name": "Claims Adjudicator",
+        "node_kind": "agent",
+        "status": "skipped",
+        "started_at": "2026-05-03T10:15:07.05",
+        "completed_at": "2026-05-03T10:15:07.05",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-payment-tool",
+        "agent_name": "Payment Processing",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-03T10:15:07.05",
+        "completed_at": "2026-05-03T10:15:07.05",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-notify-tool",
+        "agent_name": "Claimant Notifications",
+        "node_kind": "tool",
+        "status": "skipped",
+        "started_at": "2026-05-03T10:15:07.05",
+        "completed_at": "2026-05-03T10:15:07.05",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      },
+      {
+        "node_id": "ins-node-end",
+        "agent_name": "Workflow End",
+        "node_kind": "agent",
+        "status": "skipped",
+        "started_at": "2026-05-03T10:15:07.05",
+        "completed_at": "2026-05-03T10:15:07.05",
+        "duration_ms": 0,
+        "input": {},
+        "output": {},
+        "logs": ["Step skipped due to upstream failure."],
+        "requires_human_input": false,
+        "judgment_options": [],
+        "input_fields": {},
+        "human_response": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Backend runtime data (JSON store is generated on first run)
+backend/data/*.json
+backend/data/*.json.tmp
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.tsbuild/
+*.local
+
+# Env
+.env

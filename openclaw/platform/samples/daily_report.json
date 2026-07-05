@@ -1,0 +1,54 @@
+{
+  "name": "Daily Web Report",
+  "description": "Scheduled research agent that gathers data and emails a daily summary report.",
+  "tags": ["sample", "reporting"],
+  "nodes": [
+    {
+      "id": "cron",
+      "type": "trigger.cron",
+      "position": { "x": 0, "y": 80 },
+      "data": { "label": "Every morning", "config": { "cron": "0 8 * * *" } }
+    },
+    {
+      "id": "research",
+      "type": "agent.research",
+      "position": { "x": 260, "y": 80 },
+      "data": {
+        "label": "Research Agent",
+        "config": { "task": "Summarise the latest status of our tracked metrics into 3 bullet points." }
+      }
+    },
+    {
+      "id": "report",
+      "type": "action.generate_report",
+      "position": { "x": 540, "y": 80 },
+      "data": {
+        "label": "Build Report",
+        "config": {
+          "title": "Daily Summary",
+          "format": "markdown",
+          "path": "daily_report.md",
+          "sections": [{ "heading": "Highlights", "body": "{{ nodes.research.output.output }}" }]
+        }
+      }
+    },
+    {
+      "id": "email",
+      "type": "action.send_email",
+      "position": { "x": 820, "y": 80 },
+      "data": {
+        "label": "Email Report",
+        "config": {
+          "to": "team@example.com",
+          "subject": "Daily Summary",
+          "body": "{{ nodes.report.output.content }}"
+        }
+      }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "cron", "target": "research" },
+    { "id": "e2", "source": "research", "target": "report" },
+    { "id": "e3", "source": "report", "target": "email" }
+  ]
+}

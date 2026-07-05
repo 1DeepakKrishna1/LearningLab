@@ -1,0 +1,50 @@
+{
+  "name": "Email Attachment Archiver",
+  "description": "The spec's canonical example: watch the inbox for invoices, save their attachments to disk, write an archive manifest, and flag the source emails as processed.",
+  "tags": ["sample", "outlook", "files"],
+  "variables": { "archive_dir": "C:/clawflow/invoices" },
+  "nodes": [
+    {
+      "id": "trigger",
+      "type": "trigger.email",
+      "position": { "x": 0, "y": 120 },
+      "data": { "label": "New Invoice Email", "config": { "folder": "Inbox", "filter": "invoice", "unread_only": true } }
+    },
+    {
+      "id": "read",
+      "type": "tool.outlook.read_outlook_mails",
+      "position": { "x": 240, "y": 120 },
+      "data": { "label": "Read Matching Mails", "config": { "folder": "Inbox", "unread_only": true, "max_count": 20 } }
+    },
+    {
+      "id": "save",
+      "type": "tool.outlook.save_email_attachment",
+      "position": { "x": 480, "y": 120 },
+      "data": { "label": "Save Attachments", "config": { "save_dir": "{{ variables.archive_dir }}" } }
+    },
+    {
+      "id": "manifest",
+      "type": "action.file_write",
+      "position": { "x": 720, "y": 120 },
+      "data": {
+        "label": "Write Manifest",
+        "config": {
+          "path": "{{ variables.archive_dir }}/manifest.json",
+          "content": { "saved": "{{ nodes.save.output.data }}", "source": "{{ nodes.read.output.data }}" }
+        }
+      }
+    },
+    {
+      "id": "flag",
+      "type": "tool.outlook.flag_email",
+      "position": { "x": 960, "y": 120 },
+      "data": { "label": "Flag as Processed", "config": { "folder": "Inbox", "filter": "invoice" } }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "trigger", "target": "read" },
+    { "id": "e2", "source": "read", "target": "save" },
+    { "id": "e3", "source": "save", "target": "manifest" },
+    { "id": "e4", "source": "manifest", "target": "flag" }
+  ]
+}

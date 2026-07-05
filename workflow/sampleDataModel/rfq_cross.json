@@ -1,0 +1,301 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RFQ Response Cross - Enterprise Data Model",
+  "description": "Enterprise RFQ semantic matching, vendor normalization, catalog mapping, human review, and final response generation data model.",
+  "definitions": {
+    "RFQRequest": {
+      "type": "object",
+      "required": ["rfq_id", "customer_id", "rfq_number", "source_file_name"],
+      "properties": {
+        "rfq_id": { "type": "string", "description": "Unique RFQ identifier" },
+        "customer_id": { "type": "string", "description": "Customer identifier" },
+        "rfq_number": { "type": "string", "description": "RFQ reference number" },
+        "source_file_name": { "type": "string", "description": "Uploaded RFQ file name" },
+        "upload_timestamp": { "type": "string", "description": "RFQ upload timestamp" },
+        "status": { "type": "string", "description": "Processing status" },
+        "created_by": { "type": "string", "description": "User who uploaded RFQ" },
+        "total_lines": { "type": "integer", "description": "Total RFQ lines" }
+      }
+    },
+
+    "RFQSheet": {
+      "type": "object",
+      "required": ["sheet_id", "rfq_id", "sheet_name"],
+      "properties": {
+        "sheet_id": { "type": "string" },
+        "rfq_id": { "type": "string" },
+        "sheet_name": { "type": "string" },
+        "header_row_number": { "type": "integer" }
+      }
+    },
+
+    "NormalizedColumn": {
+      "type": "object",
+      "required": ["normalized_column_id", "normalized_name"],
+      "properties": {
+        "normalized_column_id": { "type": "string" },
+        "normalized_name": { "type": "string" },
+        "data_type": { "type": "string" },
+        "mandatory_flag": { "type": "boolean" }
+      }
+    },
+
+    "ColumnAlias": {
+      "type": "object",
+      "required": ["alias_id", "normalized_column_id", "alias_name"],
+      "properties": {
+        "alias_id": { "type": "string" },
+        "normalized_column_id": { "type": "string" },
+        "alias_name": { "type": "string" },
+        "confidence_weight": { "type": "number" }
+      }
+    },
+
+    "RFQColumnMapping": {
+      "type": "object",
+      "required": ["mapping_id", "rfq_id", "source_column_name"],
+      "properties": {
+        "mapping_id": { "type": "string" },
+        "rfq_id": { "type": "string" },
+        "source_column_name": { "type": "string" },
+        "normalized_column_id": { "type": "string" },
+        "mapping_method": { "type": "string" },
+        "confidence_level": { "type": "number" }
+      }
+    },
+
+    "VendorMaster": {
+      "type": "object",
+      "required": ["vendor_id", "normalized_vendor_name"],
+      "properties": {
+        "vendor_id": { "type": "string" },
+        "vendor_code": { "type": "string" },
+        "normalized_vendor_name": { "type": "string" },
+        "vendor_type": { "type": "string", "description": "PLP / OEM / Distributor" }
+      }
+    },
+
+    "VendorAlias": {
+      "type": "object",
+      "required": ["alias_id", "vendor_id", "alias_name"],
+      "properties": {
+        "alias_id": { "type": "string" },
+        "vendor_id": { "type": "string" },
+        "alias_name": { "type": "string" }
+      }
+    },
+
+    "RFQVendorMapping": {
+      "type": "object",
+      "required": ["vendor_mapping_id", "rfq_line_id", "raw_vendor_name"],
+      "properties": {
+        "vendor_mapping_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "raw_vendor_name": { "type": "string" },
+        "mapped_vendor_id": { "type": "string" },
+        "mapping_confidence": { "type": "number" },
+        "mapping_method": { "type": "string" }
+      }
+    },
+
+    "RFQLineItem": {
+      "type": "object",
+      "required": ["rfq_line_id", "rfq_id", "line_number"],
+      "properties": {
+        "rfq_line_id": { "type": "string" },
+        "rfq_id": { "type": "string" },
+        "line_number": { "type": "integer" },
+        "raw_ref_number": { "type": "string" },
+        "raw_part_number": { "type": "string" },
+        "raw_description": { "type": "string" },
+        "raw_quantity": { "type": "number" },
+        "raw_uom": { "type": "string" },
+        "raw_manufacturer": { "type": "string" }
+      }
+    },
+
+    "RFQLineNormalization": {
+      "type": "object",
+      "required": ["normalization_id", "rfq_line_id"],
+      "properties": {
+        "normalization_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "normalized_part_number": { "type": "string" },
+        "normalized_description": { "type": "string" },
+        "normalized_uom": { "type": "string" },
+        "normalized_vendor_id": { "type": "string" },
+        "normalization_status": { "type": "string" }
+      }
+    },
+
+    "HistoricalMatch": {
+      "type": "object",
+      "required": ["historical_match_id", "normalized_part_number", "matched_plp_part_id"],
+      "properties": {
+        "historical_match_id": { "type": "string" },
+        "normalized_vendor_id": { "type": "string" },
+        "normalized_part_number": { "type": "string" },
+        "normalized_description": { "type": "string" },
+        "matched_plp_part_id": { "type": "string" },
+        "confidence_level": { "type": "number" },
+        "approval_source": { "type": "string" },
+        "usage_count": { "type": "integer" },
+        "last_used_timestamp": { "type": "string" }
+      }
+    },
+
+    "HistoricalMatchEmbedding": {
+      "type": "object",
+      "required": ["embedding_id", "historical_match_id"],
+      "properties": {
+        "embedding_id": { "type": "string" },
+        "historical_match_id": { "type": "string" },
+        "embedding_vector": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "embedding_model": { "type": "string" }
+      }
+    },
+
+    "ProductCatalog": {
+      "type": "object",
+      "required": ["product_id", "part_number"],
+      "properties": {
+        "product_id": { "type": "string" },
+        "vendor_id": { "type": "string" },
+        "part_number": { "type": "string" },
+        "normalized_part_number": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "lifecycle_status": { "type": "string" }
+      }
+    },
+
+    "ProductEmbedding": {
+      "type": "object",
+      "required": ["embedding_id", "product_id"],
+      "properties": {
+        "embedding_id": { "type": "string" },
+        "product_id": { "type": "string" },
+        "embedding_vector": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "embedding_model": { "type": "string" },
+        "generated_timestamp": { "type": "string" }
+      }
+    },
+
+    "ProductVendorMapping": {
+      "type": "object",
+      "required": ["mapping_id", "source_vendor_product_id", "plp_product_id"],
+      "properties": {
+        "mapping_id": { "type": "string" },
+        "source_vendor_product_id": { "type": "string" },
+        "plp_product_id": { "type": "string" },
+        "mapping_confidence": { "type": "number" }
+      }
+    },
+
+    "RFQLineMatch": {
+      "type": "object",
+      "required": ["match_id", "rfq_line_id", "match_source"],
+      "properties": {
+        "match_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "match_source": { "type": "string" },
+        "matched_product_id": { "type": "string" },
+        "matched_vendor_id": { "type": "string" },
+        "confidence_level": { "type": "number" },
+        "semantic_score": { "type": "number" },
+        "lexical_score": { "type": "number" },
+        "vendor_score": { "type": "number" },
+        "match_rank": { "type": "integer" },
+        "match_reason": { "type": "string" },
+        "created_timestamp": { "type": "string" }
+      }
+    },
+
+    "HumanReviewQueue": {
+      "type": "object",
+      "required": ["review_id", "rfq_line_id", "review_status"],
+      "properties": {
+        "review_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "review_status": { "type": "string" },
+        "assigned_to": { "type": "string" },
+        "review_priority": { "type": "string" },
+        "created_timestamp": { "type": "string" }
+      }
+    },
+
+    "HumanReviewAction": {
+      "type": "object",
+      "required": ["action_id", "review_id", "selected_product_id"],
+      "properties": {
+        "action_id": { "type": "string" },
+        "review_id": { "type": "string" },
+        "selected_product_id": { "type": "string" },
+        "reviewer_confidence": { "type": "number" },
+        "reviewer_comments": { "type": "string" },
+        "action_type": { "type": "string" },
+        "reviewed_by": { "type": "string" },
+        "reviewed_timestamp": { "type": "string" }
+      }
+    },
+
+    "FinalMatch": {
+      "type": "object",
+      "required": ["final_match_id", "rfq_line_id", "final_product_id"],
+      "properties": {
+        "final_match_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "final_product_id": { "type": "string" },
+        "final_confidence_level": { "type": "number" },
+        "final_match_source": { "type": "string" },
+        "approval_status": { "type": "string" },
+        "approved_by": { "type": "string" },
+        "approved_timestamp": { "type": "string" }
+      }
+    },
+
+    "RFQResponse": {
+      "type": "object",
+      "required": ["response_id", "rfq_id"],
+      "properties": {
+        "response_id": { "type": "string" },
+        "rfq_id": { "type": "string" },
+        "response_status": { "type": "string" },
+        "generated_timestamp": { "type": "string" }
+      }
+    },
+
+    "RFQResponseLine": {
+      "type": "object",
+      "required": ["response_line_id", "response_id", "rfq_line_id"],
+      "properties": {
+        "response_line_id": { "type": "string" },
+        "response_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "matched_product_id": { "type": "string" },
+        "confidence_level": { "type": "number" },
+        "quantity": { "type": "number" },
+        "remarks": { "type": "string" }
+      }
+    },
+
+    "MatchFeedback": {
+      "type": "object",
+      "required": ["feedback_id", "rfq_line_id"],
+      "properties": {
+        "feedback_id": { "type": "string" },
+        "rfq_line_id": { "type": "string" },
+        "feedback_type": { "type": "string" },
+        "feedback_comments": { "type": "string" },
+        "submitted_by": { "type": "string" },
+        "submitted_timestamp": { "type": "string" }
+      }
+    }
+  }
+}

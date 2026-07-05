@@ -1,0 +1,68 @@
+{
+  "name": "PDF Invoice → Database",
+  "description": "On file upload, extract tables and text from an invoice PDF, have a reviewer agent validate the parsed fields, then persist the rows to a SQL database via the data-storage tools.",
+  "tags": ["sample", "pdf", "database"],
+  "nodes": [
+    {
+      "id": "upload",
+      "type": "trigger.file_upload",
+      "position": { "x": 0, "y": 160 },
+      "data": { "label": "Invoice Uploaded", "config": { "accept": ".pdf" } }
+    },
+    {
+      "id": "tables",
+      "type": "tool.pdf_tools.pdf_extract_tables",
+      "position": { "x": 240, "y": 80 },
+      "data": { "label": "Extract Tables", "config": { "file_path": "{{ trigger.payload.file_path }}" } }
+    },
+    {
+      "id": "text",
+      "type": "tool.pdf_tools.pdf_extract_text",
+      "position": { "x": 240, "y": 240 },
+      "data": { "label": "Extract Text", "config": { "file_path": "{{ trigger.payload.file_path }}" } }
+    },
+    {
+      "id": "merge",
+      "type": "logic.merge",
+      "position": { "x": 480, "y": 160 },
+      "data": { "label": "Combine Extracts", "config": {} }
+    },
+    {
+      "id": "review",
+      "type": "agent.reviewer",
+      "position": { "x": 700, "y": 160 },
+      "data": {
+        "label": "Validate Invoice",
+        "config": { "task": "Validate the extracted invoice: confirm invoice number, vendor, line items and total are present and internally consistent. Return a verdict and the normalised rows as JSON." }
+      }
+    },
+    {
+      "id": "connect",
+      "type": "tool.data_storage_tools.connect",
+      "position": { "x": 940, "y": 160 },
+      "data": { "label": "Connect DB", "config": { "db_path": "invoices.db" } }
+    },
+    {
+      "id": "insert",
+      "type": "tool.data_storage_tools.insert_rows",
+      "position": { "x": 1180, "y": 160 },
+      "data": { "label": "Insert Rows", "config": { "table": "invoices", "rows": "{{ nodes.review.output.output }}" } }
+    },
+    {
+      "id": "report",
+      "type": "action.generate_report",
+      "position": { "x": 1420, "y": 160 },
+      "data": { "label": "Ingestion Report", "config": { "title": "Invoice Ingested", "format": "json", "path": "ingest_report.json" } }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "upload", "target": "tables" },
+    { "id": "e2", "source": "upload", "target": "text" },
+    { "id": "e3", "source": "tables", "target": "merge" },
+    { "id": "e4", "source": "text", "target": "merge" },
+    { "id": "e5", "source": "merge", "target": "review" },
+    { "id": "e6", "source": "review", "target": "connect" },
+    { "id": "e7", "source": "connect", "target": "insert" },
+    { "id": "e8", "source": "insert", "target": "report" }
+  ]
+}

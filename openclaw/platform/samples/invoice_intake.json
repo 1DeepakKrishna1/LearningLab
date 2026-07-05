@@ -1,0 +1,71 @@
+{
+  "name": "Invoice Intake & Approval",
+  "description": "Reads invoice emails, extracts the PDF text, requires approval over $10k, then records the result.",
+  "tags": ["sample", "finance"],
+  "nodes": [
+    {
+      "id": "trigger",
+      "type": "trigger.email",
+      "position": { "x": 0, "y": 120 },
+      "data": { "label": "New Invoice Email", "config": { "folder": "Inbox", "filter": "invoice" } }
+    },
+    {
+      "id": "extract",
+      "type": "agent.executor",
+      "position": { "x": 260, "y": 120 },
+      "data": {
+        "label": "Extract Invoice Fields",
+        "agent_id": null,
+        "config": {
+          "task": "Extract the invoice number, vendor and total amount from the attached document and return them as JSON.",
+          "tools": ["pdf_tools.pdf_extract_text"]
+        }
+      }
+    },
+    {
+      "id": "check",
+      "type": "logic.if_else",
+      "position": { "x": 540, "y": 120 },
+      "data": {
+        "label": "Amount > $10k?",
+        "config": { "left": "{{ trigger.payload.amount }}", "operator": ">", "right": 10000 }
+      }
+    },
+    {
+      "id": "approval",
+      "type": "logic.approval",
+      "position": { "x": 820, "y": 40 },
+      "data": {
+        "label": "Finance Approval",
+        "config": { "channel": "ui", "title": "Approve high-value invoice", "approvers": [] }
+      }
+    },
+    {
+      "id": "record_big",
+      "type": "tool.excel_tools.excel_write",
+      "position": { "x": 1100, "y": 40 },
+      "data": { "label": "Record (approved)", "config": { "file_path": "invoices.xlsx" } }
+    },
+    {
+      "id": "record_small",
+      "type": "tool.excel_tools.excel_write",
+      "position": { "x": 820, "y": 220 },
+      "data": { "label": "Auto-record", "config": { "file_path": "invoices.xlsx" } }
+    },
+    {
+      "id": "report",
+      "type": "action.generate_report",
+      "position": { "x": 1380, "y": 120 },
+      "data": { "label": "Summary Report", "config": { "title": "Invoice Processed", "format": "markdown" } }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "trigger", "target": "extract" },
+    { "id": "e2", "source": "extract", "target": "check" },
+    { "id": "e3", "source": "check", "target": "approval", "sourceHandle": "true" },
+    { "id": "e4", "source": "check", "target": "record_small", "sourceHandle": "false" },
+    { "id": "e5", "source": "approval", "target": "record_big", "sourceHandle": "approved" },
+    { "id": "e6", "source": "record_big", "target": "report" },
+    { "id": "e7", "source": "record_small", "target": "report" }
+  ]
+}

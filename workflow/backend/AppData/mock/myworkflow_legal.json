@@ -1,0 +1,622 @@
+[
+  {
+    "id": "legal-workflow-001",
+    "name": "Legal Case Research and Draft Preparation",
+    "description": "Research case laws, analyze judgments, prepare legal draft and route for approval",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-start",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": 50.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Workflow Start",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0",
+            "timeout_seconds": 3600
+          }
+        }
+      },
+      {
+        "id": "node-legal-search",
+        "node_kind": "agent",
+        "agent_id": "agent-011",
+        "tool_id": null,
+        "position": {
+          "x": 250.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Legal Research Agent",
+          "description": "Search legal databases and regulatory sources",
+          "type": "react_agent",
+          "tools": [
+            "tool-013"
+          ],
+          "toolConfigs": {
+            "tool-013": {
+              "engine": "tavily",
+              "max_results": 10,
+              "search_depth": "advanced"
+            }
+          },
+          "properties": {
+            "goal_prompt": "Research legal precedents for {{legal_issue}}",
+            "max_iterations": 5
+          }
+        }
+      },
+      {
+        "id": "node-judgment-analysis",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 500.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Judgment Analyzer",
+          "description": "Analyze judgments and extract legal reasoning",
+          "type": "automatic",
+          "tools": [
+            "tool-006"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "model": "llama-3.3-70b-versatile",
+            "confidence_threshold": 0.85
+          }
+        }
+      },
+      {
+        "id": "node-draft-generation",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 750.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Legal Draft Generator",
+          "description": "Generate draft petition or legal brief",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are a legal expert drafting {{document_type}} based on case research.",
+            "user_prompt": "Prepare a structured legal draft using the following research {{input_data}}",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.4,
+            "max_tokens": 2000
+          }
+        }
+      },
+      {
+        "id": "node-compliance-check",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 1000.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Legal Compliance Check",
+          "description": "Ensure document meets compliance and safety rules",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": false,
+            "block_on_violation": true
+          }
+        }
+      },
+      {
+        "id": "node-human-review",
+        "node_kind": "agent",
+        "agent_id": "agent-004",
+        "tool_id": null,
+        "position": {
+          "x": 1250.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Senior Lawyer Review",
+          "description": "Human legal expert reviews the draft",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-007"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "reviewers": [
+              "seniorlawyer@firm.com"
+            ],
+            "timeout_hours": 24
+          }
+        }
+      },
+      {
+        "id": "node-notify",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 1500.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Notify Legal Team",
+          "description": "Send document approval notification",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "legal-draft-approved"
+          }
+        }
+      },
+      {
+        "id": "node-end",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 1750.0,
+          "y": 100.0
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Finalize workflow and archive results",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "notify_on_complete": true,
+            "archive_results": true
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge1",
+        "source": "node-start",
+        "target": "node-legal-search",
+        "label": "start",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge2",
+        "source": "node-legal-search",
+        "target": "node-judgment-analysis",
+        "label": "case data",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge3",
+        "source": "node-judgment-analysis",
+        "target": "node-draft-generation",
+        "label": "analysis",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge4",
+        "source": "node-draft-generation",
+        "target": "node-compliance-check",
+        "label": "draft",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge5",
+        "source": "node-compliance-check",
+        "target": "node-human-review",
+        "label": "validated",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge6",
+        "source": "node-human-review",
+        "target": "node-notify",
+        "label": "approved",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge7",
+        "source": "node-notify",
+        "target": "node-end",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-10T16:49:34.452061",
+    "updated_at": "2026-03-10T16:49:34.452061",
+    "is_template": false,
+    "tags": [
+      "legal",
+      "case-law",
+      "drafting",
+      "research"
+    ]
+  },
+  {
+    "id": "caaa411a-c842-46c3-a317-277ee72ddab5",
+    "name": "LegalResearch",
+    "description": "",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-1772819220688",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": 43.923807252519794,
+          "y": -250.74116626596066
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": ""
+          }
+        }
+      },
+      {
+        "id": "node-1772819225441",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 812.0363894741814,
+          "y": -239.33445337752514
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": ""
+          }
+        }
+      },
+      {
+        "id": "node-1772819234482",
+        "node_kind": "agent",
+        "agent_id": "agent-L01",
+        "tool_id": null,
+        "position": {
+          "x": 298.51987084161675,
+          "y": -252.50583386101653
+        },
+        "data": {
+          "name": "Legal Research Agent",
+          "description": "Performs case law research and gathers legal references",
+          "type": "automatic",
+          "tools": [
+            "tool-L01",
+            "tool-L10"
+          ],
+          "toolConfigs": {},
+          "properties": {}
+        }
+      },
+      {
+        "id": "node-1772819255197",
+        "node_kind": "agent",
+        "agent_id": "agent-L07",
+        "tool_id": null,
+        "position": {
+          "x": 558.1190410411913,
+          "y": -250.85471575008117
+        },
+        "data": {
+          "name": "Faculty Approval Agent",
+          "description": "Routes research or legal drafts for faculty approval",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-L07"
+          ],
+          "toolConfigs": {},
+          "properties": {}
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "reactflow__edge-node-1772819220688-node-1772819234482",
+        "source": "node-1772819220688",
+        "target": "node-1772819234482",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772819255197-node-1772819225441",
+        "source": "node-1772819255197",
+        "target": "node-1772819225441",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772819234482-node-1772819255197",
+        "source": "node-1772819234482",
+        "target": "node-1772819255197",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-10T16:49:34.452061",
+    "updated_at": "2026-03-10T16:49:34.452061",
+    "is_template": false,
+    "tags": []
+  },
+  {
+    "id": "60f81108-3137-4f49-be52-f06cfab0c48f",
+    "name": "Company Law",
+    "description": "",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-1773161608170",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": 37.40453490561197,
+          "y": -595.8859861737958
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773161623050",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 36.81431108709171,
+          "y": -465.4465222808342
+        },
+        "data": {
+          "name": "Guardrails Agent",
+          "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 4096,
+            "block_on_violation": true,
+            "redact_pii": true
+          }
+        }
+      },
+      {
+        "id": "node-1773161633572",
+        "node_kind": "agent",
+        "agent_id": "agent-007",
+        "tool_id": null,
+        "position": {
+          "x": 297.103015054495,
+          "y": -443.60824099558727
+        },
+        "data": {
+          "name": "Workflow Orchestrator",
+          "description": "Routes execution based on conditions and triggers downstream webhooks",
+          "type": "conditional",
+          "tools": [
+            "tool-010",
+            "tool-001"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "condition_field": "",
+            "condition_operator": "equals",
+            "condition_value": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773161659851",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 619.3652199665172,
+          "y": -3.8914961980471148
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773161666829",
+        "node_kind": "agent",
+        "agent_id": "agent-L01",
+        "tool_id": null,
+        "position": {
+          "x": 76.35930692794449,
+          "y": -201.02625158378993
+        },
+        "data": {
+          "name": "Legal Research Agent",
+          "description": "Performs case law research and gathers legal references",
+          "type": "automatic",
+          "tools": [
+            "tool-L01",
+            "tool-L10"
+          ],
+          "toolConfigs": {},
+          "properties": {}
+        }
+      },
+      {
+        "id": "node-1773161699871",
+        "node_kind": "agent",
+        "agent_id": "agent-L10",
+        "tool_id": null,
+        "position": {
+          "x": 297.6932388730148,
+          "y": -29.2711203944152
+        },
+        "data": {
+          "name": "Workflow Coordinator",
+          "description": "Coordinates multiple legal education processes",
+          "type": "orchestrator",
+          "tools": [
+            "tool-L07"
+          ],
+          "toolConfigs": {},
+          "properties": {}
+        }
+      },
+      {
+        "id": "node-1773161812722",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 538.5045568292516,
+          "y": -206.89011117127072
+        },
+        "data": {
+          "name": "Prompt Agent",
+          "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are an expert {{domain}} analyst with deep knowledge of {{context}}.\n\nRespond in {{output_format}} format.\nBe concise, accurate, and data-driven.\nIf data is missing, clearly state assumptions.\nCurrent date: {{timestamp}}.",
+            "user_prompt": "Input data:\n{{input_data}}\n\nTask: {{task}}\n\nProvide:\n1. A concise summary\n2. Key insights from the data\n3. Anomalies or risks detected\n4. Recommended next steps",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.7,
+            "max_tokens": 2000,
+            "output_format": "markdown"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "reactflow__edge-node-1773161608170-node-1773161623050",
+        "source": "node-1773161608170",
+        "target": "node-1773161623050",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161623050-node-1773161633572",
+        "source": "node-1773161623050",
+        "target": "node-1773161633572",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161633572-node-1773161666829",
+        "source": "node-1773161633572",
+        "target": "node-1773161666829",
+        "label": "Company Law",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161633572-node-1773161699871",
+        "source": "node-1773161633572",
+        "target": "node-1773161699871",
+        "label": "Invalid Intent",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161633572-node-1773161812722",
+        "source": "node-1773161633572",
+        "target": "node-1773161812722",
+        "label": "Legal Web",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161812722-node-1773161699871",
+        "source": "node-1773161812722",
+        "target": "node-1773161699871",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161666829-node-1773161699871",
+        "source": "node-1773161666829",
+        "target": "node-1773161699871",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773161699871-node-1773161659851",
+        "source": "node-1773161699871",
+        "target": "node-1773161659851",
+        "label": "Final Response",
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-10T16:59:31.586642",
+    "updated_at": "2026-03-10T17:00:07.125038",
+    "is_template": false,
+    "tags": []
+  }
+]

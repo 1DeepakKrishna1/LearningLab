@@ -1,0 +1,133 @@
+[
+  {
+    "id": "user-admin-001",
+    "email": "admin@incepta.com",
+    "name": "Product Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "product_admin",
+    "group_ids": [
+      "grp-admins"
+    ],
+    "project_ids": [
+      "0ba90dc3-2d34-48fa-b684-fe3dbbcc4eb8"
+    ],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-15T18:10:11.359659"
+  },
+  {
+    "id": "user-orgadmin-001",
+    "email": "orgadmin@incepta.com",
+    "name": "Process Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "process_admin",
+    "group_ids": [
+      "grp-admins"
+    ],
+    "project_ids": [
+      "proj-loan-001",
+      "proj-kyc-001",
+      "proj-finance-001"
+    ],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "user-processadmin-001",
+    "email": "processadmin@incepta.com",
+    "name": "Process Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "process_admin",
+    "group_ids": [],
+    "project_ids": [
+      "0ba90dc3-2d34-48fa-b684-fe3dbbcc4eb8"
+    ],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "user-alice-001",
+    "email": "alice@incepta.com",
+    "name": "Alice Johnson",
+    "password_hash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "role": "org_user",
+    "group_ids": [
+      "grp-operations"
+    ],
+    "project_ids": [
+      "proj-loan-001",
+      "proj-kyc-001",
+      "0ba90dc3-2d34-48fa-b684-fe3dbbcc4eb8"
+    ],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "user-bob-001",
+    "email": "bob@incepta.com",
+    "name": "Bob Smith",
+    "password_hash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "role": "org_user",
+    "group_ids": [
+      "grp-operations"
+    ],
+    "project_ids": [
+      "proj-loan-001"
+    ],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "user-carol-001",
+    "email": "carol@incepta.com",
+    "name": "Carol Davis",
+    "password_hash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "role": "org_user",
+    "group_ids": [
+      "grp-finance"
+    ],
+    "project_ids": [
+      "proj-finance-001",
+      "proj-loan-001"
+    ],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "user-custuser-001",
+    "email": "custuser@incepta.com",
+    "name": "Customer User",
+    "password_hash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "role": "cust_user",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "user-custadmin-001",
+    "email": "custadmin@incepta.com",
+    "name": "Customer Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "cust_admin",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  }
+]

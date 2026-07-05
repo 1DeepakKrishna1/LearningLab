@@ -1,0 +1,81 @@
+{
+  "name": "Multi-Agent Research & Brief",
+  "description": "Supervisor-style multi-agent pipeline: a planner decomposes the brief, two research agents run in parallel, their findings are merged and reviewed, then a report is generated and a WhatsApp notification is sent. Demonstrates parallel + merge + multi-agent collaboration.",
+  "tags": ["sample", "agents", "parallel"],
+  "variables": { "topic": "competitor pricing changes this week" },
+  "nodes": [
+    {
+      "id": "start",
+      "type": "trigger.manual",
+      "position": { "x": 0, "y": 200 },
+      "data": { "label": "Run Research", "config": {} }
+    },
+    {
+      "id": "planner",
+      "type": "agent.planner",
+      "position": { "x": 220, "y": 200 },
+      "data": { "label": "Plan Research", "config": { "task": "Produce a 2-part research plan for: {{ variables.topic }}." } }
+    },
+    {
+      "id": "fanout",
+      "type": "logic.parallel",
+      "position": { "x": 440, "y": 200 },
+      "data": { "label": "Fan Out", "config": {} }
+    },
+    {
+      "id": "research_a",
+      "type": "agent.research",
+      "position": { "x": 660, "y": 100 },
+      "data": { "label": "Research: Sources", "config": { "task": "Investigate part 1 of the plan and summarise findings with citations." } }
+    },
+    {
+      "id": "research_b",
+      "type": "agent.research",
+      "position": { "x": 660, "y": 300 },
+      "data": { "label": "Research: Numbers", "config": { "task": "Investigate part 2 of the plan and summarise quantitative findings." } }
+    },
+    {
+      "id": "merge",
+      "type": "logic.merge",
+      "position": { "x": 880, "y": 200 },
+      "data": { "label": "Merge Findings", "config": {} }
+    },
+    {
+      "id": "review",
+      "type": "agent.reviewer",
+      "position": { "x": 1100, "y": 200 },
+      "data": { "label": "Review & Synthesize", "config": { "task": "Critically review the merged findings for gaps and contradictions, then synthesize a concise executive brief." } }
+    },
+    {
+      "id": "report",
+      "type": "action.generate_report",
+      "position": { "x": 1320, "y": 200 },
+      "data": {
+        "label": "Build Brief",
+        "config": {
+          "title": "Research Brief: {{ variables.topic }}",
+          "format": "markdown",
+          "path": "research_brief.md",
+          "sections": [{ "heading": "Executive Summary", "body": "{{ nodes.review.output.output }}" }]
+        }
+      }
+    },
+    {
+      "id": "notify",
+      "type": "action.send_whatsapp",
+      "position": { "x": 1540, "y": 200 },
+      "data": { "label": "Notify Lead", "config": { "to": "+10000000000", "message": "Research brief ready: {{ variables.topic }}." } }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "planner" },
+    { "id": "e2", "source": "planner", "target": "fanout" },
+    { "id": "e3", "source": "fanout", "target": "research_a" },
+    { "id": "e4", "source": "fanout", "target": "research_b" },
+    { "id": "e5", "source": "research_a", "target": "merge" },
+    { "id": "e6", "source": "research_b", "target": "merge" },
+    { "id": "e7", "source": "merge", "target": "review" },
+    { "id": "e8", "source": "review", "target": "report" },
+    { "id": "e9", "source": "report", "target": "notify" }
+  ]
+}

@@ -1,0 +1,356 @@
+{
+  "product_admin": {
+    "topBar": {
+      "launchStudio": "enable"
+    },
+    "process/workflows": {
+      "run":          "enable",
+      "openInStudio": "enable",
+      "clone":        "enable"
+    },
+    "process/runs": {
+      "view": "enable"
+    },
+    "insights/dashboard": {
+      "view": "enable"
+    },
+    "insights/reports": {
+      "view": "enable"
+    },
+    "insights/audit": {
+      "view": "enable"
+    },
+    "observability/live": {
+      "view": "enable"
+    },
+    "observability/insights": {
+      "view": "enable"
+    },
+    "manage/tools": {
+      "create":          "enable",
+      "edit":            "enable",
+      "delete":          "enable",
+      "submitForReview": "enable"
+    },
+    "manage/agents": {
+      "create":          "enable",
+      "edit":            "enable",
+      "delete":          "enable",
+      "submitForReview": "enable"
+    },
+    "manage/templates": {
+      "clone": "enable"
+    },
+    "manage/reviews": {
+      "approve": "enable",
+      "reject":  "enable"
+    },
+    "manage/data-models": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "manage/users": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "manage/groups": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "process/projects": {
+      "export": "enable"
+    },
+    "manage/projects": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    }
+  },
+
+  "process_admin": {
+    "topBar": {
+      "launchStudio": "enable"
+    },
+    "process/workflows": {
+      "run":          "enable",
+      "openInStudio": "enable",
+      "clone":        "enable"
+    },
+    "process/runs": {
+      "view": "enable"
+    },
+    "insights/dashboard": {
+      "view": "enable"
+    },
+    "insights/reports": {
+      "view": "enable"
+    },
+    "insights/audit": {
+      "view": "enable"
+    },
+    "observability/live": {
+      "view": "enable"
+    },
+    "observability/insights": {
+      "view": "enable"
+    },
+    "manage/tools": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/agents": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/templates": {
+      "clone": "hide"
+    },
+    "manage/reviews": {
+      "approve": "hide",
+      "reject":  "hide"
+    },
+    "manage/data-models": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "manage/users": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "manage/groups": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "process/projects": {
+      "export": "enable"
+    },
+    "manage/projects": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    }
+  },
+
+  "org_user": {
+    "topBar": {
+      "launchStudio": "enable"
+    },
+    "process/workflows": {
+      "run":          "enable",
+      "openInStudio": "enable",
+      "clone":        "enable"
+    },
+    "process/runs": {
+      "view": "enable"
+    },
+    "insights/dashboard": {
+      "view": "enable"
+    },
+    "insights/reports": {
+      "view": "enable"
+    },
+    "insights/audit": {
+      "view": "hide"
+    },
+    "observability/live": {
+      "view": "enable"
+    },
+    "observability/insights": {
+      "view": "enable"
+    },
+    "manage/tools": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/agents": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/templates": {
+      "clone": "hide"
+    },
+    "manage/reviews": {
+      "approve": "hide",
+      "reject":  "hide"
+    },
+    "manage/data-models": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "manage/users": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "manage/groups": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "process/projects": {
+      "export": "hide"
+    },
+    "manage/projects": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    }
+  },
+
+  "cust_user": {
+    "topBar": {
+      "launchStudio": "hide"
+    },
+    "process/workflows": {
+      "run":          "enable",
+      "openInStudio": "hide",
+      "clone":        "hide"
+    },
+    "process/runs": {
+      "view": "enable"
+    },
+    "insights/dashboard": {
+      "view": "enable"
+    },
+    "insights/reports": {
+      "view": "enable"
+    },
+    "insights/audit": {
+      "view": "hide"
+    },
+    "observability/live": {
+      "view": "hide"
+    },
+    "observability/insights": {
+      "view": "hide"
+    },
+    "manage/tools": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/agents": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/templates": {
+      "clone": "hide"
+    },
+    "manage/reviews": {
+      "approve": "hide",
+      "reject":  "hide"
+    },
+    "manage/data-models": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "manage/users": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "manage/groups": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "process/projects": {
+      "export": "hide"
+    },
+    "manage/projects": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    }
+  },
+
+  "cust_admin": {
+    "topBar": {
+      "launchStudio": "hide"
+    },
+    "process/workflows": {
+      "run":          "enable",
+      "openInStudio": "hide",
+      "clone":        "hide"
+    },
+    "process/runs": {
+      "view": "enable"
+    },
+    "insights/dashboard": {
+      "view": "enable"
+    },
+    "insights/reports": {
+      "view": "enable"
+    },
+    "insights/audit": {
+      "view": "enable"
+    },
+    "observability/live": {
+      "view": "enable"
+    },
+    "observability/insights": {
+      "view": "enable"
+    },
+    "manage/tools": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/agents": {
+      "create":          "hide",
+      "edit":            "hide",
+      "delete":          "hide",
+      "submitForReview": "hide"
+    },
+    "manage/templates": {
+      "clone": "hide"
+    },
+    "manage/reviews": {
+      "approve": "hide",
+      "reject":  "hide"
+    },
+    "manage/data-models": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    },
+    "manage/users": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "manage/groups": {
+      "create": "enable",
+      "edit":   "enable",
+      "delete": "enable"
+    },
+    "process/projects": {
+      "export": "hide"
+    },
+    "manage/projects": {
+      "create": "hide",
+      "edit":   "hide",
+      "delete": "hide"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Web Scrape → Excel Report",
+  "description": "Scheduled browser automation: launch a browser, navigate to a target page, scrape a table, close the browser, write the data to Excel, and email the report. Demonstrates the Selenium web-tools chain end to end.",
+  "tags": ["sample", "web", "automation"],
+  "variables": { "target_url": "https://example.com/prices" },
+  "nodes": [
+    {
+      "id": "cron",
+      "type": "trigger.cron",
+      "position": { "x": 0, "y": 160 },
+      "data": { "label": "Daily 07:00", "config": { "cron": "0 7 * * *" } }
+    },
+    {
+      "id": "launch",
+      "type": "tool.web_tools.launch_browser",
+      "position": { "x": 220, "y": 160 },
+      "data": { "label": "Launch Browser", "config": { "headless": true } }
+    },
+    {
+      "id": "navigate",
+      "type": "tool.web_tools.navigate_to_url",
+      "position": { "x": 440, "y": 160 },
+      "data": { "label": "Open Page", "config": { "url": "{{ variables.target_url }}" } }
+    },
+    {
+      "id": "wait",
+      "type": "tool.web_tools.wait_for_element",
+      "position": { "x": 660, "y": 160 },
+      "data": { "label": "Wait For Table", "config": { "selector": "table", "timeout": 15 } }
+    },
+    {
+      "id": "extract",
+      "type": "tool.web_tools.extract_table",
+      "position": { "x": 880, "y": 160 },
+      "data": { "label": "Scrape Table", "config": { "selector": "table" } }
+    },
+    {
+      "id": "close",
+      "type": "tool.web_tools.close_browser",
+      "position": { "x": 1100, "y": 160 },
+      "data": { "label": "Close Browser", "config": {} }
+    },
+    {
+      "id": "write",
+      "type": "tool.excel_tools.excel_write",
+      "position": { "x": 1320, "y": 160 },
+      "data": { "label": "Write Excel", "config": { "file_path": "prices.xlsx", "sheet": "Latest", "data": "{{ nodes.extract.output.data }}" } }
+    },
+    {
+      "id": "email",
+      "type": "action.send_email",
+      "position": { "x": 1540, "y": 160 },
+      "data": { "label": "Email Report", "config": { "to": "analytics@example.com", "subject": "Daily price scrape", "body": "Latest prices attached.", "attachments": ["prices.xlsx"] } }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "cron", "target": "launch" },
+    { "id": "e2", "source": "launch", "target": "navigate" },
+    { "id": "e3", "source": "navigate", "target": "wait" },
+    { "id": "e4", "source": "wait", "target": "extract" },
+    { "id": "e5", "source": "extract", "target": "close" },
+    { "id": "e6", "source": "close", "target": "write" },
+    { "id": "e7", "source": "write", "target": "email" }
+  ]
+}

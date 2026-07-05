@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Purchase Order Approval",
+  "description": "Vendor selection, PO creation, multi-level approval, and goods receipt workflow",
+  "definitions": {
+    "Vendor": {
+      "type": "object",
+      "required": ["vendor_id", "vendor_name", "gstin"],
+      "properties": {
+        "vendor_id":      { "type": "string",  "description": "Unique vendor ID" },
+        "vendor_name":    { "type": "string",  "description": "Registered vendor name" },
+        "gstin":          { "type": "string",  "description": "GST registration number" },
+        "pan":            { "type": "string",  "description": "PAN number" },
+        "category":       { "type": "string",  "description": "IT / Facilities / Raw Material / Services / Marketing" },
+        "contact_name":   { "type": "string",  "description": "Primary contact person" },
+        "email":          { "type": "string",  "description": "Vendor email" },
+        "phone":          { "type": "string",  "description": "Vendor phone" },
+        "payment_terms":  { "type": "string",  "description": "Net 30 / Net 60 / Advance / COD" },
+        "is_approved":    { "type": "boolean", "description": "Vendor approved in vendor master" },
+        "rating":         { "type": "number",  "description": "Internal vendor rating (1-5)" }
+      }
+    },
+    "PurchaseRequest": {
+      "type": "object",
+      "required": ["pr_id", "requested_by", "department", "item_description", "quantity", "estimated_cost"],
+      "properties": {
+        "pr_id":            { "type": "string", "description": "Purchase request ID" },
+        "requested_by":     { "type": "string", "description": "Employee ID who raised PR" },
+        "department":       { "type": "string", "description": "Requesting department" },
+        "cost_center":      { "type": "string", "description": "Cost center code" },
+        "item_description": { "type": "string", "description": "Description of items / services needed" },
+        "quantity":         { "type": "number", "description": "Quantity required" },
+        "unit":             { "type": "string", "description": "Unit of measure (Nos / Kg / Ltrs / Hours)" },
+        "estimated_cost":   { "type": "number", "description": "Estimated total cost (INR)" },
+        "required_by":      { "type": "string", "description": "Required delivery date" },
+        "justification":    { "type": "string", "description": "Business justification" },
+        "status":           { "type": "string", "description": "Draft / Submitted / Approved / Rejected / PO Raised" },
+        "created_at":       { "type": "string", "description": "PR creation timestamp" }
+      }
+    },
+    "PurchaseOrder": {
+      "type": "object",
+      "required": ["po_id", "pr_id", "vendor_id", "po_amount"],
+      "properties": {
+        "po_id":            { "type": "string", "description": "Purchase order number" },
+        "pr_id":            { "type": "string", "description": "Reference to PurchaseRequest" },
+        "vendor_id":        { "type": "string", "description": "Reference to Vendor" },
+        "po_date":          { "type": "string", "description": "PO issue date" },
+        "delivery_address": { "type": "string", "description": "Delivery location" },
+        "delivery_date":    { "type": "string", "description": "Expected delivery date" },
+        "po_amount":        { "type": "number", "description": "Total PO value (excl. tax)" },
+        "tax_amount":       { "type": "number", "description": "Tax (GST) amount" },
+        "total_amount":     { "type": "number", "description": "Total PO value (incl. tax)" },
+        "currency":         { "type": "string", "description": "Currency code (INR / USD / EUR)" },
+        "status":           { "type": "string", "description": "Draft / Pending Approval / Approved / Sent / Acknowledged / Closed" },
+        "terms_conditions": { "type": "string", "description": "PO terms and conditions" }
+      }
+    },
+    "ApprovalRecord": {
+      "type": "object",
+      "required": ["approval_id", "po_id", "approver_id", "level", "decision"],
+      "properties": {
+        "approval_id":    { "type": "string", "description": "Approval record ID" },
+        "po_id":          { "type": "string", "description": "Reference to PurchaseOrder" },
+        "approver_id":    { "type": "string", "description": "Approver employee ID" },
+        "approver_role":  { "type": "string", "description": "Manager / Finance / VP / Director / CFO" },
+        "level":          { "type": "number", "description": "Approval level (1 = first approver)" },
+        "decision":       { "type": "string", "description": "Approved / Rejected / On Hold" },
+        "comments":       { "type": "string", "description": "Approver comments" },
+        "decided_at":     { "type": "string", "description": "Decision timestamp" },
+        "delegated_from": { "type": "string", "description": "Original approver if delegated" }
+      }
+    },
+    "GoodsReceipt": {
+      "type": "object",
+      "required": ["grn_id", "po_id", "received_by", "received_date"],
+      "properties": {
+        "grn_id":             { "type": "string",  "description": "Goods Receipt Note ID" },
+        "po_id":              { "type": "string",  "description": "Reference to PurchaseOrder" },
+        "received_by":        { "type": "string",  "description": "Employee who received goods" },
+        "received_date":      { "type": "string",  "description": "Date of receipt" },
+        "quantity_ordered":   { "type": "number",  "description": "Quantity as per PO" },
+        "quantity_received":  { "type": "number",  "description": "Quantity actually received" },
+        "quantity_rejected":  { "type": "number",  "description": "Quantity rejected (damaged / wrong)" },
+        "quality_status":     { "type": "string",  "description": "Accepted / Partial / Rejected" },
+        "rejection_reason":   { "type": "string",  "description": "Reason for rejection if any" },
+        "invoice_number":     { "type": "string",  "description": "Vendor invoice number" },
+        "invoice_amount":     { "type": "number",  "description": "Vendor invoice amount" },
+        "three_way_match":    { "type": "boolean", "description": "PO-GRN-Invoice 3-way match passed" }
+      }
+    }
+  }
+}

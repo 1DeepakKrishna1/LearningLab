@@ -1,0 +1,89 @@
+[
+  {
+    "id": "proj-loan-001",
+    "name": "BOA Loan Operations",
+    "description": "Loan sanction and credit processing workflows",
+    "launchurl": "https://www.bing.com/search?q=Loan+Operations",
+    "workflow_ids": [
+      "wf-loan-sanction-2026",
+      "29195194-4197-45cf-bfa5-92c9e2651db3"
+    ],
+    "user_ids": [
+      "user-alice-001",
+      "user-bob-001",
+      "user-orgadmin-001",
+      "user-carol-001"
+    ],
+    "group_ids": [
+      "grp-operations"
+    ],
+    "owner_id": "user-orgadmin-001",
+    "is_active": true,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-18T15:00:41.830784"
+  },
+  {
+    "id": "proj-kyc-001",
+    "name": "ABC Customer Onboarding",
+    "description": "KYC and customer onboarding workflows",
+    "launchurl": "https://www.bing.com/search?q=Customer+Onboarding",
+    "workflow_ids": [
+      "tpl-002",
+      "a813709b-dbd1-429b-800c-43b29928ff5d",
+      "wf-kyc-onboarding-2026",
+      "797f2506-08e6-4687-821d-8426502ede88"
+    ],
+    "user_ids": [
+      "user-alice-001",
+      "user-orgadmin-001"
+    ],
+    "group_ids": [
+      "grp-operations"
+    ],
+    "owner_id": "user-orgadmin-001",
+    "is_active": true,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-18T15:01:11.951386"
+  },
+  {
+    "id": "proj-finance-001",
+    "name": "HSBC Finance & Insurance",
+    "description": "Insurance claims and purchase order workflows",
+    "launchurl": "https://www.bing.com/search?q=Finance+%26+Insurance",
+    "workflow_ids": [
+      "wf-insurance-claims-2026",
+      "wf-po-approval-2026"
+    ],
+    "user_ids": [
+      "user-carol-001",
+      "user-orgadmin-001"
+    ],
+    "group_ids": [
+      "grp-finance"
+    ],
+    "owner_id": "user-orgadmin-001",
+    "is_active": true,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-18T15:01:29.889554"
+  },
+  {
+    "id": "0ba90dc3-2d34-48fa-b684-fe3dbbcc4eb8",
+    "name": "PLP  Cross Match",
+    "description": "AI based Solution for RFQ for PLP product match ",
+    "launchurl": "https://new-demo.d27nyl3h4bqwq3.amplifyapp.com/",
+    "workflow_ids": [
+      "bee5012d-2871-4769-ab5b-9c552cd1ffe7",
+      "f37242eb-c9c7-4bf2-8358-df81c4e77f97"
+    ],
+    "user_ids": [
+      "user-admin-001",
+      "user-alice-001",
+      "user-processadmin-001"
+    ],
+    "group_ids": [],
+    "owner_id": "user-admin-001",
+    "is_active": true,
+    "created_at": "2026-05-08T18:10:28.002902",
+    "updated_at": "2026-05-15T11:32:52.653021"
+  }
+]

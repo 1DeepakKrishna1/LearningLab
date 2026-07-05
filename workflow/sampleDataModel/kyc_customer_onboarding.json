@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KYC Customer Onboarding",
+  "description": "Know Your Customer identity verification and account activation workflow",
+  "definitions": {
+    "Customer": {
+      "type": "object",
+      "required": ["customer_id", "full_name", "dob", "nationality"],
+      "properties": {
+        "customer_id":   { "type": "string",  "description": "Unique customer identifier" },
+        "full_name":     { "type": "string",  "description": "Full legal name" },
+        "dob":           { "type": "string",  "description": "Date of birth (YYYY-MM-DD)" },
+        "nationality":   { "type": "string",  "description": "Nationality / citizenship" },
+        "gender":        { "type": "string",  "description": "Male / Female / Other" },
+        "email":         { "type": "string",  "description": "Primary email address" },
+        "phone":         { "type": "string",  "description": "Primary phone number" },
+        "address_line1": { "type": "string",  "description": "Address line 1" },
+        "address_line2": { "type": "string",  "description": "Address line 2" },
+        "city":          { "type": "string",  "description": "City" },
+        "state":         { "type": "string",  "description": "State / Province" },
+        "postal_code":   { "type": "string",  "description": "Postal / ZIP code" },
+        "country":       { "type": "string",  "description": "Country code (ISO 3166)" },
+        "risk_level":    { "type": "string",  "description": "Low / Medium / High (AML risk)" },
+        "is_pep":        { "type": "boolean", "description": "Politically Exposed Person flag" }
+      }
+    },
+    "IdentityDocument": {
+      "type": "object",
+      "required": ["doc_id", "customer_id", "doc_type", "doc_number"],
+      "properties": {
+        "doc_id":          { "type": "string",  "description": "Document record ID" },
+        "customer_id":     { "type": "string",  "description": "Reference to Customer" },
+        "doc_type":        { "type": "string",  "description": "Passport / Aadhaar / PAN / DL / Voter ID" },
+        "doc_number":      { "type": "string",  "description": "Document number" },
+        "issuing_country": { "type": "string",  "description": "Country that issued the document" },
+        "issue_date":      { "type": "string",  "description": "Issue date" },
+        "expiry_date":     { "type": "string",  "description": "Expiry date" },
+        "front_image_ref": { "type": "string",  "description": "Storage reference for front image" },
+        "back_image_ref":  { "type": "string",  "description": "Storage reference for back image" },
+        "is_primary":      { "type": "boolean", "description": "Primary identity document flag" }
+      }
+    },
+    "VerificationRecord": {
+      "type": "object",
+      "required": ["verification_id", "customer_id", "verification_type", "status"],
+      "properties": {
+        "verification_id":   { "type": "string",  "description": "Verification record ID" },
+        "customer_id":       { "type": "string",  "description": "Reference to Customer" },
+        "doc_id":            { "type": "string",  "description": "Reference to IdentityDocument" },
+        "verification_type": { "type": "string",  "description": "OCR / Face-Match / Liveness / Database / Manual" },
+        "status":            { "type": "string",  "description": "Pending / Passed / Failed / Needs-Review" },
+        "confidence_score":  { "type": "number",  "description": "ML confidence score (0-1)" },
+        "failure_reason":    { "type": "string",  "description": "Reason if verification failed" },
+        "verified_by":       { "type": "string",  "description": "Agent ID or system name" },
+        "verified_at":       { "type": "string",  "description": "Verification timestamp" },
+        "review_notes":      { "type": "string",  "description": "Manual reviewer notes" }
+      }
+    },
+    "AMLScreening": {
+      "type": "object",
+      "required": ["screening_id", "customer_id", "screened_at"],
+      "properties": {
+        "screening_id":  { "type": "string",  "description": "AML screening record ID" },
+        "customer_id":   { "type": "string",  "description": "Reference to Customer" },
+        "watchlist_hit": { "type": "boolean", "description": "Match found in sanctions / watchlist" },
+        "pep_match":     { "type": "boolean", "description": "PEP database match found" },
+        "adverse_media": { "type": "boolean", "description": "Adverse media found" },
+        "match_details": { "type": "string",  "description": "Details of any matches" },
+        "resolution":    { "type": "string",  "description": "Clear / Escalate / Reject" },
+        "screened_by":   { "type": "string",  "description": "System or analyst who ran screening" },
+        "screened_at":   { "type": "string",  "description": "Screening timestamp" }
+      }
+    },
+    "OnboardingCase": {
+      "type": "object",
+      "required": ["case_id", "customer_id", "channel", "status"],
+      "properties": {
+        "case_id":          { "type": "string", "description": "Onboarding case ID" },
+        "customer_id":      { "type": "string", "description": "Reference to Customer" },
+        "channel":          { "type": "string", "description": "Web / Mobile / Branch / API" },
+        "product_type":     { "type": "string", "description": "Product being onboarded for" },
+        "status":           { "type": "string", "description": "Initiated / Docs Collected / Under Review / Approved / Rejected / Active" },
+        "assigned_analyst": { "type": "string", "description": "Assigned KYC analyst" },
+        "sla_deadline":     { "type": "string", "description": "SLA completion deadline" },
+        "created_at":       { "type": "string", "description": "Case creation timestamp" },
+        "completed_at":     { "type": "string", "description": "Case completion timestamp" },
+        "rejection_reason": { "type": "string", "description": "Reason if case rejected" }
+      }
+    }
+  }
+}

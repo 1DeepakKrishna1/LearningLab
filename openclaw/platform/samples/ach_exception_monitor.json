@@ -1,0 +1,79 @@
+{
+  "name": "ACH Exception Monitor",
+  "description": "Scheduled finance workflow: search Outlook for ACH exception reports, have an executor agent classify retryable vs non-retryable items, record them to Excel, and require operations approval before re-submitting retryable exceptions.",
+  "tags": ["sample", "finance", "approval"],
+  "nodes": [
+    {
+      "id": "cron",
+      "type": "trigger.cron",
+      "position": { "x": 0, "y": 200 },
+      "data": { "label": "Every 30 min", "config": { "cron": "*/30 * * * *" } }
+    },
+    {
+      "id": "search",
+      "type": "tool.outlook.search_outlook_email",
+      "position": { "x": 230, "y": 200 },
+      "data": { "label": "Find ACH Exceptions", "config": { "query": "ACH exception", "folder": "Inbox", "max_count": 10 } }
+    },
+    {
+      "id": "classify",
+      "type": "agent.executor",
+      "position": { "x": 470, "y": 200 },
+      "data": {
+        "label": "Classify Exceptions",
+        "config": {
+          "task": "From the emails in context, extract each ACH exception with its return code (R01, R02, ...) and label it retryable or non-retryable. Return JSON with a `retryable_count`.",
+          "tools": []
+        }
+      }
+    },
+    {
+      "id": "record",
+      "type": "tool.excel_tools.excel_write",
+      "position": { "x": 710, "y": 200 },
+      "data": { "label": "Record to Excel", "config": { "file_path": "ach_exceptions.xlsx", "sheet": "Today" } }
+    },
+    {
+      "id": "any_retryable",
+      "type": "logic.if_else",
+      "position": { "x": 950, "y": 200 },
+      "data": { "label": "Retryable > 0?", "config": { "left": "{{ nodes.classify.output.retryable_count }}", "operator": ">", "right": 0 } }
+    },
+    {
+      "id": "approval",
+      "type": "logic.approval",
+      "position": { "x": 1190, "y": 100 },
+      "data": { "label": "Approve Re-submit", "config": { "channel": "ui", "title": "Approve ACH re-submission", "description": "Retryable ACH exceptions found. Approve to notify operations to re-submit." } }
+    },
+    {
+      "id": "notify_ops",
+      "type": "action.send_email",
+      "position": { "x": 1430, "y": 40 },
+      "data": { "label": "Notify Operations", "config": { "to": "operations@exelcius.com", "subject": "ACH re-submission approved", "body": "Approved retryable ACH exceptions for re-submission. See ach_exceptions.xlsx." } }
+    },
+    {
+      "id": "log_reject",
+      "type": "action.file_write",
+      "position": { "x": 1430, "y": 160 },
+      "data": { "label": "Log Rejection", "config": { "path": "ach_rejections.log", "content": "Re-submission rejected at {{ trigger.type }}." } }
+    },
+    {
+      "id": "report",
+      "type": "action.generate_report",
+      "position": { "x": 1430, "y": 300 },
+      "data": { "label": "Summary Report", "config": { "title": "ACH Exception Run", "format": "markdown", "path": "ach_report.md" } }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "cron", "target": "search" },
+    { "id": "e2", "source": "search", "target": "classify" },
+    { "id": "e3", "source": "classify", "target": "record" },
+    { "id": "e4", "source": "record", "target": "any_retryable" },
+    { "id": "e5", "source": "any_retryable", "target": "approval", "sourceHandle": "true" },
+    { "id": "e6", "source": "any_retryable", "target": "report", "sourceHandle": "false" },
+    { "id": "e7", "source": "approval", "target": "notify_ops", "sourceHandle": "approved" },
+    { "id": "e8", "source": "approval", "target": "log_reject", "sourceHandle": "rejected" },
+    { "id": "e9", "source": "notify_ops", "target": "report" },
+    { "id": "e10", "source": "log_reject", "target": "report" }
+  ]
+}

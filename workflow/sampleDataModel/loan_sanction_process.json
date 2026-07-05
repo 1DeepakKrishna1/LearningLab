@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Loan Sanction Process",
+  "description": "End-to-end loan application, credit assessment, and disbursement workflow",
+  "definitions": {
+    "Applicant": {
+      "type": "object",
+      "required": ["applicant_id", "full_name", "pan_number", "date_of_birth", "annual_income"],
+      "properties": {
+        "applicant_id":    { "type": "string",  "description": "Unique applicant identifier" },
+        "full_name":       { "type": "string",  "description": "Full legal name" },
+        "pan_number":      { "type": "string",  "description": "PAN card number" },
+        "aadhaar_number":  { "type": "string",  "description": "Aadhaar card number" },
+        "date_of_birth":   { "type": "string",  "description": "Date of birth (YYYY-MM-DD)" },
+        "email":           { "type": "string",  "description": "Email address" },
+        "phone":           { "type": "string",  "description": "Mobile number" },
+        "annual_income":   { "type": "number",  "description": "Annual income in INR" },
+        "employment_type": { "type": "string",  "description": "Salaried / Self-Employed / Business" },
+        "credit_score":    { "type": "number",  "description": "CIBIL credit score (300-900)" },
+        "existing_emi":    { "type": "number",  "description": "Total existing EMI obligations" }
+      }
+    },
+    "LoanApplication": {
+      "type": "object",
+      "required": ["application_id", "applicant_id", "loan_type", "requested_amount"],
+      "properties": {
+        "application_id":   { "type": "string", "description": "Unique application ID" },
+        "applicant_id":     { "type": "string", "description": "Reference to Applicant" },
+        "loan_type":        { "type": "string", "description": "Home / Personal / Business / Auto / Education" },
+        "requested_amount": { "type": "number", "description": "Loan amount requested (INR)" },
+        "tenure_months":    { "type": "number", "description": "Repayment tenure in months" },
+        "purpose":          { "type": "string", "description": "Purpose of loan" },
+        "application_date": { "type": "string", "description": "Date of application" },
+        "status":           { "type": "string", "description": "Draft / Submitted / Under Review / Approved / Rejected / Disbursed" },
+        "assigned_officer": { "type": "string", "description": "Loan officer assigned" },
+        "branch_code":      { "type": "string", "description": "Processing branch code" }
+      }
+    },
+    "CreditAssessment": {
+      "type": "object",
+      "required": ["assessment_id", "application_id", "risk_category"],
+      "properties": {
+        "assessment_id":      { "type": "string", "description": "Assessment record ID" },
+        "application_id":     { "type": "string", "description": "Reference to LoanApplication" },
+        "dti_ratio":          { "type": "number", "description": "Debt-to-income ratio (%)" },
+        "ltv_ratio":          { "type": "number", "description": "Loan-to-value ratio (%)" },
+        "risk_category":      { "type": "string", "description": "Low / Medium / High" },
+        "recommended_amount": { "type": "number", "description": "Recommended loan amount" },
+        "recommended_rate":   { "type": "number", "description": "Recommended interest rate (%)" },
+        "bureau_report_ref":  { "type": "string", "description": "Credit bureau report reference" },
+        "remarks":            { "type": "string", "description": "Underwriter remarks" },
+        "assessed_by":        { "type": "string", "description": "Underwriter ID or AI system" },
+        "assessed_at":        { "type": "string", "description": "Assessment timestamp" },
+        "override_reason":    { "type": "string", "description": "Reason if manual override applied" }
+      }
+    },
+    "Collateral": {
+      "type": "object",
+      "required": ["collateral_id", "application_id", "collateral_type", "estimated_value"],
+      "properties": {
+        "collateral_id":     { "type": "string",  "description": "Collateral record ID" },
+        "application_id":    { "type": "string",  "description": "Reference to LoanApplication" },
+        "collateral_type":   { "type": "string",  "description": "Property / Vehicle / FD / Shares / Gold" },
+        "description":       { "type": "string",  "description": "Asset description" },
+        "estimated_value":   { "type": "number",  "description": "Market value of collateral" },
+        "verified_value":    { "type": "number",  "description": "Bank-verified value" },
+        "ownership_doc_ref": { "type": "string",  "description": "Document reference number" },
+        "valuation_date":    { "type": "string",  "description": "Date of valuation" },
+        "is_verified":       { "type": "boolean", "description": "Valuation verification status" }
+      }
+    },
+    "SanctionLetter": {
+      "type": "object",
+      "required": ["letter_id", "application_id", "sanctioned_amount", "interest_rate"],
+      "properties": {
+        "letter_id":             { "type": "string",  "description": "Sanction letter ID" },
+        "application_id":        { "type": "string",  "description": "Reference to LoanApplication" },
+        "sanctioned_amount":     { "type": "number",  "description": "Final approved loan amount" },
+        "interest_rate":         { "type": "number",  "description": "Interest rate (% per annum)" },
+        "tenure_months":         { "type": "number",  "description": "Approved tenure in months" },
+        "emi_amount":            { "type": "number",  "description": "Monthly EMI amount" },
+        "processing_fee":        { "type": "number",  "description": "Processing fee charged" },
+        "conditions":            { "type": "string",  "description": "Conditions and covenants" },
+        "valid_until":           { "type": "string",  "description": "Offer validity date" },
+        "issued_at":             { "type": "string",  "description": "Issue timestamp" },
+        "accepted_by_applicant": { "type": "boolean", "description": "Whether applicant has accepted" }
+      }
+    },
+    "Disbursement": {
+      "type": "object",
+      "required": ["disbursement_id", "application_id", "disbursed_amount", "disbursement_date"],
+      "properties": {
+        "disbursement_id":   { "type": "string", "description": "Disbursement record ID" },
+        "application_id":    { "type": "string", "description": "Reference to LoanApplication" },
+        "disbursed_amount":  { "type": "number", "description": "Amount actually disbursed" },
+        "disbursement_date": { "type": "string", "description": "Date of disbursement" },
+        "account_number":    { "type": "string", "description": "Beneficiary account number" },
+        "ifsc_code":         { "type": "string", "description": "Bank IFSC code" },
+        "transaction_ref":   { "type": "string", "description": "Bank transaction reference" },
+        "mode":              { "type": "string", "description": "NEFT / RTGS / IMPS / Cheque" },
+        "disbursed_by":      { "type": "string", "description": "Officer who authorized disbursement" }
+      }
+    }
+  }
+}

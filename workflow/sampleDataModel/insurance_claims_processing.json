@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Insurance Claims Processing",
+  "description": "Policy claim intake, assessment, investigation, and settlement workflow",
+  "definitions": {
+    "PolicyHolder": {
+      "type": "object",
+      "required": ["holder_id", "full_name", "policy_number"],
+      "properties": {
+        "holder_id":      { "type": "string",  "description": "Unique policyholder ID" },
+        "full_name":      { "type": "string",  "description": "Full name" },
+        "policy_number":  { "type": "string",  "description": "Insurance policy number" },
+        "policy_type":    { "type": "string",  "description": "Health / Motor / Life / Property / Travel" },
+        "email":          { "type": "string",  "description": "Email address" },
+        "phone":          { "type": "string",  "description": "Phone number" },
+        "sum_insured":    { "type": "number",  "description": "Total sum insured" },
+        "premium_amount": { "type": "number",  "description": "Annual premium amount" },
+        "policy_start":   { "type": "string",  "description": "Policy start date" },
+        "policy_end":     { "type": "string",  "description": "Policy expiry date" },
+        "is_active":      { "type": "boolean", "description": "Policy active status" }
+      }
+    },
+    "ClaimRequest": {
+      "type": "object",
+      "required": ["claim_id", "holder_id", "incident_date", "claim_type", "claimed_amount"],
+      "properties": {
+        "claim_id":          { "type": "string", "description": "Unique claim ID" },
+        "holder_id":         { "type": "string", "description": "Reference to PolicyHolder" },
+        "incident_date":     { "type": "string", "description": "Date of incident / loss" },
+        "reported_date":     { "type": "string", "description": "Date claim was reported" },
+        "claim_type":        { "type": "string", "description": "Hospitalization / Accident / Theft / Damage / Death" },
+        "incident_location": { "type": "string", "description": "Location of incident" },
+        "incident_desc":     { "type": "string", "description": "Description of incident" },
+        "claimed_amount":    { "type": "number", "description": "Amount claimed by policyholder" },
+        "status":            { "type": "string", "description": "Filed / Under Review / Investigation / Approved / Rejected / Settled" },
+        "priority":          { "type": "string", "description": "Low / Normal / High / Critical" }
+      }
+    },
+    "SupportingDocument": {
+      "type": "object",
+      "required": ["doc_id", "claim_id", "doc_type"],
+      "properties": {
+        "doc_id":            { "type": "string",  "description": "Document record ID" },
+        "claim_id":          { "type": "string",  "description": "Reference to ClaimRequest" },
+        "doc_type":          { "type": "string",  "description": "FIR / Hospital Bill / Repair Quote / Death Certificate / Photos / Other" },
+        "file_name":         { "type": "string",  "description": "Original file name" },
+        "storage_ref":       { "type": "string",  "description": "Storage path / URL reference" },
+        "uploaded_at":       { "type": "string",  "description": "Upload timestamp" },
+        "is_verified":       { "type": "boolean", "description": "Document verified by adjuster" },
+        "verification_note": { "type": "string",  "description": "Verification notes" }
+      }
+    },
+    "ClaimAssessment": {
+      "type": "object",
+      "required": ["assessment_id", "claim_id", "adjuster_id", "eligible_amount"],
+      "properties": {
+        "assessment_id":    { "type": "string",  "description": "Assessment record ID" },
+        "claim_id":         { "type": "string",  "description": "Reference to ClaimRequest" },
+        "adjuster_id":      { "type": "string",  "description": "Claims adjuster ID" },
+        "eligible_amount":  { "type": "number",  "description": "Assessed eligible claim amount" },
+        "deductible":       { "type": "number",  "description": "Policy deductible applied" },
+        "net_payable":      { "type": "number",  "description": "Net payable after deductible" },
+        "is_fraud_suspect": { "type": "boolean", "description": "Flagged for fraud investigation" },
+        "coverage_details": { "type": "string",  "description": "Coverage breakdown notes" },
+        "assessment_date":  { "type": "string",  "description": "Date of assessment" },
+        "recommendation":   { "type": "string",  "description": "Approve / Reject / Partial / Escalate" }
+      }
+    },
+    "Settlement": {
+      "type": "object",
+      "required": ["settlement_id", "claim_id", "settlement_amount", "payment_mode"],
+      "properties": {
+        "settlement_id":     { "type": "string",  "description": "Settlement record ID" },
+        "claim_id":          { "type": "string",  "description": "Reference to ClaimRequest" },
+        "settlement_amount": { "type": "number",  "description": "Final settlement amount paid" },
+        "payment_mode":      { "type": "string",  "description": "NEFT / Cheque / Direct Credit / Cashless" },
+        "account_number":    { "type": "string",  "description": "Beneficiary account number" },
+        "transaction_ref":   { "type": "string",  "description": "Payment transaction reference" },
+        "settlement_date":   { "type": "string",  "description": "Date of settlement" },
+        "settled_by":        { "type": "string",  "description": "Authorizing officer ID" },
+        "claimant_accepted": { "type": "boolean", "description": "Whether claimant accepted settlement" },
+        "closure_remarks":   { "type": "string",  "description": "Final closure notes" }
+      }
+    }
+  }
+}

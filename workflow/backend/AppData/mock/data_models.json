@@ -1,0 +1,4380 @@
+[
+  {
+    "id": "2725e764-1506-4f68-ae2e-bddc9c5e1fd8",
+    "name": "MyDataModel",
+    "description": "This is my Data Model",
+    "entities": [
+      {
+        "id": "4d3ac3c5-a20d-43d2-a6e1-8f27fa3fe779",
+        "name": "Name",
+        "description": "Name of the entity",
+        "fields": [
+          {
+            "name": "First",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "Last",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-05T11:36:32.862277",
+    "updated_at": "2026-05-05T11:36:32.862277"
+  },
+  {
+    "id": "dm-loan-sanction-2026",
+    "name": "Loan Sanction Process",
+    "description": "End-to-end loan application, credit assessment, and disbursement data model",
+    "entities": [
+      {
+        "id": "ent-ls-applicant",
+        "name": "Applicant",
+        "description": "Loan applicant personal and financial details",
+        "fields": [
+          {
+            "name": "applicant_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique applicant identifier",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "full_name",
+            "field_type": "string",
+            "required": true,
+            "description": "Full legal name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "pan_number",
+            "field_type": "string",
+            "required": true,
+            "description": "PAN card number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "aadhaar_number",
+            "field_type": "string",
+            "required": false,
+            "description": "Aadhaar card number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "date_of_birth",
+            "field_type": "string",
+            "required": true,
+            "description": "Date of birth (YYYY-MM-DD)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "email",
+            "field_type": "string",
+            "required": false,
+            "description": "Email address",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "phone",
+            "field_type": "string",
+            "required": false,
+            "description": "Mobile number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "annual_income",
+            "field_type": "number",
+            "required": true,
+            "description": "Annual income in INR",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "employment_type",
+            "field_type": "string",
+            "required": false,
+            "description": "Salaried / Self-Employed / Business",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "credit_score",
+            "field_type": "number",
+            "required": false,
+            "description": "CIBIL credit score (300-900)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "existing_emi",
+            "field_type": "number",
+            "required": false,
+            "description": "Total existing EMI obligations",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-ls-application",
+        "name": "LoanApplication",
+        "description": "Loan request submitted by the applicant",
+        "fields": [
+          {
+            "name": "application_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique application ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "applicant_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Applicant",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "loan_type",
+            "field_type": "string",
+            "required": true,
+            "description": "Home / Personal / Business / Auto / Education",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "requested_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Loan amount requested (INR)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "tenure_months",
+            "field_type": "number",
+            "required": false,
+            "description": "Repayment tenure in months",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "purpose",
+            "field_type": "string",
+            "required": false,
+            "description": "Purpose of loan",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "application_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Date of application",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": false,
+            "description": "Draft / Submitted / Under Review / Approved / Rejected / Disbursed",
+            "validation": null,
+            "default_value": "Draft"
+          },
+          {
+            "name": "assigned_officer",
+            "field_type": "string",
+            "required": false,
+            "description": "Loan officer assigned",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "branch_code",
+            "field_type": "string",
+            "required": false,
+            "description": "Processing branch code",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-ls-credit",
+        "name": "CreditAssessment",
+        "description": "Underwriter risk and eligibility assessment",
+        "fields": [
+          {
+            "name": "assessment_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Assessment record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "application_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to LoanApplication",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "dti_ratio",
+            "field_type": "number",
+            "required": false,
+            "description": "Debt-to-income ratio (%)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "ltv_ratio",
+            "field_type": "number",
+            "required": false,
+            "description": "Loan-to-value ratio (%)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "risk_category",
+            "field_type": "string",
+            "required": true,
+            "description": "Low / Medium / High",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "recommended_amount",
+            "field_type": "number",
+            "required": false,
+            "description": "Recommended loan amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "recommended_rate",
+            "field_type": "number",
+            "required": false,
+            "description": "Recommended interest rate (%)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "bureau_report_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Credit bureau report reference",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "remarks",
+            "field_type": "string",
+            "required": false,
+            "description": "Underwriter remarks",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "assessed_by",
+            "field_type": "string",
+            "required": false,
+            "description": "Underwriter ID or AI system",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "assessed_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Assessment timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "override_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "Reason if manual override applied",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-ls-collateral",
+        "name": "Collateral",
+        "description": "Asset pledged as security for the loan",
+        "fields": [
+          {
+            "name": "collateral_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Collateral record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "application_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to LoanApplication",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "collateral_type",
+            "field_type": "string",
+            "required": true,
+            "description": "Property / Vehicle / FD / Shares / Gold",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "description",
+            "field_type": "string",
+            "required": false,
+            "description": "Asset description",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "estimated_value",
+            "field_type": "number",
+            "required": true,
+            "description": "Market value of collateral",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verified_value",
+            "field_type": "number",
+            "required": false,
+            "description": "Bank-verified value",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "ownership_doc_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Document reference number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "valuation_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Date of valuation",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_verified",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Valuation verification status",
+            "validation": null,
+            "default_value": false
+          }
+        ]
+      },
+      {
+        "id": "ent-ls-sanction",
+        "name": "SanctionLetter",
+        "description": "Formal loan approval offer issued to the applicant",
+        "fields": [
+          {
+            "name": "letter_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Sanction letter ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "application_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to LoanApplication",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "sanctioned_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Final approved loan amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "interest_rate",
+            "field_type": "number",
+            "required": true,
+            "description": "Interest rate (% per annum)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "tenure_months",
+            "field_type": "number",
+            "required": false,
+            "description": "Approved tenure in months",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "emi_amount",
+            "field_type": "number",
+            "required": false,
+            "description": "Monthly EMI amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "processing_fee",
+            "field_type": "number",
+            "required": false,
+            "description": "Processing fee charged",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "conditions",
+            "field_type": "string",
+            "required": false,
+            "description": "Conditions and covenants",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "valid_until",
+            "field_type": "string",
+            "required": false,
+            "description": "Offer validity date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "issued_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Issue timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "accepted_by_applicant",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Whether applicant has accepted",
+            "validation": null,
+            "default_value": false
+          }
+        ]
+      },
+      {
+        "id": "ent-ls-disbursement",
+        "name": "Disbursement",
+        "description": "Actual fund transfer to the borrower",
+        "fields": [
+          {
+            "name": "disbursement_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Disbursement record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "application_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to LoanApplication",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "disbursed_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Amount actually disbursed",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "disbursement_date",
+            "field_type": "string",
+            "required": true,
+            "description": "Date of disbursement",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "account_number",
+            "field_type": "string",
+            "required": false,
+            "description": "Beneficiary account number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "ifsc_code",
+            "field_type": "string",
+            "required": false,
+            "description": "Bank IFSC code",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "transaction_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Bank transaction reference",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mode",
+            "field_type": "string",
+            "required": false,
+            "description": "NEFT / RTGS / IMPS / Cheque",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "disbursed_by",
+            "field_type": "string",
+            "required": false,
+            "description": "Officer who authorized disbursement",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-ls-01",
+        "from_entity": "ent-ls-applicant",
+        "to_entity": "ent-ls-application",
+        "relation_type": "one_to_many",
+        "label": "submits"
+      },
+      {
+        "id": "rel-ls-02",
+        "from_entity": "ent-ls-application",
+        "to_entity": "ent-ls-credit",
+        "relation_type": "one_to_one",
+        "label": "assessed by"
+      },
+      {
+        "id": "rel-ls-03",
+        "from_entity": "ent-ls-application",
+        "to_entity": "ent-ls-collateral",
+        "relation_type": "one_to_many",
+        "label": "secured by"
+      },
+      {
+        "id": "rel-ls-04",
+        "from_entity": "ent-ls-application",
+        "to_entity": "ent-ls-sanction",
+        "relation_type": "one_to_one",
+        "label": "results in"
+      },
+      {
+        "id": "rel-ls-05",
+        "from_entity": "ent-ls-sanction",
+        "to_entity": "ent-ls-disbursement",
+        "relation_type": "one_to_one",
+        "label": "triggers"
+      }
+    ],
+    "created_at": "2026-05-05T12:00:00",
+    "updated_at": "2026-05-05T12:00:00"
+  },
+  {
+    "id": "dm-kyc-onboarding-2026",
+    "name": "KYC Customer Onboarding",
+    "description": "Know Your Customer identity verification and account activation data model",
+    "entities": [
+      {
+        "id": "ent-kyc-customer",
+        "name": "Customer",
+        "description": "Individual being onboarded",
+        "fields": [
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique customer identifier",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "full_name",
+            "field_type": "string",
+            "required": true,
+            "description": "Full legal name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "dob",
+            "field_type": "string",
+            "required": true,
+            "description": "Date of birth (YYYY-MM-DD)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "nationality",
+            "field_type": "string",
+            "required": true,
+            "description": "Nationality / citizenship",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "gender",
+            "field_type": "string",
+            "required": false,
+            "description": "Male / Female / Other",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "email",
+            "field_type": "string",
+            "required": false,
+            "description": "Primary email address",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "phone",
+            "field_type": "string",
+            "required": false,
+            "description": "Primary phone number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "address_line1",
+            "field_type": "string",
+            "required": false,
+            "description": "Address line 1",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "city",
+            "field_type": "string",
+            "required": false,
+            "description": "City",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "state",
+            "field_type": "string",
+            "required": false,
+            "description": "State / Province",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "postal_code",
+            "field_type": "string",
+            "required": false,
+            "description": "Postal / ZIP code",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "country",
+            "field_type": "string",
+            "required": false,
+            "description": "Country code (ISO 3166)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "risk_level",
+            "field_type": "string",
+            "required": false,
+            "description": "Low / Medium / High (AML risk)",
+            "validation": null,
+            "default_value": "Low"
+          },
+          {
+            "name": "is_pep",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Politically Exposed Person flag",
+            "validation": null,
+            "default_value": false
+          }
+        ]
+      },
+      {
+        "id": "ent-kyc-document",
+        "name": "IdentityDocument",
+        "description": "Government-issued identity proof submitted for verification",
+        "fields": [
+          {
+            "name": "doc_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Document record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_type",
+            "field_type": "string",
+            "required": true,
+            "description": "Passport / Aadhaar / PAN / DL / Voter ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_number",
+            "field_type": "string",
+            "required": true,
+            "description": "Document number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "issuing_country",
+            "field_type": "string",
+            "required": false,
+            "description": "Country that issued the document",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "issue_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Issue date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "expiry_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Expiry date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "front_image_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Storage reference for front image",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "back_image_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Storage reference for back image",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_primary",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Primary identity document flag",
+            "validation": null,
+            "default_value": false
+          }
+        ]
+      },
+      {
+        "id": "ent-kyc-verification",
+        "name": "VerificationRecord",
+        "description": "Result of each identity verification check performed",
+        "fields": [
+          {
+            "name": "verification_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Verification record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_id",
+            "field_type": "string",
+            "required": false,
+            "description": "Reference to IdentityDocument",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verification_type",
+            "field_type": "string",
+            "required": true,
+            "description": "OCR / Face-Match / Liveness / Database / Manual",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": true,
+            "description": "Pending / Passed / Failed / Needs-Review",
+            "validation": null,
+            "default_value": "Pending"
+          },
+          {
+            "name": "confidence_score",
+            "field_type": "number",
+            "required": false,
+            "description": "ML confidence score (0-1)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "failure_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "Reason if verification failed",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verified_by",
+            "field_type": "string",
+            "required": false,
+            "description": "Agent ID or system name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verified_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Verification timestamp",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-kyc-aml",
+        "name": "AMLScreening",
+        "description": "Anti-money laundering and sanctions screening result",
+        "fields": [
+          {
+            "name": "screening_id",
+            "field_type": "string",
+            "required": true,
+            "description": "AML screening record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "watchlist_hit",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Match found in sanctions / watchlist",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "pep_match",
+            "field_type": "boolean",
+            "required": false,
+            "description": "PEP database match found",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "adverse_media",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Adverse media found",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "match_details",
+            "field_type": "string",
+            "required": false,
+            "description": "Details of any matches",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "resolution",
+            "field_type": "string",
+            "required": false,
+            "description": "Clear / Escalate / Reject",
+            "validation": null,
+            "default_value": "Clear"
+          },
+          {
+            "name": "screened_by",
+            "field_type": "string",
+            "required": false,
+            "description": "System or analyst who ran screening",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "screened_at",
+            "field_type": "string",
+            "required": true,
+            "description": "Screening timestamp",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-kyc-case",
+        "name": "OnboardingCase",
+        "description": "Overall onboarding case tracking all steps and SLA",
+        "fields": [
+          {
+            "name": "case_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Onboarding case ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "channel",
+            "field_type": "string",
+            "required": true,
+            "description": "Web / Mobile / Branch / API",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "product_type",
+            "field_type": "string",
+            "required": false,
+            "description": "Product being onboarded for",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": true,
+            "description": "Initiated / Docs Collected / Under Review / Approved / Rejected / Active",
+            "validation": null,
+            "default_value": "Initiated"
+          },
+          {
+            "name": "assigned_analyst",
+            "field_type": "string",
+            "required": false,
+            "description": "Assigned KYC analyst",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "sla_deadline",
+            "field_type": "string",
+            "required": false,
+            "description": "SLA completion deadline",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "created_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Case creation timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "completed_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Case completion timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rejection_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "Reason if case rejected",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-kyc-01",
+        "from_entity": "ent-kyc-customer",
+        "to_entity": "ent-kyc-document",
+        "relation_type": "one_to_many",
+        "label": "submits"
+      },
+      {
+        "id": "rel-kyc-02",
+        "from_entity": "ent-kyc-document",
+        "to_entity": "ent-kyc-verification",
+        "relation_type": "one_to_many",
+        "label": "verified via"
+      },
+      {
+        "id": "rel-kyc-03",
+        "from_entity": "ent-kyc-customer",
+        "to_entity": "ent-kyc-aml",
+        "relation_type": "one_to_one",
+        "label": "screened in"
+      },
+      {
+        "id": "rel-kyc-04",
+        "from_entity": "ent-kyc-customer",
+        "to_entity": "ent-kyc-case",
+        "relation_type": "one_to_one",
+        "label": "tracked by"
+      }
+    ],
+    "created_at": "2026-05-05T12:10:00",
+    "updated_at": "2026-05-05T12:10:00"
+  },
+  {
+    "id": "dm-insurance-claims-2026",
+    "name": "Insurance Claims Processing",
+    "description": "Policy claim intake, assessment, investigation, and settlement data model",
+    "entities": [
+      {
+        "id": "ent-ins-holder",
+        "name": "PolicyHolder",
+        "description": "Insurance policy holder",
+        "fields": [
+          {
+            "name": "holder_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique policyholder ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "full_name",
+            "field_type": "string",
+            "required": true,
+            "description": "Full name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "policy_number",
+            "field_type": "string",
+            "required": true,
+            "description": "Insurance policy number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "policy_type",
+            "field_type": "string",
+            "required": false,
+            "description": "Health / Motor / Life / Property / Travel",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "email",
+            "field_type": "string",
+            "required": false,
+            "description": "Email address",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "phone",
+            "field_type": "string",
+            "required": false,
+            "description": "Phone number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "sum_insured",
+            "field_type": "number",
+            "required": false,
+            "description": "Total sum insured",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "premium_amount",
+            "field_type": "number",
+            "required": false,
+            "description": "Annual premium amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "policy_start",
+            "field_type": "string",
+            "required": false,
+            "description": "Policy start date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "policy_end",
+            "field_type": "string",
+            "required": false,
+            "description": "Policy expiry date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_active",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Policy active status",
+            "validation": null,
+            "default_value": true
+          }
+        ]
+      },
+      {
+        "id": "ent-ins-claim",
+        "name": "ClaimRequest",
+        "description": "Claim filed by the policyholder",
+        "fields": [
+          {
+            "name": "claim_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique claim ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "holder_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to PolicyHolder",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "incident_date",
+            "field_type": "string",
+            "required": true,
+            "description": "Date of incident / loss",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "reported_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Date claim was reported",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "claim_type",
+            "field_type": "string",
+            "required": true,
+            "description": "Hospitalization / Accident / Theft / Damage / Death",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "incident_location",
+            "field_type": "string",
+            "required": false,
+            "description": "Location of incident",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "incident_desc",
+            "field_type": "string",
+            "required": false,
+            "description": "Description of incident",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "claimed_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Amount claimed by policyholder",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": false,
+            "description": "Filed / Under Review / Investigation / Approved / Rejected / Settled",
+            "validation": null,
+            "default_value": "Filed"
+          },
+          {
+            "name": "priority",
+            "field_type": "string",
+            "required": false,
+            "description": "Low / Normal / High / Critical",
+            "validation": null,
+            "default_value": "Normal"
+          }
+        ]
+      },
+      {
+        "id": "ent-ins-document",
+        "name": "SupportingDocument",
+        "description": "Evidence and documents submitted to support the claim",
+        "fields": [
+          {
+            "name": "doc_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Document record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "claim_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to ClaimRequest",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_type",
+            "field_type": "string",
+            "required": true,
+            "description": "FIR / Hospital Bill / Repair Quote / Death Certificate / Photos",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "file_name",
+            "field_type": "string",
+            "required": false,
+            "description": "Original file name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "storage_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Storage path / URL reference",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "uploaded_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Upload timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_verified",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Document verified by adjuster",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "verification_note",
+            "field_type": "string",
+            "required": false,
+            "description": "Verification notes",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-ins-assessment",
+        "name": "ClaimAssessment",
+        "description": "Adjuster evaluation of the claim",
+        "fields": [
+          {
+            "name": "assessment_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Assessment record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "claim_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to ClaimRequest",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "adjuster_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Claims adjuster ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "eligible_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Assessed eligible claim amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "deductible",
+            "field_type": "number",
+            "required": false,
+            "description": "Policy deductible applied",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "net_payable",
+            "field_type": "number",
+            "required": false,
+            "description": "Net payable after deductible",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_fraud_suspect",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Flagged for fraud investigation",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "coverage_details",
+            "field_type": "string",
+            "required": false,
+            "description": "Coverage breakdown notes",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "assessment_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Date of assessment",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "recommendation",
+            "field_type": "string",
+            "required": false,
+            "description": "Approve / Reject / Partial / Escalate",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-ins-settlement",
+        "name": "Settlement",
+        "description": "Final payment made to the claimant",
+        "fields": [
+          {
+            "name": "settlement_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Settlement record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "claim_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to ClaimRequest",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "settlement_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Final settlement amount paid",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "payment_mode",
+            "field_type": "string",
+            "required": true,
+            "description": "NEFT / Cheque / Direct Credit / Cashless",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "account_number",
+            "field_type": "string",
+            "required": false,
+            "description": "Beneficiary account number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "transaction_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Payment transaction reference",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "settlement_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Date of settlement",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "settled_by",
+            "field_type": "string",
+            "required": false,
+            "description": "Authorizing officer ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "claimant_accepted",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Whether claimant accepted settlement",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "closure_remarks",
+            "field_type": "string",
+            "required": false,
+            "description": "Final closure notes",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-ins-01",
+        "from_entity": "ent-ins-holder",
+        "to_entity": "ent-ins-claim",
+        "relation_type": "one_to_many",
+        "label": "files"
+      },
+      {
+        "id": "rel-ins-02",
+        "from_entity": "ent-ins-claim",
+        "to_entity": "ent-ins-document",
+        "relation_type": "one_to_many",
+        "label": "supported by"
+      },
+      {
+        "id": "rel-ins-03",
+        "from_entity": "ent-ins-claim",
+        "to_entity": "ent-ins-assessment",
+        "relation_type": "one_to_one",
+        "label": "assessed in"
+      },
+      {
+        "id": "rel-ins-04",
+        "from_entity": "ent-ins-assessment",
+        "to_entity": "ent-ins-settlement",
+        "relation_type": "one_to_one",
+        "label": "leads to"
+      }
+    ],
+    "created_at": "2026-05-05T12:20:00",
+    "updated_at": "2026-05-05T12:20:00"
+  },
+  {
+    "id": "dm-po-approval-2026",
+    "name": "Purchase Order Approval",
+    "description": "Vendor selection, PO creation, multi-level approval, and goods receipt data model",
+    "entities": [
+      {
+        "id": "ent-po-vendor",
+        "name": "Vendor",
+        "description": "Registered vendor / supplier",
+        "fields": [
+          {
+            "name": "vendor_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique vendor ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_name",
+            "field_type": "string",
+            "required": true,
+            "description": "Registered vendor name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "gstin",
+            "field_type": "string",
+            "required": true,
+            "description": "GST registration number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "pan",
+            "field_type": "string",
+            "required": false,
+            "description": "PAN number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "category",
+            "field_type": "string",
+            "required": false,
+            "description": "IT / Facilities / Raw Material / Services / Marketing",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "contact_name",
+            "field_type": "string",
+            "required": false,
+            "description": "Primary contact person",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "email",
+            "field_type": "string",
+            "required": false,
+            "description": "Vendor email",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "phone",
+            "field_type": "string",
+            "required": false,
+            "description": "Vendor phone",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "payment_terms",
+            "field_type": "string",
+            "required": false,
+            "description": "Net 30 / Net 60 / Advance / COD",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_approved",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Vendor approved in vendor master",
+            "validation": null,
+            "default_value": false
+          },
+          {
+            "name": "rating",
+            "field_type": "number",
+            "required": false,
+            "description": "Internal vendor rating (1-5)",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-po-pr",
+        "name": "PurchaseRequest",
+        "description": "Internal procurement requisition raised by an employee",
+        "fields": [
+          {
+            "name": "pr_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Purchase request ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "requested_by",
+            "field_type": "string",
+            "required": true,
+            "description": "Employee ID who raised PR",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "department",
+            "field_type": "string",
+            "required": true,
+            "description": "Requesting department",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "cost_center",
+            "field_type": "string",
+            "required": false,
+            "description": "Cost center code",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "item_description",
+            "field_type": "string",
+            "required": true,
+            "description": "Description of items / services needed",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "quantity",
+            "field_type": "number",
+            "required": true,
+            "description": "Quantity required",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "unit",
+            "field_type": "string",
+            "required": false,
+            "description": "Unit of measure (Nos / Kg / Ltrs / Hours)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "estimated_cost",
+            "field_type": "number",
+            "required": true,
+            "description": "Estimated total cost (INR)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "required_by",
+            "field_type": "string",
+            "required": false,
+            "description": "Required delivery date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "justification",
+            "field_type": "string",
+            "required": false,
+            "description": "Business justification",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": false,
+            "description": "Draft / Submitted / Approved / Rejected / PO Raised",
+            "validation": null,
+            "default_value": "Draft"
+          },
+          {
+            "name": "created_at",
+            "field_type": "string",
+            "required": false,
+            "description": "PR creation timestamp",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-po-order",
+        "name": "PurchaseOrder",
+        "description": "Formal order issued to the vendor",
+        "fields": [
+          {
+            "name": "po_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Purchase order number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "pr_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to PurchaseRequest",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Vendor",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "po_date",
+            "field_type": "string",
+            "required": false,
+            "description": "PO issue date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "delivery_address",
+            "field_type": "string",
+            "required": false,
+            "description": "Delivery location",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "delivery_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Expected delivery date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "po_amount",
+            "field_type": "number",
+            "required": true,
+            "description": "Total PO value (excl. tax)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "tax_amount",
+            "field_type": "number",
+            "required": false,
+            "description": "Tax (GST) amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "total_amount",
+            "field_type": "number",
+            "required": false,
+            "description": "Total PO value (incl. tax)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "currency",
+            "field_type": "string",
+            "required": false,
+            "description": "Currency code (INR / USD / EUR)",
+            "validation": null,
+            "default_value": "INR"
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": false,
+            "description": "Draft / Pending Approval / Approved / Sent / Acknowledged / Closed",
+            "validation": null,
+            "default_value": "Draft"
+          }
+        ]
+      },
+      {
+        "id": "ent-po-approval",
+        "name": "ApprovalRecord",
+        "description": "Individual approver decision on the PO",
+        "fields": [
+          {
+            "name": "approval_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Approval record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "po_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to PurchaseOrder",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "approver_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Approver employee ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "approver_role",
+            "field_type": "string",
+            "required": false,
+            "description": "Manager / Finance / VP / Director / CFO",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "level",
+            "field_type": "number",
+            "required": true,
+            "description": "Approval level (1 = first approver)",
+            "validation": null,
+            "default_value": 1
+          },
+          {
+            "name": "decision",
+            "field_type": "string",
+            "required": true,
+            "description": "Approved / Rejected / On Hold",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "comments",
+            "field_type": "string",
+            "required": false,
+            "description": "Approver comments",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "decided_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Decision timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "delegated_from",
+            "field_type": "string",
+            "required": false,
+            "description": "Original approver if delegated",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ent-po-grn",
+        "name": "GoodsReceipt",
+        "description": "Confirmation of goods or services received against the PO",
+        "fields": [
+          {
+            "name": "grn_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Goods Receipt Note ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "po_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to PurchaseOrder",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "received_by",
+            "field_type": "string",
+            "required": true,
+            "description": "Employee who received goods",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "received_date",
+            "field_type": "string",
+            "required": true,
+            "description": "Date of receipt",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "quantity_ordered",
+            "field_type": "number",
+            "required": false,
+            "description": "Quantity as per PO",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "quantity_received",
+            "field_type": "number",
+            "required": false,
+            "description": "Quantity actually received",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "quantity_rejected",
+            "field_type": "number",
+            "required": false,
+            "description": "Quantity rejected (damaged / wrong)",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "quality_status",
+            "field_type": "string",
+            "required": false,
+            "description": "Accepted / Partial / Rejected",
+            "validation": null,
+            "default_value": "Accepted"
+          },
+          {
+            "name": "rejection_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "Reason for rejection if any",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "invoice_number",
+            "field_type": "string",
+            "required": false,
+            "description": "Vendor invoice number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "invoice_amount",
+            "field_type": "number",
+            "required": false,
+            "description": "Vendor invoice amount",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "three_way_match",
+            "field_type": "boolean",
+            "required": false,
+            "description": "PO-GRN-Invoice 3-way match passed",
+            "validation": null,
+            "default_value": false
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-po-01",
+        "from_entity": "ent-po-vendor",
+        "to_entity": "ent-po-order",
+        "relation_type": "one_to_many",
+        "label": "fulfils"
+      },
+      {
+        "id": "rel-po-02",
+        "from_entity": "ent-po-pr",
+        "to_entity": "ent-po-order",
+        "relation_type": "one_to_one",
+        "label": "converts to"
+      },
+      {
+        "id": "rel-po-03",
+        "from_entity": "ent-po-order",
+        "to_entity": "ent-po-approval",
+        "relation_type": "one_to_many",
+        "label": "approved by"
+      },
+      {
+        "id": "rel-po-04",
+        "from_entity": "ent-po-order",
+        "to_entity": "ent-po-grn",
+        "relation_type": "one_to_many",
+        "label": "received as"
+      }
+    ],
+    "created_at": "2026-05-05T12:30:00",
+    "updated_at": "2026-05-05T12:30:00"
+  },
+  {
+    "id": "08ee0c4b-8651-4964-af1f-b57bc88bda83",
+    "name": "KYC Customer Onboarding",
+    "description": "Know Your Customer identity verification and account activation workflow",
+    "entities": [
+      {
+        "id": "4688369b-8f7c-4442-bd1c-419fc12d05a8",
+        "name": "Customer",
+        "description": "",
+        "fields": [
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique customer identifier",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "full_name",
+            "field_type": "string",
+            "required": true,
+            "description": "Full legal name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "dob",
+            "field_type": "string",
+            "required": true,
+            "description": "Date of birth (YYYY-MM-DD)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "nationality",
+            "field_type": "string",
+            "required": true,
+            "description": "Nationality / citizenship",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "gender",
+            "field_type": "string",
+            "required": false,
+            "description": "Male / Female / Other",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "email",
+            "field_type": "string",
+            "required": false,
+            "description": "Primary email address",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "phone",
+            "field_type": "string",
+            "required": false,
+            "description": "Primary phone number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "address_line1",
+            "field_type": "string",
+            "required": false,
+            "description": "Address line 1",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "address_line2",
+            "field_type": "string",
+            "required": false,
+            "description": "Address line 2",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "city",
+            "field_type": "string",
+            "required": false,
+            "description": "City",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "state",
+            "field_type": "string",
+            "required": false,
+            "description": "State / Province",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "postal_code",
+            "field_type": "string",
+            "required": false,
+            "description": "Postal / ZIP code",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "country",
+            "field_type": "string",
+            "required": false,
+            "description": "Country code (ISO 3166)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "risk_level",
+            "field_type": "string",
+            "required": false,
+            "description": "Low / Medium / High (AML risk)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_pep",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Politically Exposed Person flag",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "48080adc-ba4f-4c5e-befc-c82434bb63e7",
+        "name": "IdentityDocument",
+        "description": "",
+        "fields": [
+          {
+            "name": "doc_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Document record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_type",
+            "field_type": "string",
+            "required": true,
+            "description": "Passport / Aadhaar / PAN / DL / Voter ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_number",
+            "field_type": "string",
+            "required": true,
+            "description": "Document number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "issuing_country",
+            "field_type": "string",
+            "required": false,
+            "description": "Country that issued the document",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "issue_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Issue date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "expiry_date",
+            "field_type": "string",
+            "required": false,
+            "description": "Expiry date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "front_image_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Storage reference for front image",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "back_image_ref",
+            "field_type": "string",
+            "required": false,
+            "description": "Storage reference for back image",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "is_primary",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Primary identity document flag",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "7ca8690c-fcc0-4eb2-b8b9-823cfc72cf42",
+        "name": "VerificationRecord",
+        "description": "",
+        "fields": [
+          {
+            "name": "verification_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Verification record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "doc_id",
+            "field_type": "string",
+            "required": false,
+            "description": "Reference to IdentityDocument",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verification_type",
+            "field_type": "string",
+            "required": true,
+            "description": "OCR / Face-Match / Liveness / Database / Manual",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": true,
+            "description": "Pending / Passed / Failed / Needs-Review",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "confidence_score",
+            "field_type": "number",
+            "required": false,
+            "description": "ML confidence score (0-1)",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "failure_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "Reason if verification failed",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verified_by",
+            "field_type": "string",
+            "required": false,
+            "description": "Agent ID or system name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "verified_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Verification timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "review_notes",
+            "field_type": "string",
+            "required": false,
+            "description": "Manual reviewer notes",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "888d698b-01fd-4d0a-a7db-bf2ca3536c7e",
+        "name": "AMLScreening",
+        "description": "",
+        "fields": [
+          {
+            "name": "screening_id",
+            "field_type": "string",
+            "required": true,
+            "description": "AML screening record ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "watchlist_hit",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Match found in sanctions / watchlist",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "pep_match",
+            "field_type": "boolean",
+            "required": false,
+            "description": "PEP database match found",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "adverse_media",
+            "field_type": "boolean",
+            "required": false,
+            "description": "Adverse media found",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "match_details",
+            "field_type": "string",
+            "required": false,
+            "description": "Details of any matches",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "resolution",
+            "field_type": "string",
+            "required": false,
+            "description": "Clear / Escalate / Reject",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "screened_by",
+            "field_type": "string",
+            "required": false,
+            "description": "System or analyst who ran screening",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "screened_at",
+            "field_type": "string",
+            "required": true,
+            "description": "Screening timestamp",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "4840b887-6d7d-4f71-9917-9916e0958d50",
+        "name": "OnboardingCase",
+        "description": "",
+        "fields": [
+          {
+            "name": "case_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Onboarding case ID",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Reference to Customer",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "channel",
+            "field_type": "string",
+            "required": true,
+            "description": "Web / Mobile / Branch / API",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "product_type",
+            "field_type": "string",
+            "required": false,
+            "description": "Product being onboarded for",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": true,
+            "description": "Initiated / Docs Collected / Under Review / Approved / Rejected / Active",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "assigned_analyst",
+            "field_type": "string",
+            "required": false,
+            "description": "Assigned KYC analyst",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "sla_deadline",
+            "field_type": "string",
+            "required": false,
+            "description": "SLA completion deadline",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "created_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Case creation timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "completed_at",
+            "field_type": "string",
+            "required": false,
+            "description": "Case completion timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rejection_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "Reason if case rejected",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-05T13:17:26.104478",
+    "updated_at": "2026-05-05T13:17:26.104478"
+  },
+  {
+    "id": "a400c392-8380-444f-8d6b-2e59f1d1d5f0",
+    "name": "Report Generation (Clone) (Copy)",
+    "description": "",
+    "entities": [
+      {
+        "id": "f03fbb62-4430-4e00-8197-ebf4590237e5",
+        "name": "Report",
+        "description": "Automated weekly report details",
+        "fields": [
+          {
+            "name": "id",
+            "field_type": "number",
+            "required": true,
+            "description": "Unique report identifier",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "generation_date",
+            "field_type": "date",
+            "required": true,
+            "description": "Report generation date",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "data",
+            "field_type": "object",
+            "required": true,
+            "description": "Latest fetched data",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "analysis",
+            "field_type": "object",
+            "required": true,
+            "description": "AI analysis results",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "stakeholders",
+            "field_type": "array",
+            "required": true,
+            "description": "List of stakeholders to distribute the report to",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-05T13:42:29.325412",
+    "updated_at": "2026-05-05T13:42:29.325412"
+  },
+  {
+    "id": "e34aa15e-34d8-4264-95b1-c161d79f435c",
+    "name": "RFQ Response Cross - Enterprise Data Model",
+    "description": "Enterprise RFQ semantic matching, vendor normalization, catalog mapping, human review, and final response generation data model.",
+    "entities": [
+      {
+        "id": "4059f80f-60d5-485b-88aa-5869c3baf975",
+        "name": "RFQRequest",
+        "description": "",
+        "fields": [
+          {
+            "name": "rfq_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Unique RFQ identifier",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "customer_id",
+            "field_type": "string",
+            "required": true,
+            "description": "Customer identifier",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_number",
+            "field_type": "string",
+            "required": true,
+            "description": "RFQ reference number",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "source_file_name",
+            "field_type": "string",
+            "required": true,
+            "description": "Uploaded RFQ file name",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "upload_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "RFQ upload timestamp",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "status",
+            "field_type": "string",
+            "required": false,
+            "description": "Processing status",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "created_by",
+            "field_type": "string",
+            "required": false,
+            "description": "User who uploaded RFQ",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "total_lines",
+            "field_type": "number",
+            "required": false,
+            "description": "Total RFQ lines",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "fa276e8b-337e-4629-b24c-8868a7c6a5bd",
+        "name": "RFQSheet",
+        "description": "",
+        "fields": [
+          {
+            "name": "sheet_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "sheet_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "header_row_number",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "3e2c87db-cea3-40cd-84f7-08912c67de1f",
+        "name": "NormalizedColumn",
+        "description": "",
+        "fields": [
+          {
+            "name": "normalized_column_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "data_type",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mandatory_flag",
+            "field_type": "boolean",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "1a7cc01f-5ba9-4e3f-8e6a-c52aca2a003a",
+        "name": "ColumnAlias",
+        "description": "",
+        "fields": [
+          {
+            "name": "alias_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_column_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "alias_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "confidence_weight",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "d96f3ee3-0a30-4146-aa9f-01eba59e43aa",
+        "name": "RFQColumnMapping",
+        "description": "",
+        "fields": [
+          {
+            "name": "mapping_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "source_column_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_column_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mapping_method",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "confidence_level",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "e97a5d6d-86ad-4ccc-a819-6585cc1d26c7",
+        "name": "VendorMaster",
+        "description": "",
+        "fields": [
+          {
+            "name": "vendor_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_code",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_vendor_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_type",
+            "field_type": "string",
+            "required": false,
+            "description": "PLP / OEM / Distributor",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "4f4dcb44-1bcf-4501-9541-ea4920d024a9",
+        "name": "VendorAlias",
+        "description": "",
+        "fields": [
+          {
+            "name": "alias_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "alias_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "550ce653-6b7b-4e9e-b46b-499c3f972798",
+        "name": "RFQVendorMapping",
+        "description": "",
+        "fields": [
+          {
+            "name": "vendor_mapping_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_vendor_name",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mapped_vendor_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mapping_confidence",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mapping_method",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "969be001-2b24-4229-b411-199a97cb63a0",
+        "name": "RFQLineItem",
+        "description": "",
+        "fields": [
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "line_number",
+            "field_type": "number",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_ref_number",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_part_number",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_description",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_quantity",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_uom",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "raw_manufacturer",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ff6f1365-0812-4fc4-8346-b1952dfbfadd",
+        "name": "RFQLineNormalization",
+        "description": "",
+        "fields": [
+          {
+            "name": "normalization_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_part_number",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_description",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_uom",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_vendor_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalization_status",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "6542c75f-7328-403a-9851-00dc55c5ba5c",
+        "name": "HistoricalMatch",
+        "description": "",
+        "fields": [
+          {
+            "name": "historical_match_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_vendor_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_part_number",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_description",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "matched_plp_part_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "confidence_level",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "approval_source",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "usage_count",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "last_used_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "4ad8eec1-14e8-4440-b7a3-70048873d18e",
+        "name": "HistoricalMatchEmbedding",
+        "description": "",
+        "fields": [
+          {
+            "name": "embedding_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "historical_match_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "embedding_vector",
+            "field_type": "array",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "embedding_model",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "ea68d2ce-5068-4ea3-ba2c-b1ab9ed70794",
+        "name": "ProductCatalog",
+        "description": "",
+        "fields": [
+          {
+            "name": "product_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "part_number",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "normalized_part_number",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "description",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "category",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "lifecycle_status",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "0126ed64-f557-442a-bdfe-9b40bec658b9",
+        "name": "ProductEmbedding",
+        "description": "",
+        "fields": [
+          {
+            "name": "embedding_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "product_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "embedding_vector",
+            "field_type": "array",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "embedding_model",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "generated_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "50a08c97-679b-4030-b64e-956cb19a8fea",
+        "name": "ProductVendorMapping",
+        "description": "",
+        "fields": [
+          {
+            "name": "mapping_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "source_vendor_product_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "plp_product_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "mapping_confidence",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "a24b1c52-5778-431b-ba23-72ec42690c10",
+        "name": "RFQLineMatch",
+        "description": "",
+        "fields": [
+          {
+            "name": "match_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "match_source",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "matched_product_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "matched_vendor_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "confidence_level",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "semantic_score",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "lexical_score",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "vendor_score",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "match_rank",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "match_reason",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "created_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "f1ad98d0-4124-4c1f-8c0b-a1a23cc364e8",
+        "name": "HumanReviewQueue",
+        "description": "",
+        "fields": [
+          {
+            "name": "review_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "review_status",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "assigned_to",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "review_priority",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "created_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "5e698954-c7e9-4860-8358-6dbd9a32acba",
+        "name": "HumanReviewAction",
+        "description": "",
+        "fields": [
+          {
+            "name": "action_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "review_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "selected_product_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "reviewer_confidence",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "reviewer_comments",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "action_type",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "reviewed_by",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "reviewed_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "31719a45-e8c1-4bbf-8681-238b83a5bd06",
+        "name": "FinalMatch",
+        "description": "",
+        "fields": [
+          {
+            "name": "final_match_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "final_product_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "final_confidence_level",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "final_match_source",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "approval_status",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "approved_by",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "approved_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "a8ffab30-5d26-493a-bdc6-bc039c541a89",
+        "name": "RFQResponse",
+        "description": "",
+        "fields": [
+          {
+            "name": "response_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "response_status",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "generated_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "08908376-5ea8-4bae-b086-5fcfa8c9c424",
+        "name": "RFQResponseLine",
+        "description": "",
+        "fields": [
+          {
+            "name": "response_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "response_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "matched_product_id",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "confidence_level",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "quantity",
+            "field_type": "number",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "remarks",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      },
+      {
+        "id": "83fa4742-b924-4dd1-867e-36df4442001d",
+        "name": "MatchFeedback",
+        "description": "",
+        "fields": [
+          {
+            "name": "feedback_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "rfq_line_id",
+            "field_type": "string",
+            "required": true,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "feedback_type",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "feedback_comments",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "submitted_by",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          },
+          {
+            "name": "submitted_timestamp",
+            "field_type": "string",
+            "required": false,
+            "description": "",
+            "validation": null,
+            "default_value": null
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-12T12:58:25.471771",
+    "updated_at": "2026-05-12T12:58:25.471771"
+  },
+  {
+    "id": "4dd4f60e-b739-4903-8c1f-8deb5f300611",
+    "name": "Fixed Deposit",
+    "description": "Runtime data model for the Fixed Deposit Opening process. Tracks application, KYC, risk, FD configuration, maturity, compliance, and account creation.",
+    "entities": [
+      {
+        "id": "af161e9b-769e-4d81-94e6-4b0fbe066a53",
+        "name": "ApplicationInfo",
+        "description": "Applicant data collection tracking",
+        "fields": [
+          {
+            "name": "records_collected",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of applicant records collected by data ingestion agent",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "data_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Count of data quality errors found during collection",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "11765fbf-1cb6-412c-a859-e09d121b345d",
+        "name": "KYCVerification",
+        "description": "KYC and document verification tracking",
+        "fields": [
+          {
+            "name": "kyc_decisions",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of KYC decisions made by role-based approver",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "escalated_cases",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of KYC cases escalated for manual review",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "1fd737a8-1472-493f-9e71-d94f5c911dd7",
+        "name": "RiskProfile",
+        "description": "Eligibility and risk assessment results",
+        "fields": [
+          {
+            "name": "records_assessed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of applicant records assessed for eligibility and risk",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "assessment_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Count of errors during risk assessment",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "24997e1c-c1ef-42f9-93c1-3896be39cb1b",
+        "name": "FDConfiguration",
+        "description": "Fixed Deposit terms configuration tracking",
+        "fields": [
+          {
+            "name": "sub_tasks_created",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of FD configuration sub-tasks created by orchestrator",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "sub_tasks_completed",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of FD configuration sub-tasks completed",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "5e39d90e-e887-452d-8822-6e5bc2334c53",
+        "name": "MaturityDetails",
+        "description": "Maturity and returns calculation results",
+        "fields": [
+          {
+            "name": "records_computed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of maturity computation records processed",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "computation_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Errors encountered during maturity calculation",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "f21b319f-5c88-41ea-9104-f67b06bb08ae",
+        "name": "ComplianceRecord",
+        "description": "Compliance audit and review outcomes",
+        "fields": [
+          {
+            "name": "compliance_decisions",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of compliance audit decisions made",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "compliance_escalated",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of compliance cases escalated",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "598fc27c-ef95-45a1-907f-742baede907b",
+        "name": "AccountSetup",
+        "description": "FD account creation results",
+        "fields": [
+          {
+            "name": "accounts_processed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of FD accounts successfully created",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "setup_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of account creation errors",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-20T12:08:32.713684",
+    "updated_at": "2026-05-20T12:08:32.713684"
+  },
+  {
+    "id": "3eedc52a-ce56-4dc8-8d5a-36e40a524004",
+    "name": "Fixed Deposit",
+    "description": "Runtime data model for the Fixed Deposit Opening process. Tracks application, KYC, risk, FD configuration, maturity, compliance, and account creation.",
+    "entities": [
+      {
+        "id": "fe1de624-7fa2-4a76-9d0a-05502835da3e",
+        "name": "ApplicationInfo",
+        "description": "Applicant data collection tracking",
+        "fields": [
+          {
+            "name": "records_collected",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of applicant records collected by data ingestion agent",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "data_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Count of data quality errors found during collection",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "6a6c1e4c-d8af-47d0-ae36-812eadb7a3ac",
+        "name": "KYCVerification",
+        "description": "KYC and document verification tracking",
+        "fields": [
+          {
+            "name": "kyc_decisions",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of KYC decisions made by role-based approver",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "escalated_cases",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of KYC cases escalated for manual review",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "a0193f8f-7bd6-4c8b-bc57-12f8b455d8da",
+        "name": "RiskProfile",
+        "description": "Eligibility and risk assessment results",
+        "fields": [
+          {
+            "name": "records_assessed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of applicant records assessed for eligibility and risk",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "assessment_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Count of errors during risk assessment",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "8bfbdd26-58fc-4615-b231-2080e99cf0ba",
+        "name": "FDConfiguration",
+        "description": "Fixed Deposit terms configuration tracking",
+        "fields": [
+          {
+            "name": "sub_tasks_created",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of FD configuration sub-tasks created by orchestrator",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "sub_tasks_completed",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of FD configuration sub-tasks completed",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "46178b00-5adb-43e7-8455-6b5d764f9f7a",
+        "name": "MaturityDetails",
+        "description": "Maturity and returns calculation results",
+        "fields": [
+          {
+            "name": "records_computed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of maturity computation records processed",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "computation_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Errors encountered during maturity calculation",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "c8072cfc-f674-4def-8d72-13ea7bb33587",
+        "name": "ComplianceRecord",
+        "description": "Compliance audit and review outcomes",
+        "fields": [
+          {
+            "name": "compliance_decisions",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of compliance audit decisions made",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "compliance_escalated",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of compliance cases escalated",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "6e9589b0-a8fd-4a05-93c9-00d350d89dc2",
+        "name": "AccountSetup",
+        "description": "FD account creation results",
+        "fields": [
+          {
+            "name": "accounts_processed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of FD accounts successfully created",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "setup_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of account creation errors",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-20T12:09:38.928446",
+    "updated_at": "2026-05-20T12:09:38.928446"
+  },
+  {
+    "id": "10e7d9f6-2050-4942-a528-6fe41427d58c",
+    "name": "Fixed Deposit",
+    "description": "Runtime data model for the Fixed Deposit Opening process. Tracks application, KYC, risk, FD configuration, maturity, compliance, and account creation.",
+    "entities": [
+      {
+        "id": "d40951da-00a2-4afe-b09a-3bf34296df79",
+        "name": "ApplicationInfo",
+        "description": "Applicant data collection tracking",
+        "fields": [
+          {
+            "name": "records_collected",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of applicant records collected by data ingestion agent",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "data_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Count of data quality errors found during collection",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "f2c33172-1cf5-4e8c-bc7c-7509ff2cf3aa",
+        "name": "KYCVerification",
+        "description": "KYC and document verification tracking",
+        "fields": [
+          {
+            "name": "kyc_decisions",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of KYC decisions made by role-based approver",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "escalated_cases",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of KYC cases escalated for manual review",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "7ff06f81-da71-468c-943d-84f11e65fc93",
+        "name": "RiskProfile",
+        "description": "Eligibility and risk assessment results",
+        "fields": [
+          {
+            "name": "records_assessed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of applicant records assessed for eligibility and risk",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "assessment_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Count of errors during risk assessment",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "430e755d-9e8c-4fd6-baf4-0893fd105893",
+        "name": "FDConfiguration",
+        "description": "Fixed Deposit terms configuration tracking",
+        "fields": [
+          {
+            "name": "sub_tasks_created",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of FD configuration sub-tasks created by orchestrator",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "sub_tasks_completed",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of FD configuration sub-tasks completed",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "6b17d426-96ef-424e-b428-7a8cc7c58c0c",
+        "name": "MaturityDetails",
+        "description": "Maturity and returns calculation results",
+        "fields": [
+          {
+            "name": "records_computed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of maturity computation records processed",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "computation_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Errors encountered during maturity calculation",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "efd2bcd2-fb28-44b7-a44d-1741405379a3",
+        "name": "ComplianceRecord",
+        "description": "Compliance audit and review outcomes",
+        "fields": [
+          {
+            "name": "compliance_decisions",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of compliance audit decisions made",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "compliance_escalated",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of compliance cases escalated",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      },
+      {
+        "id": "440c426d-7e04-4104-95df-4ee298312d00",
+        "name": "AccountSetup",
+        "description": "FD account creation results",
+        "fields": [
+          {
+            "name": "accounts_processed",
+            "field_type": "number",
+            "required": true,
+            "description": "Number of FD accounts successfully created",
+            "validation": null,
+            "default_value": 0
+          },
+          {
+            "name": "setup_errors",
+            "field_type": "number",
+            "required": false,
+            "description": "Number of account creation errors",
+            "validation": null,
+            "default_value": 0
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "created_at": "2026-05-20T12:10:43.278289",
+    "updated_at": "2026-05-20T12:10:43.278289"
+  }
+]

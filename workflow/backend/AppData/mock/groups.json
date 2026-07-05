@@ -1,0 +1,40 @@
+[
+  {
+    "id": "grp-operations",
+    "name": "Operations Team",
+    "description": "Handles loan and onboarding workflows",
+    "user_ids": [
+      "user-alice-001",
+      "user-bob-001"
+    ],
+    "project_ids": [],
+    "is_active": true,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "grp-finance",
+    "name": "Finance Team",
+    "description": "Manages insurance and purchase order workflows",
+    "user_ids": [
+      "user-carol-001"
+    ],
+    "project_ids": [],
+    "is_active": true,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  },
+  {
+    "id": "grp-admins",
+    "name": "Administrators",
+    "description": "Platform administrators",
+    "user_ids": [
+      "user-admin-001",
+      "user-orgadmin-001"
+    ],
+    "project_ids": [],
+    "is_active": true,
+    "created_at": "2026-05-07T11:31:22.567383",
+    "updated_at": "2026-05-07T11:31:22.567383"
+  }
+]

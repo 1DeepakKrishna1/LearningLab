@@ -1,0 +1,540 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================================
+   FONT SIZE SYSTEM
+   Applied via data-font-size attribute on <html>.
+   ================================================================ */
+[data-font-size="small"]  { font-size: 13px; }
+[data-font-size="medium"] { font-size: 15px; }
+[data-font-size="large"]  { font-size: 17px; }
+
+/* ================================================================
+   THEME SYSTEM
+   CSS custom properties (RGB channels) per theme.
+   Universal overrides use rgba(var(--th-xxx), opacity).
+   data-theme attribute is applied to <html> element.
+   ================================================================ */
+
+/* ── Theme: Slate (default) ──────────────────────────────────── */
+:root,
+[data-theme="slate"] {
+  color-scheme: dark;
+  --th-bg1: 15, 23, 42;       /* slate-900  – deepest bg          */
+  --th-bg2: 30, 41, 59;       /* slate-800  – panel/card bg        */
+  --th-bg3: 51, 65, 85;       /* slate-700  – elevated/hover       */
+  --th-bg4: 71, 85, 105;      /* slate-600  – even lighter         */
+  --th-txt1: 226, 232, 240;   /* slate-200  – primary text         */
+  --th-txt2: 148, 163, 184;   /* slate-400  – secondary text       */
+  --th-txt3: 100, 116, 139;   /* slate-500  – muted text           */
+  --th-txt4: 71, 85, 105;     /* slate-600  – very muted           */
+  --th-bdr: 51, 65, 85;       /* slate-700  – border base          */
+  --th-acc: 99, 102, 241;     /* indigo-500 – accent               */
+  --th-ach: 129, 140, 248;    /* indigo-400 – accent hover/light   */
+  --th-adm: 49, 46, 129;      /* indigo-900 – accent dim bg        */
+  --th-ref: 71, 85, 105;      /* edge stroke                       */
+}
+
+/* ── Theme: Carbon ───────────────────────────────────────────── */
+[data-theme="carbon"] {
+  color-scheme: dark;
+  --th-bg1: 9, 9, 9;
+  --th-bg2: 20, 20, 20;
+  --th-bg3: 31, 31, 31;
+  --th-bg4: 42, 42, 42;
+  --th-txt1: 250, 250, 250;
+  --th-txt2: 161, 161, 170;
+  --th-txt3: 113, 113, 122;
+  --th-txt4: 82, 82, 91;
+  --th-bdr: 38, 38, 38;
+  --th-acc: 245, 158, 11;     /* amber-500  */
+  --th-ach: 251, 191, 36;     /* amber-400  */
+  --th-adm: 120, 53, 15;      /* amber-900  */
+  --th-ref: 58, 58, 58;
+}
+
+/* ── Theme: Ocean ────────────────────────────────────────────── */
+[data-theme="ocean"] {
+  color-scheme: dark;
+  --th-bg1: 3, 17, 26;
+  --th-bg2: 6, 30, 45;
+  --th-bg3: 10, 48, 69;
+  --th-bg4: 15, 64, 96;
+  --th-txt1: 224, 242, 254;
+  --th-txt2: 125, 211, 252;
+  --th-txt3: 56, 189, 248;
+  --th-txt4: 14, 165, 233;
+  --th-bdr: 10, 48, 69;
+  --th-acc: 6, 182, 212;      /* cyan-500   */
+  --th-ach: 34, 211, 238;     /* cyan-400   */
+  --th-adm: 22, 78, 99;       /* cyan-900   */
+  --th-ref: 21, 94, 117;
+}
+
+/* ── Theme: Aurora ───────────────────────────────────────────── */
+[data-theme="aurora"] {
+  color-scheme: dark;
+  --th-bg1: 2, 12, 7;
+  --th-bg2: 4, 26, 14;
+  --th-bg3: 13, 45, 24;
+  --th-bg4: 20, 65, 36;
+  --th-txt1: 209, 250, 229;
+  --th-txt2: 110, 231, 183;
+  --th-txt3: 52, 211, 153;
+  --th-txt4: 16, 185, 129;
+  --th-bdr: 13, 45, 24;
+  --th-acc: 16, 185, 129;     /* emerald-500 */
+  --th-ach: 52, 211, 153;     /* emerald-400 */
+  --th-adm: 6, 78, 59;        /* emerald-900 */
+  --th-ref: 15, 118, 110;
+}
+
+/* ── Theme: Midnight ─────────────────────────────────────────── */
+[data-theme="midnight"] {
+  color-scheme: dark;
+  --th-bg1: 13, 8, 24;
+  --th-bg2: 21, 13, 46;
+  --th-bg3: 31, 18, 69;
+  --th-bg4: 46, 24, 94;
+  --th-txt1: 237, 233, 254;
+  --th-txt2: 196, 181, 253;
+  --th-txt3: 167, 139, 250;
+  --th-txt4: 139, 92, 246;
+  --th-bdr: 31, 18, 69;
+  --th-acc: 139, 92, 246;     /* violet-500 */
+  --th-ach: 167, 139, 250;    /* violet-400 */
+  --th-adm: 46, 16, 101;      /* violet-900 */
+  --th-ref: 76, 29, 149;
+}
+
+/* ── Theme: Light ────────────────────────────────────────────── */
+[data-theme="light"] {
+  color-scheme: light;
+  --th-bg1: 244, 246, 250;    /* blue-tinted off-white – page bg   */
+  --th-bg2: 255, 255, 255;    /* pure white – cards / panels       */
+  --th-bg3: 235, 239, 247;    /* hover / elevated surface          */
+  --th-bg4: 214, 221, 234;    /* pressed / deeper hover            */
+  --th-txt1: 15, 23, 42;      /* slate-900 – primary text          */
+  --th-txt2: 51, 65, 85;      /* slate-700 – secondary text        */
+  --th-txt3: 71, 85, 105;     /* slate-600 – muted text            */
+  --th-txt4: 100, 116, 139;   /* slate-500 – very muted (was 400!) */
+  --th-bdr: 199, 210, 228;    /* slate-300 – visible borders       */
+  --th-acc: 79, 70, 229;      /* indigo-600 – stronger accent      */
+  --th-ach: 55, 48, 163;      /* indigo-800 – accent hover         */
+  --th-adm: 224, 231, 255;    /* indigo-100 – accent dim bg        */
+  --th-ref: 148, 163, 184;
+}
+
+/* ================================================================
+   BASE STRUCTURAL STYLES (use CSS variables)
+   ================================================================ */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(var(--th-bg1), 1);
+  color: rgba(var(--th-txt1), 1);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  transition: background-color 0.25s ease, color 0.2s ease;
+}
+
+/* ================================================================
+   UNIVERSAL TAILWIND OVERRIDES
+   Specificity: [data-theme](0,1,0) + class(0,0,1) = 0,1,1
+   Beats Tailwind's plain class 0,0,1. !important added for safety.
+   ================================================================ */
+
+/* ── Backgrounds ─────────────────────────────────────────────── */
+[data-theme] .bg-slate-950,
+[data-theme] .bg-slate-900  { background-color: rgba(var(--th-bg1), 1)   !important; }
+[data-theme] .bg-slate-800  { background-color: rgba(var(--th-bg2), 1)   !important; }
+[data-theme] .bg-slate-700  { background-color: rgba(var(--th-bg3), 1)   !important; }
+[data-theme] .bg-slate-600  { background-color: rgba(var(--th-bg4), 1)   !important; }
+
+/* opacity variants */
+[data-theme] .bg-slate-900\/80 { background-color: rgba(var(--th-bg1), 0.80) !important; }
+[data-theme] .bg-slate-900\/40 { background-color: rgba(var(--th-bg1), 0.40) !important; }
+[data-theme] .bg-slate-900\/20 { background-color: rgba(var(--th-bg1), 0.20) !important; }
+[data-theme] .bg-slate-800\/90 { background-color: rgba(var(--th-bg2), 0.90) !important; }
+[data-theme] .bg-slate-800\/80 { background-color: rgba(var(--th-bg2), 0.80) !important; }
+[data-theme] .bg-slate-800\/70 { background-color: rgba(var(--th-bg2), 0.70) !important; }
+[data-theme] .bg-slate-800\/60 { background-color: rgba(var(--th-bg2), 0.60) !important; }
+[data-theme] .bg-slate-800\/50 { background-color: rgba(var(--th-bg2), 0.50) !important; }
+[data-theme] .bg-slate-800\/40 { background-color: rgba(var(--th-bg2), 0.40) !important; }
+[data-theme] .bg-slate-800\/30 { background-color: rgba(var(--th-bg2), 0.30) !important; }
+[data-theme] .bg-slate-700\/60 { background-color: rgba(var(--th-bg3), 0.60) !important; }
+[data-theme] .bg-slate-700\/50 { background-color: rgba(var(--th-bg3), 0.50) !important; }
+[data-theme] .bg-slate-700\/30 { background-color: rgba(var(--th-bg3), 0.30) !important; }
+[data-theme] .bg-slate-600\/50 { background-color: rgba(var(--th-bg4), 0.50) !important; }
+
+/* hover state opacity variants */
+[data-theme] .hover\:bg-slate-800\/60:hover { background-color: rgba(var(--th-bg2), 0.60) !important; }
+
+/* hover state backgrounds */
+[data-theme] .hover\:bg-slate-700:hover  { background-color: rgba(var(--th-bg3), 1)    !important; }
+[data-theme] .hover\:bg-slate-700\/80:hover { background-color: rgba(var(--th-bg3), 0.80) !important; }
+[data-theme] .hover\:bg-slate-700\/50:hover { background-color: rgba(var(--th-bg3), 0.50) !important; }
+[data-theme] .hover\:bg-slate-600\/50:hover { background-color: rgba(var(--th-bg4), 0.50) !important; }
+
+/* ── Text ─────────────────────────────────────────────────────── */
+[data-theme] .text-slate-100,
+[data-theme] .text-slate-200 { color: rgba(var(--th-txt1), 1) !important; }
+
+[data-theme] .text-slate-300,
+[data-theme] .text-slate-400 { color: rgba(var(--th-txt2), 1) !important; }
+
+[data-theme] .text-slate-500 { color: rgba(var(--th-txt3), 1) !important; }
+[data-theme] .text-slate-600 { color: rgba(var(--th-txt4), 1) !important; }
+
+[data-theme] .hover\:text-slate-200:hover { color: rgba(var(--th-txt1), 1) !important; }
+[data-theme] .hover\:text-slate-300:hover { color: rgba(var(--th-txt2), 1) !important; }
+[data-theme] .hover\:text-white:hover     { color: rgba(var(--th-txt1), 1) !important; }
+
+/* text-white → theme primary text (dark on light, light on dark) */
+[data-theme] .text-white { color: rgba(var(--th-txt1), 1) !important; }
+
+/* ── Borders ──────────────────────────────────────────────────── */
+[data-theme] .border-slate-800        { border-color: rgba(var(--th-bdr), 0.80) !important; }
+[data-theme] .border-slate-700        { border-color: rgba(var(--th-bdr), 1.00) !important; }
+[data-theme] .border-slate-700\/50    { border-color: rgba(var(--th-bdr), 0.50) !important; }
+[data-theme] .border-slate-600        { border-color: rgba(var(--th-bdr), 0.70) !important; }
+[data-theme] .border-slate-600\/50    { border-color: rgba(var(--th-bdr), 0.40) !important; }
+[data-theme] .border-b.border-slate-800 { border-bottom-color: rgba(var(--th-bdr), 0.80) !important; }
+
+/* ── Accent: backgrounds ──────────────────────────────────────── */
+[data-theme] .bg-indigo-600           { background-color: rgba(var(--th-acc), 1.00) !important; }
+[data-theme] .bg-indigo-500           { background-color: rgba(var(--th-ach), 1.00) !important; }
+[data-theme] .bg-indigo-600\/20       { background-color: rgba(var(--th-acc), 0.20) !important; }
+[data-theme] .bg-indigo-600\/40       { background-color: rgba(var(--th-acc), 0.40) !important; }
+[data-theme] .bg-indigo-900\/20       { background-color: rgba(var(--th-adm), 0.20) !important; }
+[data-theme] .bg-indigo-900\/30       { background-color: rgba(var(--th-adm), 0.30) !important; }
+[data-theme] .bg-indigo-900\/40       { background-color: rgba(var(--th-adm), 0.40) !important; }
+[data-theme] .bg-indigo-900\/60       { background-color: rgba(var(--th-adm), 0.60) !important; }
+[data-theme] .bg-indigo-900\/70       { background-color: rgba(var(--th-adm), 0.70) !important; }
+
+[data-theme] .hover\:bg-indigo-500:hover   { background-color: rgba(var(--th-ach), 1.00) !important; }
+[data-theme] .hover\:bg-indigo-600:hover   { background-color: rgba(var(--th-acc), 1.00) !important; }
+[data-theme] .hover\:bg-indigo-600\/40:hover { background-color: rgba(var(--th-acc), 0.40) !important; }
+[data-theme] .hover\:bg-indigo-900\/40:hover { background-color: rgba(var(--th-adm), 0.40) !important; }
+
+/* ── Accent: text ─────────────────────────────────────────────── */
+[data-theme] .text-indigo-300 { color: rgba(var(--th-ach), 1) !important; }
+[data-theme] .text-indigo-400 { color: rgba(var(--th-acc), 1) !important; }
+
+/* ── Accent: borders ──────────────────────────────────────────── */
+[data-theme] .border-indigo-500             { border-color: rgba(var(--th-acc), 1.00) !important; }
+[data-theme] .border-indigo-600\/30         { border-color: rgba(var(--th-acc), 0.30) !important; }
+[data-theme] .border-indigo-700\/40         { border-color: rgba(var(--th-adm), 0.50) !important; }
+[data-theme] .border-indigo-800\/40         { border-color: rgba(var(--th-adm), 0.40) !important; }
+[data-theme] .focus\:border-indigo-500:focus { border-color: rgba(var(--th-acc), 1.00) !important; }
+
+/* ── Accent: rings ────────────────────────────────────────────── */
+[data-theme] .ring-indigo-400\/80 { --tw-ring-color: rgba(var(--th-ach), 0.80); }
+[data-theme] .ring-indigo-500     { --tw-ring-color: rgba(var(--th-acc), 1.00); }
+
+/* ── Accent: gradient stops (AI Assistant header) ─────────────── */
+[data-theme] .from-indigo-900\/60 {
+  --tw-gradient-from: rgba(var(--th-adm), 0.6) var(--tw-gradient-from-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(var(--th-adm), 0) var(--tw-gradient-to-position);
+}
+
+/* ── Divide colors ────────────────────────────────────────────── */
+[data-theme] .divide-slate-700 > * + * { border-color: rgba(var(--th-bdr), 1) !important; }
+
+/* ================================================================
+   REACTFLOW OVERRIDES  (use CSS variables + !important for 3rd-party)
+   ================================================================ */
+
+[data-theme] .react-flow__renderer,
+[data-theme] .react-flow__background {
+  background-color: rgba(var(--th-bg1), 1) !important;
+}
+
+[data-theme] .react-flow__edge-path {
+  stroke: rgba(var(--th-ref), 1) !important;
+  stroke-width: 2 !important;
+}
+
+[data-theme] .react-flow__edge.selected .react-flow__edge-path,
+[data-theme] .react-flow__edge:hover .react-flow__edge-path {
+  stroke: rgba(var(--th-acc), 1) !important;
+}
+
+[data-theme] .react-flow__edge-textbg { fill: rgba(var(--th-bg2), 1) !important; }
+[data-theme] .react-flow__edge-text   { fill: rgba(var(--th-txt3), 1) !important; font-size: 11px; }
+
+[data-theme] .react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(var(--th-bg4), 1) !important;
+  border: 2px solid rgba(var(--th-bdr), 1) !important;
+  transition: background 0.15s;
+}
+
+[data-theme] .react-flow__handle:hover {
+  background: rgba(var(--th-acc), 1) !important;
+  border-color: rgba(var(--th-ach), 1) !important;
+}
+
+[data-theme] .react-flow__controls {
+  background: rgba(var(--th-bg2), 1) !important;
+  border: 1px solid rgba(var(--th-bdr), 1) !important;
+  border-radius: 8px !important;
+}
+
+[data-theme] .react-flow__controls-button {
+  background: rgba(var(--th-bg2), 1) !important;
+  border-bottom: 1px solid rgba(var(--th-bdr), 1) !important;
+  fill: rgba(var(--th-txt3), 1) !important;
+}
+
+[data-theme] .react-flow__controls-button:hover {
+  background: rgba(var(--th-bg3), 1) !important;
+}
+
+[data-theme] .react-flow__minimap {
+  background: rgba(var(--th-bg2), 1) !important;
+  border: 1px solid rgba(var(--th-bdr), 1) !important;
+  border-radius: 8px !important;
+}
+
+[data-theme] .react-flow__minimap-mask {
+  fill: rgba(var(--th-acc), 0.10) !important;
+}
+
+/* ================================================================
+   SCROLLBARS
+   ================================================================ */
+
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: rgba(var(--th-bg1), 1); }
+::-webkit-scrollbar-thumb  { background: rgba(var(--th-bg3), 1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--th-bg4), 1); }
+
+/* ================================================================
+   THEME TRANSITION – smooth color changes on switch
+   ================================================================ */
+
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Disable transitions on elements where they'd cause flicker */
+.react-flow__edge-path,
+.react-flow__handle,
+[class*="animate-"] {
+  transition: none !important;
+}
+
+/* ================================================================
+   MISC UTILITIES
+   ================================================================ */
+
+.dragging-agent { opacity: 0.5; cursor: grabbing; }
+
+/* ── Additional animation ─────────────────────────────────────── */
+@keyframes pulse-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-pulse-fast { animation: pulse-fast 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+/* ================================================================
+   LIGHT THEME: Component-level overrides
+   The universal overrides above handle bg-slate-N and text-slate-N.
+   This section covers text-white, light accent colours,
+   structural depth, and coloured badges.
+   ================================================================ */
+
+/* ── text-white → readable dark text ────────────────────────── */
+[data-theme="light"] .text-white                { color: rgba(var(--th-txt1), 1) !important; }
+[data-theme="light"] .hover\:text-white:hover   { color: rgba(var(--th-txt1), 1) !important; }
+
+/* ── Structural separation: TopBar ──────────────────────────── */
+[data-theme="light"] header {
+  background-color: #ffffff !important;
+  border-bottom-color: #dde3ef !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ── Nested content areas: entity cards / accordion panels ───── */
+[data-theme="light"] .bg-slate-900\/40 { background-color: rgba(var(--th-bg3), 1) !important; }
+[data-theme="light"] .bg-slate-800\/80 { background-color: rgba(var(--th-bg4), 1) !important; }
+
+/* ── Structural separation: Sidebar ─────────────────────────── */
+[data-theme="light"] aside {
+  background-color: #ffffff !important;
+  border-right-color: #dde3ef !important;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ── Sidebar nav: inactive items need darker text ────────────── */
+[data-theme="light"] .hover\:bg-slate-800:hover {
+  background-color: rgba(var(--th-bg3), 1) !important;
+}
+[data-theme="light"] .hover\:text-slate-100:hover {
+  color: rgba(var(--th-txt1), 1) !important;
+}
+
+/* ── Cards and panels: subtle shadow for depth ───────────────── */
+[data-theme="light"] .rounded-xl.border,
+[data-theme="light"] .rounded-2xl.border {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .rounded-lg.border {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Step card failed border: keep it visible ────────────────── */
+[data-theme="light"] .border-red-500\/30 { border-color: rgba(239, 68, 68, 0.40) !important; }
+
+/* ── Dropdown / tooltip panels ───────────────────────────────── */
+[data-theme="light"] .shadow-2xl {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.10),
+    0 10px 10px -5px rgba(0, 0, 0, 0.06) !important;
+}
+[data-theme="light"] .shadow-lg {
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ── Accent colours: too-light variants → darker equivalents ─── */
+[data-theme="light"] .text-indigo-300 { color: #4338ca !important; }  /* indigo-700 */
+[data-theme="light"] .text-indigo-400 { color: #4f46e5 !important; }  /* indigo-600 */
+[data-theme="light"] .text-cyan-300   { color: #0e7490 !important; }  /* cyan-700 */
+[data-theme="light"] .text-cyan-400   { color: #0891b2 !important; }  /* cyan-600 */
+[data-theme="light"] .text-teal-300   { color: #0f766e !important; }  /* teal-700 */
+[data-theme="light"] .text-teal-400   { color: #0d9488 !important; }  /* teal-600 */
+[data-theme="light"] .text-blue-300   { color: #1d4ed8 !important; }  /* blue-700 */
+[data-theme="light"] .text-blue-400   { color: #2563eb !important; }  /* blue-600 */
+[data-theme="light"] .text-purple-300 { color: #7c3aed !important; }  /* violet-600 */
+[data-theme="light"] .text-purple-400 { color: #6d28d9 !important; }  /* violet-700 */
+
+/* ── Status / semantic colours → sufficient contrast on white ── */
+[data-theme="light"] .text-emerald-300 { color: #047857 !important; }  /* emerald-700 */
+[data-theme="light"] .text-emerald-400 { color: #059669 !important; }  /* emerald-600 */
+[data-theme="light"] .text-red-300     { color: #b91c1c !important; }  /* red-700 */
+[data-theme="light"] .text-red-400     { color: #dc2626 !important; }  /* red-600 */
+[data-theme="light"] .text-amber-300   { color: #b45309 !important; }  /* amber-700 */
+[data-theme="light"] .text-amber-400   { color: #d97706 !important; }  /* amber-600 */
+
+/* ── Status badge backgrounds ────────────────────────────────── */
+[data-theme="light"] .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.12) !important; }
+[data-theme="light"] .bg-red-500\/20     { background-color: rgba(239,  68,  68, 0.10) !important; }
+[data-theme="light"] .bg-amber-500\/20   { background-color: rgba(245, 158,  11, 0.12) !important; }
+[data-theme="light"] .bg-blue-500\/20    { background-color: rgba( 59, 130, 246, 0.10) !important; }
+[data-theme="light"] .bg-slate-500\/20   { background-color: rgba(100, 116, 139, 0.10) !important; }
+[data-theme="light"] .bg-purple-500\/20  { background-color: rgba(168,  85, 247, 0.10) !important; }
+[data-theme="light"] .bg-cyan-500\/20    { background-color: rgba(  6, 182, 212, 0.10) !important; }
+[data-theme="light"] .bg-teal-500\/20    { background-color: rgba( 20, 184, 166, 0.10) !important; }
+
+/* Status badge borders */
+[data-theme="light"] .border-emerald-500\/30 { border-color: rgba(16, 185, 129, 0.35) !important; }
+[data-theme="light"] .border-amber-500\/30   { border-color: rgba(245, 158,  11, 0.35) !important; }
+[data-theme="light"] .border-blue-500\/30    { border-color: rgba( 59, 130, 246, 0.35) !important; }
+[data-theme="light"] .border-slate-500\/30   { border-color: rgba(100, 116, 139, 0.25) !important; }
+[data-theme="light"] .border-purple-500\/30  { border-color: rgba(168,  85, 247, 0.35) !important; }
+[data-theme="light"] .border-cyan-500\/30    { border-color: rgba(  6, 182, 212, 0.35) !important; }
+[data-theme="light"] .border-teal-500\/30    { border-color: rgba( 20, 184, 166, 0.35) !important; }
+
+/* Role-badge hover (Sign Out button) */
+[data-theme="light"] .hover\:bg-red-500\/10:hover { background-color: rgba(239, 68, 68, 0.08) !important; }
+
+/* ── Code / mono blocks ──────────────────────────────────────── */
+[data-theme="light"] pre {
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+/* ── Inputs and form controls ────────────────────────────────── */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  color: rgba(var(--th-txt1), 1) !important;
+}
+[data-theme="light"] .placeholder-slate-500::placeholder { color: #94a3b8 !important; }
+[data-theme="light"] .placeholder-white::placeholder      { color: #94a3b8 !important; }
+
+/* ── Scrollbars ──────────────────────────────────────────────── */
+[data-theme="light"] ::-webkit-scrollbar-track { background: #f1f5f9; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Very light text variants (-100 / -200) → dark equivalents ─ */
+/* These are designed for dark backgrounds; on white they vanish. */
+[data-theme="light"] .text-indigo-100  { color: #3730a3 !important; }
+[data-theme="light"] .text-indigo-200  { color: #4338ca !important; }
+[data-theme="light"] .text-blue-100    { color: #1e40af !important; }
+[data-theme="light"] .text-blue-200    { color: #1d4ed8 !important; }
+[data-theme="light"] .text-cyan-100    { color: #155e75 !important; }
+[data-theme="light"] .text-cyan-200    { color: #0e7490 !important; }
+[data-theme="light"] .text-green-100   { color: #166534 !important; }
+[data-theme="light"] .text-green-200   { color: #15803d !important; }
+[data-theme="light"] .text-emerald-100 { color: #065f46 !important; }
+[data-theme="light"] .text-emerald-200 { color: #047857 !important; }
+[data-theme="light"] .text-teal-100    { color: #134e4a !important; }
+[data-theme="light"] .text-teal-200    { color: #0f766e !important; }
+[data-theme="light"] .text-red-100     { color: #991b1b !important; }
+[data-theme="light"] .text-red-200     { color: #b91c1c !important; }
+[data-theme="light"] .text-rose-100    { color: #9f1239 !important; }
+[data-theme="light"] .text-rose-200    { color: #be123c !important; }
+[data-theme="light"] .text-amber-100   { color: #92400e !important; }
+[data-theme="light"] .text-amber-200   { color: #b45309 !important; }
+[data-theme="light"] .text-orange-100  { color: #9a3412 !important; }
+[data-theme="light"] .text-orange-200  { color: #c2410c !important; }
+[data-theme="light"] .text-yellow-100  { color: #713f12 !important; }
+[data-theme="light"] .text-yellow-200  { color: #854d0e !important; }
+[data-theme="light"] .text-purple-100  { color: #4a1d96 !important; }
+[data-theme="light"] .text-purple-200  { color: #6b21a8 !important; }
+[data-theme="light"] .text-violet-100  { color: #4c1d95 !important; }
+[data-theme="light"] .text-violet-200  { color: #5b21b6 !important; }
+[data-theme="light"] .text-pink-100    { color: #831843 !important; }
+[data-theme="light"] .text-pink-200    { color: #9d174d !important; }
+[data-theme="light"] .text-gray-100    { color: #1f2937 !important; }
+[data-theme="light"] .text-gray-200    { color: #374151 !important; }
+[data-theme="light"] .text-zinc-100    { color: #18181b !important; }
+[data-theme="light"] .text-zinc-200    { color: #27272a !important; }
+
+/* ── Login hero panel: always dark bg → always keep light text ── */
+/* The left panel uses a hardcoded dark gradient; theme overrides   */
+/* must not flip its text to near-black.                           */
+[data-theme="light"] .login-panel-dark .text-white,
+[data-theme="light"] .login-panel-dark .hover\:text-white:hover { color: #ffffff !important; }
+[data-theme="light"] .login-panel-dark .text-slate-100,
+[data-theme="light"] .login-panel-dark .text-slate-200          { color: #e2e8f0 !important; }
+[data-theme="light"] .login-panel-dark .text-slate-400,
+[data-theme="light"] .login-panel-dark .text-slate-500          { color: #94a3b8 !important; }
+[data-theme="light"] .login-panel-dark .text-indigo-300         { color: #a5b4fc !important; }
+[data-theme="light"] .login-panel-dark .text-indigo-400         { color: #818cf8 !important; }
+
+/* ── White text stays white on dark-colored buttons/avatars ───── */
+/* These colored backgrounds are dark enough for white text (4.5:1+) */
+[data-theme="light"] .bg-indigo-600.text-white,
+[data-theme="light"] .bg-indigo-600 .text-white,
+[data-theme="light"] .bg-indigo-500.text-white,
+[data-theme="light"] .bg-indigo-500 .text-white,
+[data-theme="light"] .bg-red-600.text-white,
+[data-theme="light"] .bg-red-600 .text-white,
+[data-theme="light"] .bg-red-500.text-white,
+[data-theme="light"] .bg-red-500 .text-white,
+[data-theme="light"] .bg-emerald-600.text-white,
+[data-theme="light"] .bg-emerald-600 .text-white,
+[data-theme="light"] .bg-emerald-500.text-white,
+[data-theme="light"] .bg-emerald-500 .text-white,
+[data-theme="light"] .bg-blue-600.text-white,
+[data-theme="light"] .bg-blue-600 .text-white,
+[data-theme="light"] .bg-purple-600.text-white,
+[data-theme="light"] .bg-purple-600 .text-white,
+[data-theme="light"] .bg-amber-600.text-white,
+[data-theme="light"] .bg-amber-600 .text-white,
+[data-theme="light"] .bg-amber-500.text-white,
+[data-theme="light"] .bg-amber-500 .text-white { color: #ffffff !important; }

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "user-admin-001",
+    "email": "admin@incepta.com",
+    "name": "Product Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "product_admin",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-16T00:00:00.000000",
+    "updated_at": "2026-05-16T00:00:00.000000"
+  },
+  {
+    "id": "user-processadmin-001",
+    "email": "processadmin@incepta.com",
+    "name": "Process Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "process_admin",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-16T00:00:00.000000",
+    "updated_at": "2026-05-16T00:00:00.000000"
+  },
+  {
+    "id": "user-alice-001",
+    "email": "alice@incepta.com",
+    "name": "Alice Johnson",
+    "password_hash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "role": "org_user",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-16T00:00:00.000000",
+    "updated_at": "2026-05-16T00:00:00.000000"
+  },
+  {
+    "id": "user-custadmin-001",
+    "email": "custadmin@incepta.com",
+    "name": "Customer Admin",
+    "password_hash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "cust_admin",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-16T00:00:00.000000",
+    "updated_at": "2026-05-16T00:00:00.000000"
+  },
+  {
+    "id": "user-custuser-001",
+    "email": "custuser@incepta.com",
+    "name": "Customer User",
+    "password_hash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "role": "cust_user",
+    "group_ids": [],
+    "project_ids": [],
+    "is_active": true,
+    "avatar": null,
+    "created_at": "2026-05-16T00:00:00.000000",
+    "updated_at": "2026-05-16T00:00:00.000000"
+  }
+]
