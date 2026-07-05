@@ -1,0 +1,60 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0f1117;
+  --surface:   #1a1d27;
+  --surface2:  #22263a;
+  --border:    #2e3348;
+  --accent:    #6c8ef5;
+  --accent2:   #a78bfa;
+  --green:     #34d399;
+  --yellow:    #fbbf24;
+  --red:       #f87171;
+  --orange:    #fb923c;
+  --text:      #e2e8f0;
+  --text2:     #94a3b8;
+  --text3:     #64748b;
+  --radius:    8px;
+  --radius-lg: 12px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+/* ReactFlow overrides */
+.react-flow__background { background: var(--bg); }
+.react-flow__minimap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.react-flow__controls { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.react-flow__controls button { background: var(--surface2); color: var(--text2); border-bottom: 1px solid var(--border); }
+.react-flow__controls button:hover { background: var(--border); }
+.react-flow__edge-path { stroke: var(--border); stroke-width: 2; }
+.react-flow__edge-path.selected { stroke: var(--accent); }
+.react-flow__edge-textbg { fill: var(--surface); }
+.react-flow__edge-text { fill: var(--text2); font-size: 11px; font-family: 'Inter', sans-serif; }
+
+/* Pulse animation for running nodes */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(108,142,245,0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(108,142,245,0); }
+  100% { box-shadow: 0 0 0 0 rgba(108,142,245,0); }
+}
+.node-running { animation: pulse-ring 1.5s ease-out infinite; }
+
+/* Blink animation for awaiting input */
+@keyframes blink-border {
+  0%, 100% { border-color: var(--yellow); }
+  50%       { border-color: transparent; }
+}
+.node-awaiting { animation: blink-border 1s step-end infinite; }

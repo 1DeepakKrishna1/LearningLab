@@ -1,0 +1,14 @@
+# Requires Python 3.10+ (uses the `str | None` union syntax).
+#
+# The prompt-building core uses only the standard library. The CLI's optional
+# "execute with an LLM" step supports two providers; install whichever you use.
+
+# OpenAI: needs OPENAI_API_KEY (model overridable via OPENAI_MODEL).
+openai>=1.0.0
+
+# Google Gemini: needs GEMINI_API_KEY / GOOGLE_API_KEY (model via GEMINI_MODEL).
+google-genai>=0.3.0
+
+# Loads the .env file. Optional: a minimal built-in fallback parser is used
+# if this is not installed.
+python-dotenv>=1.0.0

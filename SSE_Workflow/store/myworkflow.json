@@ -1,0 +1,2440 @@
+[
+  {
+    "id": "a813709b-dbd1-429b-800c-43b29928ff5d",
+    "name": "Customer Onboarding (Myflow)",
+    "description": "Automated customer onboarding: verify identity with AI, route to human review, then save and notify.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-5316362e",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": 80.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Collect Customer Data",
+          "description": "Fetches data from external sources via APIs or file systems",
+          "type": "automatic",
+          "tools": [
+            "tool-001",
+            "tool-005"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "retry_on_failure": true,
+            "max_retries": 3,
+            "batch_size": 500
+          }
+        }
+      },
+      {
+        "id": "node-0dedc887",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 320.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "AI Verification",
+          "description": "Applies AI/ML models to derive insights and classify data",
+          "type": "automatic",
+          "tools": [
+            "tool-006",
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "LLM": "GroQ",
+            "model": "llama-3.3-70b-versatile",
+            "confidence_threshold": 0.85,
+            "Embeddings-Source": "default"
+          }
+        }
+      },
+      {
+        "id": "node-7990d35f",
+        "node_kind": "agent",
+        "agent_id": "agent-004",
+        "tool_id": null,
+        "position": {
+          "x": 628.2994575045209,
+          "y": -105.38493068113326
+        },
+        "data": {
+          "name": "Compliance Review",
+          "description": "Routes items to human reviewers and waits for approval decisions",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-007"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "reviewers": [
+              "team@company.com"
+            ],
+            "timeout_hours": 24,
+            "escalation_email": "manager@company.com"
+          }
+        }
+      },
+      {
+        "id": "node-85cbbb33",
+        "node_kind": "agent",
+        "agent_id": "agent-006",
+        "tool_id": null,
+        "position": {
+          "x": 632.7840867992767,
+          "y": 197.64484629294753
+        },
+        "data": {
+          "name": "Create Account",
+          "description": "Persists processed records to the configured database",
+          "type": "automatic",
+          "tools": [
+            "tool-004"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "operation": "upsert",
+            "conflict_strategy": "update",
+            "batch_size": 100
+          }
+        }
+      },
+      {
+        "id": "node-7eb5d1fc",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 1040.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Send Welcome Email",
+          "description": "Sends status updates and alerts via email and Slack",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "default",
+            "slack_channel": "#alerts"
+          }
+        }
+      },
+      {
+        "id": "node-1772732815853",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 768.1687763713081,
+          "y": 442.52441229656426
+        },
+        "data": {
+          "name": "AI Analyst",
+          "description": "Applies AI/ML models to derive insights and classify data",
+          "type": "automatic",
+          "tools": [
+            "tool-006",
+            "tool-002"
+          ],
+          "toolConfigs": {
+            "tool-002": {
+              "input_format": "json1",
+              "output_format": "json2",
+              "mapping_rules": "21313"
+            }
+          },
+          "properties": {
+            "LLM": "GroQ",
+            "model": "llama-3.3-70b-versatile",
+            "confidence_threshold": 2.85,
+            "Embeddings-Source": "default"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-aa4b0bb9",
+        "source": "node-5316362e",
+        "target": "node-0dedc887",
+        "label": "profile",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-b11cbfdb",
+        "source": "node-0dedc887",
+        "target": "node-7990d35f",
+        "label": "verified",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-112013e7",
+        "source": "node-7990d35f",
+        "target": "node-85cbbb33",
+        "label": "approved",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-376496fb",
+        "source": "node-85cbbb33",
+        "target": "node-7eb5d1fc",
+        "label": "created",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-7eb5d1fc-node-1772732815853",
+        "source": "node-7eb5d1fc",
+        "target": "node-1772732815853",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": [
+      "onboarding",
+      "compliance",
+      "human-review"
+    ]
+  },
+  {
+    "id": "1a9bfa37-10b6-4fc1-9199-818f0d844ad5",
+    "name": "Report Generation (Clone)",
+    "description": "Automated weekly report: fetch latest data, apply AI analysis, and distribute to stakeholders.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-20230d0e",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": 150.0,
+          "y": 250.0
+        },
+        "data": {
+          "name": "Fetch Weekly Data",
+          "type": "automatic"
+        }
+      },
+      {
+        "id": "node-4eff2edc",
+        "node_kind": "agent",
+        "agent_id": "agent-002",
+        "tool_id": null,
+        "position": {
+          "x": 400.0,
+          "y": 250.0
+        },
+        "data": {
+          "name": "Aggregate Metrics",
+          "type": "automatic"
+        }
+      },
+      {
+        "id": "node-c7d374d3",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 650.0,
+          "y": 250.0
+        },
+        "data": {
+          "name": "AI Commentary",
+          "type": "automatic"
+        }
+      },
+      {
+        "id": "node-947ac3c1",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 900.0,
+          "y": 250.0
+        },
+        "data": {
+          "name": "Distribute Report",
+          "type": "automatic"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-adcceecf",
+        "source": "node-20230d0e",
+        "target": "node-4eff2edc",
+        "label": "raw",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-3c2643d0",
+        "source": "node-4eff2edc",
+        "target": "node-c7d374d3",
+        "label": "aggregated",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-e31027b6",
+        "source": "node-c7d374d3",
+        "target": "node-947ac3c1",
+        "label": "report ready",
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": [
+      "reporting",
+      "analytics",
+      "scheduled"
+    ]
+  },
+  {
+    "id": "2f979eb7-976e-45c2-8fe5-247ef467cbfb",
+    "name": "Report Generation (Clone) (Copy)",
+    "description": "Automated weekly report: fetch latest data, apply AI analysis, and distribute to stakeholders.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-20230d0e",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": 131.9172995780591,
+          "y": 238.3754068716094
+        },
+        "data": {
+          "name": "Fetch Weekly Data",
+          "description": "Fetches data from external sources via APIs or file systems",
+          "type": "automatic",
+          "tools": [
+            "tool-001",
+            "tool-005"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "retry_on_failure": true,
+            "max_retries": 3,
+            "batch_size": 500
+          }
+        }
+      },
+      {
+        "id": "node-4eff2edc",
+        "node_kind": "agent",
+        "agent_id": "agent-002",
+        "tool_id": null,
+        "position": {
+          "x": 406.45810729355026,
+          "y": 51.73610608800482
+        },
+        "data": {
+          "name": "Aggregate Metrics",
+          "description": "Transforms, validates, and structures raw data for downstream use",
+          "type": "automatic",
+          "tools": [
+            "tool-002",
+            "tool-009"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "validation_schema": {},
+            "error_threshold": 0.05
+          }
+        }
+      },
+      {
+        "id": "node-c7d374d3",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 433.034259252227,
+          "y": 325.6823335917366
+        },
+        "data": {
+          "name": "AI Commentary",
+          "description": "Applies AI/ML models to derive insights and classify data",
+          "type": "automatic",
+          "tools": [
+            "tool-006",
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "LLM": "GroQ",
+            "model": "llama-3.3-70b-versatile",
+            "confidence_threshold": 0.85,
+            "Embeddings-Source": "default"
+          }
+        }
+      },
+      {
+        "id": "node-947ac3c1",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 856.3052957479763,
+          "y": 250.0
+        },
+        "data": {
+          "name": "Distribute Report",
+          "description": "Sends status updates and alerts via email and Slack",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "default",
+            "slack_channel": "#alerts"
+          }
+        }
+      },
+      {
+        "id": "node-1772734811926",
+        "node_kind": "agent",
+        "agent_id": "agent-004",
+        "tool_id": null,
+        "position": {
+          "x": 744.205381002401,
+          "y": -108.15284810379748
+        },
+        "data": {
+          "name": "Human Reviewer",
+          "description": "Routes items to human reviewers and waits for approval decisions",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-007"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "reviewers": [
+              "team@company.com"
+            ],
+            "timeout_hours": 24,
+            "escalation_email": "manager@company.com"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-adcceecf",
+        "source": "node-20230d0e",
+        "target": "node-4eff2edc",
+        "label": "raw",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-3c2643d0",
+        "source": "node-4eff2edc",
+        "target": "node-c7d374d3",
+        "label": "aggregated",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-e31027b6",
+        "source": "node-c7d374d3",
+        "target": "node-947ac3c1",
+        "label": "report ready",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-4eff2edc-node-1772734811926",
+        "source": "node-4eff2edc",
+        "target": "node-1772734811926",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772734811926-node-947ac3c1",
+        "source": "node-1772734811926",
+        "target": "node-947ac3c1",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": []
+  },
+  {
+    "id": "1279b1b7-c105-4064-b56c-7368ca042248",
+    "name": "Supervised Multi-Agent Workflow (Clone)",
+    "description": "A Supervisor monitors the pipeline; an Orchestrator decomposes the task; parallel Prompt and ReAct sub-agents handle sub-tasks; Reflection merges results; Guardrails validates before delivery.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-06a89865",
+        "node_kind": "agent",
+        "agent_id": "agent-015",
+        "tool_id": null,
+        "position": {
+          "x": 321.01072935503316,
+          "y": -122.89933694996998
+        },
+        "data": {
+          "name": "Supervisor",
+          "description": "Monitors agent health, routes tasks by policy, catches failures and triggers retries or escalations",
+          "type": "supervisor",
+          "tools": [
+            "tool-008",
+            "tool-003"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "routing_policy": "priority",
+            "max_retries": 3,
+            "failure_threshold": 2,
+            "escalation_channel": "#ops-alerts",
+            "heartbeat_interval_s": 10
+          }
+        }
+      },
+      {
+        "id": "node-d416e243",
+        "node_kind": "agent",
+        "agent_id": "agent-014",
+        "tool_id": null,
+        "position": {
+          "x": 319.21494876431564,
+          "y": 46.67172995780592
+        },
+        "data": {
+          "name": "Orchestrator",
+          "description": "Decomposes complex tasks, dispatches sub-tasks to specialist agents and merges results",
+          "type": "orchestrator",
+          "tools": [
+            "tool-010",
+            "tool-001"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "decomposition_strategy": "llm",
+            "merge_strategy": "reduce",
+            "max_sub_agents": 2,
+            "timeout_seconds": 90,
+            "model": "llama-3.3-70b-versatile"
+          }
+        }
+      },
+      {
+        "id": "node-2f27a127",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 524.6726943942135,
+          "y": 228.74840265220018
+        },
+        "data": {
+          "name": "Prompt Sub-Agent",
+          "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are an expert at {{domain}}. Your sub-task: {{task}}\n\nContext from orchestrator:\n{{context}}\n\nRespond in {{output_format}} format. Be thorough but concise.",
+            "user_prompt": "Process this input:\n{{input_data}}\n\nFocus on: structured analysis, key findings, data integrity issues.",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.5,
+            "max_tokens": 1500,
+            "output_format": "json"
+          }
+        }
+      },
+      {
+        "id": "node-0545d8aa",
+        "node_kind": "agent",
+        "agent_id": "agent-011",
+        "tool_id": null,
+        "position": {
+          "x": 63.84761904761888,
+          "y": 206.87739602169984
+        },
+        "data": {
+          "name": "ReAct Sub-Agent",
+          "description": "Iteratively Reasons and Acts using tools until a final answer is reached (ReAct pattern)",
+          "type": "react_agent",
+          "tools": [
+            "tool-006",
+            "tool-013",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "goal_prompt": "Sub-task: {{task}}\n\nInput data: {{input_data}}\n\nUse Web Search and REST API to enrich the data with current information. Reason step-by-step. Output: {{output_format}}",
+            "max_iterations": 4,
+            "model": "llama-3.3-70b-versatile",
+            "stop_on_answer": true,
+            "trace_thoughts": true
+          }
+        }
+      },
+      {
+        "id": "node-6d7b4c86",
+        "node_kind": "agent",
+        "agent_id": "agent-012",
+        "tool_id": null,
+        "position": {
+          "x": 251.2491862567813,
+          "y": 425.0664255575648
+        },
+        "data": {
+          "name": "Reflect & Merge",
+          "description": "Generates an initial output, self-critiques it and iteratively improves until quality threshold is met",
+          "type": "reflection_agent",
+          "tools": [
+            "tool-006"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "critique_prompt": "Merge and review these sub-agent outputs:\n\nSub-Agent A result:\n{{previous_output}}\n\nEvaluate the merged result for:\n1. Consistency \u2014 Do the results agree? (1\u201310)\n2. Coverage \u2014 Is {{task}} fully addressed? (1\u201310)\n3. Quality \u2014 Is the output actionable? (1\u201310)\n\nProvide a unified, coherent final output. If score < {{quality_threshold}}, revise.",
+            "quality_threshold": 7.5,
+            "max_iterations": 2,
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.35
+          }
+        }
+      },
+      {
+        "id": "node-d747b9c3",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 555.6233875828812,
+          "y": 440.76745027124775
+        },
+        "data": {
+          "name": "Output Guardrails",
+          "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 4096,
+            "block_on_violation": true,
+            "redact_pii": true
+          }
+        }
+      },
+      {
+        "id": "node-9dce5363",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 842.883510303647,
+          "y": -82.07667269439418
+        },
+        "data": {
+          "name": "Notify Stakeholders",
+          "description": "Sends status updates and alerts via email and Slack",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "default",
+            "slack_channel": "#alerts"
+          }
+        }
+      },
+      {
+        "id": "node-1772743275869",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": 42.15343194318859,
+          "y": -123.49752863170583
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": ""
+          }
+        }
+      },
+      {
+        "id": "node-1772743418393",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 842.9056923410185,
+          "y": 117.51320072332729
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": ""
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-fbc1f634",
+        "source": "node-06a89865",
+        "target": "node-d416e243",
+        "label": "task",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-eacba09a",
+        "source": "node-d416e243",
+        "target": "node-2f27a127",
+        "label": "sub-task A",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-68397d7c",
+        "source": "node-d416e243",
+        "target": "node-0545d8aa",
+        "label": "sub-task B",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-5d79dff1",
+        "source": "node-2f27a127",
+        "target": "node-6d7b4c86",
+        "label": "result A",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-3f7f5192",
+        "source": "node-0545d8aa",
+        "target": "node-6d7b4c86",
+        "label": "result B",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-f2eee151",
+        "source": "node-6d7b4c86",
+        "target": "node-d747b9c3",
+        "label": "merged",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-dd1c22a6",
+        "source": "node-d747b9c3",
+        "target": "node-9dce5363",
+        "label": "validated",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772743275869-node-06a89865",
+        "source": "node-1772743275869",
+        "target": "node-06a89865",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-9dce5363-node-1772743418393",
+        "source": "node-9dce5363",
+        "target": "node-1772743418393",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": [
+      "multi-agent",
+      "supervisor",
+      "orchestration",
+      "parallel"
+    ]
+  },
+  {
+    "id": "52280618-f7db-46cc-80f1-0d0fa92f220e",
+    "name": "SampleSimple",
+    "description": "",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-1772743865772",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": 57.0,
+          "y": 16.5
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": "",
+            "executor": ""
+          }
+        }
+      },
+      {
+        "id": "node-1772743871320",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 388.25,
+          "y": 396.25
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "default",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": "mySummary"
+          }
+        }
+      },
+      {
+        "id": "node-1772743881197",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": 56.25,
+          "y": 178.25
+        },
+        "data": {
+          "name": "Data Ingestion Agent",
+          "description": "Fetches data from external sources via APIs or file systems",
+          "type": "automatic",
+          "tools": [
+            "tool-001",
+            "tool-005"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "retry_on_failure": true,
+            "max_retries": 3,
+            "batch_size": 500
+          }
+        }
+      },
+      {
+        "id": "node-1772743886658",
+        "node_kind": "agent",
+        "agent_id": "agent-004",
+        "tool_id": null,
+        "position": {
+          "x": 386.75,
+          "y": 15.25
+        },
+        "data": {
+          "name": "Human Reviewer",
+          "description": "Routes items to human reviewers and waits for approval decisions",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-007"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "reviewers": [
+              "team@company.com"
+            ],
+            "timeout_hours": 24,
+            "escalation_email": "manager@company.com"
+          }
+        }
+      },
+      {
+        "id": "node-1772743894831",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 388.25,
+          "y": 218.25
+        },
+        "data": {
+          "name": "Prompt Agent",
+          "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are an expert {{domain}} analyst with deep knowledge of {{context}}.\n\nRespond in {{output_format}} format.\nBe concise, accurate, and data-driven.\nIf data is missing, clearly state assumptions.\nCurrent date: {{timestamp}}.",
+            "user_prompt": "Input data:\n{{input_data}}\n\nTask: {{task}}\n\nProvide:\n1. A concise summary\n2. Key insights from the data\n3. Anomalies or risks detected\n4. Recommended next steps",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.7,
+            "max_tokens": 2000,
+            "output_format": "markdown"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "reactflow__edge-node-1772743865772-node-1772743881197",
+        "source": "node-1772743865772",
+        "target": "node-1772743881197",
+        "label": "init",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772743881197-node-1772743886658",
+        "source": "node-1772743881197",
+        "target": "node-1772743886658",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772743886658-node-1772743894831",
+        "source": "node-1772743886658",
+        "target": "node-1772743894831",
+        "label": "AI Execution",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772743894831-node-1772743871320",
+        "source": "node-1772743894831",
+        "target": "node-1772743871320",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": []
+  },
+  {
+    "id": "6f8468dd-f429-47c5-bc50-d87f9835f681",
+    "name": "Prompt-Driven NL-SQL Query (Clone)",
+    "description": "User asks a natural-language question; a Prompt Agent reformulates it, the DB agent runs NL-to-SQL, Reflection validates quality, a Human Reviewer approves, then results are sent.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-0bf459cc",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 80.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Validate Question",
+          "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 4096,
+            "block_on_violation": true,
+            "redact_pii": true
+          }
+        }
+      },
+      {
+        "id": "node-43e4ec83",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 362.4882459312839,
+          "y": 152.790837854129
+        },
+        "data": {
+          "name": "Reformulate Prompt",
+          "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are a data query specialist. Convert user questions into precise, unambiguous database query specifications.\n\nDatabase context:\n{{db_schema}}\n\nAlways output a structured JSON with keys: intent, entities, filters, sort_by, limit.",
+            "user_prompt": "User question: {{user_query}}\n\nExtract the query intent and convert to a structured specification that NL-to-SQL can process. Include any implicit filters based on context: {{context}}",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.2,
+            "max_tokens": 800,
+            "output_format": "json"
+          }
+        }
+      },
+      {
+        "id": "node-a7f7810b",
+        "node_kind": "agent",
+        "agent_id": "agent-006",
+        "tool_id": null,
+        "position": {
+          "x": 694.0740204942738,
+          "y": 89.53056057866186
+        },
+        "data": {
+          "name": "NL-to-SQL Query",
+          "description": "Persists processed records to the configured database",
+          "type": "automatic",
+          "tools": [
+            "tool-004"
+          ],
+          "toolConfigs": {
+            "tool-012": {
+              "schema_description": "Tables:\n- orders(id, customer_id, amount, status, created_at)\n- customers(id, name, email, region, tier)\n- products(id, name, category, price, stock)\n\nRelationships:\n- orders.customer_id \u2192 customers.id\n\nRules:\n- Always add LIMIT {{max_rows}} unless user specifies\n- Use parameterized queries for safety"
+            }
+          },
+          "properties": {
+            "operation": "upsert",
+            "conflict_strategy": "update",
+            "batch_size": 100
+          }
+        }
+      },
+      {
+        "id": "node-54aaf90c",
+        "node_kind": "agent",
+        "agent_id": "agent-004",
+        "tool_id": null,
+        "position": {
+          "x": 1040.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Human Review",
+          "description": "Routes items to human reviewers and waits for approval decisions",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-007"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "reviewers": [
+              "team@company.com"
+            ],
+            "timeout_hours": 24,
+            "escalation_email": "manager@company.com"
+          }
+        }
+      },
+      {
+        "id": "node-c5a27f5d",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 1280.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Send Answer",
+          "description": "Sends status updates and alerts via email and Slack",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "default",
+            "slack_channel": "#alerts"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-2dc85a10",
+        "source": "node-0bf459cc",
+        "target": "node-43e4ec83",
+        "label": "clean query",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-d662cc84",
+        "source": "node-43e4ec83",
+        "target": "node-a7f7810b",
+        "label": "structured prompt",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-12cfc45a",
+        "source": "node-54aaf90c",
+        "target": "node-c5a27f5d",
+        "label": "approved",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-a7f7810b-node-54aaf90c",
+        "source": "node-a7f7810b",
+        "target": "node-54aaf90c",
+        "label": "In Review",
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": [
+      "nlp",
+      "database",
+      "prompt",
+      "nl-sql"
+    ]
+  },
+  {
+    "id": "b4f9514a-cda8-4d44-a620-0af0c6349096",
+    "name": "ToolWorkflow",
+    "description": "",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-1772796251519",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": -30.0,
+          "y": -131.1238232891076
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": ""
+          }
+        }
+      },
+      {
+        "id": "node-1772796257778",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 348.75,
+          "y": 281.25
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": ""
+          }
+        }
+      },
+      {
+        "id": "node-1772796270502",
+        "node_kind": "tool",
+        "agent_id": null,
+        "tool_id": "tool-001",
+        "position": {
+          "x": -4.872329816799947,
+          "y": 81.34970130553845
+        },
+        "data": {
+          "name": "HTTP Request",
+          "description": "Make HTTP GET/POST/PUT/DELETE requests to external APIs",
+          "toolType": "api_call",
+          "properties": {
+            "method": "GET",
+            "url": "",
+            "headers": {},
+            "timeout": 30
+          }
+        }
+      },
+      {
+        "id": "node-1772796278309",
+        "node_kind": "tool",
+        "agent_id": null,
+        "tool_id": "tool-002",
+        "position": {
+          "x": -3.952389555692264,
+          "y": 261.5717324278769
+        },
+        "data": {
+          "name": "Data Transformer",
+          "description": "Transform and map data between JSON, CSV, and XML formats",
+          "toolType": "data_transform",
+          "properties": {
+            "input_format": "json",
+            "output_format": "json",
+            "mapping_rules": {}
+          }
+        }
+      },
+      {
+        "id": "node-1772796364632",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": 348.25,
+          "y": 67.75
+        },
+        "data": {
+          "name": "Data Ingestion Agent",
+          "description": "Fetches data from external sources via APIs or file systems",
+          "type": "automatic",
+          "tools": [
+            "tool-001",
+            "tool-005"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "retry_on_failure": true,
+            "max_retries": 3,
+            "batch_size": 500
+          }
+        }
+      },
+      {
+        "id": "node-1772807018970",
+        "node_kind": "agent",
+        "agent_id": "agent-004",
+        "tool_id": null,
+        "position": {
+          "x": 348.2613200013949,
+          "y": -128.84499476095104
+        },
+        "data": {
+          "name": "Human Reviewer",
+          "description": "Routes items to human reviewers and waits for approval decisions",
+          "type": "human_in_the_loop",
+          "tools": [
+            "tool-007"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "reviewers": [
+              "team@company.com"
+            ],
+            "timeout_hours": 24,
+            "escalation_email": "manager@company.com"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "reactflow__edge-node-1772796251519-node-1772796270502",
+        "source": "node-1772796251519",
+        "target": "node-1772796270502",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772796270502-node-1772796278309",
+        "source": "node-1772796270502",
+        "target": "node-1772796278309",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772796364632-node-1772796257778",
+        "source": "node-1772796364632",
+        "target": "node-1772796257778",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772796278309-node-1772807018970",
+        "source": "node-1772796278309",
+        "target": "node-1772807018970",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772807018970-node-1772796364632",
+        "source": "node-1772807018970",
+        "target": "node-1772796364632",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": []
+  },
+  {
+    "id": "5460eee4-1ca5-4e31-afa0-870d5325520c",
+    "name": "Data Pipeline (Clone)",
+    "description": "End-to-end ETL pipeline: ingest raw data, transform it, run AI analysis, persist to DB, and notify stakeholders.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-ef417335",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": 80.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Ingest Sales Data",
+          "description": "Fetches data from external sources via APIs or file systems",
+          "type": "automatic",
+          "tools": [
+            "tool-001",
+            "tool-005"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "retry_on_failure": true,
+            "max_retries": 3,
+            "batch_size": 500
+          }
+        }
+      },
+      {
+        "id": "node-72202ac1",
+        "node_kind": "agent",
+        "agent_id": "agent-002",
+        "tool_id": null,
+        "position": {
+          "x": 320.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Transform Records",
+          "description": "Transforms, validates, and structures raw data for downstream use",
+          "type": "automatic",
+          "tools": [
+            "tool-002",
+            "tool-009"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "validation_schema": {},
+            "error_threshold": 0.05
+          }
+        }
+      },
+      {
+        "id": "node-56622ded",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 560.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "AI Trend Analysis",
+          "description": "Applies AI/ML models to derive insights and classify data",
+          "type": "automatic",
+          "tools": [
+            "tool-006",
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "LLM": "GroQ",
+            "model": "llama-3.3-70b-versatile",
+            "confidence_threshold": 0.85,
+            "Embeddings-Source": "default"
+          }
+        }
+      },
+      {
+        "id": "node-3f32b569",
+        "node_kind": "agent",
+        "agent_id": "agent-006",
+        "tool_id": null,
+        "position": {
+          "x": 801.0657605574902,
+          "y": 585.8053218114057
+        },
+        "data": {
+          "name": "Save to DB",
+          "description": "Persists processed records to the configured database",
+          "type": "automatic",
+          "tools": [
+            "tool-004"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "operation": "upsert",
+            "conflict_strategy": "update",
+            "batch_size": 100
+          }
+        }
+      },
+      {
+        "id": "node-6ab7e7c5",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 1040.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Send Report",
+          "description": "Sends status updates and alerts via email and Slack",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "default",
+            "slack_channel": "#alerts"
+          }
+        }
+      },
+      {
+        "id": "node-1772880387057",
+        "node_kind": "agent",
+        "agent_id": "agent-002",
+        "tool_id": null,
+        "position": {
+          "x": 530.8699459095718,
+          "y": 366.2291325389787
+        },
+        "data": {
+          "name": "Data Processor",
+          "description": "Transforms, validates, and structures raw data for downstream use",
+          "type": "automatic",
+          "tools": [
+            "tool-002",
+            "tool-009"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "validation_schema": {},
+            "error_threshold": 0.05
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-b5c7030b",
+        "source": "node-ef417335",
+        "target": "node-72202ac1",
+        "label": "raw data",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-efcee645",
+        "source": "node-72202ac1",
+        "target": "node-56622ded",
+        "label": "clean data",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-46d54b92",
+        "source": "node-3f32b569",
+        "target": "node-6ab7e7c5",
+        "label": "persisted",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-56622ded-node-1772880387057",
+        "source": "node-56622ded",
+        "target": "node-1772880387057",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1772880387057-node-3f32b569",
+        "source": "node-1772880387057",
+        "target": "node-3f32b569",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": [
+      "etl",
+      "data",
+      "analytics"
+    ]
+  },
+  {
+    "id": "c5eb3c74-360f-4f78-9794-250d03f6d825",
+    "name": "Bot Flow",
+    "description": "",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-1773301401536",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": -1.4806473635060797,
+          "y": 428.7659837258953
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773301408465",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 263.8936927284388,
+          "y": 433.3251266122746
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773301431709",
+        "node_kind": "agent",
+        "agent_id": "agent-007",
+        "tool_id": null,
+        "position": {
+          "x": 306.1161359048484,
+          "y": -50.10723733853753
+        },
+        "data": {
+          "name": "Intent Classifier",
+          "description": "Routes execution based on conditions and triggers downstream webhooks",
+          "type": "conditional",
+          "tools": [
+            "tool-010",
+            "tool-001"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "condition_field": "",
+            "condition_operator": "equals",
+            "condition_value": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773301441545",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 432.2177978187825,
+          "y": 248.89488670927435
+        },
+        "data": {
+          "name": "Prompt Agent",
+          "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are an expert {{domain}} analyst with deep knowledge of {{context}}.\n\nRespond in {{output_format}} format.\nBe concise, accurate, and data-driven.\nIf data is missing, clearly state assumptions.\nCurrent date: {{timestamp}}.",
+            "user_prompt": "Input data:\n{{input_data}}\n\nTask: {{task}}\n\nProvide:\n1. A concise summary\n2. Key insights from the data\n3. Anomalies or risks detected\n4. Recommended next steps",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.7,
+            "max_tokens": 2000,
+            "output_format": "markdown"
+          }
+        }
+      },
+      {
+        "id": "node-1773301448569",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 27.5250989967314,
+          "y": -79.52922075970321
+        },
+        "data": {
+          "name": "Guardrails Agent",
+          "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 4096,
+            "block_on_violation": true,
+            "redact_pii": true
+          }
+        }
+      },
+      {
+        "id": "node-1773301464005",
+        "node_kind": "agent",
+        "agent_id": "agent-007",
+        "tool_id": null,
+        "position": {
+          "x": 623.376090965109,
+          "y": 393.61052187774317
+        },
+        "data": {
+          "name": "Workflow Orchestrator",
+          "description": "Routes execution based on conditions and triggers downstream webhooks",
+          "type": "conditional",
+          "tools": [
+            "tool-010",
+            "tool-001"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "condition_field": "",
+            "condition_operator": "equals",
+            "condition_value": ""
+          }
+        }
+      },
+      {
+        "id": "node-1773301494218",
+        "node_kind": "agent",
+        "agent_id": "agent-006",
+        "tool_id": null,
+        "position": {
+          "x": 149.13007757415988,
+          "y": 248.50180803828067
+        },
+        "data": {
+          "name": "Database Manager",
+          "description": "Persists processed records to the configured database",
+          "type": "automatic",
+          "tools": [
+            "tool-004"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "operation": "upsert",
+            "conflict_strategy": "update",
+            "batch_size": 100
+          }
+        }
+      },
+      {
+        "id": "node-1773379755709",
+        "node_kind": "agent",
+        "agent_id": "agent-015",
+        "tool_id": null,
+        "position": {
+          "x": 620.9977428087417,
+          "y": -80.68874540951686
+        },
+        "data": {
+          "name": "Domain-A",
+          "description": "Monitors agent health, routes tasks by policy, catches failures and triggers retries or escalations",
+          "type": "supervisor",
+          "tools": [
+            "tool-008",
+            "tool-003"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "routing_policy": "round_robin",
+            "max_retries": 3,
+            "failure_threshold": 2,
+            "escalation_channel": "#ops-alerts",
+            "heartbeat_interval_s": 10
+          }
+        }
+      },
+      {
+        "id": "node-1773379841545",
+        "node_kind": "agent",
+        "agent_id": "agent-015",
+        "tool_id": null,
+        "position": {
+          "x": 771.8596549398374,
+          "y": 93.19629922308935
+        },
+        "data": {
+          "name": "Domain-B",
+          "description": "Monitors agent health, routes tasks by policy, catches failures and triggers retries or escalations",
+          "type": "supervisor",
+          "tools": [
+            "tool-008",
+            "tool-003"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "routing_policy": "round_robin",
+            "max_retries": 3,
+            "failure_threshold": 2,
+            "escalation_channel": "#ops-alerts",
+            "heartbeat_interval_s": 10
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "reactflow__edge-node-1773301401536-node-1773301448569",
+        "source": "node-1773301401536",
+        "target": "node-1773301448569",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301448569-node-1773301431709",
+        "source": "node-1773301448569",
+        "target": "node-1773301431709",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301431709-node-1773301441545",
+        "source": "node-1773301431709",
+        "target": "node-1773301441545",
+        "label": "Prompt",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301431709-node-1773301494218",
+        "source": "node-1773301431709",
+        "target": "node-1773301494218",
+        "label": "Query",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301441545-node-1773301464005",
+        "source": "node-1773301441545",
+        "target": "node-1773301464005",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301494218-node-1773301464005",
+        "source": "node-1773301494218",
+        "target": "node-1773301464005",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301464005-node-1773301408465",
+        "source": "node-1773301464005",
+        "target": "node-1773301408465",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301431709-node-1773301464005",
+        "source": "node-1773301431709",
+        "target": "node-1773301464005",
+        "label": "Invalid",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301431709-node-1773379755709",
+        "source": "node-1773301431709",
+        "target": "node-1773379755709",
+        "label": "Domain-A",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773301431709-node-1773379841545",
+        "source": "node-1773301431709",
+        "target": "node-1773379841545",
+        "label": "Domain-B",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773379755709-node-1773301464005",
+        "source": "node-1773379755709",
+        "target": "node-1773301464005",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1773379841545-node-1773301464005",
+        "source": "node-1773379841545",
+        "target": "node-1773301464005",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": []
+  },
+  {
+    "id": "80cdd460-ea54-47e5-a97d-675ded684ecf",
+    "name": "MyBankFlow",
+    "description": "",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-1774289156089",
+        "node_kind": "agent",
+        "agent_id": "agent-start",
+        "tool_id": null,
+        "position": {
+          "x": -247.71199999999996,
+          "y": -180.792
+        },
+        "data": {
+          "name": "Workflow Start",
+          "description": "Entry point of the workflow. Configuration properties here are shared as read-only across all agents and tools in this workflow.",
+          "type": "start",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "environment": "production",
+            "version": "1.0.0",
+            "timeout_seconds": 3600,
+            "max_retries": 3,
+            "run_label": ""
+          }
+        }
+      },
+      {
+        "id": "node-1774289160043",
+        "node_kind": "agent",
+        "agent_id": "agent-end",
+        "tool_id": null,
+        "position": {
+          "x": 367.7770329113923,
+          "y": 293.726
+        },
+        "data": {
+          "name": "Workflow End",
+          "description": "Exit point of the workflow. All agents and tools can write their final results here. Properties define the output schema for collected workflow data.",
+          "type": "end",
+          "tools": [],
+          "toolConfigs": {},
+          "properties": {
+            "output_destination": "",
+            "notify_on_complete": true,
+            "archive_results": false,
+            "summary": ""
+          }
+        }
+      },
+      {
+        "id": "node-1774289166124",
+        "node_kind": "agent",
+        "agent_id": "agent-001",
+        "tool_id": null,
+        "position": {
+          "x": -247.39635543175487,
+          "y": -33.08194763231197
+        },
+        "data": {
+          "name": "Data Ingestion Agent",
+          "description": "Fetches data from external sources via APIs or file systems",
+          "type": "automatic",
+          "tools": [
+            "tool-001",
+            "tool-005"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "retry_on_failure": true,
+            "max_retries": 3,
+            "batch_size": 500
+          }
+        }
+      },
+      {
+        "id": "node-1774289172456",
+        "node_kind": "agent",
+        "agent_id": "agent-003",
+        "tool_id": null,
+        "position": {
+          "x": 35.15126412014024,
+          "y": 59.80262417495891
+        },
+        "data": {
+          "name": "AI Analyst",
+          "description": "Applies AI/ML models to derive insights and classify data",
+          "type": "automatic",
+          "tools": [
+            "tool-006",
+            "tool-002",
+            "tool-009",
+            "tool-010"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "LLM": "GroQ",
+            "model": "llama-3.3-70b-versatile",
+            "confidence_threshold": 0.85,
+            "Embeddings-Source": "default"
+          }
+        }
+      },
+      {
+        "id": "node-1774289185588",
+        "node_kind": "agent",
+        "agent_id": "agent-007",
+        "tool_id": null,
+        "position": {
+          "x": 34.06200000000001,
+          "y": -185.9099999999999
+        },
+        "data": {
+          "name": "Workflow Orchestrator",
+          "description": "Routes execution based on conditions and triggers downstream webhooks",
+          "type": "conditional",
+          "tools": [
+            "tool-010",
+            "tool-001"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "condition_field": "",
+            "condition_operator": "equals",
+            "condition_value": ""
+          }
+        }
+      },
+      {
+        "id": "node-1774289192141",
+        "node_kind": "agent",
+        "agent_id": "agent-010",
+        "tool_id": null,
+        "position": {
+          "x": 312.3180000000001,
+          "y": 20.218000000000018
+        },
+        "data": {
+          "name": "Prompt Agent",
+          "description": "Executes parameterized System + User prompt templates against an LLM with variable injection",
+          "type": "prompt_agent",
+          "tools": [
+            "tool-006",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "system_prompt": "You are an expert {{domain}} analyst with deep knowledge of {{context}}.\n\nRespond in {{output_format}} format.\nBe concise, accurate, and data-driven.\nIf data is missing, clearly state assumptions.\nCurrent date: {{timestamp}}.",
+            "user_prompt": "Input data:\n{{input_data}}\n\nTask: {{task}}\n\nProvide:\n1. A concise summary\n2. Key insights from the data\n3. Anomalies or risks detected\n4. Recommended next steps",
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.7,
+            "max_tokens": 2000,
+            "output_format": "markdown"
+          }
+        }
+      },
+      {
+        "id": "node-1774289668053",
+        "node_kind": "tool",
+        "agent_id": null,
+        "tool_id": "tool-012",
+        "position": {
+          "x": 61.94897898479769,
+          "y": 276.93762318132195
+        },
+        "data": {
+          "name": "NL-to-SQL",
+          "description": "Convert natural language questions into SQL queries and execute against a database",
+          "toolType": "database",
+          "properties": {
+            "connection_string": "",
+            "schema_description": "Tables and columns:\n{{db_schema}}\n\nRelationships:\n{{db_relationships}}\n\nRules:\n- Always add LIMIT {{max_rows}} unless user specifies\n- Use parameterized queries for user-supplied values\n- Prefer explicit column names over SELECT *",
+            "model": "llama-3.3-70b-versatile",
+            "max_rows": 500
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "reactflow__edge-node-1774289156089-node-1774289166124",
+        "source": "node-1774289156089",
+        "target": "node-1774289166124",
+        "label": "Init",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774289166124-node-1774289185588",
+        "source": "node-1774289166124",
+        "target": "node-1774289185588",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774289185588-node-1774289172456",
+        "source": "node-1774289185588",
+        "target": "node-1774289172456",
+        "label": "yes",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774289185588-node-1774289192141",
+        "source": "node-1774289185588",
+        "target": "node-1774289192141",
+        "label": "no",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774289192141-node-1774289160043",
+        "source": "node-1774289192141",
+        "target": "node-1774289160043",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774289172456-node-1774289668053",
+        "source": "node-1774289172456",
+        "target": "node-1774289668053",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774289668053-node-1774289160043",
+        "source": "node-1774289668053",
+        "target": "node-1774289160043",
+        "label": null,
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:17:51.183931",
+    "updated_at": "2026-03-23T18:17:51.183931",
+    "is_template": false,
+    "tags": []
+  },
+  {
+    "id": "089d4028-d5a1-44d6-abe4-745da1a9c984",
+    "name": "ReAct Research Agent (Clone)",
+    "description": "A ReAct loop agent reasons and acts using Web Search and REST API tools, with guardrails on input/output and reflection-based improvement of the final answer.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-d55aa15a",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 80.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Input Guardrails",
+          "type": "guardrails",
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 4096,
+            "block_on_violation": true,
+            "redact_pii": false
+          }
+        }
+      },
+      {
+        "id": "node-28597b9f",
+        "node_kind": "agent",
+        "agent_id": "agent-011",
+        "tool_id": null,
+        "position": {
+          "x": 320.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "ReAct Research",
+          "type": "react_agent",
+          "properties": {
+            "goal_prompt": "Goal: {{user_query}}\n\nContext: {{context}}\n\nInstructions:\n- Think step-by-step before each action\n- Use Web Search for recent facts and current events\n- Use REST API Caller for structured data retrieval\n- Cite all sources\n- Output format: {{output_format}}",
+            "max_iterations": 6,
+            "model": "llama-3.3-70b-versatile",
+            "stop_on_answer": true,
+            "trace_thoughts": true
+          }
+        }
+      },
+      {
+        "id": "node-37421b44",
+        "node_kind": "agent",
+        "agent_id": "agent-012",
+        "tool_id": null,
+        "position": {
+          "x": 560.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Reflect & Improve",
+          "type": "reflection_agent",
+          "properties": {
+            "critique_prompt": "Review this research answer:\n---\n{{previous_output}}\n---\n\nScore on:\n1. Factual accuracy (1\u201310)\n2. Source coverage (1\u201310)\n3. Answer completeness (1\u201310)\n\nIf overall < {{quality_threshold}}, provide an improved version.",
+            "quality_threshold": 8.0,
+            "max_iterations": 2,
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.3
+          }
+        }
+      },
+      {
+        "id": "node-32cd8848",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 800.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Output Guardrails",
+          "type": "guardrails",
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 8192,
+            "block_on_violation": true,
+            "redact_pii": true
+          }
+        }
+      },
+      {
+        "id": "node-d15ecdbb",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 1040.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Deliver Results",
+          "type": "automatic"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-e6afbabe",
+        "source": "node-d55aa15a",
+        "target": "node-28597b9f",
+        "label": "validated input",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-94601b67",
+        "source": "node-28597b9f",
+        "target": "node-37421b44",
+        "label": "raw answer",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-4cfc4d10",
+        "source": "node-37421b44",
+        "target": "node-32cd8848",
+        "label": "improved answer",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-e9048416",
+        "source": "node-32cd8848",
+        "target": "node-d15ecdbb",
+        "label": "safe output",
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:23:31.462725",
+    "updated_at": "2026-03-23T18:23:31.462725",
+    "is_template": false,
+    "tags": [
+      "ai",
+      "research",
+      "react",
+      "reflection"
+    ]
+  },
+  {
+    "id": "9b14d739-3542-4d37-9b53-9a74430d000e",
+    "name": "ReAct Research Agent (Clone) (Copy)",
+    "description": "A ReAct loop agent reasons and acts using Web Search and REST API tools, with guardrails on input/output and reflection-based improvement of the final answer.",
+    "status": "draft",
+    "nodes": [
+      {
+        "id": "node-d55aa15a",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 80.0,
+          "y": 200.0
+        },
+        "data": {
+          "name": "Input Guardrails",
+          "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 4096,
+            "block_on_violation": true,
+            "redact_pii": false
+          }
+        }
+      },
+      {
+        "id": "node-28597b9f",
+        "node_kind": "agent",
+        "agent_id": "agent-011",
+        "tool_id": null,
+        "position": {
+          "x": 317.9857661860725,
+          "y": 446.7436422061281
+        },
+        "data": {
+          "name": "ReAct Research",
+          "description": "Iteratively Reasons and Acts using tools until a final answer is reached (ReAct pattern)",
+          "type": "react_agent",
+          "tools": [
+            "tool-006",
+            "tool-013",
+            "tool-011"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "goal_prompt": "Goal: {{user_query}}\n\nContext: {{context}}\n\nInstructions:\n- Think step-by-step before each action\n- Use Web Search for recent facts and current events\n- Use REST API Caller for structured data retrieval\n- Cite all sources\n- Output format: {{output_format}}",
+            "max_iterations": 6,
+            "model": "llama-3.3-70b-versatile",
+            "stop_on_answer": true,
+            "trace_thoughts": true
+          }
+        }
+      },
+      {
+        "id": "node-37421b44",
+        "node_kind": "agent",
+        "agent_id": "agent-012",
+        "tool_id": null,
+        "position": {
+          "x": 583.163688860167,
+          "y": 160.7224406284123
+        },
+        "data": {
+          "name": "Reflect & Improve",
+          "description": "Generates an initial output, self-critiques it and iteratively improves until quality threshold is met",
+          "type": "reflection_agent",
+          "tools": [
+            "tool-006"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "critique_prompt": "Review this research answer:\n---\n{{previous_output}}\n---\n\nScore on:\n1. Factual accuracy (1\u201310)\n2. Source coverage (1\u201310)\n3. Answer completeness (1\u201310)\n\nIf overall < {{quality_threshold}}, provide an improved version.",
+            "quality_threshold": 8,
+            "max_iterations": 2,
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 0.3
+          }
+        }
+      },
+      {
+        "id": "node-32cd8848",
+        "node_kind": "agent",
+        "agent_id": "agent-013",
+        "tool_id": null,
+        "position": {
+          "x": 942.0034838818942,
+          "y": 451.7792267409471
+        },
+        "data": {
+          "name": "Output Guardrails",
+          "description": "Validates and sanitizes inputs/outputs against safety rules, PII detection and schema constraints",
+          "type": "guardrails",
+          "tools": [
+            "tool-002"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "check_pii": true,
+            "check_toxicity": true,
+            "max_content_length": 8192,
+            "block_on_violation": true,
+            "redact_pii": true
+          }
+        }
+      },
+      {
+        "id": "node-d15ecdbb",
+        "node_kind": "agent",
+        "agent_id": "agent-005",
+        "tool_id": null,
+        "position": {
+          "x": 1270.6297716947074,
+          "y": 232.2277410228412
+        },
+        "data": {
+          "name": "Deliver Results",
+          "description": "Sends status updates and alerts via email and Slack",
+          "type": "automatic",
+          "tools": [
+            "tool-003",
+            "tool-008"
+          ],
+          "toolConfigs": {},
+          "properties": {
+            "email_template": "default",
+            "slack_channel": "#alerts"
+          }
+        }
+      },
+      {
+        "id": "node-1774290226816",
+        "node_kind": "tool",
+        "agent_id": null,
+        "tool_id": "tool-003",
+        "position": {
+          "x": 622.7173323219914,
+          "y": 458.2586742016713
+        },
+        "data": {
+          "name": "Email Notifier",
+          "description": "Send email notifications to specified recipients",
+          "toolType": "notification",
+          "properties": {
+            "smtp_server": "smtp.gmail.com",
+            "from_address": "",
+            "subject_template": "[{{workflow_name}}] {{status}} \u2014 {{timestamp}}"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-e6afbabe",
+        "source": "node-d55aa15a",
+        "target": "node-28597b9f",
+        "label": "validated input",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-94601b67",
+        "source": "node-28597b9f",
+        "target": "node-37421b44",
+        "label": "raw answer",
+        "type": "smoothstep"
+      },
+      {
+        "id": "edge-e9048416",
+        "source": "node-32cd8848",
+        "target": "node-d15ecdbb",
+        "label": "safe output",
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-37421b44-node-1774290226816",
+        "source": "node-37421b44",
+        "target": "node-1774290226816",
+        "label": null,
+        "type": "smoothstep"
+      },
+      {
+        "id": "reactflow__edge-node-1774290226816-node-32cd8848",
+        "source": "node-1774290226816",
+        "target": "node-32cd8848",
+        "label": "tooloutput",
+        "type": "smoothstep"
+      }
+    ],
+    "created_at": "2026-03-23T18:25:08.032401",
+    "updated_at": "2026-03-23T18:25:08.032401",
+    "is_template": false,
+    "tags": []
+  }
+]

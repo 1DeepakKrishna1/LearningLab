@@ -1,0 +1,9 @@
+Provide a production quality code for semantic cache : a single system handling 
+✅ Vector similarity (no FAISS)
+✅ Metadata storage
+✅ TTL expiry (native Redis)
+✅ Hybrid strategy (Direct hit + RAG + fallback)
+If top-1 similarity > 0.9 → direct cache hit
+	Else If Any Top-K ≥ LOW_TH  → Top-K generation
+		ELSE → LLM Call (and cache it)
+✅ No stale index problem

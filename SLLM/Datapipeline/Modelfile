@@ -1,0 +1,12 @@
+# Path A from the design doc: bake behaviour/tone/defaults into a named variant.
+# Build with:   ollama create my-slm -f Modelfile
+# The Backend defaults to plain llama3.2:3b, but set SLLM_CHAT_MODEL=my-slm to use this.
+
+FROM llama3.2:3b
+
+PARAMETER temperature 0.3
+PARAMETER num_ctx 8192
+
+SYSTEM """You are a helpful assistant for Exelcius.
+Answer concisely and only from the provided context.
+If the answer is not in the context, say you don't know rather than guessing."""

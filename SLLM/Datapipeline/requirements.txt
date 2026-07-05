@@ -1,0 +1,16 @@
+# --- Datapipeline dependencies ---
+# Vector store + local embeddings
+chromadb>=0.5.0
+ollama>=0.3.0
+
+# Document loaders
+pypdf>=4.0.0
+pdfplumber>=0.11.0
+pandas>=2.0.0
+openpyxl>=3.1.0        # .xlsx
+xlrd>=2.0.1            # legacy .xls
+pytesseract>=0.3.10    # OCR for images (needs Tesseract installed on the OS)
+Pillow>=10.0.0
+
+# UX
+tqdm>=4.66.0

@@ -1,0 +1,153 @@
+Demo examples for reasoning techniques with automation topics.
+
+Each section shows:
+- Technique name
+- Required fields for the user template
+- Sample valid values for those fields
+- A filled-in prompt example using automation context (Outlook, Selenium, Playwright, XLS, CSV, PDF, RAG, embeddings)
+
+---
+
+Technique: chain_of_thought
+Required fields: problem_statement
+Sample values:
+  problem_statement = "Automate downloading email attachments from Outlook, saving PDFs to a shared folder, and logging metadata into CSV."
+Filled prompt:
+Problem: Automate downloading email attachments from Outlook, saving PDFs to a shared folder, and logging metadata into CSV.
+
+Think through this step by step. Lay out each intermediate step, then give the final answer.
+
+---
+
+Technique: few_shot_cot
+Required fields: example_question_1, example_reasoning_then_answer_1, example_question_2, example_reasoning_then_answer_2, actual_question
+Sample values:
+  example_question_1 = "How do I parse CSV rows in Python and write selected columns to Excel?"
+  example_reasoning_then_answer_1 = "Read the CSV with csv.DictReader, select the desired columns in order, then use openpyxl to write rows into a new XLSX worksheet. Final answer: use csv.DictReader + openpyxl."
+  example_question_2 = "How can Selenium click a button in a browser automation script?"
+  example_reasoning_then_answer_2 = "Locate the button by its CSS selector, wait until it is clickable, then call click() on it. Final answer: wait for element and click."
+  actual_question = "How do I build a RAG pipeline that indexes PDF content with embeddings and answers email-related questions?"
+Filled prompt:
+Example 1:
+Q: How do I parse CSV rows in Python and write selected columns to Excel?
+A: Read the CSV with csv.DictReader, select the desired columns in order, then use openpyxl to write rows into a new XLSX worksheet. Final answer: use csv.DictReader + openpyxl.
+
+Example 2:
+Q: How can Selenium click a button in a browser automation script?
+A: Locate the button by its CSS selector, wait until it is clickable, then call click() on it. Final answer: wait for element and click.
+
+Now solve:
+Q: How do I build a RAG pipeline that indexes PDF content with embeddings and answers email-related questions?
+A:
+
+---
+
+Technique: step_back
+Required fields: specific_question
+Sample values:
+  specific_question = "Why does a PDF-to-text extraction step sometimes fail when the file is attached to an Outlook email?"
+Filled prompt:
+Question: Why does a PDF-to-text extraction step sometimes fail when the file is attached to an Outlook email?
+
+First: what is the underlying concept or principle relevant here?
+Then: apply that principle to answer the specific question.
+
+---
+
+Technique: decomposition
+Required fields: complex_task
+Sample values:
+  complex_task = "Build an automation workflow that reads XLS financial reports, enriches them with embeddings, stores them in a RAG index, and lets users query the data from a chatbot."
+Filled prompt:
+Task: Build an automation workflow that reads XLS financial reports, enriches them with embeddings, stores them in a RAG index, and lets users query the data from a chatbot.
+
+Step 1 - Decompose: list the subproblems in dependency order.
+Step 2 - Solve each subproblem in sequence.
+Step 3 - Combine the sub-answers into the final result.
+
+---
+
+Technique: plan_and_solve
+Required fields: task
+Sample values:
+  task = "Create a Playwright script that logs into Outlook Web Access, downloads invoices as PDF, and updates a CSV inventory file."
+Filled prompt:
+Create a Playwright script that logs into Outlook Web Access, downloads invoices as PDF, and updates a CSV inventory file.
+
+Let's first understand the problem and devise a plan. Then carry out the plan step by step to reach the answer.
+
+---
+
+Technique: chain_of_verification
+Required fields: question
+Sample values:
+  question = "What is the best way to validate embedded PDF text before adding it to a RAG index?"
+Filled prompt:
+Question: What is the best way to validate embedded PDF text before adding it to a RAG index?
+
+1. Draft answer.
+2. List verification questions that could reveal mistakes in the draft.
+3. Answer each verification question.
+4. Final answer, revised in light of the above.
+
+---
+
+Technique: self_reflection
+Required fields: task, optional_criteria
+Sample values:
+  task = "Write automation code that extracts tables from PDF invoices and writes them into XLSX."
+  optional_criteria = "(e.g., table detection accuracy, malformed PDF handling, column alignment)"
+Filled prompt:
+Task: Write automation code that extracts tables from PDF invoices and writes them into XLSX.
+
+First attempt: produce an initial solution.
+Critique: identify weaknesses, errors, and missed requirements (e.g., table detection accuracy, malformed PDF handling, column alignment).
+Revised answer: produce the improved version.
+
+---
+
+Technique: react
+Required fields: question, tool_signatures
+Sample values:
+  question = "How can I automate Outlook email parsing, download attachments, and update a CSV tracker with Playwright?"
+  tool_signatures = "download_email(folder: str) -> dict, parse_pdf(path: str) -> str, write_csv(rows: list[dict]) -> None"
+Filled prompt:
+Question: How can I automate Outlook email parsing, download attachments, and update a CSV tracker with Playwright?
+
+Available tools:
+download_email(folder: str) -> dict
+parse_pdf(path: str) -> str
+write_csv(rows: list[dict]) -> None
+
+Thought:
+Action:
+Observation:
+... (repeat) ...
+Answer:
+
+---
+
+Technique: self_consistency
+Required fields: single_answer_problem
+Sample values:
+  single_answer_problem = "What is the most reliable way to create embeddings from Outlook email text and store them in a RAG index?"
+Filled prompt:
+Problem: What is the most reliable way to create embeddings from Outlook email text and store them in a RAG index?
+
+Think step by step, then give the final answer.
+
+---
+
+Technique: tree_of_thoughts
+Required fields: problem, k, evaluation_axes, output_type
+Sample values:
+  problem = "Choose the best automation strategy for extracting invoice data from Outlook attachments, converting it to CSV, and indexing it with embeddings."
+  k = "3"
+  evaluation_axes = "accuracy, speed, maintainability"
+  output_type = "recommendation"
+Filled prompt:
+Problem: Choose the best automation strategy for extracting invoice data from Outlook attachments, converting it to CSV, and indexing it with embeddings.
+
+1. Propose 3 distinct approaches.
+2. Evaluate the viability of each (accuracy, speed, maintainability).
+3. Pursue the most promising one to a final recommendation.

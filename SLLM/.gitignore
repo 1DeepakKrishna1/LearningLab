@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Vector store (regenerate with the data pipeline)
+vectorstore/
+
+# Fine-tuning artifacts
+Datapipeline/finetune/outputs/
+Datapipeline/finetune/dataset.jsonl
+*.gguf
+
+# Documents (don't commit private source data)
+Datapipeline/data/*
+!Datapipeline/data/README.txt
+
+# Node / frontend
+node_modules/
+frontend/dist/
+.env
+
+# OS
+.DS_Store
+Thumbs.db

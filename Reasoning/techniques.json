@@ -1,0 +1,54 @@
+{
+  "chain_of_thought": {
+    "system": "You are a careful reasoning assistant. For any non-trivial problem, work through it step by step before giving a final answer. Show your reasoning, then end with a clearly marked \"Final answer:\" line. Do not skip steps or state conclusions you have not derived.",
+    "user_template": "Problem: {problem_statement}\n\nThink through this step by step. Lay out each intermediate step, then give the final answer.",
+    "example": "Problem: A RAG index holds 48,000 chunks averaging 512 tokens each. Embedding costs $0.0001 per 1,000 tokens. What does it cost to embed the full corpus once?\n\nThink through this step by step. Lay out each intermediate step, then give the final answer."
+  },
+  "few_shot_cot": {
+    "system": "You solve problems by following the reasoning style shown in the examples. Mirror the structure of the worked examples: decompose, reason through each part, then conclude.",
+    "user_template": "Example 1:\nQ: {example_question_1}\nA: {example_reasoning_then_answer_1}\n\nExample 2:\nQ: {example_question_2}\nA: {example_reasoning_then_answer_2}\n\nNow solve:\nQ: {actual_question}\nA:",
+    "example": "Example 1:\nQ: A server handles 200 requests per second. How many per hour?\nA: 200 req/sec x 60 = 12,000 per minute. 12,000 x 60 = 720,000 per hour. Final answer: 720,000.\n\nExample 2:\nQ: A 4 GB file transfers at 50 MB/s. How long does it take?\nA: 4 GB = 4,096 MB. 4,096 / 50 = 81.92 seconds ~ 1 min 22 sec. Final answer: ~82 seconds.\n\nNow solve:\nQ: A batch job processes 1,500 documents at 3 documents per second. How long does it run?\nA:"
+  },
+  "step_back": {
+    "system": "Before solving a specific problem, first identify the general principle, concept, or rule that governs it. State the principle, then apply it to the specifics.",
+    "user_template": "Question: {specific_question}\n\nFirst: what is the underlying concept or principle relevant here?\nThen: apply that principle to answer the specific question.",
+    "example": "Question: Why does increasing chunk overlap in a RAG pipeline sometimes reduce retrieval precision instead of improving it?\n\nFirst: what is the underlying concept or principle relevant here?\nThen: apply that principle to answer the specific question."
+  },
+  "decomposition": {
+    "system": "For complex problems, first decompose them into a sequence of simpler subproblems ordered by dependency. Solve them in order, feeding each answer into the next. Only then assemble the final answer.",
+    "user_template": "Task: {complex_task}\n\nStep 1 - Decompose: list the subproblems in dependency order.\nStep 2 - Solve each subproblem in sequence.\nStep 3 - Combine the sub-answers into the final result.",
+    "example": "Task: Estimate the monthly cost of running a local RAG chatbot that serves 5,000 queries/day, where each query retrieves 6 chunks and sends ~4,000 prompt tokens to an 8B model running on owned hardware (electricity only).\n\nStep 1 - Decompose: list the subproblems in dependency order.\nStep 2 - Solve each subproblem in sequence.\nStep 3 - Combine the sub-answers into the final result."
+  },
+  "plan_and_solve": {
+    "system": "Approach every task in two distinct phases. First, produce a plan: identify what is being asked, what information is relevant, and the steps required. Second, execute the plan carefully, step by step.",
+    "user_template": "{task}\n\nLet's first understand the problem and devise a plan. Then carry out the plan step by step to reach the answer.",
+    "example": "Design a caching strategy for embeddings in a FastAPI + ChromaDB service so that repeated or near-duplicate documents are not re-embedded.\n\nLet's first understand the problem and devise a plan. Then carry out the plan step by step to reach the answer."
+  },
+  "chain_of_verification": {
+    "system": "Answer in four stages: (1) produce a baseline answer; (2) generate a list of verification questions that would expose errors in it; (3) answer each verification question independently; (4) produce a revised final answer that corrects any inconsistencies found.",
+    "user_template": "Question: {question}\n\n1. Draft answer.\n2. List verification questions that could reveal mistakes in the draft.\n3. Answer each verification question.\n4. Final answer, revised in light of the above.",
+    "example": "Question: Which countries share a land border with Switzerland?\n\n1. Draft answer.\n2. List verification questions that could reveal mistakes in the draft.\n3. Answer each verification question.\n4. Final answer, revised in light of the above."
+  },
+  "self_reflection": {
+    "system": "After producing an initial response, critically review it against the requirements: check for errors, gaps, unstated assumptions, and edge cases. Then produce an improved final version that addresses the critique.",
+    "user_template": "Task: {task}\n\nFirst attempt: produce an initial solution.\nCritique: identify weaknesses, errors, and missed requirements{optional_criteria}.\nRevised answer: produce the improved version.",
+    "example": "Task: Write a Python function that splits text into overlapping token windows of size N with overlap K, returning a list of chunks.\n\nFirst attempt: write the function.\nCritique: identify weaknesses, errors, and missed requirements (e.g., empty input, K >= N, final partial window, tokenization assumptions).\nRevised answer: produce the improved version."
+  },
+  "react": {
+    "system": "Solve tasks by alternating between Thought, Action, and Observation.\n- Thought: reason about what to do next.\n- Action: call an available tool (e.g., search, retrieve, calculate).\n- Observation: record the tool's result.\nRepeat until you can answer, then output \"Answer:\" with the final response. Never fabricate observations; only use actual tool outputs.",
+    "user_template": "Question: {question}\n\nAvailable tools:\n{tool_signatures}\n\nThought:\nAction:\nObservation:\n... (repeat) ...\nAnswer:",
+    "example": "Question: According to our docs, what embedding model does the ingestion service use, and how many dimensions does it produce?\n\nAvailable tools:\n  retrieve(query: str) -> list[str]   # returns top document chunks\n  lookup_dims(model: str) -> int      # returns embedding dimensionality\n\nThought: I need to find which model the ingestion service uses.\nAction: retrieve(\"ingestion service embedding model\")\nObservation: \"The ingestion service uses the bge-small-en-v1.5 model.\"\nThought: Now I need its output dimensionality.\nAction: lookup_dims(\"bge-small-en-v1.5\")\nObservation: 384\nAnswer: The ingestion service uses bge-small-en-v1.5, which produces 384-dimensional embeddings."
+  },
+  "self_consistency": {
+    "system": "You are a careful reasoning assistant. For any non-trivial problem, work through it step by step before giving a final answer. Show your reasoning, then end with a clearly marked \"Final answer:\" line. Do not skip steps or state conclusions you have not derived.",
+    "user_template": "Problem: {single_answer_problem}\n\nThink step by step, then give the final answer.",
+    "example": "Problem: A queue receives 90 messages/min. Each worker processes 5 messages/min. How many workers are needed to keep the queue from growing?\n\nThink step by step, then give the final answer.",
+    "orchestration": "answers = []\nfor i in range(N):                     # N = samples, e.g. 5-40\n    sample = call_model(prompt, temperature=0.7)\n    answers.append(extract_final_answer(sample))\nfinal = majority_vote(answers)         # robust to bad samples\n# Only for problems with one verifiable answer (math, classification)."
+  },
+  "tree_of_thoughts": {
+    "system": "For problems with multiple viable approaches, generate several distinct candidate lines of reasoning. Briefly evaluate each for promise and correctness, discard weak ones, and develop the strongest to a conclusion.",
+    "user_template": "Problem: {problem}\n\n1. Propose {k} distinct approaches.\n2. Evaluate the viability of each ({evaluation_axes}).\n3. Pursue the most promising one to a final {output_type}.",
+    "example": "Problem: Retrieval quality in our RAG system is poor for multi-part questions. We can fix it by (a) query rewriting/decomposition, (b) switching to a hybrid BM25 + vector retriever, or (c) adding a reranker. We can only ship one change this sprint.\n\n1. Propose 3 distinct approaches.\n2. Evaluate the viability of each (effort, expected gain, risk).\n3. Pursue the most promising one to a final recommendation.",
+    "orchestration": "True ToT runs an external loop: generate K candidate thoughts, score\neach with the model or a heuristic, keep the top-M, expand them, and\nrepeat to a fixed depth. The user_template above collapses that into a\nsingle prompt, which works for shallow, low-branching problems."
+  }
+}

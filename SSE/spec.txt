@@ -1,0 +1,29 @@
+Generate Server side events and REST API based invocation for a server and client in python. provide a production quality code for that
+take a long 10step running invocation request call client with option to run all without sending SSE, 
+run all with informing client about the progress via SSE, run step by step and temp stop the execution at he step and informing via SSE about the progress and asking to resume to invoke via another call from client via FAST API
+
+Production-ready Python Server-Sent Events (SSE) + REST API system
+
+Stack:
+- FastAPI (server)
+- Uvicorn (ASGI server)
+- httpx (client REST)
+- sseclient-py (client SSE)
+- asyncio queue for event streaming
+
+Features:
+- REST endpoint to trigger events
+- SSE endpoint to stream events to clients
+- Multi-client support
+- Heartbeat
+- Graceful disconnect handling
+- Typed models
+- Logging
+- Retry support
+- Invocation workflow 
+    1. 10-step long running workflow
+    2. Modes:
+    - FULL_NO_SSE (silent execution)
+    - FULL_WITH_SSE (continuous progress updates)
+    - STEP_MODE (pause after each step, wait for resume)
+    3. Resume API
