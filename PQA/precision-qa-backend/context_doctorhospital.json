@@ -1,0 +1,7 @@
+{
+  "starting_point": "Hospital Management",
+  "intent": "Smooth daily activities",
+  "supporting_data": "Need assistance in 'Schedule management', 'Patient tracking', 'Clinical workflows', 'Resource allocation'",
+  "constraints": "",
+  "persona": "doctor"
+}

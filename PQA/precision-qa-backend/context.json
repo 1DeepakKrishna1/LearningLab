@@ -1,0 +1,7 @@
+{
+  "starting_point": "Heart Transplant",
+  "intent": "Smooth Medical process",
+  "supporting_data": "Need assistance in 'consultation', 'Medical Q&A', 'Treatment planning', 'Patient education'",
+  "constraints": "",
+  "persona": "patient"
+}
