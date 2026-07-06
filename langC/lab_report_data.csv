@@ -1,0 +1,70 @@
+Test Name,Result Value,Unit,Reference Range,Interpretation/Remark
+Thyroid Stimulating Hormone (TSH) - Ultrasensitive,3.2060,µIU/ml,Not specified,Everything looks good
+Vitamin B12,503,pg/ml,Not specified,Everything looks good
+Cholesterol Total,157,mg/dl,Not specified,Everything looks good
+Alanine Aminotransferase (ALT/SGPT),11.00,U/l,10-49,Everything looks good
+Serum Creatinine,0.73,mg/dl,0.5-1.1,Everything looks good
+Calcium Total,9.8,mg/dl,8.7-10.4,Everything looks good
+Vitamin D Total-25 Hydroxy,11.37,ng/ml,Not specified,Concern
+Serum Iron,16.4,ug/dl,50-170,Concern
+HbA1c - Glycated Hemoglobin,11.90,%,4.2-5.7,Concern (Diagnosing Diabetes >=6.5%)
+Average Estimated Glucose - plasma,243.43,mg/dl,Not specified,High (corresponds to high HbA1c)
+"Fasting Blood Sugar (Glucose, Fasting)",98,mg/dl,70-100,Normal
+Total Cholesterol,150,mg/dl,Desirable: <200,Normal
+Serum Triglycerides,124,mg/dl,Desirable: <150,Normal
+Serum HDL Cholesterol,29.6,mg/dl,40-60,Low
+Serum LDL Cholesterol,73.40,mg/dl,Optimal: <100,Optimal
+Serum VLDL Cholesterol,83.4,mg/dl,06-30,High
+Total CHOL/HDL Cholesterol Ratio,3.17,Ratio,3.30-4.40,Slightly low
+LDL/HDL Cholesterol Ratio,9.68,Ratio,Desirable/Low Risk: 0.5-3.0,High Risk
+HDL/LDL Cholesterol Ratio,0.51,Ratio,Optimal >0.4,Optimal
+Non-HDL Cholesterol,117.4,mg/dl,0.0-160.0,Normal
+Serum Bilirubin (Total),0.29,mg/dl,0.3-1.2,Low
+Serum Bilirubin (Direct),0.07,mg/dl,0-0.3,Normal
+Serum Bilirubin (Indirect),0.22,mg/dl,0.0-0.8,Normal
+Aspartate Aminotransferase (AST/SGOT),19.00,U/L,5-34,Normal
+Alkaline Phosphatase (ALP),140.00,U/L,38-126,High
+Gamma Glutamyl Transferase (GGT),5.0,U/L,5-38.0,Lower end of normal
+Serum Total Protein,7.10,g/dl,5.7-8.2,Normal
+Serum Albumin,4.60,g/dl,3.4-4.8,Normal
+Serum Globulin,2.50,gm/dl,3.0-4.2,Low
+Albumin/Globulin Ratio,1.84,Ratio,1.2-2.5,Normal
+SGOT/SGPT Ratio,1.73,Ratio,0.7-1.4,High
+UIBC,374.10,ug/dl,120-470,Normal
+Serum Total Iron Binding Capacity (TIBC),390.5,µg/dl,250-400,Normal
+Transferrin Saturation %,4.2,%,15-50,Low
+Serum Uric Acid,6.5,mg/dl,2.6-6,High
+Serum Phosphorus,4.6,mg/dl,2.4-5.1,Normal
+Serum Sodium,139,mmol/L,132-146,Normal
+Serum Chloride,110,mmol/L,99-109,High
+Blood Urea,35,mg/dl,19.3-49.38,Normal
+Blood Urea Nitrogen (BUN),16.4,mg/dl,8-20,Normal
+Bun/Creatinine Ratio,22.41,Ratio,Not specified,Not specified
+Urea/Creatinine Ratio,47.95,Ratio,Not specified,Not specified
+Urine Colour,Pale Yellow,,Pale Yellow,Normal
+Urine Volume,15.00,mL,Not specified,Not specified
+Urine Appearance,Slightly Hazy,,Clear,Slightly abnormal
+Urine Specific Gravity,1.020,,1.001-1.035,Normal
+Urine pH,5.0,,4.5-7.5,Normal
+Urine Glucose,Negative,,Negative,Normal
+Urine Protein,Negative,,Negative,Normal
+Urine Ketones,Negative,,Negative,Normal
+Urine Urobilinogen,Normal,,Normal,Normal
+Urine Bilirubin,Negative,,Negative,Normal
+Urine Nitrite,Negative,,Negative,Normal
+Urine Blood,Negative,,Negative,Normal
+Urine Leucocyte Esterase,2+,,Negative,Abnormal (suggests pyuria/UTI)
+Urine Pus Cells,15-20,/HPF,0-5,High (suggests infection)
+Urine Epithelial Cells,4-5,/HPF,0-5,Upper limit of normal
+Urine RBCs,Nil,/HPF,Nil,Normal
+Urine Casts,Nil,,Nil,Normal
+Urine Crystals,Nil,,Nil,Normal
+Urine Bacteria,Absent,,Absent,Normal
+Urine Yeast Cell,Absent,,Absent,Normal
+Urine Others (NonSpecific),Nil,,Nil,Normal
+Haemoglobin (HB),11.2,g/dl,12.0-15.0,Low
+Total Leucocyte Count (TLC),7.0,10^3/uL,4.0-10.0,Normal
+Hematocrit (PCV),35,%,36.0-46.0,Low
+Red Blood Cell Count (RBC),4.50,millions/cumm,3.80-4.80,Normal
+Mean Corpuscular Volume (MCV),77.8,FL,83.0-101.0,Low
+Mean Corpuscular Hemoglobin (MCH),24.9,pg,24-30,Normal

@@ -1,0 +1,5 @@
+For a 1000 sq. ft. house, how many cement bags are required?
+What is the minimum and maximum number of bags?
+How does cement requirement change for RCC vs masonry?
+Cement required for G+6 / 7-floor building?
+What assumptions are used for estimation (mix ratio, structure type)?
